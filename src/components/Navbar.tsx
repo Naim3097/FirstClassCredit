@@ -1,69 +1,80 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
-const navLinks = [
-  { href: "/financing-hp", label: "Financing HP" },
-  { href: "/about", label: "About" },
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/financing-hp", label: "Motorcycle Financing" },
+  { href: "/about", label: "About Us" },
   { href: "/resources", label: "Resources" },
   { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
-  }, [mobileOpen]);
+  }, [open]);
 
   return (
-    <header
-      className={`sticky top-0 z-50 transition-shadow duration-300 ${
-        scrolled ? "shadow-[0_1px_0_rgba(0,0,0,0.06)]" : ""
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_#e8e8e0]"
+          : "bg-transparent"
       }`}
-      style={{
-        backgroundColor: "rgba(255,255,255,0.95)",
-        backdropFilter: "blur(12px)",
-      }}
     >
-      <nav className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 h-[64px] md:h-[72px] flex items-center justify-between">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 h-[72px] flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <div className="w-8 h-8 rounded bg-dark-blue flex items-center justify-center">
-            <span className="text-white font-bold text-sm">FC</span>
+        <Link href="/" className="flex items-center gap-2.5">
+          <div className="w-8 h-8 bg-gradient-to-br from-[#253A7D] to-[#2C76BB] rounded-lg flex items-center justify-center text-white text-xs font-bold tracking-tight">
+            FC
           </div>
-          <span className="text-deep-blue font-semibold text-base hidden sm:block">
+          <span
+            className={`text-[17px] font-semibold tracking-tight transition-colors duration-500 ${
+              scrolled ? "text-[#272A33]" : "text-white"
+            }`}
+          >
             First Class Credit
           </span>
         </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+        {/* Desktop links */}
+        <div className="hidden lg:flex items-center gap-7">
+          {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-[15px] text-[var(--text-primary)] hover:text-blue transition-colors duration-200"
+              className={`text-[14px] font-medium transition-colors duration-300 ${
+                pathname === link.href
+                  ? scrolled
+                    ? "text-[#2C76BB]"
+                    : "text-white"
+                  : scrolled
+                  ? "text-[#272A33]/70 hover:text-[#272A33]"
+                  : "text-white/70 hover:text-white"
+              }`}
             >
               {link.label}
             </Link>
           ))}
           <Link
             href="/apply"
-            className="inline-flex items-center justify-center px-6 py-3 bg-orange text-white font-semibold text-sm rounded-lg transition-all duration-300 hover:brightness-90"
+            className="ml-3 inline-flex items-center justify-center px-5 py-2 bg-[#EE4720] text-white text-[14px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
           >
             Apply Now
           </Link>
@@ -71,52 +82,69 @@ export default function Navbar() {
 
         {/* Hamburger */}
         <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          onClick={() => setOpen(!open)}
+          className="lg:hidden relative w-8 h-8 flex items-center justify-center"
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-6 h-[2px] bg-deep-blue transition-transform duration-300 ${
-              mobileOpen ? "rotate-45 translate-y-[5px]" : ""
-            }`}
+            className={`absolute block w-5 h-[1.5px] transition-all duration-300 ${
+              scrolled ? "bg-[#272A33]" : "bg-white"
+            } ${open ? "rotate-45" : "-translate-y-[5px]"}`}
           />
           <span
-            className={`block w-6 h-[2px] bg-deep-blue transition-opacity duration-300 ${
-              mobileOpen ? "opacity-0" : ""
-            }`}
+            className={`absolute block w-5 h-[1.5px] transition-all duration-300 ${
+              scrolled ? "bg-[#272A33]" : "bg-white"
+            } ${open ? "opacity-0" : ""}`}
           />
           <span
-            className={`block w-6 h-[2px] bg-deep-blue transition-transform duration-300 ${
-              mobileOpen ? "-rotate-45 -translate-y-[5px]" : ""
-            }`}
+            className={`absolute block w-5 h-[1.5px] transition-all duration-300 ${
+              scrolled ? "bg-[#272A33]" : "bg-white"
+            } ${open ? "-rotate-45" : "translate-y-[5px]"}`}
           />
         </button>
-      </nav>
+      </div>
 
-      {/* Mobile Panel */}
-      {mobileOpen && (
-        <div className="md:hidden fixed inset-0 top-[64px] bg-white z-40">
-          <div className="flex flex-col p-6 gap-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="py-3 text-lg text-[var(--text-primary)] border-b border-[var(--border-light)]"
-              >
-                {link.label}
-              </Link>
-            ))}
+      {/* Mobile menu */}
+      <div
+        className={`lg:hidden fixed inset-0 top-[72px] bg-white transition-all duration-500 ${
+          open
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="flex flex-col px-8 pt-12 gap-1">
+          {links.map((link, i) => (
             <Link
-              href="/apply"
-              onClick={() => setMobileOpen(false)}
-              className="mt-4 inline-flex items-center justify-center px-8 py-4 bg-orange text-white font-semibold rounded-lg text-center"
+              key={link.href}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className={`py-3 text-[28px] font-extralight tracking-tight transition-all duration-300 ${
+                pathname === link.href
+                  ? "text-[#2C76BB]"
+                  : "text-[#272A33]"
+              }`}
+              style={{
+                transitionDelay: open ? `${i * 60}ms` : "0ms",
+                transform: open ? "translateY(0)" : "translateY(12px)",
+                opacity: open ? 1 : 0,
+              }}
             >
-              Apply Now
+              {link.label}
             </Link>
-          </div>
+          ))}
+          <Link
+            href="/apply"
+            onClick={() => setOpen(false)}
+            className="mt-8 inline-flex items-center justify-center px-8 py-3.5 bg-[#EE4720] text-white font-semibold rounded-lg w-fit"
+            style={{
+              transitionDelay: open ? `${links.length * 60}ms` : "0ms",
+              opacity: open ? 1 : 0,
+            }}
+          >
+            Apply Now
+          </Link>
         </div>
-      )}
-    </header>
+      </div>
+    </nav>
   );
 }

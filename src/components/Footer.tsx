@@ -2,108 +2,117 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-deep-blue text-warm-white">
-      <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+    <footer className="bg-[#272A33] text-white/60 pt-16 pb-8">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded bg-white/20 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">FC</span>
-              </div>
-              <span className="font-semibold">First Class Credit</span>
-            </div>
-            <p className="text-sm text-warm-white/70 leading-relaxed">
-              Tailored hire purchase solutions designed to put ownership within
-              reach.
+            <span className="text-white text-[15px] font-semibold tracking-tight">
+              First Class Credit
+            </span>
+            <p className="text-[13px] leading-relaxed mt-3 max-w-[240px]">
+              Your trusted partner in hire purchase financing. Helping
+              Malaysians achieve their mobility goals since Kuching,
+              Sarawak.
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Navigation */}
           <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-warm-white">
-              Quick Links
-            </h4>
-            <ul className="space-y-2.5">
-              {[
-                { href: "/", label: "Home" },
-                { href: "/financing-hp", label: "Motorcycle Financing HP" },
-                { href: "/about", label: "About Us" },
-                { href: "/resources", label: "Resources" },
-              ].map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-warm-white/70 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <p className="text-[11px] font-semibold uppercase tracking-[1.5px] text-white mb-5">
+              Navigate
+            </p>
+            <nav className="flex flex-col gap-2.5">
+              <Link href="/" className="text-[14px] hover:text-white transition-colors">
+                Home
+              </Link>
+              <Link href="/financing-hp" className="text-[14px] hover:text-white transition-colors">
+                Motorcycle Financing
+              </Link>
+              <Link href="/about" className="text-[14px] hover:text-white transition-colors">
+                About Us
+              </Link>
+              <Link href="/resources" className="text-[14px] hover:text-white transition-colors">
+                Resources
+              </Link>
+              <Link href="/contact" className="text-[14px] hover:text-white transition-colors">
+                Contact
+              </Link>
+            </nav>
           </div>
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-warm-white">
+            <p className="text-[11px] font-semibold uppercase tracking-[1.5px] text-white mb-5">
               Contact
-            </h4>
-            <ul className="space-y-2.5 text-sm text-warm-white/70">
-              <li>
-                LOT 442, Ground Floor Section 11,
+            </p>
+            <div className="space-y-3 text-[14px]">
+              <p className="leading-relaxed">
+                Lot 450, 1st Floor,
                 <br />
-                KTLD, Jln Kulas, Kampung Bandarshah,
+                Lorong Lapangan Terbang 3A,
                 <br />
-                93400 Kuching, Sarawak
-              </li>
-              <li>
+                93250 Kuching, Sarawak
+              </p>
+              <p>
                 <a
-                  href="https://wa.me/60169328901"
+                  href="tel:+60168558553"
+                  className="hover:text-white transition-colors"
+                >
+                  +60 16-855 8553
+                </a>
+              </p>
+              <p>
+                <a
+                  href="https://wa.me/60168558553"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
-                  WhatsApp: +6016-932 8901
+                  WhatsApp
                 </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+6082549196"
-                  className="hover:text-white transition-colors"
-                >
-                  Office: +6082-549 196
-                </a>
-              </li>
-            </ul>
+              </p>
+            </div>
           </div>
 
-          {/* Legal */}
+          {/* Hours + Legal */}
           <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-warm-white">
-              Legal
-            </h4>
-            <ul className="space-y-2.5">
-              {[
-                { href: "/terms", label: "Terms & Conditions" },
-                { href: "/privacy", label: "Privacy Disclaimer" },
-              ].map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-warm-white/70 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <p className="text-[11px] font-semibold uppercase tracking-[1.5px] text-white mb-5">
+              Hours
+            </p>
+            <p className="text-[14px] mb-6">
+              Mon &ndash; Fri
+              <br />
+              9:00 AM &ndash; 5:00 PM
+            </p>
+            <div className="flex gap-4">
+              <Link
+                href="/terms"
+                className="text-[13px] hover:text-white transition-colors"
+              >
+                Terms
+              </Link>
+              <Link
+                href="/privacy"
+                className="text-[13px] hover:text-white transition-colors"
+              >
+                Privacy
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-white/10 text-sm text-warm-white/50">
-          &copy; {new Date().getFullYear()} First Class Credit. All rights
-          reserved.
+        <div className="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-2 text-[12px] text-white/30">
+          <span>
+            &copy; {new Date().getFullYear()} First Class Credit. All rights
+            reserved.
+          </span>
+          <Link
+            href="/apply"
+            className="text-[#EE4720] font-semibold hover:text-[#F18F33] transition-colors"
+          >
+            Apply Now &rarr;
+          </Link>
         </div>
       </div>
     </footer>
