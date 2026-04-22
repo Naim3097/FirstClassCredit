@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -40,17 +41,15 @@ export default function Navbar() {
     >
       <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 h-[72px] flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 bg-gradient-to-br from-[#253A7D] to-[#2C76BB] rounded-lg flex items-center justify-center text-white text-xs font-bold tracking-tight">
-            FC
-          </div>
-          <span
-            className={`text-[17px] font-semibold tracking-tight transition-colors duration-500 ${
-              scrolled ? "text-[#272A33]" : "text-white"
-            }`}
-          >
-            First Class Credit
-          </span>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="First Class Credit"
+            width={160}
+            height={50}
+            className="h-10 w-auto object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop links */}

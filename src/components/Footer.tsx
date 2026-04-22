@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -7,9 +8,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div>
-            <span className="text-white text-[15px] font-semibold tracking-tight">
-              First Class Credit
-            </span>
+            <Image
+              src="/logo.png"
+              alt="First Class Credit"
+              width={160}
+              height={50}
+              className="h-10 w-auto object-contain brightness-0 invert"
+            />
             <p className="text-[13px] leading-relaxed mt-3 max-w-[240px]">
               Your trusted partner in hire purchase financing. Helping
               Malaysians achieve their mobility goals since Kuching,
