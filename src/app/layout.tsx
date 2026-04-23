@@ -1,13 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import LayoutShell from "@/components/LayoutShell";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700"],
+const plusJakartaSans = localFont({
+  src: [
+    {
+      path: "../fonts/PlusJakartaSans-VariableFont_wght.ttf",
+      style: "normal",
+      weight: "200 800",
+    },
+    {
+      path: "../fonts/PlusJakartaSans-Italic-VariableFont_wght.ttf",
+      style: "italic",
+      weight: "200 800",
+    },
+  ],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-plus-jakarta",
 });
 
 export const metadata: Metadata = {
@@ -22,8 +32,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className={`${inter.className} min-h-full flex flex-col`}>
+    <html lang="en" className={`${plusJakartaSans.variable} h-full antialiased`}>
+      <body className={`${plusJakartaSans.className} min-h-full flex flex-col`}>
         <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
