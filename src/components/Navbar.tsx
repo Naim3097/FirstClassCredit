@@ -47,7 +47,9 @@ export default function Navbar() {
             alt="First Class Credit"
             width={160}
             height={50}
-            className="h-10 w-auto object-contain"
+            className={`h-10 w-auto object-contain transition-all duration-500 ${
+              scrolled ? "" : "brightness-0 invert"
+            }`}
             priority
           />
         </Link>
