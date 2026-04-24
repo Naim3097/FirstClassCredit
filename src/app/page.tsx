@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import FAQAccordion from "@/components/FAQAccordion";
 import { HeroReveal, Reveal, StaggerChildren, CountUp } from "@/components/ScrollAnimations";
-import AnimatedLiquidBackground from "@/components/AnimatedLiquidBackground";
 
 const homeFAQ = [
   {
@@ -82,56 +81,6 @@ export default function Home() {
               </Link>
             </div>
           </HeroReveal>
-        </div>
-      </section>
-
-      {/* ===== ANIMATED GRADIENT TAGLINE ===== */}
-      <section className="relative overflow-hidden" style={{ minHeight: "560px" }}>
-        <AnimatedLiquidBackground color1="#253A7D" color2="#1a6bb5" color3="#0b1a3d" />
-
-        {/* subtle grain overlay matching the Framer component's noise layer */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              'url("https://framerusercontent.com/images/g0QcWrxr87K0ufOxIUFBakwYA8.png")',
-            backgroundSize: "200px",
-            backgroundRepeat: "repeat",
-            opacity: 0.06,
-          }}
-        />
-
-        {/* content */}
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-[560px] text-center max-w-[800px] mx-auto px-5 md:px-10 py-24">
-          <Reveal>
-            <p className="text-[11px] font-semibold uppercase tracking-[3px] text-[#47A7DD] mb-6">
-              Your Financial Partner
-            </p>
-            <h2 className="text-[36px] md:text-[52px] lg:text-[60px] font-extralight leading-[1.08] text-white tracking-[-0.02em] mb-6">
-              Financing that moves{" "}
-              <br className="hidden md:block" />
-              <span className="text-[#47A7DD]">as fast as you do.</span>
-            </h2>
-            <p className="text-[17px] md:text-[19px] text-white/60 max-w-[480px] mx-auto leading-[1.6] mb-10">
-              Get pre-approved in 24–48 hours with minimal paperwork. We handle
-              the complexity so you can focus on the ride.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-6 text-white/40 text-[13px] font-medium">
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#47A7DD] inline-block" />
-                Up to 90&nbsp;% financing margin
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#47A7DD] inline-block" />
-                Tenures up to 60 months
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#47A7DD] inline-block" />
-                Kuching &amp; beyond
-              </span>
-            </div>
-          </Reveal>
         </div>
       </section>
 
