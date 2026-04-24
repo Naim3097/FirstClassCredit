@@ -33,27 +33,27 @@ export default function Home() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative min-h-screen flex items-center justify-center bg-[#0b1a3d] overflow-hidden">
+      <section className="relative min-h-screen flex items-end bg-[#0b1a3d] overflow-hidden">
         {/* Background image with slow zoom */}
         <div className="absolute inset-0">
           <Image
             src="/home-hero.jpg"
             alt=""
             fill
-            className="object-cover object-center opacity-55 hero-zoom-img"
+            className="object-cover object-center opacity-80 hero-zoom-img"
             priority
           />
-          {/* Gradient: strong at bottom, softens upward — desktop */}
+          {/* Gradient: bottom band only — desktop */}
           <div className="absolute inset-0 hidden md:block" style={{
-            background: "linear-gradient(to top, #0d2461 0%, #1a3a7a 20%, #253A7Dcc 50%, #253A7D66 75%, transparent 100%)"
+            background: "linear-gradient(to top, #0d2461ee 0%, #1a3a7acc 30%, #253A7D55 60%, transparent 100%)"
           }} />
-          {/* Gradient: mobile — slightly stronger base */}
+          {/* Gradient: mobile */}
           <div className="absolute inset-0 block md:hidden" style={{
-            background: "linear-gradient(to top, #0d2461 0%, #1a3a7a 25%, #253A7Dcc 55%, #253A7D80 80%, transparent 100%)"
+            background: "linear-gradient(to top, #0d2461f2 0%, #1a3a7add 35%, #253A7D66 65%, transparent 100%)"
           }} />
         </div>
 
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 py-32 md:py-40 flex flex-col items-center text-center">
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pb-24 md:pb-32 pt-32 flex flex-col items-center text-center">
           <HeroReveal className="flex flex-col items-center">
             <p className="text-[11px] font-semibold uppercase tracking-[3px] text-[#47A7DD] mb-5">
               HP Motorcycle Financing
