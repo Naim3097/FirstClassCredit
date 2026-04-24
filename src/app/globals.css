@@ -26,6 +26,17 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ── Hero background slow zoom-in ──────────────────────────────── */
+@keyframes hero-zoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.12); }
+}
+
+.hero-zoom-img {
+  animation: hero-zoom 22s ease-out forwards;
+  will-change: transform;
+}
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);

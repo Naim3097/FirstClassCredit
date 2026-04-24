@@ -33,20 +33,28 @@ export default function Home() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative min-h-screen flex items-end bg-[#253A7D] overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center bg-[#0b1a3d] overflow-hidden">
+        {/* Background image with slow zoom */}
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=1600&q=80"
+            src="/home-hero.jpg"
             alt=""
             fill
-            className="object-cover opacity-30"
+            className="object-cover object-center opacity-55 hero-zoom-img"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#253A7D] via-[#253A7D]/60 to-[#253A7D]/30" />
+          {/* Gradient: strong at bottom, softens upward — desktop */}
+          <div className="absolute inset-0 hidden md:block" style={{
+            background: "linear-gradient(to top, #0d2461 0%, #1a3a7a 20%, #253A7Dcc 50%, #253A7D66 75%, transparent 100%)"
+          }} />
+          {/* Gradient: mobile — slightly stronger base */}
+          <div className="absolute inset-0 block md:hidden" style={{
+            background: "linear-gradient(to top, #0d2461 0%, #1a3a7a 25%, #253A7Dcc 55%, #253A7D80 80%, transparent 100%)"
+          }} />
         </div>
 
-        <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pb-20 md:pb-28 pt-32 w-full">
-          <HeroReveal className="max-w-[640px]">
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 py-32 md:py-40 flex flex-col items-center text-center">
+          <HeroReveal className="flex flex-col items-center">
             <p className="text-[11px] font-semibold uppercase tracking-[3px] text-[#47A7DD] mb-5">
               HP Motorcycle Financing
             </p>
@@ -55,11 +63,11 @@ export default function Home() {
               <br />
               goals into reality.
             </h1>
-            <p className="text-[17px] md:text-[19px] text-white/60 max-w-[480px] mb-10 leading-[1.6]">
+            <p className="text-[17px] md:text-[19px] text-white/70 max-w-[480px] mb-10 leading-[1.6]">
               Hassle-free HP financing in Kuching and beyond. Flexible
               repayments up to 60 months, up to 90% margin of financing.
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center gap-4 flex-wrap">
               <Link
                 href="/apply"
                 className="inline-flex items-center justify-center px-7 py-3.5 bg-[#EE4720] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
@@ -68,7 +76,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/financing-hp"
-                className="text-white/60 text-[15px] font-medium hover:text-white transition-colors duration-300"
+                className="inline-flex items-center justify-center px-6 py-3.5 border border-white/30 text-white/80 text-[15px] font-medium rounded-lg hover:border-white/60 hover:text-white transition-all duration-300"
               >
                 How it works &rarr;
               </Link>
