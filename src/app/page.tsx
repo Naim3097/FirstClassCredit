@@ -58,7 +58,7 @@ export default function Home() {
               HP Vehicle Financing
             </p>
             <h1 className="text-[36px] md:text-[52px] lg:text-[64px] font-extralight leading-[1.08] text-white tracking-[-0.02em] mb-6">
-              Turn your motor-vehicle
+              Turn your mobility
               <br />
               goals into reality.
             </h1>
@@ -152,7 +152,7 @@ export default function Home() {
                 </h3>
                 <p className="text-[15px] text-white/60 leading-relaxed max-w-md">
                   Stop waiting and start moving. Secure your new or used
-                  motor vehicle with hassle-free HP financing and flexible
+                  vehicle with hassle-free HP financing and flexible
                   repayment plans up to 60 months.
                 </p>
               </div>
@@ -281,7 +281,7 @@ export default function Home() {
                   High Margin Financing
                 </p>
                 <h3 className="text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  Finance up to 90% of your motor vehicle&apos;s value.
+                  Finance up to 90% of your vehicle&apos;s value.
                 </h3>
                 <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed">
                   New or used &mdash; get the maximum backing you need with a

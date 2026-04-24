@@ -34,7 +34,7 @@ export default function About() {
               <p className="text-[15px] text-[var(--text-secondary)] leading-[1.7]">
                 Based in Kuching, Sarawak, we specialize in providing flexible
                 and accessible financing solutions tailored for Malaysians.
-                Whether you are purchasing your first motor vehicle, upgrading your
+                Whether you are purchasing your first vehicle, upgrading your
                 daily ride, or securing funds for specific personal objectives,
                 we bridge the gap between your aspirations and reality.
               </p>
