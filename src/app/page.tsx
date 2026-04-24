@@ -84,6 +84,56 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== FLOATING STATS BAR ===== */}
+      <div className="relative z-20 bg-[#0d2461] px-5 md:px-10 lg:px-16">
+        <div className="max-w-[1200px] mx-auto">
+          <div
+            className="bg-white rounded-2xl shadow-[0_8px_48px_rgba(13,36,97,0.18)] px-6 md:px-12 py-7 md:py-8 -translate-y-10 md:-translate-y-14"
+          >
+            <div className="grid grid-cols-3 divide-x divide-[#e8e8e0]">
+              {/* Stat 1 */}
+              <div className="flex flex-col items-center justify-center text-center px-4 md:px-8 gap-0.5">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-[40px] md:text-[56px] font-extralight text-[#253A7D] leading-none tracking-tight">
+                    <CountUp end={60} />
+                  </span>
+                  <span className="text-[13px] md:text-[15px] font-semibold text-[#253A7D] leading-tight">month</span>
+                </div>
+                <p className="text-[11px] md:text-[12px] text-[var(--text-muted)] font-medium uppercase tracking-[1.5px] mt-1">
+                  max tenure
+                </p>
+              </div>
+
+              {/* Stat 2 */}
+              <div className="flex flex-col items-center justify-center text-center px-4 md:px-8 gap-0.5">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-[40px] md:text-[56px] font-extralight text-[#253A7D] leading-none tracking-tight">
+                    <CountUp end={90} />
+                  </span>
+                  <span className="text-[13px] md:text-[15px] font-semibold text-[#253A7D] leading-tight">%</span>
+                </div>
+                <p className="text-[11px] md:text-[12px] text-[var(--text-muted)] font-medium uppercase tracking-[1.5px] mt-1">
+                  financing margin
+                </p>
+              </div>
+
+              {/* Stat 3 */}
+              <div className="flex flex-col items-center justify-center text-center px-4 md:px-8 gap-0.5">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-[40px] md:text-[56px] font-extralight text-[#253A7D] leading-none tracking-tight">
+                    <CountUp end={24} />
+                  </span>
+                  <span className="text-[13px] md:text-[15px] font-semibold text-[#253A7D] leading-tight">hour</span>
+                </div>
+                <p className="text-[11px] md:text-[12px] text-[var(--text-muted)] font-medium uppercase tracking-[1.5px] mt-1">
+                  approval
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* ===== PRODUCTS ===== */}
       <section className="py-24 md:py-32 bg-[#0d2461]">
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
