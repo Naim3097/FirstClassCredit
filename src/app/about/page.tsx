@@ -34,7 +34,7 @@ export default function About() {
               <p className="text-[15px] text-[var(--text-secondary)] leading-[1.7]">
                 Based in Kuching, Sarawak, we specialize in providing flexible
                 and accessible financing solutions tailored for Malaysians.
-                Whether you are purchasing your first motorcycle, upgrading your
+                Whether you are purchasing your first motor vehicle, upgrading your
                 daily ride, or securing funds for specific personal objectives,
                 we bridge the gap between your aspirations and reality.
               </p>
@@ -71,7 +71,7 @@ export default function About() {
               <p className="text-[16px] text-[#272A33] leading-relaxed">
                 You get fast pre-approvals so you can move forward with your
                 plans without delay. We know time matters when you&apos;ve found
-                the right bike.
+                the right vehicle.
               </p>
             </Reveal>
             <Reveal delay={0.06}>

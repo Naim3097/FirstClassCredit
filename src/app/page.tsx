@@ -19,7 +19,7 @@ const homeFAQ = [
   {
     question: "What is the maximum financing margin and tenure?",
     answer:
-      "You can finance up to 90% of the motorcycle\u2019s value for a maximum period of 5 years (60 months).",
+      "You can finance up to 90% of the motor vehicle\u2019s value for a maximum period of 5 years (60 months).",
   },
   {
     question: "Are there any hidden fees?",
@@ -55,10 +55,10 @@ export default function Home() {
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pb-24 md:pb-32 pt-32 flex flex-col items-center text-center">
           <HeroReveal className="flex flex-col items-center">
             <p className="text-[11px] font-semibold uppercase tracking-[3px] text-[#47A7DD] mb-5">
-              HP Motorcycle Financing
+              HP Vehicle Financing
             </p>
             <h1 className="text-[36px] md:text-[52px] lg:text-[64px] font-extralight leading-[1.08] text-white tracking-[-0.02em] mb-6">
-              Turn your two-wheeled
+              Turn your motor-vehicle
               <br />
               goals into reality.
             </h1>
@@ -148,11 +148,11 @@ export default function Home() {
             <Reveal className="md:col-span-3 bg-[#172f6e] border border-white/10 rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-[320px] group transition-all duration-500 hover:border-[#47A7DD]/40 hover:bg-[#1c3880]">
               <div>
                 <h3 className="text-[20px] md:text-[24px] font-semibold text-white leading-snug mb-3">
-                  Hit the Road with Your Dream Bike
+                  Drive Forward with Your Next Vehicle
                 </h3>
                 <p className="text-[15px] text-white/60 leading-relaxed max-w-md">
-                  Stop waiting and start riding. Secure your new or used
-                  motorcycle with hassle-free HP financing and flexible
+                  Stop waiting and start moving. Secure your new or used
+                  motor vehicle with hassle-free HP financing and flexible
                   repayment plans up to 60 months.
                 </p>
               </div>
@@ -160,7 +160,7 @@ export default function Home() {
                 href="/financing-hp"
                 className="mt-8 text-[#47A7DD] text-[15px] font-semibold inline-flex items-center gap-2 group-hover:gap-3.5 transition-all duration-300"
               >
-                Explore Motorcycle Financing <span aria-hidden>&rarr;</span>
+                Explore Vehicle Financing <span aria-hidden>&rarr;</span>
               </Link>
             </Reveal>
 
@@ -281,7 +281,7 @@ export default function Home() {
                   High Margin Financing
                 </p>
                 <h3 className="text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  Finance up to 90% of your motorcycle&apos;s value.
+                  Finance up to 90% of your motor vehicle&apos;s value.
                 </h3>
                 <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed">
                   New or used &mdash; get the maximum backing you need with a
@@ -319,7 +319,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             <Reveal>
               <blockquote className="text-[22px] md:text-[28px] font-light text-[#272A33] leading-[1.4] tracking-[-0.01em]">
-                &ldquo;The process was so fast &mdash; I got my motorcycle
+                &ldquo;The process was so fast &mdash; I got my vehicle
                 within a week of applying. The team was incredibly helpful from
                 start to finish.&rdquo;
               </blockquote>
@@ -332,7 +332,7 @@ export default function Home() {
                     Ahmad Razak
                   </p>
                   <p className="text-[13px] text-[var(--text-muted)]">
-                    Motorcycle Owner &middot; Kuching
+                    Vehicle Owner &middot; Kuching
                   </p>
                 </div>
               </div>
@@ -398,7 +398,7 @@ export default function Home() {
           <Reveal>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <h2 className="text-[22px] md:text-[28px] font-light text-white leading-snug max-w-lg">
-                Ready to get on the road? <br className="hidden md:block" />
+                Ready to finance your next vehicle? <br className="hidden md:block" />
                 Start your application in 5 minutes.
               </h2>
               <Link

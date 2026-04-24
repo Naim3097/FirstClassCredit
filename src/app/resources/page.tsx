@@ -1,11 +1,11 @@
 import Link from "next/link";
 import FAQAccordion from "@/components/FAQAccordion";
 
-const motorcycleFAQ = [
+const vehicleFAQ = [
   {
     question: "What is a Hire Purchase (HP) agreement?",
     answer:
-      "It is a contract where you \u201chire\u201d the motorcycle from the owner (the financier) with an option to purchase it at the end of the term. You become the legal owner only after the final instalment is paid.",
+      "It is a contract where you 'hire' the motor vehicle from the owner (the financier) with an option to purchase it at the end of the term. You become the legal owner only after the final instalment is paid.",
   },
   {
     question: "Is First Class Credit Financing HP governed under the Hire Purchase Act 1967?",
@@ -14,12 +14,12 @@ const motorcycleFAQ = [
   {
     question: "What are the basic eligibility requirements to apply?",
     answer:
-      "Generally, you must be a Malaysian citizen aged 18\u201365 (at the point of application). You\u2019ll need a minimum monthly income of RM1,500.",
+      "Generally, you must be a Malaysian citizen aged 18-65 (at the point of application). You'll need a minimum monthly income of RM1,500.",
   },
   {
     question: "How long does the approval process take?",
     answer:
-      "Once we receive your complete documentation (NRIC, 3 months\u2019 salary slips, and EPF/bank statements), pre-approval typically takes 24 to 48 hours.",
+      "Once we receive your complete documentation (NRIC, 3 months' salary slips, and EPF/bank statements), pre-approval typically takes 24 to 48 hours.",
   },
   {
     question: "Can I apply if I have a low CCRIS/CTOS score?",
@@ -27,7 +27,7 @@ const motorcycleFAQ = [
       "Yes, we look at more than just a score. We consider your current employment stability and downpayment capability. While traditional banks might decline, we specialize in finding solutions for varied credit profiles.",
   },
   {
-    question: "Which law governs my motorcycle loan in Malaysia?",
+    question: "Which law governs my motor vehicle loan in Malaysia?",
     answer:
       "All vehicle financing in Malaysia is governed by the Hire Purchase Act 1967. This protects you by regulating interest rates, repossession rules, and your rights as a hirer.",
   },
@@ -43,18 +43,18 @@ const motorcycleFAQ = [
   {
     question: "Can you provide a representative example of a hire purchase loan with First Class Credit?",
     answer:
-      "Loan amount: RM5,000\nInterest rate: 10% per annum (flat rate)\nTenure: 24 months\nMonthly instalment: RM250 (RM5,000 principal + RM1,000 total interest \u00f7 24 months)",
+      "Loan amount: RM5,000\nInterest rate: 10% per annum (flat rate)\nTenure: 24 months\nMonthly instalment: RM250 (RM5,000 principal + RM1,000 total interest / 24 months)",
   },
   {
     question: "What is the minimum & maximum loan tenure?",
     answer: "Minimum loan tenure 1 year & maximum loan tenure 5 years.",
   },
   {
-    question: "What is the maximum amount financed for motorcycle purchasing?",
-    answer: "Under the Hire Purchase Act 1967, you can finance up to 90% of the motorcycle\u2019s value.",
+    question: "What is the maximum amount financed for motor vehicle purchasing?",
+    answer: "Under the Hire Purchase Act 1967, you can finance up to 90% of the motor vehicle's value.",
   },
   {
-    question: "Are there any \u201chidden\u201d fees?",
+    question: "Are there any 'hidden' fees?",
     answer:
       "We practice full transparency. Typical costs include a Stamp Duty, Processing Fees, and JPJ Ownership Claim (Hakmilik) fee. These will be clearly stated in your Product Disclosure Sheet (PDS).",
   },
@@ -66,11 +66,11 @@ const motorcycleFAQ = [
   {
     question: "Can I settle my loan early?",
     answer:
-      "Yes. Under the HP Act, you are entitled to a statutory rebate on the \u201cunearned\u201d interest if you settle the loan before the end of the tenure.",
+      "Yes. Under the HP Act, you are entitled to a statutory rebate on the 'unearned' interest if you settle the loan before the end of the tenure.",
   },
   {
-    question: "What motorcycle brands are eligible for financing?",
-    answer: "First Class Credit finances a wide range of motorcycle brands.",
+    question: "What motor vehicle brands are eligible for financing?",
+    answer: "First Class Credit finances a wide range of vehicle brands.",
   },
   {
     question: "What happens if I miss a payment?",
@@ -78,7 +78,7 @@ const motorcycleFAQ = [
       "A late payment interest will be charged on the overdue amount. We encourage you to contact our Collection Team early if you face financial hardship to discuss a restructuring plan.",
   },
   {
-    question: "When can First Class Credit repossess my motorcycle?",
+    question: "When can First Class Credit repossess my motor vehicle?",
     answer:
       "By law, repossession can only occur after you have defaulted on two (2) successive instalments and have been served a Fourth Schedule notice (21-day notice).",
   },
@@ -92,9 +92,9 @@ const blogPosts = [
     image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
   },
   {
-    title: "Understanding CCRIS & CTOS: Can You Still Get a Motorcycle Loan?",
+    title: "Understanding CCRIS & CTOS: Can You Still Get a Vehicle Loan?",
     excerpt:
-      "A low credit score doesn\u2019t have to be a dead end. Learn how credit reporting works in Malaysia and what options are available to you.",
+      "A low credit score doesn't have to be a dead end. Learn how credit reporting works in Malaysia and what options are available to you.",
     image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80",
   },
 ];
@@ -102,7 +102,6 @@ const blogPosts = [
 export default function Resources() {
   return (
     <>
-      {/* ===== HEADER ===== */}
       <section className="py-20 md:py-28 bg-gradient-to-br from-dark-blue to-deep-blue">
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <p className="text-xs font-semibold uppercase tracking-[2px] text-light-blue mb-4">
@@ -114,7 +113,6 @@ export default function Resources() {
         </div>
       </section>
 
-      {/* ===== BLOG ===== */}
       <section className="py-20 md:py-[100px] bg-[var(--bg-primary)]">
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="mb-10">
@@ -155,7 +153,6 @@ export default function Resources() {
         </div>
       </section>
 
-      {/* ===== FULL FAQ ===== */}
       <section className="py-20 md:py-[100px] bg-white">
         <div className="max-w-[800px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="text-center mb-10">
@@ -166,11 +163,10 @@ export default function Resources() {
               Everything You Need to Know
             </h2>
           </div>
-          <FAQAccordion items={motorcycleFAQ} />
+          <FAQAccordion items={vehicleFAQ} />
         </div>
       </section>
 
-      {/* ===== CTA ===== */}
       <section className="bg-deep-blue py-20 md:py-24">
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 text-center">
           <h2 className="text-2xl md:text-[2rem] font-semibold text-white mb-8">

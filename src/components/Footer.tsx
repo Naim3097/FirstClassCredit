@@ -32,7 +32,7 @@ export default function Footer() {
                 Home
               </Link>
               <Link href="/financing-hp" className="text-[14px] hover:text-white transition-colors">
-                Motorcycle Financing
+                Vehicle Financing
               </Link>
               <Link href="/about" className="text-[14px] hover:text-white transition-colors">
                 About Us
