@@ -85,21 +85,22 @@ export default function Home() {
       </section>
 
       {/* ===== PRODUCTS ===== */}
-      <section className="py-24 md:py-32 bg-[var(--bg-primary)]">
+      <section className="py-24 md:py-32 bg-[#0d2461]">
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <Reveal>
-            <h2 className="text-[24px] md:text-[32px] font-semibold leading-tight text-[#272A33] mb-16 max-w-md">
+            <h2 className="text-[24px] md:text-[32px] font-semibold leading-tight text-white mb-16 max-w-md">
               Financing solutions for where you are and where you&apos;re going.
             </h2>
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-            <Reveal className="md:col-span-3 bg-white border border-[#e8e8e0] rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-[320px] group transition-shadow duration-500 hover:shadow-[0_12px_40px_rgba(39,42,51,0.08)]">
+            {/* Main card — slightly lighter navy with a subtle border */}
+            <Reveal className="md:col-span-3 bg-[#172f6e] border border-white/10 rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-[320px] group transition-all duration-500 hover:border-[#47A7DD]/40 hover:bg-[#1c3880]">
               <div>
-                <h3 className="text-[20px] md:text-[24px] font-semibold text-[#253A7D] leading-snug mb-3">
+                <h3 className="text-[20px] md:text-[24px] font-semibold text-white leading-snug mb-3">
                   Hit the Road with Your Dream Bike
                 </h3>
-                <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed max-w-md">
+                <p className="text-[15px] text-white/60 leading-relaxed max-w-md">
                   Stop waiting and start riding. Secure your new or used
                   motorcycle with hassle-free HP financing and flexible
                   repayment plans up to 60 months.
@@ -107,13 +108,14 @@ export default function Home() {
               </div>
               <Link
                 href="/financing-hp"
-                className="mt-8 text-[#2C76BB] text-[15px] font-semibold inline-flex items-center gap-2 group-hover:gap-3.5 transition-all duration-300"
+                className="mt-8 text-[#47A7DD] text-[15px] font-semibold inline-flex items-center gap-2 group-hover:gap-3.5 transition-all duration-300"
               >
                 Explore Motorcycle Financing <span aria-hidden>&rarr;</span>
               </Link>
             </Reveal>
 
-            <Reveal delay={0.1} className="md:col-span-2 bg-[#272A33] rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-[320px]">
+            {/* Coming soon card — accent border treatment */}
+            <Reveal delay={0.1} className="md:col-span-2 bg-[#253A7D] border border-white/10 rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-[320px]">
               <span className="inline-block bg-[#F18F33] text-white text-[10px] font-bold uppercase tracking-[1.5px] px-3 py-1 rounded-full w-fit">
                 Coming Soon
               </span>
@@ -127,7 +129,7 @@ export default function Home() {
                 </p>
                 <Link
                   href="/objective-financing"
-                  className="mt-6 text-white/40 text-[14px] font-medium inline-flex items-center gap-1.5"
+                  className="mt-6 text-[#47A7DD]/60 text-[14px] font-medium inline-flex items-center gap-1.5 hover:text-[#47A7DD] transition-colors duration-300"
                 >
                   Objective Financing &rarr;
                 </Link>
