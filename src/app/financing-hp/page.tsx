@@ -49,12 +49,11 @@ export default function FinancingHP() {
         {/* Right-side motorcycle image */}
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=1800&q=85&auto=format&fit=crop"
+            src="/financing-hp-hero.jpg"
             alt=""
             fill
             className="object-cover object-right"
             priority
-            unoptimized
           />
           {/* Left-to-right gradient: solid navy on left, fade to transparent on right */}
           <div
