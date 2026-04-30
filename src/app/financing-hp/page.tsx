@@ -67,15 +67,7 @@ export default function FinancingHP() {
           <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0d2461]/60 to-transparent" />
         </div>
 
-        {/* Faint FCC watermark in middle */}
-        <div className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none" aria-hidden>
-          <svg width="320" height="320" viewBox="0 0 100 100" fill="none" className="opacity-[0.06]">
-            <circle cx="50" cy="50" r="40" stroke="#47A7DD" strokeWidth="1.5" />
-            <path d="M35 35 L65 35 M35 50 L55 50 M35 65 L65 65" stroke="#47A7DD" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-        </div>
-
-        <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pt-24 md:pt-28 pb-16 md:pb-20 lg:pb-24 min-h-[480px] md:min-h-[540px] lg:min-h-[580px] flex items-center">
+        <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pt-28 md:pt-36 pb-24 md:pb-32 lg:pb-40 min-h-[580px] md:min-h-[680px] lg:min-h-[740px] flex items-center">
           <HeroReveal className="max-w-[600px]">
             <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[2.5px] md:tracking-[3px] text-[#47A7DD] mb-4 md:mb-5">
               Motorcycle Financing
@@ -177,124 +169,153 @@ export default function FinancingHP() {
       </section>
 
       {/* ===== VF-S03 ELIGIBILITY ===== */}
-      <section className="py-14 md:py-20 bg-[#FDF0CD]/40">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-            {/* Heading */}
+      <section className="relative py-16 md:py-24 bg-[#f7f4ef] overflow-hidden">
+        {/* Decorative dot grid — bottom left */}
+        <div className="absolute bottom-0 left-0 w-48 h-48 opacity-20 pointer-events-none" aria-hidden>
+          <svg width="192" height="192" viewBox="0 0 192 192" fill="none">
+            {Array.from({ length: 8 }).map((_, row) =>
+              Array.from({ length: 8 }).map((_, col) => (
+                <circle key={`${row}-${col}`} cx={col * 24 + 12} cy={row * 24 + 12} r="3" fill="#0d2461" />
+              ))
+            )}
+          </svg>
+        </div>
+        {/* Decorative dot grid — top right */}
+        <div className="absolute top-0 right-0 w-40 h-32 opacity-10 pointer-events-none" aria-hidden>
+          <svg width="160" height="128" viewBox="0 0 160 128" fill="none">
+            {Array.from({ length: 5 }).map((_, row) =>
+              Array.from({ length: 7 }).map((_, col) => (
+                <circle key={`${row}-${col}`} cx={col * 22 + 11} cy={row * 22 + 11} r="2.5" fill="#0d2461" />
+              ))
+            )}
+          </svg>
+        </div>
+
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+
+            {/* Left: heading panel */}
             <Reveal className="lg:col-span-4">
-              <h2 className="text-[26px] md:text-[32px] lg:text-[34px] font-bold text-[#272A33] leading-[1.15] tracking-tight mb-5">
-                Eligibility &amp; documents
+              {/* Pill badge */}
+              <div className="inline-flex items-center gap-2 bg-white border border-[#dde3f0] rounded-full px-4 py-2 mb-7 shadow-sm">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0d2461" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="8" y1="13" x2="16" y2="13" />
+                  <line x1="8" y1="17" x2="13" y2="17" />
+                </svg>
+                <span className="text-[10px] font-bold uppercase tracking-[2px] text-[#0d2461]">Before You Apply</span>
+              </div>
+
+              <h2 className="text-[32px] md:text-[40px] lg:text-[44px] font-bold text-[#0d2461] leading-[1.1] tracking-tight mb-5">
+                Eligibility &amp;<br />documents
               </h2>
+              <p className="text-[14px] md:text-[15px] text-[#666] leading-relaxed mb-7 max-w-[320px]">
+                Make sure you meet the requirements below before you start your application.
+              </p>
               <Link
                 href="/apply"
-                className="inline-flex items-center gap-1.5 text-[#2C76BB] text-[14px] font-semibold hover:text-[#253A7D] transition-colors"
+                className="inline-flex items-center gap-1.5 text-[#0d2461] text-[14px] font-semibold hover:text-[#47A7DD] transition-colors"
               >
-                Check if you qualify <span aria-hidden>&rarr;</span>
+                Check if you qualify <span aria-hidden>→</span>
               </Link>
             </Reveal>
 
-            {/* Table card */}
+            {/* Right: rows card */}
             <Reveal delay={0.08} className="lg:col-span-8">
-              <div className="bg-white rounded-2xl overflow-hidden shadow-[0_10px_40px_-20px_rgba(13,36,97,0.15)]">
-                {/* Header */}
-                <div className="grid grid-cols-[1fr_1.4fr] md:grid-cols-[1fr_1.6fr] bg-[#0d2461] text-white">
-                  <div className="px-5 md:px-7 py-4 md:py-5 text-[11px] md:text-[12px] font-bold uppercase tracking-[1.5px]">
-                    Requirement
-                  </div>
-                  <div className="px-5 md:px-7 py-4 md:py-5 text-[11px] md:text-[12px] font-bold uppercase tracking-[1.5px]">
-                    Details
-                  </div>
-                </div>
-
-                {/* Rows */}
+              <div className="bg-white rounded-2xl overflow-hidden shadow-[0_8px_40px_-12px_rgba(13,36,97,0.12)]">
                 {[
                   {
                     label: "Nationality",
                     value: "Malaysian Citizen",
                     icon: (
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d2461" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="12" cy="8" r="4" />
                         <path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
                       </svg>
                     ),
-                    bg: "bg-white",
                   },
                   {
                     label: "Age",
                     value: "18 to 70 years old at end of financing tenure",
                     icon: (
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d2461" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3.5" y="5" width="17" height="15" rx="2" />
                         <path d="M3.5 9.5h17M8 3v4M16 3v4" />
                       </svg>
                     ),
-                    bg: "bg-[#FDF0CD]/40",
                   },
                   {
                     label: "Minimum Income",
                     value: "RM1,500 basic monthly salary",
                     icon: (
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d2461" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="2.5" y="6" width="19" height="12" rx="2" />
                         <circle cx="12" cy="12" r="2.5" />
                       </svg>
                     ),
-                    bg: "bg-white",
                   },
                   {
                     label: "Documents",
-                    value:
-                      "Copy of NRIC, latest 3 months\u2019 payslips, latest EPF statement or 3 months\u2019 bank statements",
+                    value: "Copy of NRIC, latest 3 months\u2019 payslips, latest EPF statement or 3 months\u2019 bank statements",
                     icon: (
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d2461" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                         <polyline points="14 2 14 8 20 8" />
                       </svg>
                     ),
-                    bg: "bg-white",
                   },
                 ].map((row, i, arr) => (
                   <div
                     key={row.label}
-                    className={`grid grid-cols-[1fr_1.4fr] md:grid-cols-[1fr_1.6fr] ${row.bg} ${
-                      i < arr.length - 1 ? "border-b border-[#eef0f5]" : ""
-                    }`}
+                    className={`flex items-center gap-0 ${i < arr.length - 1 ? "border-b border-[#eef0f5]" : ""}`}
                   >
-                    <div className="px-5 md:px-7 py-4 md:py-5 flex items-center gap-3">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[#E8F1FB] flex items-center justify-center flex-shrink-0">
+                    {/* Icon */}
+                    <div className="flex items-center justify-center px-5 md:px-7 py-5 md:py-6 flex-shrink-0">
+                      <div className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[#e8eaf6] flex items-center justify-center">
                         {row.icon}
                       </div>
-                      <span className="text-[13px] md:text-[14.5px] font-semibold text-[#272A33]">
-                        {row.label}
-                      </span>
                     </div>
-                    <div className="px-5 md:px-7 py-4 md:py-5 flex items-center text-[13px] md:text-[14px] text-[var(--text-secondary)] leading-snug">
+                    {/* Vertical divider */}
+                    <div className="w-px self-stretch bg-[#eef0f5] flex-shrink-0" />
+                    {/* Label */}
+                    <div className="px-5 md:px-7 py-5 md:py-6 w-[140px] md:w-[180px] flex-shrink-0">
+                      <span className="text-[13px] md:text-[15px] font-bold text-[#0d2461]">{row.label}</span>
+                    </div>
+                    {/* Value */}
+                    <div className="px-4 md:px-6 py-5 md:py-6 flex-1 text-[13px] md:text-[14px] text-[#555] leading-snug">
                       {row.value}
                     </div>
                   </div>
                 ))}
               </div>
             </Reveal>
+
           </div>
         </div>
       </section>
 
       {/* ===== VF-S04 LOAN CALCULATOR ===== */}
-      <section className="py-14 md:py-20 bg-[#E8F1FB]/50">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
+      <section
+        className="py-14 md:py-20 relative overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #0d2461 0%, #1a3a7c 40%, #2C76BB 100%)" }}
+      >
+        {/* Subtle radial glow */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden style={{ background: "radial-gradient(ellipse at 20% 50%, rgba(71,167,221,0.18) 0%, transparent 65%)" }} />
+        <div className="relative max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <Reveal className="lg:col-span-4">
-              <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[2.5px] text-[#2C76BB] mb-3 md:mb-4">
+              <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[2.5px] text-[#47A7DD] mb-3 md:mb-4">
                 Plan your budget
               </p>
-              <h2 className="text-[26px] md:text-[32px] lg:text-[34px] font-bold text-[#272A33] leading-[1.15] tracking-tight mb-4 md:mb-5">
+              <h2 className="text-[26px] md:text-[32px] lg:text-[34px] font-bold text-white leading-[1.15] tracking-tight mb-4 md:mb-5">
                 See how it fits<br /> your plan.
               </h2>
-              <p className="text-[14px] md:text-[15px] text-[var(--text-secondary)] leading-relaxed max-w-md mb-5 md:mb-6">
+              <p className="text-[14px] md:text-[15px] text-white/65 leading-relaxed max-w-md mb-5 md:mb-6">
                 Use our calculator to estimate your monthly instalment. Adjust
                 the loan amount and tenure to find a plan that suits you.
               </p>
-              <p className="text-[12px] md:text-[13px] text-[var(--text-muted)] italic">
+              <p className="text-[12px] md:text-[13px] text-white/40 italic">
                 *Based on a fixed profit rate of 10% per annum.
               </p>
             </Reveal>
@@ -318,9 +339,10 @@ export default function FinancingHP() {
           </Reveal>
 
           <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-6 relative">
-            {/* Connecting dotted line (desktop) */}
+            {/* Connecting dotted line (desktop) — vertically centered on the icon circles */}
             <div
-              className="hidden lg:block absolute top-[58px] left-[12.5%] right-[12.5%] border-t-2 border-dashed border-[#E8F1FB] z-0"
+              className="hidden lg:block absolute left-[12.5%] right-[12.5%] border-t-2 border-dashed border-[#B8D4EF] z-0"
+              style={{ top: "76px" }}
               aria-hidden
             />
             {[
@@ -329,7 +351,7 @@ export default function FinancingHP() {
                 title: "Estimate Your Loan",
                 desc: "Use our online calculator to find a monthly instalment that fits your budget.",
                 icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="4" y="2" width="16" height="20" rx="2" />
                     <line x1="8" y1="6" x2="16" y2="6" />
                     <line x1="8" y1="11" x2="10" y2="11" />
@@ -346,7 +368,7 @@ export default function FinancingHP() {
                 title: "Quick Online Application",
                 desc: "Fill out our 5-minute application form with your motorcycle and personal details.",
                 icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="4" width="20" height="13" rx="2" />
                     <line x1="2" y1="20" x2="22" y2="20" />
                   </svg>
@@ -357,7 +379,7 @@ export default function FinancingHP() {
                 title: "Fast Verification",
                 desc: "Our team reviews your profile and contacts you via WhatsApp within 24\u201348 hours for pre-approval.",
                 icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="5" y="4" width="14" height="18" rx="2" />
                     <path d="M9 4V2.5h6V4" />
                     <line x1="8" y1="10" x2="16" y2="10" />
@@ -370,7 +392,7 @@ export default function FinancingHP() {
                 title: "Sign & Drive",
                 desc: "Sign your Hire Purchase Agreement, settle the downpayment, and collect your motorcycle.",
                 icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="8" cy="15" r="4" />
                     <path d="M11 12l9-9 2 2-2 2 1 1-2 2-1-1-3 3" />
                   </svg>
@@ -382,8 +404,11 @@ export default function FinancingHP() {
                 <div className="w-7 h-7 mx-auto rounded-full bg-white border-2 border-[#2C76BB] flex items-center justify-center text-[#2C76BB] text-[12px] font-bold mb-3">
                   {s.n}
                 </div>
-                {/* Icon */}
-                <div className="w-16 h-16 md:w-[72px] md:h-[72px] mx-auto rounded-full bg-[#E8F1FB]/60 flex items-center justify-center mb-5">
+                {/* Icon — blue gradient circle */}
+                <div
+                  className="w-16 h-16 md:w-[72px] md:h-[72px] mx-auto rounded-full flex items-center justify-center mb-5 shadow-md"
+                  style={{ background: "linear-gradient(135deg, #47A7DD 0%, #2C76BB 45%, #0d2461 100%)" }}
+                >
                   {s.icon}
                 </div>
                 <h4 className="text-[15px] md:text-[16px] font-semibold text-[#272A33] mb-2.5">
@@ -410,7 +435,7 @@ export default function FinancingHP() {
       </section>
 
       {/* ===== VF-S06 FAQ ===== */}
-      <section className="py-14 md:py-20 bg-[#FDF0CD]/40">
+      <section className="py-14 md:py-20 bg-[#f7f4ef]">
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             <Reveal className="lg:col-span-4">

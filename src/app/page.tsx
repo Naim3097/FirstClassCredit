@@ -94,7 +94,10 @@ export default function Home() {
               {/* Stat 1 */}
               <div className="flex flex-col items-center justify-center text-center px-2 sm:px-4 md:px-8 gap-0.5">
                 <div className="flex items-baseline gap-1">
-                  <span className="text-[28px] sm:text-[40px] md:text-[56px] font-extralight text-[#253A7D] leading-none tracking-tight">
+                  <span
+                    className="text-[28px] sm:text-[40px] md:text-[56px] font-bold text-[#253A7D] leading-none tracking-tight"
+                    style={{ textShadow: "0 0 18px rgba(37,58,125,0.28), 0 0 40px rgba(71,167,221,0.18)" }}
+                  >
                     <CountUp end={60} />
                   </span>
                   <span className="text-[11px] sm:text-[13px] md:text-[15px] font-semibold text-[#253A7D] leading-tight">month</span>
@@ -107,7 +110,10 @@ export default function Home() {
               {/* Stat 2 */}
               <div className="flex flex-col items-center justify-center text-center px-2 sm:px-4 md:px-8 gap-0.5">
                 <div className="flex items-baseline gap-1">
-                  <span className="text-[28px] sm:text-[40px] md:text-[56px] font-extralight text-[#253A7D] leading-none tracking-tight">
+                  <span
+                    className="text-[28px] sm:text-[40px] md:text-[56px] font-bold text-[#253A7D] leading-none tracking-tight"
+                    style={{ textShadow: "0 0 18px rgba(37,58,125,0.28), 0 0 40px rgba(71,167,221,0.18)" }}
+                  >
                     <CountUp end={90} />
                   </span>
                   <span className="text-[11px] sm:text-[13px] md:text-[15px] font-semibold text-[#253A7D] leading-tight">%</span>
@@ -120,7 +126,10 @@ export default function Home() {
               {/* Stat 3 */}
               <div className="flex flex-col items-center justify-center text-center px-2 sm:px-4 md:px-8 gap-0.5">
                 <div className="flex items-baseline gap-1">
-                  <span className="text-[28px] sm:text-[40px] md:text-[56px] font-extralight text-[#253A7D] leading-none tracking-tight">
+                  <span
+                    className="text-[28px] sm:text-[40px] md:text-[56px] font-bold text-[#253A7D] leading-none tracking-tight"
+                    style={{ textShadow: "0 0 18px rgba(37,58,125,0.28), 0 0 40px rgba(71,167,221,0.18)" }}
+                  >
                     <CountUp end={24} />
                   </span>
                   <span className="text-[11px] sm:text-[13px] md:text-[15px] font-semibold text-[#253A7D] leading-tight">hour</span>
@@ -269,11 +278,10 @@ export default function Home() {
             {/* Wide image plate */}
             <Reveal className="lg:col-span-8 relative rounded-2xl overflow-hidden h-[260px] md:h-[340px] lg:h-auto lg:min-h-[420px] shadow-[0_20px_60px_-30px_rgba(13,36,97,0.35)]">
               <Image
-                src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1600&q=80&auto=format&fit=crop"
-                alt="Open road"
+                src="/impact-hero.jpg"
+                alt="Happy customer with new car"
                 fill
                 className="object-cover object-center"
-                unoptimized
               />
               <div
                 className="absolute inset-0"
@@ -545,7 +553,7 @@ export default function Home() {
       </section>
 
       {/* ===== FAQ ===== */}
-      <section className="pt-20 md:pt-28 pb-6 md:pb-8 bg-[var(--bg-primary)]">
+      <section className="pt-20 md:pt-28 pb-6 md:pb-8 bg-[#f7f4ef]">
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             <Reveal className="lg:col-span-4">

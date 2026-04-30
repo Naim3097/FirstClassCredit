@@ -102,9 +102,9 @@ const blogPosts = [
 export default function Resources() {
   return (
     <>
-      <section className="py-20 md:py-28 bg-gradient-to-br from-dark-blue to-deep-blue">
+      <section className="py-20 md:py-28" style={{ background: "linear-gradient(315deg, #47A7DD 0%, #2C76BB 45%, #0d2461 100%)" }}>
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
-          <p className="text-xs font-semibold uppercase tracking-[2px] text-light-blue mb-4">
+          <p className="text-xs font-semibold uppercase tracking-[2px] text-white/70 mb-4">
             Resources
           </p>
           <h1 className="text-4xl md:text-5xl lg:text-[56px] font-extralight leading-[1.1] text-white max-w-2xl">
@@ -113,7 +113,7 @@ export default function Resources() {
         </div>
       </section>
 
-      <section className="py-20 md:py-[100px] bg-[var(--bg-primary)]">
+      <section className="py-20 md:py-[100px] bg-[#f7f4ef]">
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="mb-10">
             <p className="text-xs font-semibold uppercase tracking-[2px] text-blue mb-3">
@@ -167,7 +167,7 @@ export default function Resources() {
         </div>
       </section>
 
-      <section className="bg-deep-blue py-20 md:py-24">
+      <section className="py-20 md:py-24" style={{ background: "linear-gradient(315deg, #47A7DD 0%, #2C76BB 45%, #0d2461 100%)" }}>
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 text-center">
           <h2 className="text-2xl md:text-[2rem] font-semibold text-white mb-8">
             Still Have Questions?
