@@ -209,7 +209,7 @@ export default function Resources() {
         </div>
       </section>
 
-      <section className="py-20 md:py-24" style={{ background: "linear-gradient(315deg, #47A7DD 0%, #2C76BB 45%, #0d2461 100%)" }}>
+      <section className="py-20 md:py-24" style={{ background: "linear-gradient(135deg, #0d2461 0%, #1a3a7c 40%, #2C76BB 100%)" }}>
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 text-center">
           <h2 className="text-2xl md:text-[2rem] font-semibold text-white mb-8">
             Still Have Questions?
