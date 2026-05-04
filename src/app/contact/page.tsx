@@ -92,12 +92,12 @@ export default function Contact() {
             {/* LEFT: Heading + Form */}
             <div className="lg:col-span-7">
               <Reveal>
-                <span className="inline-flex items-center text-[12px] font-semibold bg-[#f0f4ff] text-[#253A7D] px-4 py-1.5 rounded-full mb-7">
-                  Send a Message
-                </span>
-                <h2 className="text-[38px] md:text-[52px] font-bold text-[#272A33] leading-[1.1] tracking-[-0.02em] mb-10">
+                <h2 className="text-[38px] md:text-[52px] font-bold text-[#272A33] leading-[1.1] tracking-[-0.02em] mb-4">
                   Contact Us
                 </h2>
+                <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed mb-10">
+                  Tell us how we can help and we&apos;ll confirm your enquiry within 1 working day.
+                </p>
               </Reveal>
 
               {submitted ? (
@@ -222,7 +222,7 @@ export default function Contact() {
                   {/* Submit */}
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#272A33] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#253A7D]"
+                    className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#EE4720] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
                   >
                     Send Message
                     <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-[13px]">
@@ -236,11 +236,6 @@ export default function Contact() {
             {/* RIGHT: Description + Image card */}
             <div className="lg:col-span-5">
               <Reveal delay={0.1}>
-                <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed mb-8 lg:text-right">
-                  Tell us how we can help and we&apos;ll confirm your enquiry
-                  within 1 working day.
-                </p>
-
                 {/* Image card */}
                 <div className="relative rounded-2xl overflow-hidden bg-[#e8e8e0]" style={{ aspectRatio: "4/5" }}>
                   <Image
@@ -249,9 +244,6 @@ export default function Contact() {
                     fill
                     className="object-cover"
                   />
-                  <span className="absolute top-4 right-4 inline-flex items-center text-[12px] font-semibold bg-white text-[#272A33] px-3.5 py-1.5 rounded-full shadow-sm">
-                    First Class Credit
-                  </span>
                 </div>
               </Reveal>
             </div>
