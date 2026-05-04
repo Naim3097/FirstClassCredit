@@ -331,7 +331,7 @@ export default function About() {
       </section>
 
       {/* ===== AB-S06 CTA ===== */}
-      <section className="bg-[#0d2461] py-16 md:py-20">
+      <section className="py-16 md:py-20" style={{ background: "linear-gradient(135deg, #0d2461 0%, #1a3a7c 40%, #2C76BB 100%)" }}>
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             <div className="flex items-start gap-5">
