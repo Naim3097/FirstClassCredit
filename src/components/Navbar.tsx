@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/financing-hp", label: "Vehicle Financing" },
+  { href: "/financing-hp", label: "Motorcycle Financing" },
   { href: "/about", label: "About Us" },
   { href: "/resources", label: "Resources" },
   { href: "/contact", label: "Contact" },
@@ -34,7 +34,7 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+        scrolled || open
           ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_#e8e8e0]"
           : "bg-transparent"
       }`}
@@ -48,7 +48,7 @@ export default function Navbar() {
             width={160}
             height={50}
             className={`h-10 w-auto object-contain transition-all duration-500 ${
-              scrolled ? "" : "brightness-0 invert"
+              scrolled || open ? "" : "brightness-0 invert"
             }`}
             priority
           />
@@ -89,17 +89,17 @@ export default function Navbar() {
         >
           <span
             className={`absolute block w-5 h-[1.5px] transition-all duration-300 ${
-              scrolled ? "bg-[#272A33]" : "bg-white"
+              scrolled || open ? "bg-[#272A33]" : "bg-white"
             } ${open ? "rotate-45" : "-translate-y-[5px]"}`}
           />
           <span
             className={`absolute block w-5 h-[1.5px] transition-all duration-300 ${
-              scrolled ? "bg-[#272A33]" : "bg-white"
+              scrolled || open ? "bg-[#272A33]" : "bg-white"
             } ${open ? "opacity-0" : ""}`}
           />
           <span
             className={`absolute block w-5 h-[1.5px] transition-all duration-300 ${
-              scrolled ? "bg-[#272A33]" : "bg-white"
+              scrolled || open ? "bg-[#272A33]" : "bg-white"
             } ${open ? "-rotate-45" : "translate-y-[5px]"}`}
           />
         </button>
