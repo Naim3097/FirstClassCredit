@@ -120,7 +120,7 @@ export default function Contact() {
                         onChange={(e) =>
                           setFormData({ ...formData, name: e.target.value })
                         }
-                        className="w-full px-4 py-3 text-[15px] bg-[#f7f7f0] border border-[#e8e8e0] rounded-lg outline-none focus:border-[#2C76BB] transition-colors"
+                        className="w-full px-4 py-3 text-[15px] bg-white border border-[#e0e0e0] rounded-lg outline-none focus:border-[#2C76BB] transition-colors"
                         placeholder="Your full name"
                       />
                     </div>
@@ -138,7 +138,7 @@ export default function Contact() {
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
                         }
-                        className="w-full px-4 py-3 text-[15px] bg-[#f7f7f0] border border-[#e8e8e0] rounded-lg outline-none focus:border-[#2C76BB] transition-colors"
+                        className="w-full px-4 py-3 text-[15px] bg-white border border-[#e0e0e0] rounded-lg outline-none focus:border-[#2C76BB] transition-colors"
                         placeholder="you@email.com"
                       />
                     </div>
@@ -161,7 +161,7 @@ export default function Contact() {
                         onChange={(e) =>
                           setFormData({ ...formData, phone: e.target.value })
                         }
-                        className="w-full px-4 py-3 text-[15px] bg-[#f7f7f0] border border-[#e8e8e0] rounded-lg outline-none focus:border-[#2C76BB] transition-colors"
+                        className="w-full px-4 py-3 text-[15px] bg-white border border-[#e0e0e0] rounded-lg outline-none focus:border-[#2C76BB] transition-colors"
                         placeholder="e.g. 016-855 8553"
                       />
                     </div>
@@ -178,7 +178,7 @@ export default function Contact() {
                         onChange={(e) =>
                           setFormData({ ...formData, enquiry: e.target.value })
                         }
-                        className="w-full px-4 py-3 text-[15px] bg-[#f7f7f0] border border-[#e8e8e0] rounded-lg outline-none focus:border-[#2C76BB] transition-colors text-[var(--text-secondary)] appearance-none"
+                        className="w-full px-4 py-3 text-[15px] bg-white border border-[#e0e0e0] rounded-lg outline-none focus:border-[#2C76BB] transition-colors text-[var(--text-secondary)] appearance-none"
                       >
                         <option value="">Choose enquiry type...</option>
                         <option value="financing">Apply for Financing</option>
@@ -205,7 +205,7 @@ export default function Contact() {
                       onChange={(e) =>
                         setFormData({ ...formData, message: e.target.value })
                       }
-                      className="w-full px-4 py-3 text-[15px] bg-[#f7f7f0] border border-[#e8e8e0] rounded-lg outline-none focus:border-[#2C76BB] transition-colors resize-none"
+                      className="w-full px-4 py-3 text-[15px] bg-white border border-[#e0e0e0] rounded-lg outline-none focus:border-[#2C76BB] transition-colors resize-none"
                       placeholder="Anything else we should know?"
                     />
                   </div>
@@ -252,60 +252,60 @@ export default function Contact() {
       </section>
 
       {/* ===== CONTACT INFO + MAP ===== */}
-      <section className="py-16 md:py-20 bg-[var(--bg-primary)]">
+      <section className="py-16 md:py-20 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0d2461 0%, #1a3a7c 40%, #2C76BB 100%)" }}>
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
 
             {/* Info */}
             <div className="lg:col-span-2">
               <Reveal>
-                <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed mb-10">
+                <p className="text-[15px] text-white/70 leading-relaxed mb-10">
                   Whether you have questions about our financing products,
                   need help with an application, or want to explore a
                   partnership &mdash; we&apos;d love to hear from you.
                 </p>
                 <div className="space-y-8">
                   <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[2px] text-[#272A33] mb-2">
+                    <p className="text-[11px] font-semibold uppercase tracking-[2px] text-white/50 mb-2">
                       Address
                     </p>
-                    <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed">
+                    <p className="text-[15px] text-white/80 leading-relaxed">
                       Lot 450, 1st Floor, Lorong Lapangan Terbang 3A,<br />
                       93250 Kuching, Sarawak
                     </p>
                   </div>
                   <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[2px] text-[#272A33] mb-2">
+                    <p className="text-[11px] font-semibold uppercase tracking-[2px] text-white/50 mb-2">
                       Phone
                     </p>
                     <a
                       href="tel:+60168558553"
-                      className="text-[15px] text-[#2C76BB] hover:text-[#253A7D] transition-colors"
+                      className="text-[15px] text-[#47A7DD] hover:text-white transition-colors"
                     >
                       +60 16-855 8553
                     </a>
                   </div>
                   <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[2px] text-[#272A33] mb-2">
+                    <p className="text-[11px] font-semibold uppercase tracking-[2px] text-white/50 mb-2">
                       WhatsApp
                     </p>
                     <a
                       href="https://wa.me/60168558553"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[15px] text-[#2C76BB] hover:text-[#253A7D] transition-colors"
+                      className="text-[15px] text-[#47A7DD] hover:text-white transition-colors"
                     >
                       Chat with us on WhatsApp
                     </a>
                   </div>
                   <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[2px] text-[#272A33] mb-2">
+                    <p className="text-[11px] font-semibold uppercase tracking-[2px] text-white/50 mb-2">
                       Hours
                     </p>
-                    <p className="text-[15px] text-[var(--text-secondary)]">
+                    <p className="text-[15px] text-white/80">
                       Mon &ndash; Fri: 9:00 AM &ndash; 5:00 PM
                     </p>
-                    <p className="text-[13px] text-[var(--text-muted)] mt-1">
+                    <p className="text-[13px] text-white/50 mt-1">
                       Closed on weekends &amp; public holidays
                     </p>
                   </div>
