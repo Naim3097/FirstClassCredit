@@ -48,11 +48,20 @@ export default function FinancingHP() {
       <section className="relative bg-[#0d2461] overflow-hidden">
         {/* Right-side motorcycle image */}
         <div className="absolute inset-0">
+          {/* Mobile image (hidden on lg+) */}
+          <Image
+            src="/financing-hp-hero-mobile.png"
+            alt=""
+            fill
+            className="object-cover object-center lg:hidden"
+            priority
+          />
+          {/* Desktop image (hidden on mobile) */}
           <Image
             src="/financing-hp-hero.jpg"
             alt=""
             fill
-            className="object-cover object-right"
+            className="object-cover object-right hidden lg:block"
             priority
           />
           {/* Left-to-right gradient: solid navy on left, fade to transparent on right */}
