@@ -239,7 +239,7 @@ export default function Contact() {
                 {/* Image card */}
                 <div className="relative rounded-2xl overflow-hidden bg-[#e8e8e0]" style={{ aspectRatio: "4/5" }}>
                   <Image
-                    src="/about-mission.jpg"
+                    src="/contact-form.png"
                     alt="First Class Credit"
                     fill
                     className="object-cover"
