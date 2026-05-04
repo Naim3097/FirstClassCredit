@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const malaysianStates = [
@@ -54,12 +55,14 @@ export default function ApplyPage() {
       {/* Header */}
       <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 py-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-gradient-to-br from-[#253A7D] to-[#2C76BB] rounded-lg flex items-center justify-center text-white text-sm font-bold">
-            FC
-          </div>
-          <span className="text-lg font-semibold text-[#272A33] tracking-tight">
-            First Class Credit
-          </span>
+          <Image
+            src="/logo.png"
+            alt="First Class Credit"
+            width={160}
+            height={50}
+            className="h-9 w-auto object-contain"
+            priority
+          />
         </Link>
         <Link
           href="/"
