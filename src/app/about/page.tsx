@@ -335,7 +335,7 @@ export default function About() {
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             <div className="flex items-start gap-5">
-              <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="hidden md:flex w-14 h-14 rounded-full bg-white/10 items-center justify-center flex-shrink-0 mt-0.5">
                 <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#47A7DD" strokeWidth="1.8">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
