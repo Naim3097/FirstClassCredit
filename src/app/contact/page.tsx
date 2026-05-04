@@ -37,7 +37,7 @@ export default function Contact() {
       </section>
 
       {/* ===== CONTACT FORM ===== */}
-      <section className="py-20 md:py-28 bg-white">
+      <section id="contact-form" className="py-20 md:py-28 bg-white">
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
