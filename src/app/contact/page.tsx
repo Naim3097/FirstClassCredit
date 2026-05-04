@@ -26,7 +26,7 @@ export default function Contact() {
       <section className="relative bg-[#0d2461] overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/contact-hero.jpg"
+            src="/contact-hero.png"
             alt=""
             fill
             className="object-cover object-right"
