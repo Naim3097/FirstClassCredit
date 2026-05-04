@@ -75,10 +75,10 @@ export default function About() {
             {/* Left: story */}
             <Reveal>
               <p className="text-[20px] md:text-[26px] font-bold text-[#0d2461] leading-[1.38] mb-6">
-                At First Class Credit, we believe that achieving your mobility and lifestyle goals should be a milestone, not a financial burden.
+                At First Class Credit, we believe owning your next motor vehicle should be a milestone, not a financial burden.
               </p>
               <p className="text-[14px] md:text-[15px] text-[#555] leading-[1.8] mb-3">
-                Based in Kuching, Sarawak, we specialize in providing flexible and accessible financing solutions tailored for Malaysians. Whether you are purchasing your first vehicle, upgrading your daily ride, or securing funds for specific personal objectives, we bridge the gap between your aspirations and reality.
+                Headquartered in Kuching, Sarawak, we are First Class Credit Sdn. Bhd. (201801009791 / 1271805-K) — a licensed credit company specialising in Hire Purchase financing for cars and motorcycles, fully governed by the Hire Purchase Act 1967. Whether you’re financing your first ride, upgrading the family car, or planning a personal milestone, we bridge the gap between your aspirations and reality.
               </p>
               <Link
                 href="/contact"
@@ -176,7 +176,7 @@ export default function About() {
                   </svg>
                 ),
                 title: "Transparency",
-                desc: "No hidden charges. Our services operate with strict compliance — including adherence to the Hire Purchase Act 1967 — ensuring your consumer rights are always protected.",
+                desc: "No hidden charges. Every fee, charge and rate is disclosed in your Product Disclosure Sheet before you sign — in full compliance with the Hire Purchase Act 1967.",
               },
               {
                 icon: (

@@ -1,16 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import FAQAccordion from "@/components/FAQAccordion";
+import { blogPosts } from "./blog/posts";
 
 const vehicleFAQ = [
   {
     question: "What is a Hire Purchase (HP) agreement?",
     answer:
-      "It is a contract where you 'hire' the motor vehicle from the owner (the financier) with an option to purchase it at the end of the term. You become the legal owner only after the final instalment is paid.",
+      "It is a contract where you 'hire' the motor vehicle from the Owner (First Class Credit Sdn. Bhd.) and ownership transfers to you upon full settlement. You become the legal owner only after the final instalment is paid.",
   },
   {
     question: "Is First Class Credit Financing HP governed under the Hire Purchase Act 1967?",
-    answer: "Yes.",
+    answer:
+      "Yes. All our motor vehicle financing is governed by the Hire Purchase Act 1967, which protects you as the Hirer.",
   },
   {
     question: "What are the basic eligibility requirements to apply?",
@@ -25,78 +27,71 @@ const vehicleFAQ = [
   {
     question: "Can I apply if I have a low CCRIS/CTOS score?",
     answer:
-      "Yes, we look at more than just a score. We consider your current employment stability and downpayment capability. While traditional banks might decline, we specialize in finding solutions for varied credit profiles.",
+      "Yes, we look at more than just a score. We consider your current employment stability and downpayment capability. While traditional banks might decline, we specialise in finding solutions for varied credit profiles.",
   },
   {
     question: "Which law governs my motor vehicle loan in Malaysia?",
     answer:
-      "All vehicle financing in Malaysia is governed by the Hire Purchase Act 1967. This protects you by regulating interest rates, repossession rules, and your rights as a hirer.",
+      "All motor vehicle financing in Malaysia is governed by the Hire Purchase Act 1967. This protects you by regulating term charges, repossession rules, and your rights as a Hirer.",
   },
   {
-    question: "What are the profit rates offered?",
-    answer: "0.833% per month / 10% per annum.",
+    question: "What is the profit rate offered?",
+    answer:
+      "A fixed flat rate of 10.00% per annum (≈ 0.833% per month). The rate is locked in for the full tenure.",
   },
   {
     question: "How is the interest calculated?",
     answer:
-      "Most HP loans use a fixed flat rate. Total interest is calculated on the initial principal over the full tenure.",
+      "We use a fixed flat rate. Total term charges = Amount Financed × Rate × (Tenure in years). The full amount is then divided into equal instalments over the tenure.",
   },
   {
-    question: "Can you provide a representative example of a hire purchase loan with First Class Credit?",
+    question: "Can you provide a representative example?",
     answer:
-      "Loan amount: RM5,000\nInterest rate: 10% per annum (flat rate)\nTenure: 24 months\nMonthly instalment: RM250 (RM5,000 principal + RM1,000 total interest / 24 months)",
+      "From our PDS — Amount Financed RM10,000, Margin 81.30%, Fixed Rate 10.00% p.a. (flat), Tenure 48 months, Total Term Charges RM4,000, Monthly Instalment RM294 (incl. transaction fee), Final Instalment RM278.",
   },
   {
     question: "What is the minimum & maximum loan tenure?",
-    answer: "Minimum loan tenure 1 year & maximum loan tenure 5 years.",
+    answer: "Minimum 1 year (12 months) and maximum 5 years (60 months).",
   },
   {
-    question: "What is the maximum amount financed for motor vehicle purchasing?",
-    answer: "Under the Hire Purchase Act 1967, you can finance up to 90% of the motor vehicle's value.",
-  },
-  {
-    question: "Are there any 'hidden' fees?",
+    question: "What is the maximum amount financed?",
     answer:
-      "We practice full transparency. Typical costs include a Stamp Duty, Processing Fees, and JPJ Ownership Claim (Hakmilik) fee. These will be clearly stated in your Product Disclosure Sheet (PDS).",
+      "Under the Hire Purchase Act 1967, you can finance up to 90% of the motor vehicle's value.",
+  },
+  {
+    question: "What fees and charges do I pay?",
+    answer:
+      "Per the PDS: Stamp Duty RM20 (without guarantor) or RM60 (with guarantor), e-Hakmilik Charges RM3, and Postage RM10. All fees are disclosed up front — no hidden charges.",
+  },
+  {
+    question: "Do I need insurance / Takaful?",
+    answer:
+      "Yes. Comprehensive Insurance/Takaful coverage is mandatory under the Hire Purchase Act 1967 for the full tenure of the HP facility.",
   },
   {
     question: "How do I make monthly payments?",
     answer:
-      "1. Auto-debit or post-dated cheque\n2. Cash Deposit Machine available at all banks with 24 hours service\n3. MEPS interbank GIRO at any participating banks\n4. Internet banking",
+      "1. Auto-debit or post-dated cheque\n2. Cash Deposit Machine available at all banks (24-hour service)\n3. MEPS interbank GIRO at any participating banks\n4. Internet banking",
   },
   {
     question: "Can I settle my loan early?",
     answer:
-      "Yes. Under the HP Act, you are entitled to a statutory rebate on the 'unearned' interest if you settle the loan before the end of the tenure.",
+      "Yes. You receive a statutory rebate per the Hire Purchase Act 1967, calculated as: Rebate = [RP × (RP + 1)] / [OP × (OP + 1)] × Total Term Charges, where RP = Remaining Period (months) and OP = Original Period (months).",
   },
   {
-    question: "What motor vehicle brands are eligible for financing?",
-    answer: "First Class Credit finances a wide range of vehicle brands.",
+    question: "What vehicles are eligible for financing?",
+    answer:
+      "First Class Credit finances a wide range of motor vehicles including cars and motorcycles, both new and used.",
   },
   {
     question: "What happens if I miss a payment?",
     answer:
-      "A late payment interest will be charged on the overdue amount. We encourage you to contact our Collection Team early if you face financial hardship to discuss a restructuring plan.",
+      "A late payment penalty of 8% per annum on the amount in arrears, calculated daily, will be charged. Contact our Collection Team early if you face hardship so we can discuss a workable plan before further action.",
   },
   {
     question: "When can First Class Credit repossess my motor vehicle?",
     answer:
       "By law, repossession can only occur after you have defaulted on two (2) successive instalments and have been served a Fourth Schedule notice (21-day notice).",
-  },
-];
-
-const blogPosts = [
-  {
-    title: "5 Things to Check Before Signing a Hire Purchase Agreement in Malaysia",
-    excerpt:
-      "Understanding the fine print of your HP agreement can save you from unexpected costs. Here are the key things every buyer should verify before signing.",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
-  },
-  {
-    title: "Understanding CCRIS & CTOS: Can You Still Get a Vehicle Loan?",
-    excerpt:
-      "A low credit score doesn't have to be a dead end. Learn how credit reporting works in Malaysia and what options are available to you.",
-    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80",
   },
 ];
 
@@ -167,18 +162,24 @@ export default function Resources() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {blogPosts.map((post) => (
-              <article
-                key={post.title}
-                className="bg-white border border-[var(--border-color)] rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_8px_32px_rgba(39,42,51,0.08)] hover:-translate-y-0.5 group"
+              <Link
+                key={post.slug}
+                href={`/resources/blog/${post.slug}`}
+                className="block bg-white border border-[var(--border-color)] rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_8px_32px_rgba(39,42,51,0.08)] hover:-translate-y-0.5 group"
               >
                 <div className="relative aspect-[16/9] bg-[var(--bg-primary)]">
-                  <img
+                  <Image
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    unoptimized
                   />
                 </div>
                 <div className="p-6 md:p-8">
+                  <p className="text-[10px] font-semibold uppercase tracking-[1.5px] text-[#2C76BB] mb-2">
+                    {post.readingTime}
+                  </p>
                   <h3 className="text-lg md:text-xl font-semibold text-dark-blue mb-3 leading-snug">
                     {post.title}
                   </h3>
@@ -189,7 +190,7 @@ export default function Resources() {
                     Read More <span aria-hidden="true">&rarr;</span>
                   </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>

@@ -19,12 +19,22 @@ const homeFAQ = [
   {
     question: "What is the maximum financing margin and tenure?",
     answer:
-      "You can finance up to 90% of the vehicle\u2019s value for a maximum period of 5 years (60 months).",
+      "You can finance up to 90% of the motor vehicle\u2019s value for a maximum period of 5 years (60 months). Actual margin depends on your profile and the vehicle.",
+  },
+  {
+    question: "What is the profit rate offered?",
+    answer:
+      "A fixed flat rate of 10.00% per annum (\u2248 0.833% per month), locked in for the full tenure.",
+  },
+  {
+    question: "Can you provide a representative example?",
+    answer:
+      "From our PDS \u2014 Amount Financed RM10,000, Margin 81.30%, Fixed Rate 10.00% p.a. (flat), Tenure 48 months, Total Term Charges RM4,000, Monthly Instalment RM294, Final Instalment RM278 (both inclusive of transaction fee).",
   },
   {
     question: "Are there any hidden fees?",
     answer:
-      "No. Typical costs include Stamp Duty, Processing Fees, and JPJ Ownership Claim (Hakmilik) fee \u2014 all clearly stated in your Product Disclosure Sheet.",
+      "No. Per the PDS: Stamp Duty RM20 (without guarantor) or RM60 (with guarantor), e-Hakmilik Charges RM3, and Postage RM10. All fees are disclosed up front.",
   },
 ];
 
@@ -58,13 +68,13 @@ export default function Home() {
               HP Vehicle Financing
             </p>
             <h1 className="text-[36px] md:text-[52px] lg:text-[64px] font-extralight leading-[1.08] text-white tracking-[-0.02em] mb-6">
-              Turn your mobility
+              Your next ride,
               <br />
-              goals into reality.
+              financed the straightforward way.
             </h1>
-            <p className="text-[17px] md:text-[19px] text-white/70 max-w-[480px] mb-10 leading-[1.6]">
-              Hassle-free HP financing in Kuching and beyond. Flexible
-              repayments up to 60 months, up to 90% margin of financing.
+            <p className="text-[17px] md:text-[19px] text-white/70 max-w-[520px] mb-10 leading-[1.6]">
+              Licensed Hire Purchase financing in Kuching. Up to 90% margin,
+              tenures up to 60 months, fixed rates with no surprises.
             </p>
             <div className="flex items-center justify-center gap-4 flex-wrap">
               <Link
@@ -413,12 +423,11 @@ export default function Home() {
                   Competitive Rates
                 </p>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  Rates designed to match your financial profile.
+                  A fixed flat rate, locked in for the full tenure.
                 </h3>
                 <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
-                  Fixed or variable interest rates with full transparency. No
-                  hidden charges &mdash; always the best rates for your
-                  financial situation.
+                  10.00% per annum, with every fee disclosed in your Product
+                  Disclosure Sheet — no hidden charges, no surprises.
                 </p>
               </div>
             </Reveal>

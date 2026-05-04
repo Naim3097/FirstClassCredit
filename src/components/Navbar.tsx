@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/financing-hp", label: "Motorcycle Financing" },
+  { href: "/financing-hp", label: "Vehicle Financing" },
   { href: "/about", label: "About Us" },
   { href: "/resources", label: "Resources" },
   { href: "/contact", label: "Contact" },
@@ -32,6 +32,7 @@ export default function Navbar() {
   }, [open]);
 
   return (
+    <>
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
@@ -106,14 +107,18 @@ export default function Navbar() {
           />
         </button>
       </div>
+    </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — rendered OUTSIDE <nav> so the nav's backdrop-blur
+          (which makes the nav a containing block for fixed descendants)
+          doesn't clip this panel against the 72px header box. */}
       <div
-        className={`lg:hidden fixed inset-0 top-[72px] bg-white transition-all duration-500 ${
+        className={`lg:hidden fixed inset-0 top-[72px] z-40 transition-opacity duration-500 ${
           open
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
+        style={{ backgroundColor: "#ffffff" }}
       >
         <div className="flex flex-col px-8 pt-12 gap-1">
           {links.map((link, i) => (
@@ -148,6 +153,6 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-    </nav>
+    </>
   );
 }

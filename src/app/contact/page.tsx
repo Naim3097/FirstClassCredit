@@ -72,7 +72,7 @@ export default function Contact() {
                 Send a Message
               </Link>
               <a
-                href="https://wa.me/60168558553"
+                href="https://wa.me/60169328901"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-white text-[13px] md:text-[14px] font-semibold hover:text-[#47A7DD] transition-colors"
@@ -271,19 +271,21 @@ export default function Contact() {
                       Address
                     </p>
                     <p className="text-[15px] text-white/80 leading-relaxed">
-                      Lot 450, 1st Floor, Lorong Lapangan Terbang 3A,<br />
-                      93250 Kuching, Sarawak
+                      First Class Credit Sdn. Bhd. (1271805-K)<br />
+                      Lot 538, Ground Floor, Section 6,<br />
+                      KTLD, Jalan Satok,<br />
+                      93400 Kuching, Sarawak
                     </p>
                   </div>
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[2px] text-white/50 mb-2">
-                      Phone
+                      Office
                     </p>
                     <a
-                      href="tel:+60168558553"
+                      href="tel:+6082237878"
                       className="text-[15px] text-[#47A7DD] hover:text-white transition-colors"
                     >
-                      +60 16-855 8553
+                      +60 82-237878
                     </a>
                   </div>
                   <div>
@@ -291,12 +293,12 @@ export default function Contact() {
                       WhatsApp
                     </p>
                     <a
-                      href="https://wa.me/60168558553"
+                      href="https://wa.me/60169328901"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[15px] text-[#47A7DD] hover:text-white transition-colors"
                     >
-                      Chat with us on WhatsApp
+                      +60 16-932 8901
                     </a>
                   </div>
                   <div>
@@ -318,14 +320,14 @@ export default function Contact() {
             <Reveal delay={0.1} className="lg:col-span-3">
               <div className="rounded-xl overflow-hidden h-full min-h-[320px]">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.436!2d110.347!3d1.5533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31fba7c0c0000001%3A0x1!2sLot%20450%2C%20Lorong%20Lapangan%20Terbang%203A%2C%20Kuching!5e0!3m2!1sen!2smy!4v1"
+                  src="https://www.google.com/maps?q=Lot+538+Section+6+KTLD+Jalan+Satok+93400+Kuching+Sarawak&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0, minHeight: "320px" }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="First Class Credit location"
+                  title="First Class Credit — Lot 538, Jalan Satok, Kuching"
                 />
               </div>
             </Reveal>

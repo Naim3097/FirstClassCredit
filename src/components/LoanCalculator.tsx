@@ -4,22 +4,30 @@ import { useState } from "react";
 
 export default function LoanCalculator() {
   const [amount, setAmount] = useState(15000);
-  const [tenure, setTenure] = useState(24);
-  const rate = 0.1;
-  const totalInterest = amount * rate * (tenure / 12);
-  const monthly = Math.round((amount + totalInterest) / tenure);
+  const [tenure, setTenure] = useState(48);
+  const rate = 0.1; // 10% per annum, flat (per PDS)
+
+  // PDS-style flat-rate calculation
+  const totalTermCharges = amount * rate * (tenure / 12);
+  const totalPayable = amount + totalTermCharges;
+  const monthly = Math.round(totalPayable / tenure);
+  // Final instalment absorbs rounding so the sum matches totalPayable
+  const final = Math.round(totalPayable - monthly * (tenure - 1));
+
+  const fmt = (n: number) =>
+    n.toLocaleString(undefined, { maximumFractionDigits: 0 });
 
   return (
     <div className="bg-white rounded-2xl p-8 md:p-12 shadow-[0_4px_24px_rgba(39,42,51,0.06)] max-w-[640px] mx-auto">
-      {/* Loan Amount */}
+      {/* Amount Financed */}
       <div className="mb-8">
         <label className="block text-xs font-semibold uppercase tracking-[1.5px] text-blue mb-3">
-          Loan Amount (RM)
+          Amount Financed (RM)
         </label>
         <input
           type="range"
           min={5000}
-          max={50000}
+          max={200000}
           step={5000}
           value={amount}
           onChange={(e) => setAmount(Number(e.target.value))}
@@ -49,19 +57,48 @@ export default function LoanCalculator() {
       </div>
 
       <p className="text-sm text-[var(--text-secondary)] mb-6">
-        Fixed profit rate: <strong>10% per annum</strong>
+        Fixed rate: <strong>10.00% per annum (flat)</strong>
       </p>
 
-      {/* Result */}
-      <div className="text-center pt-8 border-t border-[var(--border-color)]">
+      {/* Summary breakdown — PDS format */}
+      <div className="grid grid-cols-2 gap-x-6 gap-y-5 pt-6 border-t border-[var(--border-color)]">
+        <div>
+          <p className="text-[var(--text-muted)] uppercase text-[10px] font-semibold tracking-[1.5px] mb-1">
+            Total Term Charges
+          </p>
+          <p className="text-base font-semibold text-dark-blue">RM {fmt(totalTermCharges)}</p>
+        </div>
+        <div>
+          <p className="text-[var(--text-muted)] uppercase text-[10px] font-semibold tracking-[1.5px] mb-1">
+            Total Payable
+          </p>
+          <p className="text-base font-semibold text-dark-blue">RM {fmt(totalPayable)}</p>
+        </div>
+        <div>
+          <p className="text-[var(--text-muted)] uppercase text-[10px] font-semibold tracking-[1.5px] mb-1">
+            No. of Instalments
+          </p>
+          <p className="text-base font-semibold text-dark-blue">{tenure}</p>
+        </div>
+        <div>
+          <p className="text-[var(--text-muted)] uppercase text-[10px] font-semibold tracking-[1.5px] mb-1">
+            Final Instalment
+          </p>
+          <p className="text-base font-semibold text-dark-blue">RM {final.toLocaleString()}</p>
+        </div>
+      </div>
+
+      {/* Headline monthly */}
+      <div className="text-center pt-8 mt-6 border-t border-[var(--border-color)]">
         <p className="text-xs font-semibold uppercase tracking-[1.5px] text-[var(--text-secondary)] mb-2">
-          Estimated Monthly Instalment
+          Monthly Instalment
         </p>
         <p className="text-4xl md:text-5xl font-semibold text-dark-blue">
           RM {monthly.toLocaleString()}
         </p>
-        <p className="text-xs text-[var(--text-muted)] mt-3">
-          *Indicative calculation only. Actual instalment may differ.
+        <p className="text-[11px] text-[var(--text-muted)] mt-3 leading-relaxed">
+          Inclusive of transaction fee. Indicative only — actual instalment, margin and rate are
+          confirmed in your signed Hire Purchase Agreement and Product Disclosure Sheet.
         </p>
       </div>
     </div>

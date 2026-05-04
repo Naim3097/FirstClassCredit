@@ -10,29 +10,51 @@ const hpFAQ = [
   {
     question: "What is a Hire Purchase (HP) agreement?",
     answer:
-      "It is a contract where you \u201chire\u201d the motorcycle from the owner (the financier) with an option to purchase it at the end of the term. You become the legal owner only after the final instalment is paid.",
+      "It is a contract where you \u201chire\u201d the motor vehicle from the Owner (First Class Credit Sdn. Bhd.) and ownership transfers to you upon full settlement. You become the legal owner only after the final instalment is paid.",
   },
   {
     question: "Is First Class Credit HP governed under the Hire Purchase Act 1967?",
-    answer: "Yes.",
+    answer:
+      "Yes. All our motor vehicle financing is governed by the Hire Purchase Act 1967, which protects you as the Hirer.",
   },
   {
     question: "What is the maximum amount financed?",
     answer:
-      "Under the Hire Purchase Act 1967, you can finance up to 90% of the motorcycle\u2019s value.",
+      "You can finance up to 90% of the motor vehicle\u2019s value. Actual margin depends on your profile and the vehicle.",
   },
   {
-    question: "What are the profit rates offered?",
-    answer: "0.833% per month / 10% per annum.",
+    question: "What is the profit rate offered?",
+    answer:
+      "A fixed flat rate of 10.00% per annum (\u2248 0.833% per month). The rate is locked in for the full tenure.",
   },
   {
     question: "What is the minimum and maximum loan tenure?",
-    answer: "Minimum 1 year, maximum 5 years.",
+    answer: "Minimum 1 year (12 months) and maximum 5 years (60 months).",
   },
   {
-    question: "Are there any hidden fees?",
+    question: "Can you provide a representative example?",
     answer:
-      "No. Typical costs include Stamp Duty, Processing Fees, and JPJ Ownership Claim (Hakmilik) fee \u2014 clearly stated in your Product Disclosure Sheet.",
+      "From our PDS \u2014 Amount Financed RM10,000, Margin 81.30%, Fixed Rate 10.00% p.a. (flat), Tenure 48 months, Total Term Charges RM4,000, Monthly Instalment RM294 (incl. transaction fee), Final Instalment RM278.",
+  },
+  {
+    question: "What fees and charges do I pay?",
+    answer:
+      "Per the PDS: Stamp Duty RM20 (without guarantor) or RM60 (with guarantor), e-Hakmilik Charges RM3, and Postage RM10. All fees are disclosed up front \u2014 no hidden charges.",
+  },
+  {
+    question: "Do I need insurance / Takaful?",
+    answer:
+      "Yes. Comprehensive Insurance/Takaful coverage is mandatory under the Hire Purchase Act 1967 until the HP facility is fully settled.",
+  },
+  {
+    question: "What if I miss a payment?",
+    answer:
+      "A late payment penalty of 8% per annum on the amount in arrears, calculated daily, will be charged. Contact us early if you face hardship so we can find a workable solution.",
+  },
+  {
+    question: "Can I settle my loan early?",
+    answer:
+      "Yes. You receive a statutory rebate per the Hire Purchase Act 1967, calculated as: Rebate = [RP \u00d7 (RP + 1)] / [OP \u00d7 (OP + 1)] \u00d7 Total Term Charges, where RP = Remaining Period (months) and OP = Original Period (months).",
   },
   {
     question: "How long does the approval process take?",
@@ -79,14 +101,15 @@ export default function FinancingHP() {
         <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pt-28 md:pt-36 pb-24 md:pb-32 lg:pb-40 min-h-[580px] md:min-h-[680px] lg:min-h-[740px] flex items-center">
           <HeroReveal className="max-w-[600px]">
             <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[2.5px] md:tracking-[3px] text-[#47A7DD] mb-4 md:mb-5">
-              Motorcycle Financing
+              Vehicle Financing
             </p>
             <h1 className="text-[34px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.05] text-white tracking-[-0.02em] mb-5 md:mb-6">
-              Financing your<br className="hidden sm:block" /> next ride, simplified.
+              Financing your<br className="hidden sm:block" /> next vehicle, simplified.
             </h1>
             <p className="text-[14px] md:text-[16px] text-white/70 max-w-[440px] mb-8 md:mb-10 leading-[1.65]">
-              Fast, flexible, and transparent motorcycle financing with up to
-              90% margin of financing and tenures up to 5 years.
+              Fast, flexible, and transparent Hire Purchase financing for cars
+              and motorcycles — up to 90% margin and tenures up to 5 years,
+              fully governed by the Hire Purchase Act 1967.
             </p>
             <div className="flex items-center gap-5 md:gap-7">
               <Link
@@ -122,8 +145,8 @@ export default function FinancingHP() {
             <StaggerChildren className="lg:col-span-9 grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 lg:gap-8">
               {[
                 {
-                  title: "Competitive Rates",
-                  desc: "Fixed or variable interest rates to match your financial profile.",
+                  title: "Competitive Fixed Rate",
+                  desc: "A locked-in fixed flat rate so you can plan your monthly cash flow with certainty.",
                   icon: (
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M4 20V12M10 20V4M16 20v-6M22 20H2" />
@@ -132,7 +155,7 @@ export default function FinancingHP() {
                 },
                 {
                   title: "High Margin",
-                  desc: "Finance up to 90% of your motorcycle\u2019s value \u2014 new or used.",
+                  desc: "Finance up to 90% of your motor vehicle\u2019s value — car or motorcycle, new or used.",
                   icon: (
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="6" y1="18" x2="18" y2="6" />
@@ -152,7 +175,7 @@ export default function FinancingHP() {
                 },
                 {
                   title: "Hassle-Free Renewals",
-                  desc: "Integrated road tax and insurance renewal services.",
+                  desc: "Integrated road tax and insurance / Takaful renewal services.",
                   icon: (
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z" />
@@ -321,11 +344,12 @@ export default function FinancingHP() {
                 See how it fits<br /> your plan.
               </h2>
               <p className="text-[14px] md:text-[15px] text-white/65 leading-relaxed max-w-md mb-5 md:mb-6">
-                Use our calculator to estimate your monthly instalment. Adjust
-                the loan amount and tenure to find a plan that suits you.
+                Use our calculator to estimate your monthly and final
+                instalments in PDS format. Adjust the amount financed and
+                tenure to find a plan that suits you.
               </p>
               <p className="text-[12px] md:text-[13px] text-white/40 italic">
-                *Based on a fixed profit rate of 10% per annum.
+                *Based on a fixed rate of 10.00% per annum (flat).
               </p>
             </Reveal>
             <Reveal delay={0.1} className="lg:col-span-8">
@@ -375,7 +399,7 @@ export default function FinancingHP() {
               {
                 n: 2,
                 title: "Quick Online Application",
-                desc: "Fill out our 5-minute application form with your motorcycle and personal details.",
+                desc: "Fill out our 5-minute application form with your vehicle and personal details.",
                 icon: (
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="4" width="20" height="13" rx="2" />
@@ -399,7 +423,7 @@ export default function FinancingHP() {
               {
                 n: 4,
                 title: "Sign & Drive",
-                desc: "Sign your Hire Purchase Agreement, settle the downpayment, and collect your motorcycle.",
+                desc: "Sign your Hire Purchase Agreement, settle the downpayment, and collect your vehicle.",
                 icon: (
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="8" cy="15" r="4" />

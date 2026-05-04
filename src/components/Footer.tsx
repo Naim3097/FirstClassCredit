@@ -53,28 +53,30 @@ export default function Footer() {
             </p>
             <div className="space-y-3 text-[14px]">
               <p className="leading-relaxed">
-                Lot 450, 1st Floor,
+                First Class Credit Sdn. Bhd.
                 <br />
-                Lorong Lapangan Terbang 3A,
+                Lot 538, Ground Floor, Section 6,
                 <br />
-                93250 Kuching, Sarawak
+                KTLD, Jalan Satok,
+                <br />
+                93400 Kuching, Sarawak
               </p>
               <p>
                 <a
-                  href="tel:+60168558553"
+                  href="tel:+6082237878"
                   className="hover:text-white transition-colors"
                 >
-                  +60 16-855 8553
+                  +60 82-237878
                 </a>
               </p>
               <p>
                 <a
-                  href="https://wa.me/60168558553"
+                  href="https://wa.me/60169328901"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
-                  WhatsApp
+                  WhatsApp +60 16-932 8901
                 </a>
               </p>
             </div>
