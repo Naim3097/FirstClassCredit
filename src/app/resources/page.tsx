@@ -108,7 +108,7 @@ export default function Resources() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/impact-hero.jpg"
+            src="/resources-hero.png"
             alt=""
             fill
             className="object-cover object-right"
