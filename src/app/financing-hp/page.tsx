@@ -469,16 +469,7 @@ export default function FinancingHP() {
       </section>
 
       {/* ===== VF-S07 CTA ===== */}
-      <section className="relative bg-[#0d2461] overflow-hidden py-9 md:py-11">
-        {/* Wavy line decoration on right */}
-        <div className="absolute inset-y-0 right-0 w-[55%] pointer-events-none opacity-40 hidden md:block" aria-hidden>
-          <svg width="100%" height="100%" viewBox="0 0 600 200" preserveAspectRatio="none">
-            <path d="M0,100 Q150,40 300,100 T600,100" stroke="#47A7DD" strokeWidth="1" fill="none" />
-            <path d="M0,120 Q150,60 300,120 T600,120" stroke="#47A7DD" strokeWidth="1" fill="none" opacity="0.6" />
-            <path d="M0,80 Q150,20 300,80 T600,80" stroke="#47A7DD" strokeWidth="1" fill="none" opacity="0.6" />
-            <path d="M0,140 Q150,80 300,140 T600,140" stroke="#47A7DD" strokeWidth="1" fill="none" opacity="0.4" />
-          </svg>
-        </div>
+      <section className="relative overflow-hidden py-9 md:py-11" style={{ background: "linear-gradient(135deg, #0d2461 0%, #1a3a7c 40%, #2C76BB 100%)" }}>
 
         <div className="relative max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <Reveal>
