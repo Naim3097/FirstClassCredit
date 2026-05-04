@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import FAQAccordion from "@/components/FAQAccordion";
 
@@ -102,14 +103,55 @@ const blogPosts = [
 export default function Resources() {
   return (
     <>
-      <section className="py-20 md:py-28" style={{ background: "linear-gradient(315deg, #47A7DD 0%, #2C76BB 45%, #0d2461 100%)" }}>
-        <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
-          <p className="text-xs font-semibold uppercase tracking-[2px] text-white/70 mb-4">
-            Resources
-          </p>
-          <h1 className="text-4xl md:text-5xl lg:text-[56px] font-extralight leading-[1.1] text-white max-w-2xl">
-            Learn &amp; Explore
-          </h1>
+      {/* ===== HERO ===== */}
+      <section className="relative bg-[#0d2461] overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/impact-hero.jpg"
+            alt=""
+            fill
+            className="object-cover object-right"
+            priority
+          />
+          {/* Left-to-right gradient: solid navy on left, fade to transparent on right */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, #0d2461 0%, #0d2461 30%, rgba(13,36,97,0.85) 50%, rgba(13,36,97,0.35) 75%, rgba(13,36,97,0.15) 100%)",
+            }}
+          />
+          {/* Subtle bottom navy fade */}
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0d2461]/60 to-transparent" />
+        </div>
+
+        <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pt-28 md:pt-36 pb-24 md:pb-32 lg:pb-40 min-h-[580px] md:min-h-[680px] lg:min-h-[740px] flex items-center">
+          <div className="max-w-[600px]">
+            <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[2.5px] md:tracking-[3px] text-[#47A7DD] mb-4 md:mb-5">
+              Resources
+            </p>
+            <h1 className="text-[34px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.05] text-white tracking-[-0.02em] mb-5 md:mb-6">
+              Learn &amp; Explore
+            </h1>
+            <p className="text-[14px] md:text-[16px] text-white/70 max-w-[440px] mb-8 md:mb-10 leading-[1.65]">
+              Your guide to understanding hire purchase financing, improving your credit profile, and making smart vehicle ownership decisions.
+            </p>
+            <div className="flex items-center gap-5 md:gap-7">
+              <Link
+                href="/apply"
+                className="inline-flex items-center justify-center px-6 md:px-7 py-3 md:py-3.5 bg-[#EE4720] text-white text-[14px] md:text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
+              >
+                Apply Now
+              </Link>
+              <Link
+                href="#faq"
+                className="inline-flex items-center gap-1.5 text-white text-[13px] md:text-[14px] font-semibold hover:text-[#47A7DD] transition-colors"
+              >
+                View FAQs <span aria-hidden>&rarr;</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -153,7 +195,7 @@ export default function Resources() {
         </div>
       </section>
 
-      <section className="py-20 md:py-[100px] bg-white">
+      <section id="faq" className="py-20 md:py-[100px] bg-white">
         <div className="max-w-[800px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="text-center mb-10">
             <p className="text-xs font-semibold uppercase tracking-[2px] text-blue mb-3">
