@@ -119,7 +119,7 @@ export default function FinancingHP() {
             </Reveal>
 
             {/* Cards */}
-            <StaggerChildren className="lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 lg:gap-8">
+            <StaggerChildren className="lg:col-span-9 grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 lg:gap-8">
               {[
                 {
                   title: "Competitive Rates",
