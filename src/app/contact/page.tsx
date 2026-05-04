@@ -22,16 +22,55 @@ export default function Contact() {
 
   return (
     <>
-      {/* ===== HERO — Compact, text-only ===== */}
-      <section className="bg-[#253A7D]">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pt-36 md:pt-44 pb-16 md:pb-20">
-          <HeroReveal className="max-w-[580px]">
-            <p className="text-[11px] font-semibold uppercase tracking-[3px] text-[#47A7DD] mb-5">
+      {/* ===== HERO ===== */}
+      <section className="relative bg-[#0d2461] overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/contact-hero.jpg"
+            alt=""
+            fill
+            className="object-cover object-right"
+            priority
+          />
+          {/* Left-to-right gradient: minimal overlay */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, #0d2461 0%, #0d2461 20%, rgba(13,36,97,0.75) 38%, rgba(13,36,97,0.15) 60%, rgba(13,36,97,0.0) 100%)",
+            }}
+          />
+          {/* Subtle bottom navy fade */}
+          <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#0d2461]/30 to-transparent" />
+        </div>
+
+        <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pt-28 md:pt-36 pb-24 md:pb-32 lg:pb-40 min-h-[580px] md:min-h-[680px] lg:min-h-[740px] flex items-center">
+          <HeroReveal className="max-w-[600px]">
+            <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[2.5px] md:tracking-[3px] text-[#47A7DD] mb-4 md:mb-5">
               Contact
             </p>
-            <h1 className="text-[36px] md:text-[48px] font-extralight leading-[1.1] text-white tracking-[-0.02em]">
-              Let&apos;s get in touch.
+            <h1 className="text-[34px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.05] text-white tracking-[-0.02em] mb-5 md:mb-6">
+              Let&apos;s get<br className="hidden sm:block" /> in touch.
             </h1>
+            <p className="text-[14px] md:text-[16px] text-white/70 max-w-[440px] mb-8 md:mb-10 leading-[1.65]">
+              Whether you have questions about financing, need help with an application, or want to explore a partnership &mdash; we&apos;d love to hear from you.
+            </p>
+            <div className="flex items-center gap-5 md:gap-7">
+              <Link
+                href="#contact-form"
+                className="inline-flex items-center justify-center px-6 md:px-7 py-3 md:py-3.5 bg-[#EE4720] text-white text-[14px] md:text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
+              >
+                Send a Message
+              </Link>
+              <a
+                href="https://wa.me/60168558553"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-white text-[13px] md:text-[14px] font-semibold hover:text-[#47A7DD] transition-colors"
+              >
+                WhatsApp Us <span aria-hidden>&rarr;</span>
+              </a>
+            </div>
           </HeroReveal>
         </div>
       </section>
