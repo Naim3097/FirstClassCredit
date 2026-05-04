@@ -25,11 +25,20 @@ export default function Contact() {
       {/* ===== HERO ===== */}
       <section className="relative bg-[#0d2461] overflow-hidden">
         <div className="absolute inset-0">
+          {/* Mobile hero */}
+          <Image
+            src="/contact-hero-mobile.png"
+            alt=""
+            fill
+            className="object-cover object-center lg:hidden"
+            priority
+          />
+          {/* Desktop hero */}
           <Image
             src="/contact-hero.png"
             alt=""
             fill
-            className="object-cover object-right"
+            className="object-cover object-right hidden lg:block"
             priority
           />
           {/* Left-to-right gradient: minimal overlay */}
