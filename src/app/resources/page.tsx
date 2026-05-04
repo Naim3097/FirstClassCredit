@@ -114,16 +114,16 @@ export default function Resources() {
             className="object-cover object-[80%_center] lg:object-right"
             priority
           />
-          {/* Left-to-right gradient: solid navy on left, fade to transparent on right */}
+          {/* Left-to-right gradient: minimal overlay */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, #0d2461 0%, #0d2461 30%, rgba(13,36,97,0.85) 50%, rgba(13,36,97,0.35) 75%, rgba(13,36,97,0.15) 100%)",
+                "linear-gradient(90deg, #0d2461 0%, #0d2461 20%, rgba(13,36,97,0.75) 38%, rgba(13,36,97,0.15) 60%, rgba(13,36,97,0.0) 100%)",
             }}
           />
           {/* Subtle bottom navy fade */}
-          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0d2461]/60 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#0d2461]/30 to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pt-28 md:pt-36 pb-24 md:pb-32 lg:pb-40 min-h-[580px] md:min-h-[680px] lg:min-h-[740px] flex items-center">
