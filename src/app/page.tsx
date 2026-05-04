@@ -44,11 +44,11 @@ export default function Home() {
           />
           {/* Gradient: bottom band only — desktop */}
           <div className="absolute inset-0 hidden md:block" style={{
-            background: "linear-gradient(to top, #0d2461ee 0%, #1a3a7acc 30%, #253A7D55 60%, transparent 100%)"
+            background: "linear-gradient(to top, #0d246199 0%, #1a3a7a55 25%, #253A7D22 45%, transparent 100%)"
           }} />
           {/* Gradient: mobile */}
           <div className="absolute inset-0 block md:hidden" style={{
-            background: "linear-gradient(to top, #0d2461f2 0%, #1a3a7add 35%, #253A7D66 65%, transparent 100%)"
+            background: "linear-gradient(to top, #0d2461bb 0%, #1a3a7a66 28%, #253A7D22 50%, transparent 100%)"
           }} />
         </div>
 
