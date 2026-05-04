@@ -111,7 +111,7 @@ export default function Resources() {
             src="/resources-hero.png"
             alt=""
             fill
-            className="object-cover object-right"
+            className="object-cover object-[80%_center] lg:object-right"
             priority
           />
           {/* Left-to-right gradient: solid navy on left, fade to transparent on right */}
