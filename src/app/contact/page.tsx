@@ -338,7 +338,7 @@ export default function Contact() {
           <Reveal delay={0.14}>
             <div className="mt-10 bg-white rounded-xl p-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
               <p className="text-[14px] text-[#272A33]">
-                Ready to apply for vehicle financing?
+                Ready to apply for motorcycle financing?
               </p>
               <Link
                 href="/apply"

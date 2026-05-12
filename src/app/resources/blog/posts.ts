@@ -29,7 +29,7 @@ export const blogPosts: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "A Hire Purchase (HP) agreement is one of the biggest financial commitments most Malaysians will make outside of a home loan. Whether it is your first motorcycle or a family car, signing the dotted line locks you in for years. Before you do, run through this five-point checklist to protect your wallet and your peace of mind.",
+        text: "A Hire Purchase (HP) agreement is one of the biggest financial commitments most Malaysians will make outside of a home loan. Whether it is your first commuter bike or an upgrade to a bigger motorcycle, signing the dotted line locks you in for years. Before you do, run through this five-point checklist to protect your wallet and your peace of mind.",
       },
       {
         type: "h2",
@@ -37,7 +37,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "The “Amount Financed” is the figure the financier (the Owner) actually lends you — not the vehicle's sticker price. The “Margin of Financing” is the percentage of the vehicle price being financed (the rest is your downpayment). Under the Hire Purchase Act 1967 this can go up to 90%. Make sure these two numbers match what you discussed with the dealer.",
+        text: "The “Amount Financed” is the figure the financier (the Owner) actually lends you — not the motorcycle's sticker price. The “Margin of Financing” is the percentage of the motorcycle price being financed (the rest is your downpayment). Under the Hire Purchase Act 1967 this can go up to 90%. Make sure these two numbers match what you discussed with the dealer.",
       },
       {
         type: "h2",
@@ -98,8 +98,8 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
-    slug: "ccris-ctos-can-you-still-get-a-vehicle-loan",
-    title: "Understanding CCRIS & CTOS: Can You Still Get a Vehicle Loan?",
+    slug: "ccris-ctos-can-you-still-get-a-motorcycle-loan",
+    title: "Understanding CCRIS & CTOS: Can You Still Get a Motorcycle Loan?",
     excerpt:
       "A low credit score doesn't have to be a dead end. Learn how credit reporting works in Malaysia and what options are available to you.",
     image:
@@ -108,7 +108,7 @@ export const blogPosts: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "If you've been turned down by a bank for a vehicle loan, the words “CCRIS” and “CTOS” probably came up. They sound intimidating, but understanding them is the first step to getting back on the road.",
+        text: "If you've been turned down by a bank for a motorcycle loan, the words “CCRIS” and “CTOS” probably came up. They sound intimidating, but understanding them is the first step to getting back on the road.",
       },
       { type: "h2", text: "What is CCRIS?" },
       {
@@ -122,7 +122,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "h2",
-        text: "The Big Question: Can You Still Get a Motorcycle or Car Loan?",
+        text: "The Big Question: Can You Still Get a Motorcycle Loan?",
       },
       {
         type: "p",

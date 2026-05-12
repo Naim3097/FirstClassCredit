@@ -7,12 +7,12 @@ const vehicleFAQ = [
   {
     question: "What is a Hire Purchase (HP) agreement?",
     answer:
-      "It is a contract where you 'hire' the motor vehicle from the Owner (First Class Credit Sdn. Bhd.) and ownership transfers to you upon full settlement. You become the legal owner only after the final instalment is paid.",
+      "It is a contract where you 'hire' the motorcycle from the Owner (First Class Credit Sdn. Bhd.) and ownership transfers to you upon full settlement. You become the legal owner only after the final instalment is paid.",
   },
   {
     question: "Is First Class Credit Financing HP governed under the Hire Purchase Act 1967?",
     answer:
-      "Yes. All our motor vehicle financing is governed by the Hire Purchase Act 1967, which protects you as the Hirer.",
+      "Yes. All our motorcycle financing is governed by the Hire Purchase Act 1967, which protects you as the Hirer.",
   },
   {
     question: "What are the basic eligibility requirements to apply?",
@@ -30,9 +30,9 @@ const vehicleFAQ = [
       "Yes, we look at more than just a score. We consider your current employment stability and downpayment capability. While traditional banks might decline, we specialise in finding solutions for varied credit profiles.",
   },
   {
-    question: "Which law governs my motor vehicle loan in Malaysia?",
+    question: "Which law governs my motorcycle loan in Malaysia?",
     answer:
-      "All motor vehicle financing in Malaysia is governed by the Hire Purchase Act 1967. This protects you by regulating term charges, repossession rules, and your rights as a Hirer.",
+      "All motorcycle financing in Malaysia is governed by the Hire Purchase Act 1967. This protects you by regulating term charges, repossession rules, and your rights as a Hirer.",
   },
   {
     question: "What is the profit rate offered?",
@@ -56,7 +56,7 @@ const vehicleFAQ = [
   {
     question: "What is the maximum amount financed?",
     answer:
-      "Under the Hire Purchase Act 1967, you can finance up to 90% of the motor vehicle's value.",
+      "Under the Hire Purchase Act 1967, you can finance up to 90% of the motorcycle's value.",
   },
   {
     question: "What fees and charges do I pay?",
@@ -79,9 +79,9 @@ const vehicleFAQ = [
       "Yes. You receive a statutory rebate per the Hire Purchase Act 1967, calculated as: Rebate = [RP × (RP + 1)] / [OP × (OP + 1)] × Total Term Charges, where RP = Remaining Period (months) and OP = Original Period (months).",
   },
   {
-    question: "What vehicles are eligible for financing?",
+    question: "What motorcycles are eligible for financing?",
     answer:
-      "First Class Credit finances a wide range of motor vehicles including cars and motorcycles, both new and used.",
+      "First Class Credit finances a wide range of motorcycles, both new and used.",
   },
   {
     question: "What happens if I miss a payment?",
@@ -89,7 +89,7 @@ const vehicleFAQ = [
       "A late payment penalty of 8% per annum on the amount in arrears, calculated daily, will be charged. Contact our Collection Team early if you face hardship so we can discuss a workable plan before further action.",
   },
   {
-    question: "When can First Class Credit repossess my motor vehicle?",
+    question: "When can First Class Credit repossess my motorcycle?",
     answer:
       "By law, repossession can only occur after you have defaulted on two (2) successive instalments and have been served a Fourth Schedule notice (21-day notice).",
   },
@@ -130,7 +130,7 @@ export default function Resources() {
               Learn &amp; Explore
             </h1>
             <p className="text-[14px] md:text-[16px] text-white/70 max-w-[440px] mb-8 md:mb-10 leading-[1.65]">
-              Your guide to understanding hire purchase financing, improving your credit profile, and making smart vehicle ownership decisions.
+              Your guide to understanding hire purchase financing, improving your credit profile, and making smart motorcycle ownership decisions.
             </p>
             <div className="flex items-center gap-5 md:gap-7">
               <Link

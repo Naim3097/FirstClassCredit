@@ -13,7 +13,7 @@ const malaysianStates = [
 
 export default function ApplyPage() {
   const [step, setStep] = useState(1);
-  const [financingType, setFinancingType] = useState("vehicle");
+  const [financingType, setFinancingType] = useState("motorcycle");
   const [submitted, setSubmitted] = useState(false);
 
   const inputClass =
@@ -121,24 +121,17 @@ export default function ApplyPage() {
                 onChange={(e) => setFinancingType(e.target.value)}
                 className={selectClass}
               >
-                <option value="vehicle">Vehicle Financing HP</option>
+                <option value="motorcycle">Motorcycle Financing HP</option>
                 <option value="objective">
                   Objective Financing (Coming Soon)
                 </option>
               </select>
             </div>
 
-            {financingType === "vehicle" ? (
+            {financingType === "motorcycle" ? (
               <>
                 <div>
-                  <label className={labelClass}>Vehicle Type</label>
-                  <select className={selectClass}>
-                    <option>Car</option>
-                    <option>Motorcycle</option>
-                  </select>
-                </div>
-                <div>
-                  <label className={labelClass}>Vehicle Condition</label>
+                  <label className={labelClass}>Motorcycle Condition</label>
                   <select className={selectClass}>
                     <option>New</option>
                     <option>Used</option>
@@ -146,11 +139,11 @@ export default function ApplyPage() {
                 </div>
                 <div>
                   <label className={labelClass}>
-                    Vehicle Brand &amp; Model
+                    Motorcycle Brand &amp; Model
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g., Perodua Bezza / Yamaha Y16ZR"
+                    placeholder="e.g., Yamaha Y16ZR"
                     className={inputClass}
                   />
                 </div>
@@ -164,10 +157,10 @@ export default function ApplyPage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className={labelClass}>Vehicle Price (RM)</label>
+                    <label className={labelClass}>Motorcycle Price (RM)</label>
                     <input
                       type="text"
-                      placeholder="e.g., 45,000"
+                      placeholder="e.g., 12,000"
                       className={inputClass}
                     />
                   </div>
@@ -230,7 +223,7 @@ export default function ApplyPage() {
               </div>
             )}
 
-            {financingType === "vehicle" && (
+            {financingType === "motorcycle" && (
               <div className="flex justify-end pt-4">
                 <button
                   onClick={() => setStep(2)}

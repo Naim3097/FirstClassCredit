@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function LoanCalculator() {
-  const [amount, setAmount] = useState(15000);
+  const [amount, setAmount] = useState(12000);
   const [tenure, setTenure] = useState(48);
   const rate = 0.1; // 10% per annum, flat (per PDS)
 
@@ -26,9 +26,9 @@ export default function LoanCalculator() {
         </label>
         <input
           type="range"
-          min={5000}
-          max={200000}
-          step={5000}
+          min={3000}
+          max={50000}
+          step={1000}
           value={amount}
           onChange={(e) => setAmount(Number(e.target.value))}
           className="w-full h-1.5 bg-border rounded-full appearance-none cursor-pointer accent-blue"

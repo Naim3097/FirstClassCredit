@@ -21,7 +21,7 @@ const plusJakartaSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "First Class Credit | HP Vehicle Financing in Malaysia",
+  title: "First Class Credit | Motorcycle Hire Purchase Financing in Malaysia",
   description:
     "Turn your mobility goals into reality with hassle-free HP financing. Flexible repayments up to 60 months, pre-approval within 24-48 hours.",
 };

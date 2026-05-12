@@ -19,7 +19,7 @@ const homeFAQ = [
   {
     question: "What is the maximum financing margin and tenure?",
     answer:
-      "You can finance up to 90% of the motor vehicle\u2019s value for a maximum period of 5 years (60 months). Actual margin depends on your profile and the vehicle.",
+      "You can finance up to 90% of the motorcycle\u2019s value for a maximum period of 5 years (60 months). Actual margin depends on your profile and the motorcycle.",
   },
   {
     question: "What is the profit rate offered?",
@@ -65,7 +65,7 @@ export default function Home() {
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pb-24 md:pb-32 pt-32 flex flex-col items-center text-center">
           <HeroReveal className="flex flex-col items-center">
             <p className="text-[11px] font-semibold uppercase tracking-[3px] text-[#47A7DD] mb-5">
-              HP Vehicle Financing
+              Motorcycle Hire Purchase
             </p>
             <h1 className="text-[36px] md:text-[52px] lg:text-[64px] font-extralight leading-[1.08] text-white tracking-[-0.02em] mb-6">
               Your next ride,
@@ -73,8 +73,8 @@ export default function Home() {
               financed the straightforward way.
             </h1>
             <p className="text-[17px] md:text-[19px] text-white/70 max-w-[520px] mb-10 leading-[1.6]">
-              Licensed Hire Purchase financing in Kuching. Up to 90% margin,
-              tenures up to 60 months, fixed rates with no surprises.
+              Licensed motorcycle Hire Purchase financing in Kuching. Up to 90%
+              margin, tenures up to 60 months, fixed rates with no surprises.
             </p>
             <div className="flex items-center justify-center gap-4 flex-wrap">
               <Link
@@ -200,19 +200,19 @@ export default function Home() {
                   </svg>
                 </div>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-white leading-snug mb-3">
-                  Drive Forward with Your Next Vehicle
+                  Ride Forward with Your Next Motorcycle
                 </h3>
                 <p className="text-[14px] text-white/70 leading-relaxed">
-                  Stop waiting and start moving. Secure your new or used vehicle
-                  with hassle-free HP financing and flexible repayment plans up
-                  to 60 months.
+                  Stop waiting and start riding. Secure your new or used
+                  motorcycle with hassle-free HP financing and flexible
+                  repayment plans up to 60 months.
                 </p>
               </div>
               <Link
                 href="/financing-hp"
                 className="relative mt-6 text-[#47A7DD] text-[14px] font-semibold inline-flex items-center gap-1.5 group-hover:gap-3 transition-all duration-300"
               >
-                Explore Vehicle Financing <span aria-hidden>&rarr;</span>
+                Explore Motorcycle Financing <span aria-hidden>&rarr;</span>
               </Link>
             </Reveal>
 
@@ -289,7 +289,7 @@ export default function Home() {
             <Reveal className="lg:col-span-8 relative rounded-2xl overflow-hidden h-[260px] md:h-[340px] lg:h-auto lg:min-h-[420px] shadow-[0_20px_60px_-30px_rgba(13,36,97,0.35)]">
               <Image
                 src="/impact-hero.jpg"
-                alt="Happy customer with new car"
+                alt="Happy customer with new motorcycle"
                 fill
                 className="object-cover object-center"
               />
@@ -307,8 +307,8 @@ export default function Home() {
                   On the road
                 </p>
                 <p className="text-[11px] md:text-[14px] text-[#272A33] leading-snug">
-                  Driving Malaysians forward with simple, transparent vehicle
-                  financing.
+                  Driving Malaysians forward with simple, transparent
+                  motorcycle financing.
                 </p>
               </div>
             </Reveal>
@@ -446,7 +446,7 @@ export default function Home() {
                   High Margin Financing
                 </p>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  Finance up to 90% of your vehicle&apos;s value.
+                  Finance up to 90% of your motorcycle&apos;s value.
                 </h3>
                 <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
                   New or used &mdash; get the maximum backing you need with a
@@ -513,7 +513,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             <Reveal>
               <blockquote className="text-[22px] md:text-[28px] font-light text-[#272A33] leading-[1.4] tracking-[-0.01em]">
-                &ldquo;The process was so fast &mdash; I got my vehicle
+                &ldquo;The process was so fast &mdash; I got my motorcycle
                 within a week of applying. The team was incredibly helpful from
                 start to finish.&rdquo;
               </blockquote>
@@ -526,7 +526,7 @@ export default function Home() {
                     Ahmad Razak
                   </p>
                   <p className="text-[13px] text-[var(--text-muted)]">
-                    Vehicle Owner &middot; Kuching
+                    Motorcycle Owner &middot; Kuching
                   </p>
                 </div>
               </div>
@@ -620,7 +620,7 @@ export default function Home() {
               <div className="relative flex flex-col md:flex-row md:items-center gap-8 md:gap-10">
                 <div className="flex-1">
                   <h2 className="text-[26px] md:text-[34px] lg:text-[38px] font-semibold text-white leading-[1.15] tracking-[-0.01em]">
-                    Ready to finance your next vehicle?
+                    Ready to finance your next motorcycle?
                   </h2>
                   <p className="text-[14px] md:text-[15px] text-white/70 mt-3 max-w-md">
                     Start your application in just 5 minutes.

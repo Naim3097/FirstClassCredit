@@ -10,17 +10,17 @@ const hpFAQ = [
   {
     question: "What is a Hire Purchase (HP) agreement?",
     answer:
-      "It is a contract where you \u201chire\u201d the motor vehicle from the Owner (First Class Credit Sdn. Bhd.) and ownership transfers to you upon full settlement. You become the legal owner only after the final instalment is paid.",
+      "It is a contract where you \u201chire\u201d the motorcycle from the Owner (First Class Credit Sdn. Bhd.) and ownership transfers to you upon full settlement. You become the legal owner only after the final instalment is paid.",
   },
   {
     question: "Is First Class Credit HP governed under the Hire Purchase Act 1967?",
     answer:
-      "Yes. All our motor vehicle financing is governed by the Hire Purchase Act 1967, which protects you as the Hirer.",
+      "Yes. All our motorcycle financing is governed by the Hire Purchase Act 1967, which protects you as the Hirer.",
   },
   {
     question: "What is the maximum amount financed?",
     answer:
-      "You can finance up to 90% of the motor vehicle\u2019s value. Actual margin depends on your profile and the vehicle.",
+      "You can finance up to 90% of the motorcycle\u2019s value. Actual margin depends on your profile and the motorcycle.",
   },
   {
     question: "What is the profit rate offered?",
@@ -101,15 +101,15 @@ export default function FinancingHP() {
         <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pt-28 md:pt-36 pb-24 md:pb-32 lg:pb-40 min-h-[580px] md:min-h-[680px] lg:min-h-[740px] flex items-center">
           <HeroReveal className="max-w-[600px]">
             <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[2.5px] md:tracking-[3px] text-[#47A7DD] mb-4 md:mb-5">
-              Vehicle Financing
+              Motorcycle Financing
             </p>
             <h1 className="text-[34px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.05] text-white tracking-[-0.02em] mb-5 md:mb-6">
-              Financing your<br className="hidden sm:block" /> next vehicle, simplified.
+              Financing your<br className="hidden sm:block" /> next motorcycle, simplified.
             </h1>
             <p className="text-[14px] md:text-[16px] text-white/70 max-w-[440px] mb-8 md:mb-10 leading-[1.65]">
-              Fast, flexible, and transparent Hire Purchase financing for cars
-              and motorcycles — up to 90% margin and tenures up to 5 years,
-              fully governed by the Hire Purchase Act 1967.
+              Fast, flexible, and transparent Hire Purchase financing for new
+              and used motorcycles — up to 90% margin and tenures up to 5
+              years, fully governed by the Hire Purchase Act 1967.
             </p>
             <div className="flex items-center gap-5 md:gap-7">
               <Link
@@ -155,7 +155,7 @@ export default function FinancingHP() {
                 },
                 {
                   title: "High Margin",
-                  desc: "Finance up to 90% of your motor vehicle\u2019s value — car or motorcycle, new or used.",
+                  desc: "Finance up to 90% of your motorcycle\u2019s value — new or used.",
                   icon: (
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="6" y1="18" x2="18" y2="6" />
@@ -399,7 +399,7 @@ export default function FinancingHP() {
               {
                 n: 2,
                 title: "Quick Online Application",
-                desc: "Fill out our 5-minute application form with your vehicle and personal details.",
+                desc: "Fill out our 5-minute application form with your motorcycle and personal details.",
                 icon: (
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="4" width="20" height="13" rx="2" />
@@ -423,7 +423,7 @@ export default function FinancingHP() {
               {
                 n: 4,
                 title: "Sign & Drive",
-                desc: "Sign your Hire Purchase Agreement, settle the downpayment, and collect your vehicle.",
+                desc: "Sign your Hire Purchase Agreement, settle the downpayment, and collect your motorcycle.",
                 icon: (
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="8" cy="15" r="4" />
