@@ -28,6 +28,9 @@ export default function Contact() {
           {/* Mobile hero */}
           <Image
             src="/contact-hero-mobile-3.jpg"
+            alt=""
+            fill
+            className="object-cover object-center lg:hidden"
             priority
           />
           {/* Desktop hero */}
