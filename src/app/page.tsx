@@ -176,8 +176,7 @@ export default function Home() {
               <div
                 className="absolute inset-0 bg-cover bg-center opacity-50 transition-transform duration-700 group-hover:scale-105"
                 style={{
-                  backgroundImage:
-                    "url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=80&auto=format&fit=crop')",
+                  backgroundImage: "url('/bike-only.png')",
                 }}
                 aria-hidden
               />
@@ -192,11 +191,14 @@ export default function Home() {
               />
               <div className="relative">
                 <div className="w-11 h-11 rounded-full bg-white/8 border border-white/10 flex items-center justify-center mb-6">
-                  {/* car icon */}
+                  {/* motorbike icon */}
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#47A7DD" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 17h14M5 17v-3l2-5h10l2 5v3M5 17v2h2v-2M19 17v2h-2v-2" />
-                    <circle cx="8" cy="14.5" r="0.6" fill="#47A7DD" />
-                    <circle cx="16" cy="14.5" r="0.6" fill="#47A7DD" />
+                    <circle cx="5.5" cy="17" r="2.5" />
+                    <circle cx="18.5" cy="17" r="2.5" />
+                    <path d="M8 17h7" />
+                    <path d="M14 17l-2-6h-2l-3 4h7" />
+                    <path d="M16 11l2-3h2" />
+                    <path d="M12 11h4" />
                   </svg>
                 </div>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-white leading-snug mb-3">
@@ -288,7 +290,7 @@ export default function Home() {
             {/* Wide image plate */}
             <Reveal className="lg:col-span-8 relative rounded-2xl overflow-hidden h-[260px] md:h-[340px] lg:h-auto lg:min-h-[420px] shadow-[0_20px_60px_-30px_rgba(13,36,97,0.35)]">
               <Image
-                src="/impact-hero.jpg"
+                src="/impact-hero.png"
                 alt="Happy customer with new motorcycle"
                 fill
                 className="object-cover object-center"
@@ -599,12 +601,11 @@ export default function Home() {
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <Reveal>
             <div className="relative overflow-hidden rounded-2xl px-7 md:px-12 py-9 md:py-14 translate-y-[18%] md:translate-y-[40%] shadow-[0_24px_60px_-20px_rgba(13,36,97,0.45)]">
-              {/* Car image bg */}
+              {/* Bike image bg */}
               <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{
-                  backgroundImage:
-                    "url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1600&q=80&auto=format&fit=crop')",
+                  backgroundImage: "url('/bike-on-road.png')",
                 }}
                 aria-hidden
               />

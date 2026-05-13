@@ -27,15 +27,12 @@ export default function Contact() {
         <div className="absolute inset-0">
           {/* Mobile hero */}
           <Image
-            src="/contact-hero-mobile.png"
-            alt=""
-            fill
-            className="object-cover object-center lg:hidden"
+            src="/contact-hero-mobile-3.jpg"
             priority
           />
           {/* Desktop hero */}
           <Image
-            src="/contact-hero.png"
+            src="/contact-hero-2.png"
             alt=""
             fill
             className="object-cover object-right hidden lg:block"

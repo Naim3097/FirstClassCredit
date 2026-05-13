@@ -102,11 +102,20 @@ export default function Resources() {
       <section className="relative bg-[#0d2461] overflow-hidden">
         {/* Background image */}
         <div className="absolute inset-0">
+          {/* Mobile image */}
           <Image
-            src="/resources-hero.png"
+            src="/resources-hero-mobile.png"
             alt=""
             fill
-            className="object-cover object-[80%_center] lg:object-right"
+            className="object-cover object-[80%_center] md:hidden"
+            priority
+          />
+          {/* Desktop image */}
+          <Image
+            src="/resources-hero-desktop.png"
+            alt=""
+            fill
+            className="object-cover object-right hidden md:block"
             priority
           />
           {/* Left-to-right gradient: minimal overlay */}
