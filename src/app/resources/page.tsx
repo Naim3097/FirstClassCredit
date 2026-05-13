@@ -104,7 +104,7 @@ export default function Resources() {
         <div className="absolute inset-0">
           {/* Mobile image */}
           <Image
-            src="/resources-hero-mobile.png"
+            src="/resources-hero-mobile-2.png"
             alt=""
             fill
             className="object-cover object-[80%_center] md:hidden"
