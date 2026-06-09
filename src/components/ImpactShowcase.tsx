@@ -82,7 +82,7 @@ const services: Service[] = [
     body: "A simpler way to own your next device. Transparent terms, fast pre-approvals, and a fixed monthly rate you can plan around.",
     button: { text: "About Smartphone Financing", href: "/objective-financing" },
     plate: {
-      image: "/iphone-horizontal-2.jpg",
+      image: "/iphone-horizontal.jpg",
       alt: "Person using a new smartphone",
       badge: "Launching soon",
       eyebrow: "Stay connected",
