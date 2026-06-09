@@ -21,7 +21,7 @@ const heroSlides = [
       </>
     ),
     body: "Licensed motorcycle Hire Purchase financing in Kuching. Up to 90% margin, tenures up to 60 months, fixed rates with no surprises.",
-    bg: "/home-hero.jpg",
+    bg: "/home-2.jpg",
     cta: "apply",
   },
   {
@@ -37,7 +37,7 @@ const heroSlides = [
     ),
     body: "Fund your next tech upgrade effortlessly. First Class Credit is bringing you hassle-free, accessible smartphone financing with flexible terms to Kuching and beyond.",
     // TODO: replace with the supplied smartphone hero asset
-    bg: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1600&q=80&auto=format&fit=crop",
+    bg: "/home-iphone.jpg",
     cta: "comingSoon",
   },
 ] as const;
