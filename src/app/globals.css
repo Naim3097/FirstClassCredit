@@ -26,6 +26,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ── Impact toggle / hero slide cross-fade ─────────────────────── */
+@keyframes impact-fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.impact-swap {
+  animation: impact-fade 0.45s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .impact-swap { animation: none; }
+}
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);

@@ -1,10 +1,46 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import FAQTabs from "@/components/FAQTabs";
 import RepresentativeExample from "@/components/RepresentativeExample";
+import ImpactShowcase from "@/components/ImpactShowcase";
 import { HeroReveal, Reveal, CountUp } from "@/components/ScrollAnimations";
+
+const heroSlides = [
+  {
+    key: "motorcycle",
+    eyebrow: "First Class Motorcycle Hire Purchase Financing",
+    eyebrowColor: "text-[#47A7DD]",
+    title: (
+      <>
+        Your next ride,
+        <br />
+        financed the straightforward way.
+      </>
+    ),
+    body: "Licensed motorcycle Hire Purchase financing in Kuching. Up to 90% margin, tenures up to 60 months, fixed rates with no surprises.",
+    bg: "/home-hero.jpg",
+    cta: "apply",
+  },
+  {
+    key: "smartphone",
+    eyebrow: "First Class Smartphone Hire Purchase Financing",
+    eyebrowColor: "text-[#FCDB81]",
+    title: (
+      <>
+        Smart Financing for
+        <br />
+        Your Next Smartphone.
+      </>
+    ),
+    body: "Fund your next tech upgrade effortlessly. First Class Credit is bringing you hassle-free, accessible smartphone financing with flexible terms to Kuching and beyond.",
+    // TODO: replace with the supplied smartphone hero asset
+    bg: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1600&q=80&auto=format&fit=crop",
+    cta: "comingSoon",
+  },
+] as const;
 
 const SMARTPHONE_FAQ_MESSAGE =
   "We are putting the final touches on our new financing solutions! Check back soon for details on how we can help fund your specific lifestyle and device upgrades.";
@@ -61,19 +97,40 @@ const homeFAQ = [
 ];
 
 export default function Home() {
+  const [activeHero, setActiveHero] = useState(0);
+
+  // Auto-rotate the hero between services (respects reduced-motion).
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(
+      () => setActiveHero((i) => (i + 1) % heroSlides.length),
+      6500
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  const slide = heroSlides[activeHero];
+
   return (
     <>
-      {/* ===== HERO ===== */}
+      {/* ===== HERO (alternating services) ===== */}
       <section className="relative min-h-screen flex items-end bg-[#0b1a3d] overflow-hidden">
-        {/* Background image with slow zoom */}
+        {/* Cross-fading backgrounds */}
         <div className="absolute inset-0">
-          <Image
-            src="/home-hero.jpg"
-            alt=""
-            fill
-            className="object-cover object-center opacity-80 hero-zoom-img"
-            priority
-          />
+          {heroSlides.map((s, i) => (
+            <div
+              key={s.key}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-out ${
+                activeHero === i ? "opacity-100" : "opacity-0"
+              }`}
+              aria-hidden={activeHero !== i}
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url('${s.bg}')`, opacity: 0.8 }}
+              />
+            </div>
+          ))}
           {/* Gradient: bottom band only — desktop */}
           <div className="absolute inset-0 hidden md:block" style={{
             background: "linear-gradient(to top, #0d2461ee 0%, #1a3a7acc 18%, #253A7D55 35%, transparent 55%)"
@@ -85,36 +142,58 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pb-24 md:pb-32 pt-32 flex flex-col items-center text-center">
-          <HeroReveal className="flex flex-col items-center">
-            <p className="text-[15px] md:text-[18px] font-extrabold uppercase tracking-[3.5px] text-[#47A7DD] mb-5">
-              First Class Motorcycle Hire Purchase Financing
+          <HeroReveal key={slide.key} className="flex flex-col items-center">
+            <p className={`text-[15px] md:text-[18px] font-extrabold uppercase tracking-[3.5px] mb-5 ${slide.eyebrowColor}`}>
+              {slide.eyebrow}
             </p>
             <h1 className="text-[38px] md:text-[56px] lg:text-[68px] font-light leading-[1.06] text-white tracking-[-0.02em] mb-6">
-              Your next ride,
-              <br />
-              financed the straightforward way.
+              {slide.title}
             </h1>
-            <p className="text-[17px] md:text-[19px] text-white/70 max-w-[520px] mb-10 leading-[1.6]">
-              Licensed motorcycle Hire Purchase financing in Kuching. Up to 90%
-              margin, tenures up to 60 months, fixed rates with no surprises.
+            <p className="text-[17px] md:text-[19px] text-white/70 max-w-[560px] mb-10 leading-[1.6]">
+              {slide.body}
             </p>
-            <div className="flex items-center justify-center gap-4 flex-wrap">
-              <a
-                href="/apply"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-7 py-3.5 bg-[#EE4720] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
-              >
-                Apply Now
-              </a>
-              <Link
-                href="/financing-hp"
-                className="inline-flex items-center justify-center px-6 py-3.5 border border-white/30 text-white/80 text-[15px] font-medium rounded-lg hover:border-white/60 hover:text-white transition-all duration-300"
-              >
-                How it works
-              </Link>
+            <div className="flex items-center justify-center gap-4 flex-wrap min-h-[52px]">
+              {slide.cta === "apply" ? (
+                <>
+                  <a
+                    href="/apply"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center px-7 py-3.5 bg-[#EE4720] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
+                  >
+                    Apply Now
+                  </a>
+                  <Link
+                    href="/financing-hp"
+                    className="inline-flex items-center justify-center px-6 py-3.5 border border-white/30 text-white/80 text-[15px] font-medium rounded-lg hover:border-white/60 hover:text-white transition-all duration-300"
+                  >
+                    How it works
+                  </Link>
+                </>
+              ) : (
+                <span className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#F18F33] text-white text-[15px] font-semibold rounded-lg cursor-default select-none">
+                  <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                  Coming Soon
+                </span>
+              )}
             </div>
           </HeroReveal>
+
+          {/* Slide indicators */}
+          <div className="mt-12 flex items-center gap-2.5">
+            {heroSlides.map((s, i) => (
+              <button
+                key={s.key}
+                type="button"
+                onClick={() => setActiveHero(i)}
+                aria-label={`Show ${s.key} financing`}
+                aria-current={activeHero === i}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  activeHero === i ? "w-8 bg-white" : "w-2 bg-white/40 hover:bg-white/70"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -291,324 +370,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== NUMBERS ===== */}
-      <section className="py-20 md:py-28 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
-          <Reveal className="mb-10 md:mb-14 max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[2.5px] text-[#2C76BB] mb-4">
-              Our Impact
-            </p>
-            <h2 className="text-[28px] md:text-[36px] lg:text-[42px] font-semibold text-[#272A33] leading-[1.15] tracking-[-0.01em] mb-4">
-              The numbers that matter.
-            </h2>
-            <p className="text-[15px] md:text-[16px] text-[var(--text-secondary)] leading-relaxed max-w-lg">
-              We keep it simple. Competitive rates, fast approvals, and high
-              financing margins so you can focus on what matters, reaching your
-              next milestone.
-            </p>
-            <div className="mt-7">
-              <Link
-                href="/financing-hp"
-                className="inline-flex items-center px-5 py-2.5 bg-[#0d2461] text-white text-[13.5px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#253A7D]"
-              >
-                About Motorcycle Financing
-              </Link>
-            </div>
-          </Reveal>
-
-          {/* Bento: image left (wide & short), stat cards stacked right */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6">
-            {/* Wide image plate */}
-            <Reveal className="lg:col-span-8 relative rounded-2xl overflow-hidden h-[260px] md:h-[340px] lg:h-auto lg:min-h-[420px] shadow-[0_20px_60px_-30px_rgba(13,36,97,0.35)]">
-              <Image
-                src="/moped.png"
-                alt="Happy customer with new motorcycle"
-                fill
-                className="object-cover object-center"
-              />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(13,36,97,0.15) 0%, rgba(13,36,97,0.05) 40%, rgba(13,36,97,0.55) 100%)",
-                }}
-                aria-hidden
-              />
-              {/* Floating mini-card overlay */}
-              <div className="absolute bottom-3 left-3 right-3 md:bottom-7 md:left-7 md:right-auto max-w-[240px] md:max-w-[300px] bg-white/95 backdrop-blur rounded-lg md:rounded-xl p-3 md:p-5 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.25)]">
-                <p className="text-[9px] md:text-[11px] font-semibold uppercase tracking-[1.5px] md:tracking-[2px] text-[#2C76BB] mb-1 md:mb-1.5">
-                  On the road
-                </p>
-                <p className="text-[11px] md:text-[14px] text-[#272A33] leading-snug">
-                  Driving Malaysians forward with simple, transparent
-                  motorcycle HP financing.
-                </p>
-              </div>
-            </Reveal>
-
-            {/* Right column: stacked stat cards (mobile 2x2, desktop 1 col) */}
-            <div className="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-3">
-              {/* 90% — Dark Navy */}
-              <Reveal delay={0.06} className="relative bg-[#0d2461] rounded-xl px-4 md:px-5 py-5 lg:py-4 flex items-center gap-3 md:gap-4 min-h-[110px] lg:min-h-0 overflow-hidden">
-                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FCDB81" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="M12 7v5l3 2" />
-                  </svg>
-                </div>
-                <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-3">
-                  <p className="text-[24px] md:text-[28px] lg:text-[26px] font-bold text-[#FCDB81] leading-none tracking-tight lg:min-w-[64px]">
-                    <CountUp end={90} suffix="%" />
-                  </p>
-                  <p className="text-[11.5px] md:text-[12px] text-white/70 mt-1.5 lg:mt-0 leading-snug">
-                    Maximum financing margin
-                  </p>
-                </div>
-              </Reveal>
-
-              {/* 60 — Light tinted */}
-              <Reveal delay={0.12} className="relative bg-[#E8F1FB] rounded-xl px-4 md:px-5 py-5 lg:py-4 flex items-center gap-3 md:gap-4 min-h-[110px] lg:min-h-0 overflow-hidden">
-                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3.5" y="5" width="17" height="15" rx="2" />
-                    <path d="M3.5 9.5h17M8 3v4M16 3v4" />
-                  </svg>
-                </div>
-                <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-2">
-                  <p className="text-[24px] md:text-[28px] lg:text-[26px] font-bold text-[#253A7D] leading-none tracking-tight lg:min-w-[40px]">
-                    <CountUp end={60} />
-                  </p>
-                  <p className="text-[11.5px] md:text-[12px] text-[#272A33]/65 mt-1.5 lg:mt-0 leading-snug">
-                    Months maximum tenure
-                  </p>
-                </div>
-              </Reveal>
-
-              {/* 24-48h — Light tinted (matches 60) */}
-              <Reveal delay={0.18} className="relative bg-[#E8F1FB] rounded-xl px-4 md:px-5 py-5 lg:py-4 flex items-center gap-3 md:gap-4 min-h-[110px] lg:min-h-0 overflow-hidden">
-                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />
-                  </svg>
-                </div>
-                <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-3">
-                  <p className="text-[20px] md:text-[24px] lg:text-[22px] font-bold text-[#253A7D] leading-none tracking-tight whitespace-nowrap lg:min-w-[64px]">
-                    24&ndash;48h
-                  </p>
-                  <p className="text-[11.5px] md:text-[12px] text-[#272A33]/65 mt-1.5 lg:mt-0 leading-snug">
-                    Pre-approval turnaround
-                  </p>
-                </div>
-              </Reveal>
-
-              {/* 10% — Light tinted (matches 60) */}
-              <Reveal delay={0.24} className="relative bg-[#E8F1FB] rounded-xl px-4 md:px-5 py-5 lg:py-4 flex items-center gap-3 md:gap-4 min-h-[110px] lg:min-h-0 overflow-hidden">
-                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="6" y1="18" x2="18" y2="6" />
-                    <circle cx="7.5" cy="7.5" r="2" />
-                    <circle cx="16.5" cy="16.5" r="2" />
-                  </svg>
-                </div>
-                <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-3">
-                  <p className="text-[24px] md:text-[28px] lg:text-[26px] font-bold text-[#253A7D] leading-none tracking-tight lg:min-w-[64px]">
-                    <CountUp end={10} suffix="%" />
-                  </p>
-                  <p className="text-[11.5px] md:text-[12px] text-[#272A33]/65 mt-1.5 lg:mt-0 leading-snug">
-                    Fixed interest per annum
-                  </p>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== SMARTPHONE HP — HERO ===== */}
-      <section className="relative overflow-hidden bg-[#0d2461]">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: "url('/iphone-background.png')",
-            }}
-            aria-hidden
-          />
-          {/* Mobile: full dark overlay so text stays readable */}
-          <div
-            className="absolute inset-0 block md:hidden"
-            style={{ background: "rgba(13,36,97,0.78)" }}
-            aria-hidden
-          />
-          {/* Desktop: left-to-right gradient — solid navy behind text, fades to transparent */}
-          <div
-            className="absolute inset-0 hidden md:block"
-            style={{
-              background:
-                "linear-gradient(90deg, #0d2461 0%, #0d2461f2 28%, rgba(13,36,97,0.82) 48%, rgba(13,36,97,0.35) 70%, rgba(13,36,97,0.0) 100%)",
-            }}
-            aria-hidden
-          />
-        </div>
-
-        <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 py-16 md:py-24">
-          <Reveal className="max-w-[620px]">
-            <div className="flex items-center gap-3 mb-5">
-              <p className="text-[11px] md:text-[12px] font-bold uppercase tracking-[3px] text-[#FCDB81]">
-                Smartphone HP Financing
-              </p>
-              <span className="inline-block bg-[#F18F33] text-white text-[10px] font-bold uppercase tracking-[1.5px] px-3 py-1 rounded-full">
-                Coming Soon
-              </span>
-            </div>
-            <h2 className="text-[30px] md:text-[42px] lg:text-[48px] font-semibold text-white leading-[1.1] tracking-[-0.01em] mb-5">
-              Finance your next
-              <br className="hidden sm:block" /> smartphone upgrade.
-            </h2>
-            <p className="text-[15px] md:text-[17px] text-white/70 max-w-[480px] mb-9 leading-[1.6]">
-              Stay connected without the upfront cost. Flexible Hire Purchase
-              financing for your next device, built around your budget and your
-              lifestyle.
-            </p>
-            <div className="flex items-center gap-4 flex-wrap">
-              <a
-                href="/apply?type=smartphone"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-7 py-3.5 bg-[#EE4720] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
-              >
-                Join the Waitlist
-              </a>
-              <Link
-                href="/objective-financing"
-                className="inline-flex items-center justify-center px-6 py-3.5 border border-white/30 text-white/80 text-[15px] font-medium rounded-lg hover:border-white/60 hover:text-white transition-all duration-300"
-              >
-                Learn more
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ===== SMARTPHONE HP — OUR IMPACT ===== */}
-      <section className="py-20 md:py-28 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
-          <Reveal className="mb-10 md:mb-14 max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[2.5px] text-[#2C76BB] mb-4">
-              Smartphone HP Financing &middot; Our Impact
-            </p>
-            <h2 className="text-[28px] md:text-[36px] lg:text-[42px] font-semibold text-[#272A33] leading-[1.15] tracking-[-0.01em] mb-4">
-              Built to keep you connected.
-            </h2>
-            <p className="text-[15px] md:text-[16px] text-[var(--text-secondary)] leading-relaxed max-w-lg">
-              A simpler way to own your next device. Transparent terms, fast
-              pre-approvals, and a fixed monthly rate you can plan around.
-            </p>
-            <div className="mt-7">
-              <Link
-                href="/objective-financing"
-                className="inline-flex items-center px-5 py-2.5 bg-[#0d2461] text-white text-[13.5px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#253A7D]"
-              >
-                About Smartphone Financing
-              </Link>
-            </div>
-          </Reveal>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6">
-            {/* Left gradient plate */}
-            <Reveal className="lg:col-span-8 relative rounded-2xl overflow-hidden min-h-[260px] lg:min-h-[420px] p-7 md:p-9 flex flex-col justify-between"
-              >
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: "url('/iphone-horizontal-2.jpg')" }}
-                aria-hidden
-              />
-              <div
-                className="absolute inset-0"
-                style={{ background: "linear-gradient(180deg, rgba(13,36,97,0.15) 0%, rgba(13,36,97,0.05) 40%, rgba(13,36,97,0.55) 100%)" }}
-                aria-hidden
-              />
-              <div className="relative">
-                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-6">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FCDB81" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
-                    <line x1="10.5" y1="18.5" x2="13.5" y2="18.5" />
-                  </svg>
-                </div>
-                <p className="text-[11px] font-semibold uppercase tracking-[2px] text-[#FCDB81] mb-2">
-                  Stay connected
-                </p>
-                <p className="text-[18px] md:text-[20px] text-white leading-snug max-w-[320px]">
-                  Own the latest device today and spread the cost with confidence.
-                </p>
-              </div>
-              <div className="relative mt-6">
-                <span className="inline-block bg-white/10 text-white/80 text-[11px] font-semibold uppercase tracking-[1.5px] px-3 py-1.5 rounded-full">
-                  Launching soon
-                </span>
-              </div>
-            </Reveal>
-
-            {/* Right: 3 USP stat cards */}
-            <div className="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-3">
-              {/* 36 months */}
-              <Reveal delay={0.06} className="relative bg-[#E8F1FB] rounded-xl px-4 md:px-5 py-5 lg:py-4 flex items-center gap-3 md:gap-4 min-h-[110px] lg:min-h-0 overflow-hidden">
-                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3.5" y="5" width="17" height="15" rx="2" />
-                    <path d="M3.5 9.5h17M8 3v4M16 3v4" />
-                  </svg>
-                </div>
-                <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-3">
-                  <p className="text-[24px] md:text-[28px] lg:text-[26px] font-bold text-[#253A7D] leading-none tracking-tight lg:min-w-[40px]">
-                    <CountUp end={36} />
-                  </p>
-                  <p className="text-[11.5px] md:text-[12px] text-[#272A33]/65 mt-1.5 lg:mt-0 leading-snug">
-                    Months maximum tenure
-                  </p>
-                </div>
-              </Reveal>
-
-              {/* 24-48h */}
-              <Reveal delay={0.12} className="relative bg-[#E8F1FB] rounded-xl px-4 md:px-5 py-5 lg:py-4 flex items-center gap-3 md:gap-4 min-h-[110px] lg:min-h-0 overflow-hidden">
-                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />
-                  </svg>
-                </div>
-                <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-3">
-                  <p className="text-[20px] md:text-[24px] lg:text-[22px] font-bold text-[#253A7D] leading-none tracking-tight whitespace-nowrap lg:min-w-[64px]">
-                    24&ndash;48h
-                  </p>
-                  <p className="text-[11.5px] md:text-[12px] text-[#272A33]/65 mt-1.5 lg:mt-0 leading-snug">
-                    Pre-approval turnaround
-                  </p>
-                </div>
-              </Reveal>
-
-              {/* 1.25% */}
-              <Reveal delay={0.18} className="relative bg-[#0d2461] rounded-xl px-4 md:px-5 py-5 lg:py-4 flex items-center gap-3 md:gap-4 min-h-[110px] lg:min-h-0 overflow-hidden">
-                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FCDB81" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="6" y1="18" x2="18" y2="6" />
-                    <circle cx="7.5" cy="7.5" r="2" />
-                    <circle cx="16.5" cy="16.5" r="2" />
-                  </svg>
-                </div>
-                <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-3">
-                  <p className="text-[24px] md:text-[28px] lg:text-[26px] font-bold text-[#FCDB81] leading-none tracking-tight whitespace-nowrap lg:min-w-[64px]">
-                    1.25%
-                  </p>
-                  <p className="text-[11.5px] md:text-[12px] text-white/70 mt-1.5 lg:mt-0 leading-snug">
-                    Fixed interest per month
-                  </p>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ===== OUR IMPACT (motorcycle / smartphone toggle) ===== */}
+      <ImpactShowcase />
 
       {/* ===== WHY US ===== */}
       <section className="relative py-24 md:py-32 bg-[#0d2461] overflow-hidden">
