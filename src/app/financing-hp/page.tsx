@@ -77,7 +77,7 @@ export default function FinancingHP() {
         <div className="absolute inset-0">
           {/* Mobile image (hidden on lg+) */}
           <Image
-            src="/financing-hp-hero-mobile.png"
+            src="/moped-mobile-view.jpg"
             alt=""
             fill
             className="object-cover object-center lg:hidden"
@@ -85,7 +85,7 @@ export default function FinancingHP() {
           />
           {/* Desktop image (hidden on mobile) */}
           <Image
-            src="/financing-hp-hero.jpg"
+            src="/moped-bike-2.jpg"
             alt=""
             fill
             className="object-cover object-right hidden lg:block"

@@ -86,8 +86,8 @@ export default function Home() {
 
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pb-24 md:pb-32 pt-32 flex flex-col items-center text-center">
           <HeroReveal className="flex flex-col items-center">
-            <p className="text-[13px] md:text-[15px] font-bold uppercase tracking-[3.5px] text-[#47A7DD] mb-5">
-              Motorcycle Hire Purchase
+            <p className="text-[15px] md:text-[18px] font-extrabold uppercase tracking-[3.5px] text-[#47A7DD] mb-5">
+              First Class Motorcycle Hire Purchase Financing
             </p>
             <h1 className="text-[38px] md:text-[56px] lg:text-[68px] font-light leading-[1.06] text-white tracking-[-0.02em] mb-6">
               Your next ride,
@@ -200,7 +200,7 @@ export default function Home() {
               <div
                 className="absolute inset-0 bg-cover bg-center opacity-50 transition-transform duration-700 group-hover:scale-105"
                 style={{
-                  backgroundImage: "url('/bike-only.png')",
+                  backgroundImage: "url('/underbone-motor-2.png')",
                 }}
                 aria-hidden
               />
@@ -248,8 +248,7 @@ export default function Home() {
               <div
                 className="absolute inset-0 bg-cover bg-center opacity-45 transition-transform duration-700 group-hover:scale-105"
                 style={{
-                  backgroundImage:
-                    "url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&q=80&auto=format&fit=crop')",
+                  backgroundImage: "url('/buy-phone-2.png')",
                 }}
                 aria-hidden
               />
@@ -322,7 +321,7 @@ export default function Home() {
             {/* Wide image plate */}
             <Reveal className="lg:col-span-8 relative rounded-2xl overflow-hidden h-[260px] md:h-[340px] lg:h-auto lg:min-h-[420px] shadow-[0_20px_60px_-30px_rgba(13,36,97,0.35)]">
               <Image
-                src="/impact-hero.png"
+                src="/moped.png"
                 alt="Happy customer with new motorcycle"
                 fill
                 className="object-cover object-center"
@@ -430,18 +429,24 @@ export default function Home() {
         {/* Background image */}
         <div className="absolute inset-0">
           <div
-            className="absolute inset-0 bg-cover bg-center opacity-40"
+            className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1600&q=80&auto=format&fit=crop')",
+              backgroundImage: "url('/iphone-background.png')",
             }}
             aria-hidden
           />
+          {/* Mobile: full dark overlay so text stays readable */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 block md:hidden"
+            style={{ background: "rgba(13,36,97,0.78)" }}
+            aria-hidden
+          />
+          {/* Desktop: left-to-right gradient — solid navy behind text, fades to transparent */}
+          <div
+            className="absolute inset-0 hidden md:block"
             style={{
               background:
-                "linear-gradient(90deg, #0d2461 0%, #0d2461 30%, rgba(13,36,97,0.78) 55%, rgba(13,36,97,0.35) 100%)",
+                "linear-gradient(90deg, #0d2461 0%, #0d2461f2 28%, rgba(13,36,97,0.82) 48%, rgba(13,36,97,0.35) 70%, rgba(13,36,97,0.0) 100%)",
             }}
             aria-hidden
           />
@@ -512,16 +517,16 @@ export default function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6">
             {/* Left gradient plate */}
-            <Reveal className="lg:col-span-5 relative rounded-2xl overflow-hidden min-h-[260px] lg:min-h-[360px] p-7 md:p-9 flex flex-col justify-between"
+            <Reveal className="lg:col-span-8 relative rounded-2xl overflow-hidden min-h-[260px] lg:min-h-[420px] p-7 md:p-9 flex flex-col justify-between"
               >
               <div
-                className="absolute inset-0"
-                style={{ background: "linear-gradient(135deg, #0d2461 0%, #253A7D 55%, #2C76BB 100%)" }}
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: "url('/iphone-horizontal-2.jpg')" }}
                 aria-hidden
               />
               <div
-                className="absolute -right-10 -bottom-10 w-56 h-56 rounded-full opacity-20"
-                style={{ background: "radial-gradient(circle, #47A7DD 0%, transparent 70%)" }}
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(180deg, rgba(13,36,97,0.15) 0%, rgba(13,36,97,0.05) 40%, rgba(13,36,97,0.55) 100%)" }}
                 aria-hidden
               />
               <div className="relative">
@@ -546,56 +551,56 @@ export default function Home() {
             </Reveal>
 
             {/* Right: 3 USP stat cards */}
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-3">
+            <div className="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-3">
               {/* 36 months */}
-              <Reveal delay={0.06} className="relative bg-[#E8F1FB] rounded-xl px-5 py-6 lg:py-5 flex items-center gap-4 min-h-[120px] lg:min-h-0">
-                <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <Reveal delay={0.06} className="relative bg-[#E8F1FB] rounded-xl px-4 md:px-5 py-5 lg:py-4 flex items-center gap-3 md:gap-4 min-h-[110px] lg:min-h-0 overflow-hidden">
+                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3.5" y="5" width="17" height="15" rx="2" />
                     <path d="M3.5 9.5h17M8 3v4M16 3v4" />
                   </svg>
                 </div>
-                <div className="lg:flex lg:items-center lg:gap-3">
-                  <p className="text-[26px] md:text-[30px] lg:text-[28px] font-bold text-[#253A7D] leading-none tracking-tight">
+                <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-3">
+                  <p className="text-[24px] md:text-[28px] lg:text-[26px] font-bold text-[#253A7D] leading-none tracking-tight lg:min-w-[40px]">
                     <CountUp end={36} />
                   </p>
-                  <p className="text-[12.5px] text-[#272A33]/65 mt-1.5 lg:mt-0 leading-snug">
+                  <p className="text-[11.5px] md:text-[12px] text-[#272A33]/65 mt-1.5 lg:mt-0 leading-snug">
                     Months maximum tenure
                   </p>
                 </div>
               </Reveal>
 
               {/* 24-48h */}
-              <Reveal delay={0.12} className="relative bg-[#E8F1FB] rounded-xl px-5 py-6 lg:py-5 flex items-center gap-4 min-h-[120px] lg:min-h-0">
-                <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <Reveal delay={0.12} className="relative bg-[#E8F1FB] rounded-xl px-4 md:px-5 py-5 lg:py-4 flex items-center gap-3 md:gap-4 min-h-[110px] lg:min-h-0 overflow-hidden">
+                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />
                   </svg>
                 </div>
-                <div className="lg:flex lg:items-center lg:gap-3">
-                  <p className="text-[22px] md:text-[26px] lg:text-[24px] font-bold text-[#253A7D] leading-none tracking-tight whitespace-nowrap">
+                <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-3">
+                  <p className="text-[20px] md:text-[24px] lg:text-[22px] font-bold text-[#253A7D] leading-none tracking-tight whitespace-nowrap lg:min-w-[64px]">
                     24&ndash;48h
                   </p>
-                  <p className="text-[12.5px] text-[#272A33]/65 mt-1.5 lg:mt-0 leading-snug">
+                  <p className="text-[11.5px] md:text-[12px] text-[#272A33]/65 mt-1.5 lg:mt-0 leading-snug">
                     Pre-approval turnaround
                   </p>
                 </div>
               </Reveal>
 
               {/* 1.25% */}
-              <Reveal delay={0.18} className="relative bg-[#0d2461] rounded-xl px-5 py-6 lg:py-5 flex items-center gap-4 min-h-[120px] lg:min-h-0">
-                <div className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FCDB81" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <Reveal delay={0.18} className="relative bg-[#0d2461] rounded-xl px-4 md:px-5 py-5 lg:py-4 flex items-center gap-3 md:gap-4 min-h-[110px] lg:min-h-0 overflow-hidden">
+                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FCDB81" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="6" y1="18" x2="18" y2="6" />
                     <circle cx="7.5" cy="7.5" r="2" />
                     <circle cx="16.5" cy="16.5" r="2" />
                   </svg>
                 </div>
-                <div className="lg:flex lg:items-center lg:gap-3">
-                  <p className="text-[26px] md:text-[30px] lg:text-[28px] font-bold text-[#FCDB81] leading-none tracking-tight whitespace-nowrap">
+                <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-3">
+                  <p className="text-[24px] md:text-[28px] lg:text-[26px] font-bold text-[#FCDB81] leading-none tracking-tight whitespace-nowrap lg:min-w-[64px]">
                     1.25%
                   </p>
-                  <p className="text-[12.5px] text-white/70 mt-1.5 lg:mt-0 leading-snug">
+                  <p className="text-[11.5px] md:text-[12px] text-white/70 mt-1.5 lg:mt-0 leading-snug">
                     Fixed interest per month
                   </p>
                 </div>
@@ -819,7 +824,7 @@ export default function Home() {
               <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{
-                  backgroundImage: "url('/bike-on-road.png')",
+                  backgroundImage: "url('/watch-laptop-and-phone.jpg')",
                 }}
                 aria-hidden
               />

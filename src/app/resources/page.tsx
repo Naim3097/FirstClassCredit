@@ -112,7 +112,7 @@ export default function Resources() {
         <div className="absolute inset-0">
           {/* Mobile image */}
           <Image
-            src="/resources-hero-mobile-2.png"
+            src="/woman-hold-phone-about-us-2.jpg"
             alt=""
             fill
             className="object-cover object-[80%_center] md:hidden"
@@ -120,7 +120,7 @@ export default function Resources() {
           />
           {/* Desktop image */}
           <Image
-            src="/resources-hero-desktop.png"
+            src="/woman-hold-phone-about-us-2.jpg"
             alt=""
             fill
             className="object-cover object-right hidden md:block"

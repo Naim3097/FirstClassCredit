@@ -27,7 +27,7 @@ export default function Contact() {
         <div className="absolute inset-0">
           {/* Mobile hero */}
           <Image
-            src="/contact-hero-mobile-3.jpg"
+            src="/contact-us-new-mobile.jpg"
             alt=""
             fill
             className="object-cover object-center lg:hidden"
@@ -35,7 +35,7 @@ export default function Contact() {
           />
           {/* Desktop hero */}
           <Image
-            src="/contact-hero-2.png"
+            src="/contact-us-new.jpg"
             alt=""
             fill
             className="object-cover object-right hidden lg:block"
