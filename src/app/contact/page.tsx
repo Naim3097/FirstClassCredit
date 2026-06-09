@@ -77,7 +77,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-white text-[13px] md:text-[14px] font-semibold hover:text-[#47A7DD] transition-colors"
               >
-                WhatsApp Us <span aria-hidden>&rarr;</span>
+                WhatsApp Us
               </a>
             </div>
           </HeroReveal>
@@ -225,9 +225,6 @@ export default function Contact() {
                     className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#EE4720] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
                   >
                     Send Message
-                    <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-[13px]">
-                      ↗
-                    </span>
                   </button>
                 </form>
               )}
@@ -306,7 +303,7 @@ export default function Contact() {
                       Hours
                     </p>
                     <p className="text-[15px] text-white/80">
-                      Mon &ndash; Fri: 9:00 AM &ndash; 5:00 PM
+                      Mon &ndash; Fri: 8:30 AM &ndash; 5:30 PM
                     </p>
                     <p className="text-[13px] text-white/50 mt-1">
                       Closed on weekends &amp; public holidays
@@ -338,14 +335,16 @@ export default function Contact() {
           <Reveal delay={0.14}>
             <div className="mt-10 bg-white rounded-xl p-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
               <p className="text-[14px] text-[#272A33]">
-                Ready to apply for motorcycle financing?
+                Ready to apply for hire purchase financing?
               </p>
-              <Link
+              <a
                 href="/apply"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-[#EE4720] text-[14px] font-semibold whitespace-nowrap"
               >
-                Apply Now &rarr;
-              </Link>
+                Apply Now
+              </a>
             </div>
           </Reveal>
         </div>

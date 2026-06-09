@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LoanCalculator from "@/components/LoanCalculator";
 import FAQAccordion from "@/components/FAQAccordion";
+import RepresentativeExample from "@/components/RepresentativeExample";
 import { HeroReveal, Reveal, StaggerChildren } from "@/components/ScrollAnimations";
 
 const hpFAQ = [
@@ -13,7 +14,7 @@ const hpFAQ = [
       "It is a contract where you \u201chire\u201d the motorcycle from the Owner (First Class Credit Sdn. Bhd.) and ownership transfers to you upon full settlement. You become the legal owner only after the final instalment is paid.",
   },
   {
-    question: "Is First Class Credit HP governed under the Hire Purchase Act 1967?",
+    question: "Is First Class Credit Motorcycle HP financing governed under the Hire Purchase Act 1967?",
     answer:
       "Yes. All our motorcycle financing is governed by the Hire Purchase Act 1967, which protects you as the Hirer.",
   },
@@ -33,8 +34,12 @@ const hpFAQ = [
   },
   {
     question: "Can you provide a representative example?",
-    answer:
-      "From our PDS \u2014 Amount Financed RM10,000, Margin 81.30%, Fixed Rate 10.00% p.a. (flat), Tenure 48 months, Total Term Charges RM4,000, Monthly Instalment RM294 (incl. transaction fee), Final Instalment RM278.",
+    answer: (
+      <>
+        <p>Here is a typical representative example for a hire purchase loan:</p>
+        <RepresentativeExample />
+      </>
+    ),
   },
   {
     question: "What fees and charges do I pay?",
@@ -101,7 +106,7 @@ export default function FinancingHP() {
         <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pt-28 md:pt-36 pb-24 md:pb-32 lg:pb-40 min-h-[580px] md:min-h-[680px] lg:min-h-[740px] flex items-center">
           <HeroReveal className="max-w-[600px]">
             <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[2.5px] md:tracking-[3px] text-[#47A7DD] mb-4 md:mb-5">
-              Motorcycle Financing
+              First Class Motorcycle HP Financing
             </p>
             <h1 className="text-[34px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.05] text-white tracking-[-0.02em] mb-5 md:mb-6">
               Financing your<br className="hidden sm:block" /> next motorcycle, simplified.
@@ -112,18 +117,14 @@ export default function FinancingHP() {
               years, fully governed by the Hire Purchase Act 1967.
             </p>
             <div className="flex items-center gap-5 md:gap-7">
-              <Link
+              <a
                 href="/apply"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-6 md:px-7 py-3 md:py-3.5 bg-[#EE4720] text-white text-[14px] md:text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
               >
                 Apply Now
-              </Link>
-              <Link
-                href="/apply"
-                className="inline-flex items-center gap-1.5 text-white text-[13px] md:text-[14px] font-semibold hover:text-[#47A7DD] transition-colors"
-              >
-                Check if you qualify <span aria-hidden>&rarr;</span>
-              </Link>
+              </a>
             </div>
           </HeroReveal>
         </div>
@@ -245,12 +246,14 @@ export default function FinancingHP() {
               <p className="text-[14px] md:text-[15px] text-[#666] leading-relaxed mb-7 max-w-[320px]">
                 Make sure you meet the requirements below before you start your application.
               </p>
-              <Link
+              <a
                 href="/apply"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-[#0d2461] text-[14px] font-semibold hover:text-[#47A7DD] transition-colors"
               >
-                Check if you qualify <span aria-hidden>→</span>
-              </Link>
+                Check if you qualify
+              </a>
             </Reveal>
 
             {/* Right: rows card */}
@@ -269,7 +272,7 @@ export default function FinancingHP() {
                   },
                   {
                     label: "Age",
-                    value: "18 to 70 years old at end of financing tenure",
+                    value: "18 to 70 years old (at end of financing tenure)",
                     icon: (
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d2461" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3.5" y="5" width="17" height="15" rx="2" />
@@ -456,12 +459,14 @@ export default function FinancingHP() {
 
           <Reveal delay={0.2}>
             <div className="mt-10 md:mt-12 flex justify-center">
-              <Link
+              <a
                 href="/apply"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-7 md:px-8 py-3.5 md:py-4 bg-[#EE4720] text-white text-[14px] md:text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
               >
                 Start Your Application
-              </Link>
+              </a>
             </div>
           </Reveal>
         </div>
@@ -480,7 +485,7 @@ export default function FinancingHP() {
                 href="/resources"
                 className="inline-flex items-center gap-1.5 text-[#2C76BB] text-[14px] font-semibold hover:text-[#253A7D] transition-colors"
               >
-                See all FAQs <span aria-hidden>&rarr;</span>
+                See all FAQs
               </Link>
             </Reveal>
             <Reveal delay={0.1} className="lg:col-span-8">
@@ -516,12 +521,14 @@ export default function FinancingHP() {
                   </p>
                 </div>
               </div>
-              <Link
+              <a
                 href="/apply"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-7 py-3.5 bg-[#EE4720] text-white text-[14px] md:text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33] w-fit"
               >
                 Apply Now
-              </Link>
+              </a>
             </div>
           </Reveal>
         </div>

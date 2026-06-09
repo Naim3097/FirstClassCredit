@@ -2,8 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import FAQAccordion from "@/components/FAQAccordion";
-import { HeroReveal, Reveal, StaggerChildren, CountUp } from "@/components/ScrollAnimations";
+import FAQTabs from "@/components/FAQTabs";
+import RepresentativeExample from "@/components/RepresentativeExample";
+import { HeroReveal, Reveal, CountUp } from "@/components/ScrollAnimations";
+
+const SMARTPHONE_FAQ_MESSAGE =
+  "We are putting the final touches on our new financing solutions! Check back soon for details on how we can help fund your specific lifestyle and device upgrades.";
 
 const homeFAQ = [
   {
@@ -28,13 +32,31 @@ const homeFAQ = [
   },
   {
     question: "Can you provide a representative example?",
-    answer:
-      "From our PDS \u2014 Amount Financed RM10,000, Margin 81.30%, Fixed Rate 10.00% p.a. (flat), Tenure 48 months, Total Term Charges RM4,000, Monthly Instalment RM294, Final Instalment RM278 (both inclusive of transaction fee).",
+    answer: (
+      <>
+        <p>Here is a typical representative example for a hire purchase loan:</p>
+        <RepresentativeExample />
+      </>
+    ),
   },
   {
     question: "Are there any hidden fees?",
-    answer:
-      "No. Per the PDS: Stamp Duty RM20 (without guarantor) or RM60 (with guarantor), e-Hakmilik Charges RM3, and Postage RM10. All fees are disclosed up front.",
+    answer: (
+      <>
+        No. Per the{" "}
+        <a
+          href="/pds.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#2C76BB] font-semibold underline underline-offset-2 hover:text-[#253A7D]"
+        >
+          PDS
+        </a>
+        : Stamp Duty RM20 (without guarantor) or RM60 (with guarantor),
+        e-Hakmilik Charges RM3, and Postage RM10. All fees are disclosed up
+        front.
+      </>
+    ),
   },
 ];
 
@@ -64,10 +86,10 @@ export default function Home() {
 
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pb-24 md:pb-32 pt-32 flex flex-col items-center text-center">
           <HeroReveal className="flex flex-col items-center">
-            <p className="text-[11px] font-semibold uppercase tracking-[3px] text-[#47A7DD] mb-5">
+            <p className="text-[13px] md:text-[15px] font-bold uppercase tracking-[3.5px] text-[#47A7DD] mb-5">
               Motorcycle Hire Purchase
             </p>
-            <h1 className="text-[36px] md:text-[52px] lg:text-[64px] font-extralight leading-[1.08] text-white tracking-[-0.02em] mb-6">
+            <h1 className="text-[38px] md:text-[56px] lg:text-[68px] font-light leading-[1.06] text-white tracking-[-0.02em] mb-6">
               Your next ride,
               <br />
               financed the straightforward way.
@@ -77,17 +99,19 @@ export default function Home() {
               margin, tenures up to 60 months, fixed rates with no surprises.
             </p>
             <div className="flex items-center justify-center gap-4 flex-wrap">
-              <Link
+              <a
                 href="/apply"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-7 py-3.5 bg-[#EE4720] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
               >
                 Apply Now
-              </Link>
+              </a>
               <Link
                 href="/financing-hp"
                 className="inline-flex items-center justify-center px-6 py-3.5 border border-white/30 text-white/80 text-[15px] font-medium rounded-lg hover:border-white/60 hover:text-white transition-all duration-300"
               >
-                How it works &rarr;
+                How it works
               </Link>
             </div>
           </HeroReveal>
@@ -113,7 +137,7 @@ export default function Home() {
                   <span className="text-[11px] sm:text-[13px] md:text-[15px] font-semibold text-[#253A7D] leading-tight">month</span>
                 </div>
                 <p className="text-[9px] sm:text-[11px] md:text-[12px] text-[var(--text-muted)] font-medium uppercase tracking-[1.2px] sm:tracking-[1.5px] mt-1">
-                  max tenure
+                  Flexible Loan Tenures
                 </p>
               </div>
 
@@ -129,7 +153,7 @@ export default function Home() {
                   <span className="text-[11px] sm:text-[13px] md:text-[15px] font-semibold text-[#253A7D] leading-tight">%</span>
                 </div>
                 <p className="text-[9px] sm:text-[11px] md:text-[12px] text-[var(--text-muted)] font-medium uppercase tracking-[1.2px] sm:tracking-[1.5px] mt-1">
-                  financing margin
+                  High Financing Margin
                 </p>
               </div>
 
@@ -212,9 +236,9 @@ export default function Home() {
               </div>
               <Link
                 href="/financing-hp"
-                className="relative mt-6 text-[#47A7DD] text-[14px] font-semibold inline-flex items-center gap-1.5 group-hover:gap-3 transition-all duration-300"
+                className="relative mt-6 text-[#47A7DD] text-[14px] font-bold inline-flex items-center gap-1.5 group-hover:gap-3 transition-all duration-300"
               >
-                Explore Motorcycle Financing <span aria-hidden>&rarr;</span>
+                Explore First Class Motorcycle HP Financing
               </Link>
             </Reveal>
 
@@ -259,9 +283,9 @@ export default function Home() {
               </div>
               <Link
                 href="/objective-financing"
-                className="relative mt-6 text-[#FCDB81]/80 text-[14px] font-medium inline-flex items-center gap-1.5 hover:text-[#FCDB81] hover:gap-3 transition-all duration-300"
+                className="relative mt-6 text-[#FCDB81]/90 text-[14px] font-bold inline-flex items-center gap-1.5 hover:text-[#FCDB81] hover:gap-3 transition-all duration-300"
               >
-                Check on Financing &rarr;
+                Explore First Class Smartphone HP Financing
               </Link>
             </Reveal>
           </div>
@@ -280,9 +304,17 @@ export default function Home() {
             </h2>
             <p className="text-[15px] md:text-[16px] text-[var(--text-secondary)] leading-relaxed max-w-lg">
               We keep it simple. Competitive rates, fast approvals, and high
-              financing margins so you can focus on what matters &mdash; getting
-              on the road.
+              financing margins so you can focus on what matters, reaching your
+              next milestone.
             </p>
+            <div className="mt-7">
+              <Link
+                href="/financing-hp"
+                className="inline-flex items-center px-5 py-2.5 bg-[#0d2461] text-white text-[13.5px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#253A7D]"
+              >
+                About Motorcycle Financing
+              </Link>
+            </div>
           </Reveal>
 
           {/* Bento: image left (wide & short), stat cards stacked right */}
@@ -310,7 +342,7 @@ export default function Home() {
                 </p>
                 <p className="text-[11px] md:text-[14px] text-[#272A33] leading-snug">
                   Driving Malaysians forward with simple, transparent
-                  motorcycle financing.
+                  motorcycle HP financing.
                 </p>
               </div>
             </Reveal>
@@ -343,8 +375,8 @@ export default function Home() {
                     <path d="M3.5 9.5h17M8 3v4M16 3v4" />
                   </svg>
                 </div>
-                <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-3">
-                  <p className="text-[24px] md:text-[28px] lg:text-[26px] font-bold text-[#253A7D] leading-none tracking-tight lg:min-w-[64px]">
+                <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-2">
+                  <p className="text-[24px] md:text-[28px] lg:text-[26px] font-bold text-[#253A7D] leading-none tracking-tight lg:min-w-[40px]">
                     <CountUp end={60} />
                   </p>
                   <p className="text-[11.5px] md:text-[12px] text-[#272A33]/65 mt-1.5 lg:mt-0 leading-snug">
@@ -393,6 +425,186 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== SMARTPHONE HP — HERO ===== */}
+      <section className="relative overflow-hidden bg-[#0d2461]">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-40"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1600&q=80&auto=format&fit=crop')",
+            }}
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, #0d2461 0%, #0d2461 30%, rgba(13,36,97,0.78) 55%, rgba(13,36,97,0.35) 100%)",
+            }}
+            aria-hidden
+          />
+        </div>
+
+        <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 py-16 md:py-24">
+          <Reveal className="max-w-[620px]">
+            <div className="flex items-center gap-3 mb-5">
+              <p className="text-[11px] md:text-[12px] font-bold uppercase tracking-[3px] text-[#FCDB81]">
+                Smartphone HP Financing
+              </p>
+              <span className="inline-block bg-[#F18F33] text-white text-[10px] font-bold uppercase tracking-[1.5px] px-3 py-1 rounded-full">
+                Coming Soon
+              </span>
+            </div>
+            <h2 className="text-[30px] md:text-[42px] lg:text-[48px] font-semibold text-white leading-[1.1] tracking-[-0.01em] mb-5">
+              Finance your next
+              <br className="hidden sm:block" /> smartphone upgrade.
+            </h2>
+            <p className="text-[15px] md:text-[17px] text-white/70 max-w-[480px] mb-9 leading-[1.6]">
+              Stay connected without the upfront cost. Flexible Hire Purchase
+              financing for your next device, built around your budget and your
+              lifestyle.
+            </p>
+            <div className="flex items-center gap-4 flex-wrap">
+              <a
+                href="/apply?type=smartphone"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-7 py-3.5 bg-[#EE4720] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
+              >
+                Join the Waitlist
+              </a>
+              <Link
+                href="/objective-financing"
+                className="inline-flex items-center justify-center px-6 py-3.5 border border-white/30 text-white/80 text-[15px] font-medium rounded-lg hover:border-white/60 hover:text-white transition-all duration-300"
+              >
+                Learn more
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ===== SMARTPHONE HP — OUR IMPACT ===== */}
+      <section className="py-20 md:py-28 bg-white">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
+          <Reveal className="mb-10 md:mb-14 max-w-2xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[2.5px] text-[#2C76BB] mb-4">
+              Smartphone HP Financing &middot; Our Impact
+            </p>
+            <h2 className="text-[28px] md:text-[36px] lg:text-[42px] font-semibold text-[#272A33] leading-[1.15] tracking-[-0.01em] mb-4">
+              Built to keep you connected.
+            </h2>
+            <p className="text-[15px] md:text-[16px] text-[var(--text-secondary)] leading-relaxed max-w-lg">
+              A simpler way to own your next device. Transparent terms, fast
+              pre-approvals, and a fixed monthly rate you can plan around.
+            </p>
+            <div className="mt-7">
+              <Link
+                href="/objective-financing"
+                className="inline-flex items-center px-5 py-2.5 bg-[#0d2461] text-white text-[13.5px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#253A7D]"
+              >
+                About Smartphone Financing
+              </Link>
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6">
+            {/* Left gradient plate */}
+            <Reveal className="lg:col-span-5 relative rounded-2xl overflow-hidden min-h-[260px] lg:min-h-[360px] p-7 md:p-9 flex flex-col justify-between"
+              >
+              <div
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(135deg, #0d2461 0%, #253A7D 55%, #2C76BB 100%)" }}
+                aria-hidden
+              />
+              <div
+                className="absolute -right-10 -bottom-10 w-56 h-56 rounded-full opacity-20"
+                style={{ background: "radial-gradient(circle, #47A7DD 0%, transparent 70%)" }}
+                aria-hidden
+              />
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-6">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FCDB81" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
+                    <line x1="10.5" y1="18.5" x2="13.5" y2="18.5" />
+                  </svg>
+                </div>
+                <p className="text-[11px] font-semibold uppercase tracking-[2px] text-[#FCDB81] mb-2">
+                  Stay connected
+                </p>
+                <p className="text-[18px] md:text-[20px] text-white leading-snug max-w-[320px]">
+                  Own the latest device today and spread the cost with confidence.
+                </p>
+              </div>
+              <div className="relative mt-6">
+                <span className="inline-block bg-white/10 text-white/80 text-[11px] font-semibold uppercase tracking-[1.5px] px-3 py-1.5 rounded-full">
+                  Launching soon
+                </span>
+              </div>
+            </Reveal>
+
+            {/* Right: 3 USP stat cards */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-3">
+              {/* 36 months */}
+              <Reveal delay={0.06} className="relative bg-[#E8F1FB] rounded-xl px-5 py-6 lg:py-5 flex items-center gap-4 min-h-[120px] lg:min-h-0">
+                <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3.5" y="5" width="17" height="15" rx="2" />
+                    <path d="M3.5 9.5h17M8 3v4M16 3v4" />
+                  </svg>
+                </div>
+                <div className="lg:flex lg:items-center lg:gap-3">
+                  <p className="text-[26px] md:text-[30px] lg:text-[28px] font-bold text-[#253A7D] leading-none tracking-tight">
+                    <CountUp end={36} />
+                  </p>
+                  <p className="text-[12.5px] text-[#272A33]/65 mt-1.5 lg:mt-0 leading-snug">
+                    Months maximum tenure
+                  </p>
+                </div>
+              </Reveal>
+
+              {/* 24-48h */}
+              <Reveal delay={0.12} className="relative bg-[#E8F1FB] rounded-xl px-5 py-6 lg:py-5 flex items-center gap-4 min-h-[120px] lg:min-h-0">
+                <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />
+                  </svg>
+                </div>
+                <div className="lg:flex lg:items-center lg:gap-3">
+                  <p className="text-[22px] md:text-[26px] lg:text-[24px] font-bold text-[#253A7D] leading-none tracking-tight whitespace-nowrap">
+                    24&ndash;48h
+                  </p>
+                  <p className="text-[12.5px] text-[#272A33]/65 mt-1.5 lg:mt-0 leading-snug">
+                    Pre-approval turnaround
+                  </p>
+                </div>
+              </Reveal>
+
+              {/* 1.25% */}
+              <Reveal delay={0.18} className="relative bg-[#0d2461] rounded-xl px-5 py-6 lg:py-5 flex items-center gap-4 min-h-[120px] lg:min-h-0">
+                <div className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FCDB81" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="6" y1="18" x2="18" y2="6" />
+                    <circle cx="7.5" cy="7.5" r="2" />
+                    <circle cx="16.5" cy="16.5" r="2" />
+                  </svg>
+                </div>
+                <div className="lg:flex lg:items-center lg:gap-3">
+                  <p className="text-[26px] md:text-[30px] lg:text-[28px] font-bold text-[#FCDB81] leading-none tracking-tight whitespace-nowrap">
+                    1.25%
+                  </p>
+                  <p className="text-[12.5px] text-white/70 mt-1.5 lg:mt-0 leading-snug">
+                    Fixed interest per month
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ===== WHY US ===== */}
       <section className="relative py-24 md:py-32 bg-[#0d2461] overflow-hidden">
         {/* Hero image background at 50% opacity */}
@@ -428,8 +640,8 @@ export default function Home() {
                   A fixed flat rate, locked in for the full tenure.
                 </h3>
                 <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
-                  10.00% per annum, with every fee disclosed in your Product
-                  Disclosure Sheet — no hidden charges, no surprises.
+                  Enjoy competitive rates with complete transparency upfront — no
+                  hidden charges, no surprises.
                 </p>
               </div>
             </Reveal>
@@ -448,30 +660,30 @@ export default function Home() {
                   High Margin Financing
                 </p>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  Finance up to 90% of your motorcycle&apos;s value.
+                  Secure maximum financing for your purchase.
                 </h3>
                 <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
-                  New or used &mdash; get the maximum backing you need with a
-                  minimal down payment and flexible tenure options up to 5 years.
+                  Get the maximum backing you need with flexible tenure options
+                  tailored to fit your budget and your lifestyle.
                 </p>
               </div>
             </Reveal>
 
-            {/* Quick Turnaround — dark navy */}
-            <Reveal delay={0.12} className="bg-[#253A7D] rounded-2xl p-7 md:p-9 flex gap-5">
-              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FCDB81" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            {/* Quick Turnaround — white */}
+            <Reveal delay={0.12} className="bg-white rounded-2xl p-7 md:p-9 border border-[#eef0f5] flex gap-5">
+              <div className="w-12 h-12 rounded-full bg-[#E8F1FB] flex items-center justify-center flex-shrink-0">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />
                 </svg>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[2px] text-[#F18F33] mb-2.5">
+                <p className="text-[10px] font-bold uppercase tracking-[2px] text-[#2C76BB] mb-2.5">
                   Quick Turnaround
                 </p>
-                <h3 className="text-[19px] md:text-[20px] font-semibold text-white leading-snug mb-3">
+                <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
                   Pre-approval within 24 to 48 hours.
                 </h3>
-                <p className="text-[14px] text-white/65 leading-relaxed">
+                <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
                   Submit your documents and move forward faster. Our team
                   reviews every application with urgency so you&apos;re not left
                   waiting.
@@ -479,21 +691,21 @@ export default function Home() {
               </div>
             </Reveal>
 
-            {/* Flexible & Transparent — cream */}
-            <Reveal delay={0.18} className="bg-[#FDF0CD] rounded-2xl p-7 md:p-9 flex gap-5">
-              <div className="w-12 h-12 rounded-full bg-white/60 flex items-center justify-center flex-shrink-0">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B8721F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            {/* Flexible & Transparent — white */}
+            <Reveal delay={0.18} className="bg-white rounded-2xl p-7 md:p-9 border border-[#eef0f5] flex gap-5">
+              <div className="w-12 h-12 rounded-full bg-[#E8F1FB] flex items-center justify-center flex-shrink-0">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 2.5l8 3v6c0 4.5-3.5 8.5-8 10-4.5-1.5-8-5.5-8-10v-6l8-3z" />
                 </svg>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[2px] text-[#B8721F] mb-2.5">
+                <p className="text-[10px] font-bold uppercase tracking-[2px] text-[#2C76BB] mb-2.5">
                   Flexible &amp; Transparent
                 </p>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
                   We look beyond your credit score.
                 </h3>
-                <p className="text-[14px] text-[#272A33]/70 leading-relaxed">
+                <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
                   We evaluate your current potential and financial stability.
                   Honest &amp; transparent approach to finding solutions.
                 </p>
@@ -577,9 +789,11 @@ export default function Home() {
             </Reveal>
             <div className="lg:col-span-8">
               <Reveal delay={0.1}>
-                <div className="bg-white rounded-2xl border border-[#eef0f5] px-6 md:px-8">
-                  <FAQAccordion items={homeFAQ} />
-                </div>
+                <FAQTabs
+                  motorcycleItems={homeFAQ}
+                  smartphoneMessage={SMARTPHONE_FAQ_MESSAGE}
+                  panelClassName="bg-white rounded-2xl border border-[#eef0f5] px-6 md:px-8"
+                />
               </Reveal>
               <Reveal delay={0.15}>
                 <div className="mt-8 text-center">
@@ -587,7 +801,7 @@ export default function Home() {
                     href="/resources"
                     className="text-[#2C76BB] text-[14px] font-semibold hover:text-[#253A7D] transition-colors duration-300"
                   >
-                    See all FAQs &rarr;
+                    See all FAQs
                   </Link>
                 </div>
               </Reveal>
@@ -621,18 +835,20 @@ export default function Home() {
               <div className="relative flex flex-col md:flex-row md:items-center gap-8 md:gap-10">
                 <div className="flex-1">
                   <h2 className="text-[26px] md:text-[34px] lg:text-[38px] font-semibold text-white leading-[1.15] tracking-[-0.01em]">
-                    Ready to finance your next motorcycle?
+                    Ready to finance your next milestone?
                   </h2>
                   <p className="text-[14px] md:text-[15px] text-white/70 mt-3 max-w-md">
                     Start your application in just 5 minutes.
                   </p>
                 </div>
-                <Link
+                <a
                   href="/apply"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-8 py-4 bg-[#EE4720] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33] w-fit flex-shrink-0"
                 >
                   Apply Now
-                </Link>
+                </a>
               </div>
             </div>
           </Reveal>

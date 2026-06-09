@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const malaysianStates = [
   "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan",
@@ -15,6 +15,15 @@ export default function ApplyPage() {
   const [step, setStep] = useState(1);
   const [financingType, setFinancingType] = useState("motorcycle");
   const [submitted, setSubmitted] = useState(false);
+
+  // Preselect the financing type from the URL (?type=smartphone) — e.g. when
+  // a customer arrives from the Smartphone HP Financing waitlist CTA.
+  useEffect(() => {
+    const type = new URLSearchParams(window.location.search).get("type");
+    if (type === "smartphone" || type === "objective") {
+      setFinancingType("objective");
+    }
+  }, []);
 
   const inputClass =
     "w-full py-3.5 px-0 border-0 border-b-2 border-[#e8e8e0] bg-transparent text-base focus:border-[#2C76BB] focus:outline-none transition-colors placeholder:text-[#888]";
@@ -68,7 +77,7 @@ export default function ApplyPage() {
           href="/"
           className="text-sm text-[rgb(85,85,81)] hover:text-[#2C76BB] transition-colors"
         >
-          &larr; Back to Home
+          Back to Home
         </Link>
       </div>
 
@@ -121,9 +130,9 @@ export default function ApplyPage() {
                 onChange={(e) => setFinancingType(e.target.value)}
                 className={selectClass}
               >
-                <option value="motorcycle">Motorcycle Financing HP</option>
+                <option value="motorcycle">First Class Motorcycle HP Financing</option>
                 <option value="objective">
-                  Objective Financing (Coming Soon)
+                  First Class Smartphone HP Financing (Coming Soon)
                 </option>
               </select>
             </div>
@@ -187,9 +196,9 @@ export default function ApplyPage() {
             ) : (
               <div className="bg-[#FCDB81]/30 border border-[#FCDB81] rounded-xl p-6">
                 <p className="text-[#272A33] mb-4">
-                  We are putting the final touches on our tailored Objective
-                  Financing plans! Join our waitlist, and our team will WhatsApp
-                  you the moment it launches.
+                  We are putting the final touches on our tailored First Class
+                  Smartphone HP Financing plans! Join our waitlist, and our team
+                  will WhatsApp you the moment it launches.
                 </p>
                 <div className="space-y-5">
                   <div>
@@ -229,7 +238,7 @@ export default function ApplyPage() {
                   onClick={() => setStep(2)}
                   className="px-8 py-4 bg-[#2C76BB] text-white font-semibold rounded-lg transition-all duration-300 hover:bg-[#253A7D]"
                 >
-                  Next &rarr;
+                  Next
                 </button>
               </div>
             )}
@@ -301,13 +310,13 @@ export default function ApplyPage() {
                 onClick={() => setStep(1)}
                 className="text-[rgb(85,85,81)] font-semibold hover:text-[#2C76BB] transition-colors"
               >
-                &larr; Back
+                Back
               </button>
               <button
                 onClick={() => setStep(3)}
                 className="px-8 py-4 bg-[#2C76BB] text-white font-semibold rounded-lg transition-all duration-300 hover:bg-[#253A7D]"
               >
-                Next &rarr;
+                Next
               </button>
             </div>
           </div>
@@ -410,7 +419,7 @@ export default function ApplyPage() {
                 onClick={() => setStep(2)}
                 className="text-[rgb(85,85,81)] font-semibold hover:text-[#2C76BB] transition-colors"
               >
-                &larr; Back
+                Back
               </button>
             </div>
           </div>

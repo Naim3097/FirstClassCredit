@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import FAQAccordion from "@/components/FAQAccordion";
+import FAQTabs from "@/components/FAQTabs";
+import RepresentativeExample from "@/components/RepresentativeExample";
 import { blogPosts } from "./blog/posts";
+
+const SMARTPHONE_FAQ_MESSAGE =
+  "We are putting the final touches on our new financing solution! Check back soon for details on how we can help fund your next smartphone upgrade.";
 
 const vehicleFAQ = [
   {
@@ -46,8 +50,12 @@ const vehicleFAQ = [
   },
   {
     question: "Can you provide a representative example?",
-    answer:
-      "From our PDS — Amount Financed RM10,000, Margin 81.30%, Fixed Rate 10.00% p.a. (flat), Tenure 48 months, Total Term Charges RM4,000, Monthly Instalment RM294 (incl. transaction fee), Final Instalment RM278.",
+    answer: (
+      <>
+        <p>Here is a typical representative example for a hire purchase loan:</p>
+        <RepresentativeExample />
+      </>
+    ),
   },
   {
     question: "What is the minimum & maximum loan tenure?",
@@ -139,20 +147,22 @@ export default function Resources() {
               Learn &amp; Explore
             </h1>
             <p className="text-[14px] md:text-[16px] text-white/70 max-w-[440px] mb-8 md:mb-10 leading-[1.65]">
-              Your guide to understanding hire purchase financing, improving your credit profile, and making smart motorcycle ownership decisions.
+              Your complete guide to understanding hire purchase financing, improving your credit profile, and making smart decisions for your motorcycle or smartphone upgrade.
             </p>
             <div className="flex items-center gap-5 md:gap-7">
-              <Link
+              <a
                 href="/apply"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-6 md:px-7 py-3 md:py-3.5 bg-[#EE4720] text-white text-[14px] md:text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
               >
                 Apply Now
-              </Link>
+              </a>
               <Link
                 href="#faq"
                 className="inline-flex items-center gap-1.5 text-white text-[13px] md:text-[14px] font-semibold hover:text-[#47A7DD] transition-colors"
               >
-                View FAQs <span aria-hidden>&rarr;</span>
+                View FAQs
               </Link>
             </div>
           </div>
@@ -196,7 +206,7 @@ export default function Resources() {
                     {post.excerpt}
                   </p>
                   <span className="text-blue font-semibold text-[15px] inline-flex items-center gap-1.5 group-hover:gap-3 transition-all duration-200">
-                    Read More <span aria-hidden="true">&rarr;</span>
+                    Read More
                   </span>
                 </div>
               </Link>
@@ -215,7 +225,10 @@ export default function Resources() {
               Everything You Need to Know
             </h2>
           </div>
-          <FAQAccordion items={vehicleFAQ} />
+          <FAQTabs
+            motorcycleItems={vehicleFAQ}
+            smartphoneMessage={SMARTPHONE_FAQ_MESSAGE}
+          />
         </div>
       </section>
 
@@ -231,12 +244,14 @@ export default function Resources() {
             >
               Contact Us
             </Link>
-            <Link
+            <a
               href="/apply"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-[14px] border-2 border-white/30 text-white font-semibold rounded-lg transition-all duration-300 hover:bg-white/10"
             >
               Apply Now
-            </Link>
+            </a>
           </div>
         </div>
       </section>

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
-interface FAQItem {
+export interface FAQItem {
   question: string;
-  answer: string;
+  answer: ReactNode;
 }
 
 interface FAQAccordionProps {
@@ -43,12 +43,18 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
             </button>
             <div
               className={`overflow-hidden transition-all duration-400 ease-out ${
-                isOpen ? "max-h-[500px] pb-5" : "max-h-0"
+                isOpen ? "max-h-[900px] pb-5" : "max-h-0"
               }`}
             >
-              <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed max-w-[720px] whitespace-pre-line">
-                {item.answer}
-              </p>
+              {typeof item.answer === "string" ? (
+                <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed max-w-[720px] whitespace-pre-line">
+                  {item.answer}
+                </p>
+              ) : (
+                <div className="text-[14px] text-[var(--text-secondary)] leading-relaxed max-w-[720px]">
+                  {item.answer}
+                </div>
+              )}
             </div>
           </div>
         );

@@ -135,7 +135,7 @@ export default async function BlogPostPage({
             href="/resources"
             className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[2px] text-[#47A7DD] mb-6 hover:text-white transition-colors"
           >
-            <span aria-hidden>←</span> Back to Resources
+            Back to Resources
           </Link>
           <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[2.5px] text-[#47A7DD] mb-3">
             Blog · {post.readingTime}
@@ -209,7 +209,7 @@ export default async function BlogPostPage({
                       {p.excerpt}
                     </p>
                     <span className="text-[#2C76BB] text-[14px] font-semibold inline-flex items-center gap-1.5 group-hover:gap-3 transition-all">
-                      Read article <span aria-hidden>→</span>
+                      Read article
                     </span>
                   </div>
                 </Link>

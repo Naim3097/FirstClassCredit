@@ -20,7 +20,7 @@ export default function About() {
                 Your trusted partner<br className="hidden sm:block" /> in financing services.
               </h1>
               <p className="text-[15px] md:text-[16px] text-white/70 max-w-[420px] mb-10 leading-[1.65]">
-                We help Malaysians achieve their mobility and lifestyle goals with flexible, transparent, and reliable financing solutions.
+                Whether you are upgrading your ride or your smartphone, we help Malaysians reach their goals with flexible, transparent, and reliable hire purchase financing.
               </p>
               {/* Trust badges */}
               <div className="flex flex-col sm:flex-row gap-5 sm:gap-8">
@@ -30,7 +30,7 @@ export default function About() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                   </div>
-                  <span className="text-[12px] text-white/65 leading-snug">Trusted by Malaysians<br />since 1967</span>
+                  <span className="text-[12px] text-white/65 leading-snug">Trusted by Malaysians<br />since 2018</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
@@ -75,16 +75,16 @@ export default function About() {
             {/* Left: story */}
             <Reveal>
               <p className="text-[20px] md:text-[26px] font-bold text-[#0d2461] leading-[1.38] mb-6">
-                At First Class Credit, we believe owning your next motorcycle should be a milestone, not a financial burden.
+                At First Class Credit, we believe reaching your goals should be an exciting milestone, never a financial burden.
               </p>
               <p className="text-[14px] md:text-[15px] text-[#555] leading-[1.8] mb-3">
-                Headquartered in Kuching, Sarawak, we are First Class Credit Sdn. Bhd. (201801009791 / 1271805-K) — a licensed credit company specialising in motorcycle Hire Purchase financing, fully governed by the Hire Purchase Act 1967. Whether you’re financing your first ride, upgrading to a bigger bike, or planning a personal milestone, we bridge the gap between your aspirations and reality.
+                Based in Kuching, Sarawak, First Class Credit Sdn. Bhd. (201801009791 / 1271805-K) is a licensed credit provider offering accessible hire purchase solutions to individuals. As a trusted institution governed by the Hire Purchase Act 1967, we provide the financial backing you need to move forward. Whether you are hitting the road with our Motorcycle HP Financing or staying connected through our Smartphone HP Financing, we bridge the gap between your aspirations and reality.
               </p>
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-1.5 text-[#0d2461] text-[14px] font-semibold hover:text-[#47A7DD] transition-colors mt-4"
               >
-                Our Story <span aria-hidden>→</span>
+                Contact Us
               </Link>
             </Reveal>
 
@@ -103,11 +103,11 @@ export default function About() {
                   </div>
                   <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#dddde8]">
                     <div>
-                      <p className="text-[26px] md:text-[30px] font-bold text-[#0d2461] leading-none mb-1">50K+</p>
+                      <p className="text-[26px] md:text-[30px] font-bold text-[#0d2461] leading-none mb-1">10K+</p>
                       <p className="text-[12px] text-[#666] leading-snug">Happy Customers</p>
                     </div>
                     <div>
-                      <p className="text-[26px] md:text-[30px] font-bold text-[#0d2461] leading-none mb-1">57+</p>
+                      <p className="text-[26px] md:text-[30px] font-bold text-[#0d2461] leading-none mb-1">7+</p>
                       <p className="text-[12px] text-[#666] leading-snug">Years of Experience</p>
                     </div>
                     <div>
@@ -158,7 +158,7 @@ export default function About() {
                   </svg>
                 ),
                 title: "Speed",
-                desc: "You get fast pre-approvals so you can move forward with your plans without delay. We know time matters when you've found the right motorcycle.",
+                desc: "You get fast pre-approvals so you can secure your ride or device without the wait.",
               },
               {
                 icon: (
@@ -167,7 +167,7 @@ export default function About() {
                   </svg>
                 ),
                 title: "Flexibility",
-                desc: "We look beyond traditional credit scores. We evaluate your current potential and financial stability to find the right solution for you.",
+                desc: "We look beyond traditional credit scores. We evaluate your current potential and financial stability to find a plan that works for you.",
               },
               {
                 icon: (
@@ -176,7 +176,7 @@ export default function About() {
                   </svg>
                 ),
                 title: "Transparency",
-                desc: "No hidden charges. Every fee, charge and rate is disclosed in your Product Disclosure Sheet before you sign — in full compliance with the Hire Purchase Act 1967.",
+                desc: "No hidden charges, no surprises. We operate with complete transparency so your consumer rights are always protected — in full compliance with the Hire Purchase Act 1967.",
               },
               {
                 icon: (
@@ -225,7 +225,7 @@ export default function About() {
           </Reveal>
           <Reveal y={40} delay={0.12} duration={0.9}>
             <p className="text-[24px] md:text-[32px] lg:text-[40px] font-bold text-white leading-[1.3] max-w-[860px] tracking-[-0.02em]">
-              To empower Malaysians by providing inclusive financial solutions that drive mobility, personal advancement, and economic growth.
+              To empower Malaysians by providing inclusive financial solutions that drive mobility, digital connectivity, and economic growth.
             </p>
           </Reveal>
           <Reveal y={24} delay={0.28} duration={0.8}>
@@ -342,7 +342,7 @@ export default function About() {
               </div>
               <div>
                 <h2 className="text-[20px] md:text-[24px] font-bold text-white mb-2">
-                  Let&apos;s drive your journey forward.
+                  Ready to get started?
                 </h2>
                 <p className="text-[13px] md:text-[14px] text-white/55 max-w-[400px] leading-relaxed">
                   Join the Malaysians who have trusted First Class Credit to take control of their financial journey.
@@ -350,17 +350,19 @@ export default function About() {
               </div>
             </div>
             <div className="flex items-center gap-6 flex-shrink-0">
-              <Link
+              <a
                 href="/apply"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-6 md:px-7 py-3 md:py-3.5 bg-[#EE4720] text-white text-[14px] md:text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
               >
                 Apply Now
-              </Link>
+              </a>
               <Link
                 href="/contact"
                 className="text-white/55 text-[13px] md:text-[14px] font-medium hover:text-white transition-colors duration-300 flex items-center gap-1"
               >
-                Contact our team <span aria-hidden>→</span>
+                Contact our team
               </Link>
             </div>
           </div>
