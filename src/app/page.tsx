@@ -344,19 +344,19 @@ export default function Home() {
               </span>
               <div className="relative">
                 <div className="w-11 h-11 rounded-full bg-white/8 border border-white/10 flex items-center justify-center mb-6">
-                  {/* target icon */}
+                  {/* smartphone icon */}
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FCDB81" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="9" />
-                    <circle cx="12" cy="12" r="5" />
-                    <circle cx="12" cy="12" r="1.6" fill="#FCDB81" />
+                    <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
+                    <line x1="10.5" y1="18.5" x2="13.5" y2="18.5" />
                   </svg>
                 </div>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-white leading-snug mb-3">
-                  Achieve Your Next Big Goal
+                  Upgrade Your Smartphone
                 </h3>
                 <p className="text-[14px] text-white/65 leading-relaxed">
-                  Flexible financing for personal milestones, lifestyle upgrades,
-                  and essential devices.
+                  Get the latest devices without the heavy upfront cost. Enjoy
+                  flexible and transparent financing plans designed to keep you
+                  connected.
                 </p>
               </div>
               <Link

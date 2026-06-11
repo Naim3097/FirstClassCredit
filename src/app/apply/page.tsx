@@ -11,10 +11,41 @@ const malaysianStates = [
   "W.P. Labuan", "W.P. Putrajaya",
 ];
 
+// Input sanitisers
+const digitsOnly = (v: string) => v.replace(/\D/g, "");
+const noDigits = (v: string) => v.replace(/[0-9]/g, "");
+const emailValid = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+
+const initialForm = {
+  condition: "",
+  brand: "",
+  year: "",
+  price: "",
+  downpayment: "",
+  tenure: "",
+  employment: "",
+  salary: "",
+  commitments: "",
+  location: "",
+  creditIssues: "",
+  fullName: "",
+  age: "",
+  nric: "",
+  email: "",
+  phone: "",
+  preferredComm: "",
+  pdpa: false,
+};
+
 export default function ApplyPage() {
   const [step, setStep] = useState(1);
   const [financingType, setFinancingType] = useState("motorcycle");
   const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState(initialForm);
+  const [wait, setWait] = useState({ name: "", phone: "", email: "" });
+
+  const set = <K extends keyof typeof initialForm>(key: K, value: (typeof initialForm)[K]) =>
+    setForm((f) => ({ ...f, [key]: value }));
 
   // Preselect the financing type from the URL (?type=smartphone) — e.g. when
   // a customer arrives from the Smartphone HP Financing waitlist CTA.
@@ -25,12 +56,46 @@ export default function ApplyPage() {
     }
   }, []);
 
+  // ── Validation ──────────────────────────────────────────────────
+  const step1Valid =
+    !!form.condition &&
+    form.brand.trim().length > 0 &&
+    !!form.year &&
+    form.price.length > 0 &&
+    form.downpayment.length > 0 &&
+    !!form.tenure;
+  const step2Valid =
+    !!form.employment &&
+    form.salary.length > 0 &&
+    !!form.location &&
+    !!form.creditIssues;
+  const step3Valid =
+    form.fullName.trim().length > 0 &&
+    form.age.length > 0 &&
+    form.nric.length === 12 &&
+    emailValid(form.email) &&
+    form.phone.length >= 10 &&
+    form.phone.length <= 12 &&
+    !!form.preferredComm &&
+    form.pdpa;
+  const allValid = step1Valid && step2Valid && step3Valid;
+
+  const waitValid =
+    wait.name.trim().length > 0 &&
+    wait.phone.length >= 10 &&
+    wait.phone.length <= 12 &&
+    emailValid(wait.email);
+
   const inputClass =
     "w-full py-3.5 px-0 border-0 border-b-2 border-[#e8e8e0] bg-transparent text-base focus:border-[#2C76BB] focus:outline-none transition-colors placeholder:text-[#888]";
   const selectClass =
     "w-full py-3.5 px-0 border-0 border-b-2 border-[#e8e8e0] bg-transparent text-base focus:border-[#2C76BB] focus:outline-none transition-colors appearance-none cursor-pointer";
   const labelClass =
     "block text-xs font-semibold uppercase tracking-[1.5px] text-[#2C76BB] mb-2";
+  const errorClass = "text-[12px] text-[#EE4720] mt-1.5";
+  const req = <span className="text-[#EE4720]">*</span>;
+  const nextBtn =
+    "px-8 py-4 bg-[#2C76BB] text-white font-semibold rounded-lg transition-all duration-300 enabled:hover:bg-[#253A7D] disabled:opacity-40 disabled:cursor-not-allowed";
 
   if (submitted) {
     return (
@@ -140,25 +205,37 @@ export default function ApplyPage() {
             {financingType === "motorcycle" ? (
               <>
                 <div>
-                  <label className={labelClass}>Motorcycle Condition</label>
-                  <select className={selectClass}>
+                  <label className={labelClass}>Motorcycle Condition {req}</label>
+                  <select
+                    value={form.condition}
+                    onChange={(e) => set("condition", e.target.value)}
+                    className={selectClass}
+                  >
+                    <option value="" disabled>Select condition…</option>
                     <option>New</option>
                     <option>Used</option>
                   </select>
                 </div>
                 <div>
                   <label className={labelClass}>
-                    Motorcycle Brand &amp; Model
+                    Motorcycle Brand &amp; Model {req}
                   </label>
                   <input
                     type="text"
+                    value={form.brand}
+                    onChange={(e) => set("brand", e.target.value)}
                     placeholder="e.g., Yamaha Y16ZR"
                     className={inputClass}
                   />
                 </div>
                 <div>
-                  <label className={labelClass}>Year of Manufacture</label>
-                  <select className={selectClass}>
+                  <label className={labelClass}>Year of Manufacture {req}</label>
+                  <select
+                    value={form.year}
+                    onChange={(e) => set("year", e.target.value)}
+                    className={selectClass}
+                  >
+                    <option value="" disabled>Select year…</option>
                     {[2026, 2025, 2024, 2023, 2022, 2021, 2020].map((y) => (
                       <option key={y}>{y}</option>
                     ))}
@@ -166,25 +243,36 @@ export default function ApplyPage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className={labelClass}>Motorcycle Price (RM)</label>
+                    <label className={labelClass}>Motorcycle Price (RM) {req}</label>
                     <input
                       type="text"
-                      placeholder="e.g., 12,000"
+                      inputMode="numeric"
+                      value={form.price}
+                      onChange={(e) => set("price", digitsOnly(e.target.value))}
+                      placeholder="e.g., 12000"
                       className={inputClass}
                     />
                   </div>
                   <div>
-                    <label className={labelClass}>Downpayment (RM)</label>
+                    <label className={labelClass}>Downpayment (RM) {req}</label>
                     <input
                       type="text"
-                      placeholder="e.g., 1,200"
+                      inputMode="numeric"
+                      value={form.downpayment}
+                      onChange={(e) => set("downpayment", digitsOnly(e.target.value))}
+                      placeholder="e.g., 1200"
                       className={inputClass}
                     />
                   </div>
                 </div>
                 <div>
-                  <label className={labelClass}>Loan Tenure</label>
-                  <select className={selectClass}>
+                  <label className={labelClass}>Loan Tenure {req}</label>
+                  <select
+                    value={form.tenure}
+                    onChange={(e) => set("tenure", e.target.value)}
+                    className={selectClass}
+                  >
+                    <option value="" disabled>Select tenure…</option>
                     <option>1 year</option>
                     <option>2 years</option>
                     <option>3 years</option>
@@ -202,30 +290,49 @@ export default function ApplyPage() {
                 </p>
                 <div className="space-y-5">
                   <div>
-                    <label className={labelClass}>Full Name</label>
+                    <label className={labelClass}>Full Name {req}</label>
                     <input
                       type="text"
+                      value={wait.name}
+                      onChange={(e) => setWait({ ...wait, name: noDigits(e.target.value) })}
                       placeholder="Your full name"
                       className={inputClass}
                     />
                   </div>
                   <div>
-                    <label className={labelClass}>Phone Number</label>
+                    <label className={labelClass}>Phone Number {req}</label>
                     <input
                       type="tel"
-                      placeholder="+60"
+                      inputMode="numeric"
+                      maxLength={12}
+                      value={wait.phone}
+                      onChange={(e) => setWait({ ...wait, phone: digitsOnly(e.target.value) })}
+                      placeholder="e.g., 0168558553"
                       className={inputClass}
                     />
+                    {wait.phone.length > 0 && (wait.phone.length < 10 || wait.phone.length > 12) && (
+                      <p className={errorClass}>Phone number must be 10–12 digits.</p>
+                    )}
                   </div>
                   <div>
-                    <label className={labelClass}>Email Address</label>
+                    <label className={labelClass}>Email Address {req}</label>
                     <input
                       type="email"
+                      value={wait.email}
+                      onChange={(e) => setWait({ ...wait, email: e.target.value })}
                       placeholder="your@email.com"
                       className={inputClass}
                     />
+                    {wait.email.length > 0 && !emailValid(wait.email) && (
+                      <p className={errorClass}>Please enter a valid email address.</p>
+                    )}
                   </div>
-                  <button className="w-full py-4 bg-[#F18F33] text-white font-semibold rounded-lg transition-all duration-300 hover:bg-[#EE4720]">
+                  <button
+                    type="button"
+                    disabled={!waitValid}
+                    onClick={() => setSubmitted(true)}
+                    className="w-full py-4 bg-[#F18F33] text-white font-semibold rounded-lg transition-all duration-300 enabled:hover:bg-[#EE4720] disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
                     Join Waitlist
                   </button>
                 </div>
@@ -235,8 +342,10 @@ export default function ApplyPage() {
             {financingType === "motorcycle" && (
               <div className="flex justify-end pt-4">
                 <button
+                  type="button"
+                  disabled={!step1Valid}
                   onClick={() => setStep(2)}
-                  className="px-8 py-4 bg-[#2C76BB] text-white font-semibold rounded-lg transition-all duration-300 hover:bg-[#253A7D]"
+                  className={nextBtn}
                 >
                   Next
                 </button>
@@ -249,8 +358,13 @@ export default function ApplyPage() {
         {step === 2 && (
           <div className="space-y-7">
             <div>
-              <label className={labelClass}>Employment Type</label>
-              <select className={selectClass}>
+              <label className={labelClass}>Employment Type {req}</label>
+              <select
+                value={form.employment}
+                onChange={(e) => set("employment", e.target.value)}
+                className={selectClass}
+              >
+                <option value="" disabled>Select employment type…</option>
                 <option>Private</option>
                 <option>Government</option>
                 <option>GLC</option>
@@ -259,10 +373,13 @@ export default function ApplyPage() {
               </select>
             </div>
             <div>
-              <label className={labelClass}>Monthly Basic Salary (RM)</label>
+              <label className={labelClass}>Monthly Basic Salary (RM) {req}</label>
               <input
                 type="text"
-                placeholder="e.g., 2,500"
+                inputMode="numeric"
+                value={form.salary}
+                onChange={(e) => set("salary", digitsOnly(e.target.value))}
+                placeholder="e.g., 2500"
                 className={inputClass}
               />
             </div>
@@ -275,20 +392,28 @@ export default function ApplyPage() {
               </label>
               <input
                 type="text"
+                inputMode="numeric"
+                value={form.commitments}
+                onChange={(e) => set("commitments", digitsOnly(e.target.value))}
                 placeholder="e.g., 800"
                 className={inputClass}
               />
             </div>
             <div>
-              <label className={labelClass}>Current Location</label>
-              <select className={selectClass}>
+              <label className={labelClass}>Current Location {req}</label>
+              <select
+                value={form.location}
+                onChange={(e) => set("location", e.target.value)}
+                className={selectClass}
+              >
+                <option value="" disabled>Select state…</option>
                 {malaysianStates.map((state) => (
                   <option key={state}>{state}</option>
                 ))}
               </select>
             </div>
             <div>
-              <label className={labelClass}>Existing Credit Issues?</label>
+              <label className={labelClass}>Existing Credit Issues? {req}</label>
               <div className="flex gap-6 pt-2">
                 {["Yes", "No"].map((opt) => (
                   <label key={opt} className="flex items-center gap-2 cursor-pointer">
@@ -296,7 +421,8 @@ export default function ApplyPage() {
                       type="radio"
                       name="creditIssues"
                       value={opt}
-                      defaultChecked={opt === "No"}
+                      checked={form.creditIssues === opt}
+                      onChange={(e) => set("creditIssues", e.target.value)}
                       className="w-4 h-4 accent-[#2C76BB]"
                     />
                     <span>{opt}</span>
@@ -307,14 +433,17 @@ export default function ApplyPage() {
 
             <div className="flex justify-between pt-4">
               <button
+                type="button"
                 onClick={() => setStep(1)}
                 className="text-[rgb(85,85,81)] font-semibold hover:text-[#2C76BB] transition-colors"
               >
                 Back
               </button>
               <button
+                type="button"
+                disabled={!step2Valid}
                 onClick={() => setStep(3)}
-                className="px-8 py-4 bg-[#2C76BB] text-white font-semibold rounded-lg transition-all duration-300 hover:bg-[#253A7D]"
+                className={nextBtn}
               >
                 Next
               </button>
@@ -326,39 +455,72 @@ export default function ApplyPage() {
         {step === 3 && (
           <div className="space-y-7">
             <div>
-              <label className={labelClass}>Full Name (as per NRIC)</label>
+              <label className={labelClass}>Full Name (as per NRIC) {req}</label>
               <input
                 type="text"
+                value={form.fullName}
+                onChange={(e) => set("fullName", noDigits(e.target.value))}
                 placeholder="Full legal name"
                 className={inputClass}
               />
             </div>
             <div>
-              <label className={labelClass}>NRIC Number</label>
+              <label className={labelClass}>Age {req}</label>
               <input
                 type="text"
-                placeholder="e.g., 900101-13-1234"
+                inputMode="numeric"
+                maxLength={2}
+                value={form.age}
+                onChange={(e) => set("age", digitsOnly(e.target.value))}
+                placeholder="e.g., 28"
                 className={inputClass}
               />
             </div>
             <div>
-              <label className={labelClass}>Email Address</label>
+              <label className={labelClass}>NRIC Number {req}</label>
+              <input
+                type="text"
+                inputMode="numeric"
+                maxLength={12}
+                value={form.nric}
+                onChange={(e) => set("nric", digitsOnly(e.target.value))}
+                placeholder="e.g., 900101131234"
+                className={inputClass}
+              />
+              {form.nric.length > 0 && form.nric.length < 12 && (
+                <p className={errorClass}>NRIC must be exactly 12 digits.</p>
+              )}
+            </div>
+            <div>
+              <label className={labelClass}>Email Address {req}</label>
               <input
                 type="email"
+                value={form.email}
+                onChange={(e) => set("email", e.target.value)}
                 placeholder="your@email.com"
                 className={inputClass}
               />
+              {form.email.length > 0 && !emailValid(form.email) && (
+                <p className={errorClass}>Please enter a valid email address.</p>
+              )}
             </div>
             <div>
-              <label className={labelClass}>Phone Number</label>
+              <label className={labelClass}>Phone Number {req}</label>
               <input
                 type="tel"
-                placeholder="+60"
+                inputMode="numeric"
+                maxLength={12}
+                value={form.phone}
+                onChange={(e) => set("phone", digitsOnly(e.target.value))}
+                placeholder="e.g., 0168558553"
                 className={inputClass}
               />
+              {form.phone.length > 0 && (form.phone.length < 10 || form.phone.length > 12) && (
+                <p className={errorClass}>Phone number must be 10–12 digits.</p>
+              )}
             </div>
             <div>
-              <label className={labelClass}>Preferred Communication</label>
+              <label className={labelClass}>Preferred Communication {req}</label>
               <div className="flex flex-wrap gap-6 pt-2">
                 {["WhatsApp", "Phone Call", "Email"].map((opt) => (
                   <label key={opt} className="flex items-center gap-2 cursor-pointer">
@@ -366,7 +528,8 @@ export default function ApplyPage() {
                       type="radio"
                       name="preferredComm"
                       value={opt}
-                      defaultChecked={opt === "WhatsApp"}
+                      checked={form.preferredComm === opt}
+                      onChange={(e) => set("preferredComm", e.target.value)}
                       className="w-4 h-4 accent-[#2C76BB]"
                     />
                     <span>{opt}</span>
@@ -395,17 +558,21 @@ export default function ApplyPage() {
               <input
                 type="checkbox"
                 id="pdpa"
+                checked={form.pdpa}
+                onChange={(e) => set("pdpa", e.target.checked)}
                 className="w-4 h-4 mt-1 accent-[#2C76BB] flex-shrink-0"
               />
               <label htmlFor="pdpa" className="text-sm text-[rgb(85,85,81)] leading-relaxed cursor-pointer">
                 I agree to the processing of my personal data in accordance with
-                the Personal Data Protection Act 2010.
+                the Personal Data Protection Act 2010. {req}
               </label>
             </div>
 
             <button
+              type="button"
+              disabled={!allValid}
               onClick={() => setSubmitted(true)}
-              className="w-full py-4 bg-[#EE4720] text-white font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33] hover:scale-[1.01] mt-2"
+              className="w-full py-4 bg-[#EE4720] text-white font-semibold rounded-lg transition-all duration-300 enabled:hover:bg-[#F18F33] enabled:hover:scale-[1.01] disabled:opacity-40 disabled:cursor-not-allowed mt-2"
             >
               Submit Application
             </button>
@@ -416,6 +583,7 @@ export default function ApplyPage() {
 
             <div className="flex justify-start">
               <button
+                type="button"
                 onClick={() => setStep(2)}
                 className="text-[rgb(85,85,81)] font-semibold hover:text-[#2C76BB] transition-colors"
               >

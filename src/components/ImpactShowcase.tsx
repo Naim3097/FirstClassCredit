@@ -60,7 +60,7 @@ const services: Service[] = [
     key: "motorcycle",
     tab: "Motorcycle HP Financing",
     heading: "The numbers that matter.",
-    body: "We keep it simple. Competitive rates, fast approvals, and high financing margins so you can focus on what matters, reaching your next milestone.",
+    body: "We keep it simple. Competitive rates, fast approvals, and high financing margins so you can focus on what matters — getting on the road.",
     button: { text: "About Motorcycle Financing", href: "/financing-hp" },
     plate: {
       image: "/moped.png",

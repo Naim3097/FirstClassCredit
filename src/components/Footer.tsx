@@ -4,7 +4,7 @@ import Image from "next/image";
 const socials = [
   {
     label: "Instagram",
-    href: "https://www.instagram.com/",
+    href: "https://www.instagram.com/firstclasscredit.my/",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -15,7 +15,7 @@ const socials = [
   },
   {
     label: "Facebook",
-    href: "https://www.facebook.com/",
+    href: "https://www.facebook.com/firstclasscredit.my",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
         <path d="M14 9h2.5V6H14c-2.2 0-3.5 1.4-3.5 3.6V11H8v3h2.5v7H13.5v-7H16l.5-3h-3V9.8c0-.6.3-.8 1-.8z" />
@@ -24,7 +24,7 @@ const socials = [
   },
   {
     label: "TikTok",
-    href: "https://www.tiktok.com/",
+    href: "https://www.tiktok.com/@firstclasscredit_my",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
         <path d="M16.5 3c.3 2 1.5 3.4 3.5 3.7v2.6c-1.3.1-2.5-.2-3.6-.8v5.9c0 3-2.1 5.1-4.9 5.1-2.6 0-4.7-1.9-4.7-4.5 0-2.7 2.2-4.6 4.9-4.4v2.7c-.4-.1-.8-.2-1.2-.1-1 .2-1.7 1-1.6 2 .1 1 1 1.7 2 1.6 1.1-.1 1.7-1 1.7-2.2V3h2.4z" />
