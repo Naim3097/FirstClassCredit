@@ -279,7 +279,7 @@ export default function Home() {
               <div
                 className="absolute inset-0 bg-cover bg-center opacity-50 transition-transform duration-700 group-hover:scale-105"
                 style={{
-                  backgroundImage: "url('/underbone-motor-2.png')",
+                  backgroundImage: "url('/underbone-motor-3.png')",
                 }}
                 aria-hidden
               />
