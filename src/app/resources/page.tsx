@@ -115,7 +115,7 @@ export default function Resources() {
             src="/woman-hold-phone-about-us-2.jpg"
             alt=""
             fill
-            className="object-cover object-[65%_center] md:hidden"
+            className="object-cover object-[80%_center] md:hidden"
             priority
           />
           {/* Desktop image */}
