@@ -13,7 +13,7 @@ export default function SmartphoneFinancing() {
             className="absolute inset-0 bg-cover bg-center opacity-40"
             style={{
               backgroundImage:
-                "url('/iphone-background.png')",
+                "url('/iphone-background-2.png')",
             }}
             aria-hidden
           />
