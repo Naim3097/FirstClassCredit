@@ -37,7 +37,7 @@ const heroSlides = [
     ),
     body: "Fund your next tech upgrade effortlessly. First Class Credit is bringing you hassle-free, accessible smartphone financing with flexible terms to Kuching and beyond.",
     // TODO: replace with the supplied smartphone hero asset
-    bg: "/home-iphone.jpg",
+    bg: "/home-iphone-2.jpg",
     cta: "comingSoon",
   },
 ] as const;
