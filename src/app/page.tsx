@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import FAQTabs from "@/components/FAQTabs";
@@ -98,8 +98,12 @@ const homeFAQ = [
 
 export default function Home() {
   const [activeHero, setActiveHero] = useState(0);
+  // Bumped whenever the user interacts, to (re)start the auto-rotate timer.
+  const [interaction, setInteraction] = useState(0);
+  const heroRef = useRef<HTMLElement | null>(null);
 
   // Auto-rotate the hero between services (respects reduced-motion).
+  // Restarts after any manual interaction so it doesn't fight the user.
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = setInterval(
@@ -107,6 +111,37 @@ export default function Home() {
       6500
     );
     return () => clearInterval(id);
+  }, [interaction]);
+
+  const goTo = (i: number) => {
+    setActiveHero((i + heroSlides.length) % heroSlides.length);
+    setInteraction((n) => n + 1);
+  };
+
+  // Swipe support (mobile): horizontal drag changes the active slide.
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    let startX: number | null = null;
+    const onStart = (e: TouchEvent) => {
+      startX = e.touches[0]?.clientX ?? null;
+    };
+    const onEnd = (e: TouchEvent) => {
+      if (startX === null) return;
+      const dx = (e.changedTouches[0]?.clientX ?? startX) - startX;
+      startX = null;
+      if (Math.abs(dx) < 45) return; // ignore taps / tiny drags
+      setActiveHero(
+        (i) => (i + (dx < 0 ? 1 : -1) + heroSlides.length) % heroSlides.length
+      );
+      setInteraction((n) => n + 1);
+    };
+    el.addEventListener("touchstart", onStart, { passive: true });
+    el.addEventListener("touchend", onEnd, { passive: true });
+    return () => {
+      el.removeEventListener("touchstart", onStart);
+      el.removeEventListener("touchend", onEnd);
+    };
   }, []);
 
   const slide = heroSlides[activeHero];
@@ -114,7 +149,11 @@ export default function Home() {
   return (
     <>
       {/* ===== HERO (alternating services) ===== */}
-      <section className="relative min-h-screen flex items-end bg-[#0b1a3d] overflow-hidden">
+      <section
+        ref={heroRef}
+        className="relative min-h-screen flex items-end bg-[#0b1a3d] overflow-hidden"
+        style={{ touchAction: "pan-y" }}
+      >
         {/* Cross-fading backgrounds */}
         <div className="absolute inset-0">
           {heroSlides.map((s, i) => (
@@ -188,7 +227,7 @@ export default function Home() {
               <button
                 key={s.key}
                 type="button"
-                onClick={() => setActiveHero(i)}
+                onClick={() => goTo(i)}
                 aria-label={`Show ${s.key} financing`}
                 aria-current={activeHero === i}
                 className={`h-2 rounded-full transition-all duration-300 ${
