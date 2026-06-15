@@ -30,7 +30,7 @@ export default function SmartphoneFinancing() {
 
         <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 pt-28 md:pt-36 pb-24 md:pb-32 lg:pb-40 min-h-[580px] md:min-h-[680px] lg:min-h-[740px] flex items-center">
           <HeroReveal className="max-w-[620px]">
-            <div className="flex items-center gap-3 mb-4 md:mb-5">
+            <div className="flex flex-col-reverse items-start gap-2.5 sm:flex-row sm:items-center sm:gap-3 mb-4 md:mb-5">
               <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[2.5px] md:tracking-[3px] text-[#FCDB81]">
                 First Class Smartphone HP Financing
               </p>
