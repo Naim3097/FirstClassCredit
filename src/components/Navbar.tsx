@@ -190,14 +190,14 @@ export default function Navbar() {
           (which makes the nav a containing block for fixed descendants)
           doesn't clip this panel against the 72px header box. */}
       <div
-        className={`lg:hidden fixed inset-0 top-[72px] z-40 transition-opacity duration-500 ${
+        className={`lg:hidden fixed inset-0 top-[72px] z-40 overflow-y-auto overscroll-contain transition-opacity duration-500 ${
           open
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
         style={{ backgroundColor: "#ffffff" }}
       >
-        <div className="flex flex-col px-8 pt-12 gap-1">
+        <div className="flex flex-col px-8 pt-12 pb-16 gap-1">
           {/* Home */}
           <Link
             href="/"

@@ -171,10 +171,13 @@ export default function Home() {
                   </Link>
                 </>
               ) : (
-                <span className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#F18F33] text-white text-[15px] font-semibold rounded-lg cursor-default select-none">
+                <Link
+                  href="/objective-financing"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#F18F33] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#EE4720]"
+                >
                   <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
                   Coming Soon
-                </span>
+                </Link>
               )}
             </div>
           </HeroReveal>
