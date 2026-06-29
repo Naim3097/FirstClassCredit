@@ -59,10 +59,10 @@ export default function Contact() {
               Contact
             </p>
             <h1 className="text-[34px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.05] text-white tracking-[-0.02em] mb-5 md:mb-6">
-              Let&apos;s get<br className="hidden sm:block" /> in touch.
+              Let&apos;s Get<br className="hidden sm:block" /> in Touch
             </h1>
             <p className="text-[14px] md:text-[16px] text-white/70 max-w-[440px] mb-8 md:mb-10 leading-[1.65]">
-              Whether you have questions about financing, need help with an application, or want to explore a partnership &mdash; we&apos;d love to hear from you.
+              Whether you are curious about our financing options or need a hand with your application, we are always here to help. Reach out to us today!
             </p>
             <div className="flex items-center gap-5 md:gap-7">
               <Link
@@ -190,10 +190,9 @@ export default function Contact() {
                         className="w-full px-4 py-3 text-[15px] bg-white border border-[#e0e0e0] rounded-lg outline-none focus:border-[#2C76BB] transition-colors text-[var(--text-secondary)] appearance-none"
                       >
                         <option value="">Choose enquiry type...</option>
-                        <option value="financing">Apply for Financing</option>
+                        <option value="motorcycle">Apply for Motorcycle HP Financing</option>
+                        <option value="smartphone">Apply for Smartphone HP Financing</option>
                         <option value="general">General Enquiry</option>
-                        <option value="roadtax">Road Tax &amp; Insurance</option>
-                        <option value="partnership">Partnership</option>
                       </select>
                     </div>
                   </div>
@@ -258,9 +257,9 @@ export default function Contact() {
             <div className="lg:col-span-2">
               <Reveal>
                 <p className="text-[15px] text-white/70 leading-relaxed mb-10">
-                  Whether you have questions about our financing products,
-                  need help with an application, or want to explore a
-                  partnership &mdash; we&apos;d love to hear from you.
+                  Whether you are curious about our financing options or need a
+                  hand with your application, we are always here to help. Reach
+                  out to us today!
                 </p>
                 <div className="space-y-8">
                   <div>
@@ -335,7 +334,7 @@ export default function Contact() {
           <Reveal delay={0.14}>
             <div className="mt-10 bg-white rounded-xl p-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
               <p className="text-[14px] text-[#272A33]">
-                Ready to apply for hire purchase financing?
+                Ready to Apply for Hire Purchase Financing?
               </p>
               <a
                 href="/apply"

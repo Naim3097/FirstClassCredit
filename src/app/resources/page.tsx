@@ -2,10 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import FAQTabs from "@/components/FAQTabs";
 import RepresentativeExample from "@/components/RepresentativeExample";
+import { smartphoneResourcesFAQ } from "@/data/smartphoneFAQ";
 import { blogPosts } from "./blog/posts";
-
-const SMARTPHONE_FAQ_MESSAGE =
-  "We are putting the final touches on our new financing solution! Check back soon for details on how we can help fund your next smartphone upgrade.";
 
 const vehicleFAQ = [
   {
@@ -227,7 +225,7 @@ export default function Resources() {
           </div>
           <FAQTabs
             motorcycleItems={vehicleFAQ}
-            smartphoneMessage={SMARTPHONE_FAQ_MESSAGE}
+            smartphoneItems={smartphoneResourcesFAQ}
           />
         </div>
       </section>

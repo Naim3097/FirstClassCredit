@@ -11,18 +11,47 @@ const malaysianStates = [
   "W.P. Labuan", "W.P. Putrajaya",
 ];
 
+// Google Apps Script Web App endpoint (logs to Sheet + emails the team + saves files to Drive)
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbyOdINPqWuzRUf0ZS3gS2wndViOjNUQoN3kx8M7g7A6VWRhLgT1tVl5IkQgslXL3BNU/exec";
+const WHATSAPP_NUMBER = "60169328901";
+// Shared secret — must match FORM_TOKEN in the Apps Script (spam protection)
+const FORM_TOKEN = "fcc-form-7Kq2pX9wL";
+// Reject the whole submission if the attached files exceed this (email/payload limits)
+const MAX_TOTAL_FILE_BYTES = 18 * 1024 * 1024; // ~18 MB
+
+// Read a File as base64 (without the "data:...;base64," prefix)
+const fileToBase64 = (file: File) =>
+  new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result).split(",")[1] || "");
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+
 // Input sanitisers
 const digitsOnly = (v: string) => v.replace(/\D/g, "");
 const noDigits = (v: string) => v.replace(/[0-9]/g, "");
 const emailValid = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
 
+const deviceModels = [
+  "iPhone 17e",
+  "iPhone 17",
+  "iPhone 17 Pro",
+  "iPhone 17 Pro Max",
+];
+
 const initialForm = {
+  // Motorcycle
   condition: "",
   brand: "",
   year: "",
   price: "",
   downpayment: "",
   tenure: "",
+  // Smartphone
+  deviceModel: "",
+  smartphoneTenure: "",
   employment: "",
   salary: "",
   commitments: "",
@@ -42,13 +71,16 @@ export default function ApplyPage() {
   const [financingType, setFinancingType] = useState("motorcycle");
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState(initialForm);
-  const [wait, setWait] = useState({ name: "", phone: "", email: "" });
+  const [files, setFiles] = useState<File[]>([]);
+  const [honeypot, setHoneypot] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const set = <K extends keyof typeof initialForm>(key: K, value: (typeof initialForm)[K]) =>
     setForm((f) => ({ ...f, [key]: value }));
 
   // Preselect the financing type from the URL (?type=smartphone) — e.g. when
-  // a customer arrives from the Smartphone HP Financing waitlist CTA.
+  // a customer arrives from a Smartphone HP Financing CTA.
   useEffect(() => {
     const type = new URLSearchParams(window.location.search).get("type");
     if (type === "smartphone" || type === "objective") {
@@ -58,12 +90,14 @@ export default function ApplyPage() {
 
   // ── Validation ──────────────────────────────────────────────────
   const step1Valid =
-    !!form.condition &&
-    form.brand.trim().length > 0 &&
-    !!form.year &&
-    form.price.length > 0 &&
-    form.downpayment.length > 0 &&
-    !!form.tenure;
+    financingType === "motorcycle"
+      ? !!form.condition &&
+        form.brand.trim().length > 0 &&
+        !!form.year &&
+        form.price.length > 0 &&
+        form.downpayment.length > 0 &&
+        !!form.tenure
+      : !!form.deviceModel && !!form.smartphoneTenure;
   const step2Valid =
     !!form.employment &&
     form.salary.length > 0 &&
@@ -80,11 +114,10 @@ export default function ApplyPage() {
     form.pdpa;
   const allValid = step1Valid && step2Valid && step3Valid;
 
-  const waitValid =
-    wait.name.trim().length > 0 &&
-    wait.phone.length >= 10 &&
-    wait.phone.length <= 12 &&
-    emailValid(wait.email);
+  const pdsHref =
+    financingType === "motorcycle"
+      ? "/motorcycle-hp-pds.pdf"
+      : "/smartphone-hp-pds.pdf";
 
   const inputClass =
     "w-full py-3.5 px-0 border-0 border-b-2 border-[#e8e8e0] bg-transparent text-base focus:border-[#2C76BB] focus:outline-none transition-colors placeholder:text-[#888]";
@@ -96,6 +129,92 @@ export default function ApplyPage() {
   const req = <span className="text-[#EE4720]">*</span>;
   const nextBtn =
     "px-8 py-4 bg-[#2C76BB] text-white font-semibold rounded-lg transition-all duration-300 enabled:hover:bg-[#253A7D] disabled:opacity-40 disabled:cursor-not-allowed";
+
+  // ── Derived submission values ───────────────────────────────────
+  const financingLabel =
+    financingType === "motorcycle"
+      ? "Motorcycle HP Financing"
+      : "Smartphone HP Financing";
+  const product =
+    financingType === "motorcycle"
+      ? [form.brand, form.condition && `(${form.condition})`, form.year]
+          .filter(Boolean)
+          .join(" ")
+      : form.deviceModel;
+  const tenure =
+    financingType === "motorcycle" ? form.tenure : form.smartphoneTenure;
+
+  // Prefilled WhatsApp message (shown on the success screen)
+  const waText = encodeURIComponent(
+    `Hi First Class Credit, I've just submitted my application.\n\n` +
+      `Financing: ${financingLabel}\n` +
+      `${financingType === "motorcycle" ? "Motorcycle" : "Device"}: ${product}\n` +
+      `Tenure: ${tenure}\n` +
+      `Name: ${form.fullName}\n` +
+      `Phone: ${form.phone}`
+  );
+  const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+
+  const handleSubmit = async () => {
+    if (!allValid || submitting) return;
+    // Honeypot: a real user never fills this — silently "succeed" for bots.
+    if (honeypot) {
+      setSubmitted(true);
+      return;
+    }
+    const totalBytes = files.reduce((sum, f) => sum + f.size, 0);
+    if (totalBytes > MAX_TOTAL_FILE_BYTES) {
+      setSubmitError(
+        "Your payslip files are too large (max ~18 MB total). Please reduce them or send via WhatsApp."
+      );
+      return;
+    }
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const encodedFiles = await Promise.all(
+        files.map(async (f) => ({
+          name: f.name,
+          mimeType: f.type || "application/octet-stream",
+          data: await fileToBase64(f),
+        }))
+      );
+      const payload = {
+        token: FORM_TOKEN,
+        honeypot,
+        financingType: financingLabel,
+        product,
+        tenure,
+        fullName: form.fullName,
+        age: form.age,
+        nric: form.nric,
+        email: form.email,
+        phone: form.phone,
+        salary: form.salary,
+        employment: form.employment,
+        commitments: form.commitments,
+        location: form.location,
+        creditIssues: form.creditIssues,
+        preferredComm: form.preferredComm,
+        files: encodedFiles,
+      };
+      // text/plain avoids a CORS preflight that Apps Script can't answer;
+      // no-cors guarantees the POST is delivered (response is opaque).
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload),
+      });
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        "Something went wrong sending your application. Please try again, or WhatsApp us at +60 16-932 8901."
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   if (submitted) {
     return (
@@ -111,14 +230,28 @@ export default function ApplyPage() {
           </h1>
           <p className="text-[rgb(85,85,81)] leading-relaxed mb-8">
             Our financing specialist will review your profile and WhatsApp you
-            as soon as possible.
+            as soon as possible. To speed things up, send us your details and
+            payslips on WhatsApp.
           </p>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center px-8 py-3.5 border-2 border-[#2C76BB] text-[#2C76BB] font-semibold rounded-lg transition-all duration-300 hover:bg-[#2C76BB] hover:text-white"
-          >
-            Back to Home
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href={waHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#25D366] text-white font-semibold rounded-lg transition-transform duration-200 hover:scale-[1.02] w-full sm:w-auto"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347" />
+              </svg>
+              Send Details on WhatsApp
+            </a>
+            <Link
+              href="/"
+              className="inline-flex items-center justify-center px-7 py-3.5 border-2 border-[#2C76BB] text-[#2C76BB] font-semibold rounded-lg transition-all duration-300 hover:bg-[#2C76BB] hover:text-white w-full sm:w-auto"
+            >
+              Back to Home
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -185,21 +318,59 @@ export default function ApplyPage() {
 
       {/* Form */}
       <div className="max-w-[640px] mx-auto px-5 md:px-10 pb-20">
+        {/* Honeypot — hidden from real users; bots fill it and get rejected */}
+        <input
+          type="text"
+          name="fcc_hp_field"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          data-1p-ignore="true"
+          data-lpignore="true"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          className="absolute -left-[9999px] top-0 h-0 w-0 opacity-0"
+        />
+
         {/* Step 1: Financing Details */}
         {step === 1 && (
           <div className="space-y-7">
-            <div>
-              <label className={labelClass}>Financing Type</label>
-              <select
-                value={financingType}
-                onChange={(e) => setFinancingType(e.target.value)}
-                className={selectClass}
-              >
-                <option value="motorcycle">First Class Motorcycle HP Financing</option>
-                <option value="objective">
-                  First Class Smartphone HP Financing (Coming Soon)
-                </option>
-              </select>
+            {/* Highlighted: choose financing type first */}
+            <div className="rounded-2xl border-2 border-[#2C76BB]/35 bg-[#E8F1FB]/60 p-5 md:p-6">
+              <div className="flex items-start gap-2.5 mb-1.5">
+                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#2C76BB] text-white text-[12px] font-bold flex-shrink-0">
+                  1
+                </span>
+                <p className="text-[14px] md:text-[15px] font-bold text-[#0d2461] leading-snug">
+                  Start here — choose your financing type
+                </p>
+              </div>
+              <p className="text-[12.5px] md:text-[13px] text-[#555] mb-4 ml-[34px]">
+                Pick whether you want{" "}
+                <strong className="text-[#0d2461]">Motorcycle</strong> or{" "}
+                <strong className="text-[#0d2461]">Smartphone</strong> HP
+                Financing. The rest of the form updates to match your choice.
+              </p>
+              <label className={labelClass}>Financing Type {req}</label>
+              <div className="relative">
+                <select
+                  value={financingType}
+                  onChange={(e) => setFinancingType(e.target.value)}
+                  className="w-full py-3.5 pl-4 pr-10 bg-white border-2 border-[#2C76BB]/40 rounded-lg text-base font-semibold text-[#0d2461] focus:border-[#2C76BB] focus:outline-none transition-colors appearance-none cursor-pointer"
+                >
+                  <option value="motorcycle">First Class Motorcycle HP Financing</option>
+                  <option value="objective">
+                    First Class Smartphone HP Financing
+                  </option>
+                </select>
+                <svg
+                  className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#2C76BB]"
+                  width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
             </div>
 
             {financingType === "motorcycle" ? (
@@ -282,75 +453,46 @@ export default function ApplyPage() {
                 </div>
               </>
             ) : (
-              <div className="bg-[#FCDB81]/30 border border-[#FCDB81] rounded-xl p-6">
-                <p className="text-[#272A33] mb-4">
-                  We are putting the final touches on our tailored First Class
-                  Smartphone HP Financing plans! Join our waitlist, and our team
-                  will WhatsApp you the moment it launches.
-                </p>
-                <div className="space-y-5">
-                  <div>
-                    <label className={labelClass}>Full Name {req}</label>
-                    <input
-                      type="text"
-                      value={wait.name}
-                      onChange={(e) => setWait({ ...wait, name: noDigits(e.target.value) })}
-                      placeholder="Your full name"
-                      className={inputClass}
-                    />
-                  </div>
-                  <div>
-                    <label className={labelClass}>Phone Number {req}</label>
-                    <input
-                      type="tel"
-                      inputMode="numeric"
-                      maxLength={12}
-                      value={wait.phone}
-                      onChange={(e) => setWait({ ...wait, phone: digitsOnly(e.target.value) })}
-                      placeholder="e.g., 0168558553"
-                      className={inputClass}
-                    />
-                    {wait.phone.length > 0 && (wait.phone.length < 10 || wait.phone.length > 12) && (
-                      <p className={errorClass}>Phone number must be 10–12 digits.</p>
-                    )}
-                  </div>
-                  <div>
-                    <label className={labelClass}>Email Address {req}</label>
-                    <input
-                      type="email"
-                      value={wait.email}
-                      onChange={(e) => setWait({ ...wait, email: e.target.value })}
-                      placeholder="your@email.com"
-                      className={inputClass}
-                    />
-                    {wait.email.length > 0 && !emailValid(wait.email) && (
-                      <p className={errorClass}>Please enter a valid email address.</p>
-                    )}
-                  </div>
-                  <button
-                    type="button"
-                    disabled={!waitValid}
-                    onClick={() => setSubmitted(true)}
-                    className="w-full py-4 bg-[#F18F33] text-white font-semibold rounded-lg transition-all duration-300 enabled:hover:bg-[#EE4720] disabled:opacity-40 disabled:cursor-not-allowed"
+              <>
+                <div>
+                  <label className={labelClass}>Device Model {req}</label>
+                  <select
+                    value={form.deviceModel}
+                    onChange={(e) => set("deviceModel", e.target.value)}
+                    className={selectClass}
                   >
-                    Join Waitlist
-                  </button>
+                    <option value="" disabled>Select device model…</option>
+                    {deviceModels.map((m) => (
+                      <option key={m}>{m}</option>
+                    ))}
+                  </select>
                 </div>
-              </div>
+                <div>
+                  <label className={labelClass}>Preferred Financing Tenure {req}</label>
+                  <select
+                    value={form.smartphoneTenure}
+                    onChange={(e) => set("smartphoneTenure", e.target.value)}
+                    className={selectClass}
+                  >
+                    <option value="" disabled>Select tenure…</option>
+                    <option>12 Months</option>
+                    <option>24 Months</option>
+                    <option>36 Months</option>
+                  </select>
+                </div>
+              </>
             )}
 
-            {financingType === "motorcycle" && (
-              <div className="flex justify-end pt-4">
-                <button
-                  type="button"
-                  disabled={!step1Valid}
-                  onClick={() => setStep(2)}
-                  className={nextBtn}
-                >
-                  Next
-                </button>
-              </div>
-            )}
+            <div className="flex justify-end pt-4">
+              <button
+                type="button"
+                disabled={!step1Valid}
+                onClick={() => setStep(2)}
+                className={nextBtn}
+              >
+                Next
+              </button>
+            </div>
           </div>
         )}
 
@@ -544,15 +686,44 @@ export default function ApplyPage() {
                   — Optional
                 </span>
               </label>
-              <div className="mt-2 border-2 border-dashed border-[#e8e8e0] rounded-xl p-8 text-center hover:border-[#2C76BB] transition-colors cursor-pointer">
+              <label
+                htmlFor="payslip"
+                className="mt-2 block border-2 border-dashed border-[#e8e8e0] rounded-xl p-8 text-center hover:border-[#2C76BB] transition-colors cursor-pointer"
+              >
+                <input
+                  id="payslip"
+                  type="file"
+                  multiple
+                  accept="image/*,application/pdf"
+                  onChange={(e) =>
+                    setFiles(e.target.files ? Array.from(e.target.files) : [])
+                  }
+                  className="hidden"
+                />
                 <p className="text-sm text-[#888]">
-                  Drag &amp; drop or click to upload
+                  Click to upload or drag &amp; drop
                 </p>
                 <p className="text-xs text-[#888] mt-1">
-                  Speed up your approval! Upload your last 3 months&apos;
-                  payslip.
+                  Upload your last 3 months&apos; payslips — you can select
+                  multiple files (PDF, JPG or PNG).
                 </p>
-              </div>
+              </label>
+              {files.length > 0 && (
+                <ul className="mt-3 space-y-1.5">
+                  {files.map((f, i) => (
+                    <li
+                      key={`${f.name}-${i}`}
+                      className="flex items-center gap-2 text-[13px] text-[#272A33]"
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2C76BB" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                      </svg>
+                      <span className="truncate">{f.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
             <div className="flex items-start gap-3 pt-2">
               <input
@@ -568,14 +739,30 @@ export default function ApplyPage() {
               </label>
             </div>
 
+            <p className="text-sm text-[rgb(85,85,81)] leading-relaxed">
+              Before submitting, please review the{" "}
+              <a
+                href={pdsHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#2C76BB] font-semibold underline underline-offset-2 hover:text-[#253A7D]"
+              >
+                Product Disclosure Sheet (PDS)
+              </a>
+              .
+            </p>
+
             <button
               type="button"
-              disabled={!allValid}
-              onClick={() => setSubmitted(true)}
+              disabled={!allValid || submitting}
+              onClick={handleSubmit}
               className="w-full py-4 bg-[#EE4720] text-white font-semibold rounded-lg transition-all duration-300 enabled:hover:bg-[#F18F33] enabled:hover:scale-[1.01] disabled:opacity-40 disabled:cursor-not-allowed mt-2"
             >
-              Submit Application
+              {submitting ? "Submitting…" : "Submit Application"}
             </button>
+            {submitError && (
+              <p className="text-sm text-[#EE4720] text-center">{submitError}</p>
+            )}
             <p className="text-sm text-[rgb(85,85,81)] text-center italic">
               Fast Response Guaranteed: Our specialists will reach out via
               WhatsApp as soon as possible.

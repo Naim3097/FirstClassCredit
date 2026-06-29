@@ -2,9 +2,27 @@
 
 import { useState } from "react";
 
-export default function LoanCalculator() {
-  const [amount, setAmount] = useState(12000);
-  const [tenure, setTenure] = useState(48);
+interface LoanCalculatorProps {
+  minAmount?: number;
+  maxAmount?: number;
+  step?: number;
+  defaultAmount?: number;
+  tenures?: number[];
+  defaultTenure?: number;
+  pdsHref?: string;
+}
+
+export default function LoanCalculator({
+  minAmount = 3000,
+  maxAmount = 50000,
+  step = 1000,
+  defaultAmount = 12000,
+  tenures = [12, 24, 36, 48, 60],
+  defaultTenure = 48,
+  pdsHref = "/motorcycle-hp-pds.pdf",
+}: LoanCalculatorProps = {}) {
+  const [amount, setAmount] = useState(defaultAmount);
+  const [tenure, setTenure] = useState(defaultTenure);
   const rate = 0.1; // 10% per annum, flat (per PDS)
 
   // PDS-style flat-rate calculation
@@ -26,9 +44,9 @@ export default function LoanCalculator() {
         </label>
         <input
           type="range"
-          min={3000}
-          max={50000}
-          step={1000}
+          min={minAmount}
+          max={maxAmount}
+          step={step}
           value={amount}
           onChange={(e) => setAmount(Number(e.target.value))}
           className="w-full h-1.5 bg-border rounded-full appearance-none cursor-pointer accent-blue"
@@ -48,11 +66,11 @@ export default function LoanCalculator() {
           onChange={(e) => setTenure(Number(e.target.value))}
           className="w-full py-3.5 px-0 border-0 border-b-2 border-[var(--border-color)] bg-transparent text-base focus:border-blue focus:outline-none transition-colors appearance-none cursor-pointer"
         >
-          <option value={12}>12 months (1 year)</option>
-          <option value={24}>24 months (2 years)</option>
-          <option value={36}>36 months (3 years)</option>
-          <option value={48}>48 months (4 years)</option>
-          <option value={60}>60 months (5 years)</option>
+          {tenures.map((t) => (
+            <option key={t} value={t}>
+              {t} months ({t / 12} {t / 12 === 1 ? "year" : "years"})
+            </option>
+          ))}
         </select>
       </div>
 
@@ -97,8 +115,17 @@ export default function LoanCalculator() {
           RM {monthly.toLocaleString()}
         </p>
         <p className="text-[11px] text-[var(--text-muted)] mt-3 leading-relaxed">
-          Inclusive of transaction fee. Indicative only — actual instalment, margin and rate are
-          confirmed in your signed Hire Purchase Agreement and Product Disclosure Sheet.
+          Indicative only — actual instalment, margin, and rate will be confirmed in your
+          signed Hire Purchase Agreement and{" "}
+          <a
+            href={pdsHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue font-semibold underline underline-offset-2 hover:text-dark-blue"
+          >
+            Product Disclosure Sheet
+          </a>
+          .
         </p>
       </div>
     </div>

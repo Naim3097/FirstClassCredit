@@ -5,8 +5,9 @@ import FAQAccordion, { type FAQItem } from "./FAQAccordion";
 
 interface FAQTabsProps {
   motorcycleItems: FAQItem[];
-  smartphoneMessage: string;
-  /** Classes applied to the panel that wraps the motorcycle accordion. */
+  smartphoneItems?: FAQItem[];
+  smartphoneMessage?: string;
+  /** Classes applied to the panel that wraps the accordion. */
   panelClassName?: string;
 }
 
@@ -19,10 +20,13 @@ type TabKey = (typeof tabs)[number]["key"];
 
 export default function FAQTabs({
   motorcycleItems,
+  smartphoneItems,
   smartphoneMessage,
   panelClassName = "",
 }: FAQTabsProps) {
   const [tab, setTab] = useState<TabKey>("motorcycle");
+
+  const items = tab === "motorcycle" ? motorcycleItems : smartphoneItems;
 
   return (
     <div>
@@ -48,9 +52,9 @@ export default function FAQTabs({
         })}
       </div>
 
-      {tab === "motorcycle" ? (
-        <div className={panelClassName}>
-          <FAQAccordion items={motorcycleItems} />
+      {items ? (
+        <div key={tab} className={`impact-swap ${panelClassName}`}>
+          <FAQAccordion items={items} />
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-[#eef0f5] p-7 md:p-9 flex items-start gap-4 shadow-[0_10px_40px_-22px_rgba(13,36,97,0.25)]">
@@ -62,7 +66,7 @@ export default function FAQTabs({
           </div>
           <div>
             <h3 className="text-[16px] md:text-[17px] font-semibold text-[#272A33] mb-2">
-              Coming soon
+              Coming Soon
             </h3>
             <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed max-w-[560px]">
               {smartphoneMessage}

@@ -17,7 +17,7 @@ export default function About() {
                 About Us
               </p>
               <h1 className="text-[34px] sm:text-[44px] md:text-[52px] font-bold leading-[1.08] text-white tracking-[-0.02em] mb-6">
-                Your trusted partner<br className="hidden sm:block" /> in financing services.
+                Your Trusted Partner<br className="hidden sm:block" /> in Financing Services
               </h1>
               <p className="text-[15px] md:text-[16px] text-white/70 max-w-[420px] mb-10 leading-[1.65]">
                 Whether you are upgrading your ride or your smartphone, we help Malaysians reach their goals with flexible, transparent, and reliable hire purchase financing.
@@ -244,7 +244,7 @@ export default function About() {
               Our Values
             </p>
             <h2 className="text-[30px] md:text-[40px] lg:text-[48px] font-bold text-[#0d2461] leading-[1.1] tracking-tight max-w-[540px]">
-              The values that<br />drive everything we do
+              The Values That<br />Drive Everything We Do
             </h2>
           </Reveal>
 
@@ -330,6 +330,70 @@ export default function About() {
         </div>
       </section>
 
+      {/* ===== AB-S05b PARTNER — JomKaki Motor ===== */}
+      <section className="py-20 md:py-28 bg-[#f8f8f5]">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
+          <Reveal>
+            <div className="bg-white rounded-2xl border border-[#eef0f5] overflow-hidden shadow-[0_24px_70px_-40px_rgba(13,36,97,0.3)] grid grid-cols-1 lg:grid-cols-12">
+              {/* Text */}
+              <div className="lg:col-span-7 p-8 md:p-12 lg:p-14">
+                <p className="text-[11px] font-semibold uppercase tracking-[3px] text-[#F18F33] mb-4">
+                  Our Partner
+                </p>
+                <h2 className="text-[26px] md:text-[34px] font-bold text-[#0d2461] leading-[1.15] tracking-tight mb-5">
+                  Powered by JomKaki Motor
+                </h2>
+                <p className="text-[14px] md:text-[15px] text-[#555] leading-[1.8] mb-4">
+                  At First Class Credit, we are committed to making your upgrades
+                  as seamless as possible. To bring our financial solutions
+                  directly to you, we have proudly partnered with JomKaki Motor.
+                </p>
+                <p className="text-[14px] md:text-[15px] text-[#555] leading-[1.8] mb-8">
+                  As our official vendor partner, JomKaki Motor serves as your
+                  premier destination to access our Hire Purchase (HP) financing.
+                  Whether you are looking to hit the road with a new motorcycle or
+                  upgrade your tech with the latest smartphone, you can easily
+                  apply for and utilise our flexible financing plans directly
+                  through JomKaki Motor. Together, we ensure a smooth,
+                  hassle-free experience from application to ownership.
+                </p>
+                {/* TODO: replace href with the JomKaki Motor URL */}
+                <a
+                  href="#"
+                  className="inline-flex items-center justify-center px-7 py-3.5 bg-[#EE4720] text-white text-[14px] md:text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
+                >
+                  Visit JomKaki Motor
+                </a>
+              </div>
+
+              {/* Visual panel */}
+              <div className="relative lg:col-span-5 min-h-[200px] lg:min-h-0 flex items-center justify-center p-8 overflow-hidden" style={{ background: "linear-gradient(135deg, #0d2461 0%, #253A7D 55%, #2C76BB 100%)" }}>
+                <div
+                  className="absolute -right-12 -bottom-12 w-56 h-56 rounded-full opacity-25"
+                  style={{ background: "radial-gradient(circle, #47A7DD 0%, transparent 70%)" }}
+                  aria-hidden
+                />
+                <div className="relative flex flex-col items-center text-center">
+                  {/* Logo on a clean white tile so the brand mark stays crisp */}
+                  <div className="bg-white rounded-2xl px-7 py-6 md:px-9 md:py-7 shadow-[0_18px_50px_-20px_rgba(0,0,0,0.5)]">
+                    <Image
+                      src="/jomkaki-motor.png"
+                      alt="JomKaki Motor"
+                      width={900}
+                      height={765}
+                      className="w-[150px] md:w-[180px] h-auto object-contain"
+                    />
+                  </div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[2px] text-[#FCDB81] mt-5">
+                    Official Vendor Partner
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ===== AB-S06 CTA ===== */}
       <section className="py-16 md:py-20" style={{ background: "linear-gradient(135deg, #0d2461 0%, #1a3a7c 40%, #2C76BB 100%)" }}>
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
@@ -342,7 +406,7 @@ export default function About() {
               </div>
               <div>
                 <h2 className="text-[20px] md:text-[24px] font-bold text-white mb-2">
-                  Ready to get started?
+                  Ready to Get Started?
                 </h2>
                 <p className="text-[13px] md:text-[14px] text-white/55 max-w-[400px] leading-relaxed">
                   Join the Malaysians who have trusted First Class Credit to take control of their financial journey.
@@ -362,7 +426,7 @@ export default function About() {
                 href="/contact"
                 className="text-white/55 text-[13px] md:text-[14px] font-medium hover:text-white transition-colors duration-300 flex items-center gap-1"
               >
-                Contact our team
+                Contact Our Team
               </Link>
             </div>
           </div>

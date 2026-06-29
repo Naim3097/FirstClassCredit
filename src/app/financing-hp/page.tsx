@@ -109,7 +109,7 @@ export default function FinancingHP() {
               First Class Motorcycle HP Financing
             </p>
             <h1 className="text-[34px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.05] text-white tracking-[-0.02em] mb-5 md:mb-6">
-              Financing your<br className="hidden sm:block" /> next motorcycle, simplified.
+              Financing Your<br className="hidden sm:block" /> Next Motorcycle, Simplified
             </h1>
             <p className="text-[14px] md:text-[16px] text-white/70 max-w-[440px] mb-8 md:mb-10 leading-[1.65]">
               Fast, flexible, and transparent Hire Purchase financing for new
@@ -137,7 +137,7 @@ export default function FinancingHP() {
             {/* Heading column */}
             <Reveal className="lg:col-span-3">
               <h2 className="text-[26px] md:text-[32px] lg:text-[34px] font-bold text-[#272A33] leading-[1.15] tracking-tight mb-5">
-                Why choose<br /> First Class Credit?
+                Why Choose<br /> First Class Credit?
               </h2>
               <div className="w-12 h-[3px] bg-[#2C76BB] rounded-full" />
             </Reveal>
@@ -241,19 +241,29 @@ export default function FinancingHP() {
               </div>
 
               <h2 className="text-[32px] md:text-[40px] lg:text-[44px] font-bold text-[#0d2461] leading-[1.1] tracking-tight mb-5">
-                Eligibility &amp;<br />documents
+                Eligibility &amp;<br />Documents
               </h2>
               <p className="text-[14px] md:text-[15px] text-[#666] leading-relaxed mb-7 max-w-[320px]">
                 Make sure you meet the requirements below before you start your application.
               </p>
-              <a
-                href="/apply"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[#0d2461] text-[14px] font-semibold hover:text-[#47A7DD] transition-colors"
-              >
-                Check if you qualify
-              </a>
+              <div className="flex flex-col gap-3">
+                <a
+                  href="/apply"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[#0d2461] text-[14px] font-semibold hover:text-[#47A7DD] transition-colors"
+                >
+                  Check If You Qualify
+                </a>
+                <a
+                  href="/motorcycle-hp-pds.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[#666] text-[13px] font-medium underline underline-offset-2 hover:text-[#0d2461] transition-colors w-fit"
+                >
+                  View the Product Disclosure Sheet (PDS)
+                </a>
+              </div>
             </Reveal>
 
             {/* Right: rows card */}
@@ -344,12 +354,12 @@ export default function FinancingHP() {
                 Plan your budget
               </p>
               <h2 className="text-[26px] md:text-[32px] lg:text-[34px] font-bold text-white leading-[1.15] tracking-tight mb-4 md:mb-5">
-                See how it fits<br /> your plan.
+                See How It Fits<br /> Your Plan
               </h2>
               <p className="text-[14px] md:text-[15px] text-white/65 leading-relaxed max-w-md mb-5 md:mb-6">
-                Use our calculator to estimate your monthly and final
-                instalments in PDS format. Adjust the amount financed and
-                tenure to find a plan that suits you.
+                Use our calculator to estimate your monthly instalments. Adjust
+                the amount financed and tenure to find a repayment plan that
+                suits you.
               </p>
               <p className="text-[12px] md:text-[13px] text-white/40 italic">
                 *Based on a fixed rate of 10.00% per annum (flat).
@@ -370,7 +380,7 @@ export default function FinancingHP() {
               How to apply
             </p>
             <h2 className="text-[26px] md:text-[32px] lg:text-[36px] font-bold text-[#272A33] leading-[1.15] tracking-tight max-w-[640px] mx-auto">
-              Simple steps to get you on the road.
+              Simple Steps to Get You on the Road
             </h2>
           </Reveal>
 
@@ -478,14 +488,14 @@ export default function FinancingHP() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             <Reveal className="lg:col-span-4">
               <h2 className="text-[26px] md:text-[32px] lg:text-[34px] font-bold text-[#272A33] leading-[1.15] tracking-tight mb-5">
-                Frequently asked<br /> questions
+                Frequently Asked<br /> Questions
               </h2>
               <div className="w-12 h-[3px] bg-[#2C76BB] rounded-full mb-6" />
               <Link
                 href="/resources"
                 className="inline-flex items-center gap-1.5 text-[#2C76BB] text-[14px] font-semibold hover:text-[#253A7D] transition-colors"
               >
-                See all FAQs
+                See All FAQs
               </Link>
             </Reveal>
             <Reveal delay={0.1} className="lg:col-span-8">
@@ -514,7 +524,7 @@ export default function FinancingHP() {
                 </div>
                 <div>
                   <h2 className="text-[20px] md:text-[24px] lg:text-[26px] font-semibold text-white leading-snug tracking-tight">
-                    Interested to apply?
+                    Interested to Apply?
                   </h2>
                   <p className="text-[13px] md:text-[14px] text-white/65 mt-1">
                     Start your application in just 5 minutes.

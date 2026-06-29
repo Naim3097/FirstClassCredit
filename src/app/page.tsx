@@ -6,7 +6,8 @@ import Image from "next/image";
 import FAQTabs from "@/components/FAQTabs";
 import RepresentativeExample from "@/components/RepresentativeExample";
 import ImpactShowcase from "@/components/ImpactShowcase";
-import { HeroReveal, Reveal, CountUp } from "@/components/ScrollAnimations";
+import { smartphoneServicesFAQ } from "@/data/smartphoneFAQ";
+import { HeroReveal, Reveal } from "@/components/ScrollAnimations";
 
 const heroSlides = [
   {
@@ -15,14 +16,15 @@ const heroSlides = [
     eyebrowColor: "text-[#47A7DD]",
     title: (
       <>
-        Your next ride,
+        Your Next Ride,
         <br />
-        financed the straightforward way.
+        Financed the Straightforward Way
       </>
     ),
     body: "Licensed motorcycle Hire Purchase financing in Kuching. Up to 90% margin, tenures up to 60 months, fixed rates with no surprises.",
     bg: "/home-2.jpg",
-    cta: "apply",
+    applyHref: "/apply",
+    howHref: "/financing-hp",
   },
   {
     key: "smartphone",
@@ -32,18 +34,16 @@ const heroSlides = [
       <>
         Smart Financing for
         <br />
-        Your Next Smartphone.
+        Your Next Smartphone
       </>
     ),
     body: "Fund your next tech upgrade effortlessly. First Class Credit is bringing you hassle-free, accessible smartphone financing with flexible terms to Kuching and beyond.",
     // TODO: replace with the supplied smartphone hero asset
     bg: "/home-iphone-2.jpg",
-    cta: "comingSoon",
+    applyHref: "/apply?type=smartphone",
+    howHref: "/objective-financing",
   },
 ] as const;
-
-const SMARTPHONE_FAQ_MESSAGE =
-  "We are putting the final touches on our new financing solutions! Check back soon for details on how we can help fund your specific lifestyle and device upgrades.";
 
 const homeFAQ = [
   {
@@ -81,7 +81,7 @@ const homeFAQ = [
       <>
         No. Per the{" "}
         <a
-          href="/pds.pdf"
+          href="/motorcycle-hp-pds.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="text-[#2C76BB] font-semibold underline underline-offset-2 hover:text-[#253A7D]"
@@ -192,32 +192,20 @@ export default function Home() {
               {slide.body}
             </p>
             <div className="flex items-center justify-center gap-4 flex-wrap min-h-[52px]">
-              {slide.cta === "apply" ? (
-                <>
-                  <a
-                    href="/apply"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-7 py-3.5 bg-[#EE4720] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
-                  >
-                    Apply Now
-                  </a>
-                  <Link
-                    href="/financing-hp"
-                    className="inline-flex items-center justify-center px-6 py-3.5 border border-white/30 text-white/80 text-[15px] font-medium rounded-lg hover:border-white/60 hover:text-white transition-all duration-300"
-                  >
-                    How it works
-                  </Link>
-                </>
-              ) : (
-                <Link
-                  href="/objective-financing"
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#F18F33] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#EE4720]"
-                >
-                  <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                  Coming Soon
-                </Link>
-              )}
+              <a
+                href={slide.applyHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-7 py-3.5 bg-[#EE4720] text-white text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
+              >
+                Apply Now
+              </a>
+              <Link
+                href={slide.howHref}
+                className="inline-flex items-center justify-center px-6 py-3.5 border border-white/30 text-white/80 text-[15px] font-medium rounded-lg hover:border-white/60 hover:text-white transition-all duration-300"
+              >
+                How It Works
+              </Link>
             </div>
           </HeroReveal>
 
@@ -246,51 +234,41 @@ export default function Home() {
             className="bg-white rounded-2xl shadow-[0_8px_48px_rgba(13,36,97,0.18)] px-6 md:px-12 py-7 md:py-8 -translate-y-10 md:-translate-y-14"
           >
             <div className="grid grid-cols-3 divide-x divide-[#e8e8e0]">
-              {/* Stat 1 */}
-              <div className="flex flex-col items-center justify-center text-center px-2 sm:px-4 md:px-8 gap-0.5">
-                <div className="flex items-baseline gap-1">
-                  <span
-                    className="text-[28px] sm:text-[40px] md:text-[56px] font-bold text-[#253A7D] leading-none tracking-tight"
-                    style={{ textShadow: "0 0 18px rgba(37,58,125,0.28), 0 0 40px rgba(71,167,221,0.18)" }}
-                  >
-                    <CountUp end={60} />
-                  </span>
-                  <span className="text-[11px] sm:text-[13px] md:text-[15px] font-semibold text-[#253A7D] leading-tight">month</span>
+              {/* Stat 1 — Flexible Loan Tenures */}
+              <div className="flex flex-col items-center justify-start text-center px-2 sm:px-4 md:px-8 gap-3">
+                <div className="w-11 h-11 md:w-14 md:h-14 rounded-full bg-[#E8F1FB] flex items-center justify-center">
+                  <svg className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3.5" y="5" width="17" height="15" rx="2" />
+                    <path d="M3.5 9.5h17M8 3v4M16 3v4" />
+                  </svg>
                 </div>
-                <p className="text-[9px] sm:text-[11px] md:text-[12px] text-[var(--text-muted)] font-medium uppercase tracking-[1.2px] sm:tracking-[1.5px] mt-1">
+                <p className="text-[12px] sm:text-[15px] md:text-[18px] font-bold text-[#253A7D] leading-tight">
                   Flexible Loan Tenures
                 </p>
               </div>
 
-              {/* Stat 2 */}
-              <div className="flex flex-col items-center justify-center text-center px-2 sm:px-4 md:px-8 gap-0.5">
-                <div className="flex items-baseline gap-1">
-                  <span
-                    className="text-[28px] sm:text-[40px] md:text-[56px] font-bold text-[#253A7D] leading-none tracking-tight"
-                    style={{ textShadow: "0 0 18px rgba(37,58,125,0.28), 0 0 40px rgba(71,167,221,0.18)" }}
-                  >
-                    <CountUp end={90} />
-                  </span>
-                  <span className="text-[11px] sm:text-[13px] md:text-[15px] font-semibold text-[#253A7D] leading-tight">%</span>
+              {/* Stat 2 — High Financing Margin */}
+              <div className="flex flex-col items-center justify-start text-center px-2 sm:px-4 md:px-8 gap-3">
+                <div className="w-11 h-11 md:w-14 md:h-14 rounded-full bg-[#E8F1FB] flex items-center justify-center">
+                  <svg className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 17l5-5 4 4 8-8" />
+                    <path d="M15 8h5v5" />
+                  </svg>
                 </div>
-                <p className="text-[9px] sm:text-[11px] md:text-[12px] text-[var(--text-muted)] font-medium uppercase tracking-[1.2px] sm:tracking-[1.5px] mt-1">
+                <p className="text-[12px] sm:text-[15px] md:text-[18px] font-bold text-[#253A7D] leading-tight">
                   High Financing Margin
                 </p>
               </div>
 
-              {/* Stat 3 */}
-              <div className="flex flex-col items-center justify-center text-center px-2 sm:px-4 md:px-8 gap-0.5">
-                <div className="flex items-baseline gap-1">
-                  <span
-                    className="text-[28px] sm:text-[40px] md:text-[56px] font-bold text-[#253A7D] leading-none tracking-tight"
-                    style={{ textShadow: "0 0 18px rgba(37,58,125,0.28), 0 0 40px rgba(71,167,221,0.18)" }}
-                  >
-                    <CountUp end={24} />
-                  </span>
-                  <span className="text-[11px] sm:text-[13px] md:text-[15px] font-semibold text-[#253A7D] leading-tight">hour</span>
+              {/* Stat 3 — Fast Approval */}
+              <div className="flex flex-col items-center justify-start text-center px-2 sm:px-4 md:px-8 gap-3">
+                <div className="w-11 h-11 md:w-14 md:h-14 rounded-full bg-[#E8F1FB] flex items-center justify-center">
+                  <svg className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="#253A7D" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />
+                  </svg>
                 </div>
-                <p className="text-[9px] sm:text-[11px] md:text-[12px] text-[var(--text-muted)] font-medium uppercase tracking-[1.2px] sm:tracking-[1.5px] mt-1">
-                  approval
+                <p className="text-[12px] sm:text-[15px] md:text-[18px] font-bold text-[#253A7D] leading-tight">
+                  Fast Approval
                 </p>
               </div>
             </div>
@@ -308,7 +286,7 @@ export default function Home() {
                 Financing Solutions
               </p>
               <h2 className="text-[28px] md:text-[34px] lg:text-[38px] font-semibold leading-[1.15] text-white tracking-[-0.01em]">
-                For where you are and where you&apos;re going.
+                For Where You Are and Where You&apos;re Going
               </h2>
               <p className="text-[14px] text-white/55 leading-relaxed mt-5 max-w-xs">
                 Solutions that move with your life. Simple, flexible and built around you.
@@ -363,7 +341,7 @@ export default function Home() {
               </Link>
             </Reveal>
 
-            {/* Coming soon card */}
+            {/* Smartphone card */}
             <Reveal delay={0.16} className="relative bg-[#253A7D] border border-white/10 rounded-2xl p-7 md:p-8 flex flex-col justify-between min-h-[300px] overflow-hidden group">
               {/* House image bg */}
               <div
@@ -381,9 +359,6 @@ export default function Home() {
                 }}
                 aria-hidden
               />
-              <span className="absolute top-5 right-5 z-10 inline-block bg-[#F18F33] text-white text-[10px] font-bold uppercase tracking-[1.5px] px-3 py-1 rounded-full w-fit">
-                Coming Soon
-              </span>
               <div className="relative">
                 <div className="w-11 h-11 rounded-full bg-white/8 border border-white/10 flex items-center justify-center mb-6">
                   {/* smartphone icon */}
@@ -447,7 +422,7 @@ export default function Home() {
                   Competitive Rates
                 </p>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  A fixed flat rate, locked in for the full tenure.
+                  A Fixed Flat Rate, Locked In for the Full Tenure
                 </h3>
                 <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
                   Enjoy competitive rates with complete transparency upfront — no
@@ -470,7 +445,7 @@ export default function Home() {
                   High Margin Financing
                 </p>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  Secure maximum financing for your purchase.
+                  Secure Maximum Financing for Your Purchase
                 </h3>
                 <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
                   Get the maximum backing you need with flexible tenure options
@@ -491,7 +466,7 @@ export default function Home() {
                   Quick Turnaround
                 </p>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  Pre-approval within 24 to 48 hours.
+                  Pre-Approval Within 24 to 48 Hours
                 </h3>
                 <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
                   Submit your documents and move forward faster. Our team
@@ -513,7 +488,7 @@ export default function Home() {
                   Flexible &amp; Transparent
                 </p>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  We look beyond your credit score.
+                  We Look Beyond Your Credit Score
                 </h3>
                 <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
                   We evaluate your current potential and financial stability.
@@ -594,14 +569,14 @@ export default function Home() {
                 Common Questions
               </p>
               <h2 className="text-[28px] md:text-[34px] lg:text-[38px] font-semibold text-[#272A33] leading-[1.15] tracking-[-0.01em]">
-                Common questions, <br />straight answers.
+                Common Questions, <br />Straight Answers
               </h2>
             </Reveal>
             <div className="lg:col-span-8">
               <Reveal delay={0.1}>
                 <FAQTabs
                   motorcycleItems={homeFAQ}
-                  smartphoneMessage={SMARTPHONE_FAQ_MESSAGE}
+                  smartphoneItems={smartphoneServicesFAQ}
                   panelClassName="bg-white rounded-2xl border border-[#eef0f5] px-6 md:px-8"
                 />
               </Reveal>
@@ -611,7 +586,7 @@ export default function Home() {
                     href="/resources"
                     className="text-[#2C76BB] text-[14px] font-semibold hover:text-[#253A7D] transition-colors duration-300"
                   >
-                    See all FAQs
+                    See All FAQs
                   </Link>
                 </div>
               </Reveal>
@@ -645,7 +620,7 @@ export default function Home() {
               <div className="relative flex flex-col md:flex-row md:items-center gap-8 md:gap-10">
                 <div className="flex-1">
                   <h2 className="text-[26px] md:text-[34px] lg:text-[38px] font-semibold text-white leading-[1.15] tracking-[-0.01em]">
-                    Ready to finance your next milestone?
+                    Ready to Finance Your Next Milestone?
                   </h2>
                   <p className="text-[14px] md:text-[15px] text-white/70 mt-3 max-w-md">
                     Start your application in just 5 minutes.
