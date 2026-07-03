@@ -262,6 +262,10 @@ export const smartphoneResourcesFAQ: FAQItem[] = [
     answer: "The financing comes with a flat interest rate of 10% per annum.",
   },
   {
+    question: "Can you provide a representative example?",
+    answer: smartphoneRepExample,
+  },
+  {
     question: "Are there any setup fees or extra charges?",
     answer:
       "Yes, there are applicable fees and setup costs for this product. Stamp Duty without a guarantor is RM 20.00. Stamp Duty with a guarantor is RM 60.00. Postage fees are RM 10.00.",
@@ -334,9 +338,9 @@ export const smartphoneResourcesFAQ: FAQItem[] = [
             prosecution.
           </li>
           <li>
-            We will report your default history to credit bureaus like CTOS,
-            making your future loan and credit card approvals much more difficult
-            or expensive.
+            First Class Credit will report your default history to credit
+            bureaus like CTOS, making your future loan and credit card approvals
+            much more difficult or expensive.
           </li>
         </ul>
       </>
@@ -369,5 +373,10 @@ export const smartphoneResourcesFAQ: FAQItem[] = [
     question: "What is the policy if the hirer passes away?",
     answer:
       "If the hirer passes away, the estate or next-of-kin must notify us immediately. Enforcement actions, including remote locking, will only be deferred to four (4) consecutive monthly defaults once formal notification of death is received by the Institution.",
+  },
+  {
+    question: "How long does the approval process take?",
+    answer:
+      "Once we receive your complete documentation (NRIC, latest 3 months’ payslip or latest EPF statement, latest 3 months’ salary crediting bank statements and bank proof), pre-approval typically takes 24 to 48 hours.",
   },
 ];
