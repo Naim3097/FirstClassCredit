@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import FAQTabs from "@/components/FAQTabs";
 import RepresentativeExample from "@/components/RepresentativeExample";
-import { smartphoneFAQ } from "@/data/smartphoneFAQ";
+import { smartphoneResourcesFAQ } from "@/data/smartphoneFAQ";
 import { blogPosts } from "./blog/posts";
 
 const vehicleFAQ = [
@@ -225,7 +225,7 @@ export default function Resources() {
           </div>
           <FAQTabs
             motorcycleItems={vehicleFAQ}
-            smartphoneItems={smartphoneFAQ}
+            smartphoneItems={smartphoneResourcesFAQ}
           />
         </div>
       </section>
