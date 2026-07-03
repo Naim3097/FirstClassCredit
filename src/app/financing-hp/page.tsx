@@ -64,7 +64,7 @@ const hpFAQ = [
   {
     question: "How long does the approval process take?",
     answer:
-      "Once we receive your complete documentation (NRIC, 3 months\u2019 salary slips, and EPF/bank statements), pre-approval typically takes 24 to 48 hours.",
+      "Once we receive your complete documentation (NRIC, latest 3 months\u2019 salary slips, and EPF/bank statements), pre-approval typically takes 24 to 48 hours.",
   },
 ];
 
@@ -302,7 +302,7 @@ export default function FinancingHP() {
                   },
                   {
                     label: "Documents",
-                    value: "Copy of NRIC, latest 3 months\u2019 payslips, latest EPF statement or 3 months\u2019 bank statements",
+                    value: "Copy of NRIC, latest 3 months\u2019 payslips, latest EPF statement or latest 3 months\u2019 bank statements",
                     icon: (
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d2461" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />

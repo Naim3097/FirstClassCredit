@@ -374,17 +374,15 @@ export default function About() {
                   aria-hidden
                 />
                 <div className="relative flex flex-col items-center text-center">
-                  {/* Logo on a clean white tile so the brand mark stays crisp */}
-                  <div className="bg-white rounded-2xl px-7 py-6 md:px-9 md:py-7 shadow-[0_18px_50px_-20px_rgba(0,0,0,0.5)]">
-                    <Image
-                      src="/jomkaki-motor.png"
-                      alt="JomKaki Motor"
-                      width={900}
-                      height={765}
-                      className="w-[150px] md:w-[180px] h-auto object-contain"
-                    />
-                  </div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[2px] text-[#FCDB81] mt-5">
+                  {/* Transparent logo sits directly on the navy panel */}
+                  <Image
+                    src="/jomkaki-motor.png"
+                    alt="JomKaki Motor"
+                    width={800}
+                    height={800}
+                    className="w-[190px] md:w-[230px] h-auto object-contain"
+                  />
+                  <p className="text-[11px] font-semibold uppercase tracking-[2px] text-[#FCDB81] mt-4">
                     Official Vendor Partner
                   </p>
                 </div>

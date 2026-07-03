@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LoanCalculator from "@/components/LoanCalculator";
 import FAQAccordion from "@/components/FAQAccordion";
-import { smartphoneServicesFAQ } from "@/data/smartphoneFAQ";
+import { smartphoneFAQ } from "@/data/smartphoneFAQ";
 import { HeroReveal, Reveal, StaggerChildren } from "@/components/ScrollAnimations";
 
 const APPLY_HREF = "/apply?type=smartphone";
@@ -494,7 +494,7 @@ export default function SmartphoneFinancing() {
             </Reveal>
             <Reveal delay={0.1} className="lg:col-span-8">
               <div className="bg-white rounded-2xl px-5 md:px-8 py-2 md:py-3 shadow-[0_10px_40px_-20px_rgba(13,36,97,0.15)]">
-                <FAQAccordion items={smartphoneServicesFAQ} />
+                <FAQAccordion items={smartphoneFAQ} />
               </div>
             </Reveal>
           </div>

@@ -6,7 +6,7 @@ import Image from "next/image";
 import FAQTabs from "@/components/FAQTabs";
 import RepresentativeExample from "@/components/RepresentativeExample";
 import ImpactShowcase from "@/components/ImpactShowcase";
-import { smartphoneServicesFAQ } from "@/data/smartphoneFAQ";
+import { smartphoneHomeFAQ } from "@/data/smartphoneFAQ";
 import { HeroReveal, Reveal } from "@/components/ScrollAnimations";
 
 const heroSlides = [
@@ -54,7 +54,7 @@ const homeFAQ = [
   {
     question: "How long does the approval process take?",
     answer:
-      "Once we receive your complete documentation (NRIC, 3 months\u2019 salary slips, and EPF/bank statements), pre-approval typically takes 24 to 48 hours.",
+      "Once we receive your complete documentation (NRIC, latest 3 months\u2019 salary slips, and EPF/bank statements), pre-approval typically takes 24 to 48 hours.",
   },
   {
     question: "What is the maximum financing margin and tenure?",
@@ -576,7 +576,7 @@ export default function Home() {
               <Reveal delay={0.1}>
                 <FAQTabs
                   motorcycleItems={homeFAQ}
-                  smartphoneItems={smartphoneServicesFAQ}
+                  smartphoneItems={smartphoneHomeFAQ}
                   panelClassName="bg-white rounded-2xl border border-[#eef0f5] px-6 md:px-8"
                 />
               </Reveal>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import FAQTabs from "@/components/FAQTabs";
 import RepresentativeExample from "@/components/RepresentativeExample";
-import { smartphoneResourcesFAQ } from "@/data/smartphoneFAQ";
+import { smartphoneFAQ } from "@/data/smartphoneFAQ";
 import { blogPosts } from "./blog/posts";
 
 const vehicleFAQ = [
@@ -24,7 +24,7 @@ const vehicleFAQ = [
   {
     question: "How long does the approval process take?",
     answer:
-      "Once we receive your complete documentation (NRIC, 3 months' salary slips, and EPF/bank statements), pre-approval typically takes 24 to 48 hours.",
+      "Once we receive your complete documentation (NRIC, latest 3 months' salary slips, and EPF/bank statements), pre-approval typically takes 24 to 48 hours.",
   },
   {
     question: "Can I apply if I have a low CCRIS/CTOS score?",
@@ -225,7 +225,7 @@ export default function Resources() {
           </div>
           <FAQTabs
             motorcycleItems={vehicleFAQ}
-            smartphoneItems={smartphoneResourcesFAQ}
+            smartphoneItems={smartphoneFAQ}
           />
         </div>
       </section>
