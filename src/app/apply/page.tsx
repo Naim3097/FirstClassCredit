@@ -144,16 +144,47 @@ export default function ApplyPage() {
   const tenure =
     financingType === "motorcycle" ? form.tenure : form.smartphoneTenure;
 
-  // Prefilled WhatsApp message (shown on the success screen)
-  const waText = encodeURIComponent(
-    `Hi First Class Credit, I've just submitted my application.\n\n` +
-      `Financing: ${financingLabel}\n` +
-      `${financingType === "motorcycle" ? "Motorcycle" : "Device"}: ${product}\n` +
-      `Tenure: ${tenure}\n` +
-      `Name: ${form.fullName}\n` +
-      `Phone: ${form.phone}`
-  );
-  const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
+  // Prefilled WhatsApp message (shown on the success screen) — carries all
+  // the relevant form details so the team gets everything (no payslips).
+  const financingLines =
+    financingType === "motorcycle"
+      ? [
+          `Condition: ${form.condition}`,
+          `Motorcycle: ${form.brand}`,
+          `Year: ${form.year}`,
+          `Price: RM${form.price}`,
+          `Downpayment: RM${form.downpayment}`,
+          `Tenure: ${form.tenure}`,
+        ]
+      : [`Device: ${form.deviceModel}`, `Tenure: ${form.smartphoneTenure}`];
+
+  const waLines: string[] = [
+    "Hi First Class Credit, I've just submitted my application.",
+    "",
+    "— Financing —",
+    `Type: ${financingLabel}`,
+    ...financingLines,
+    "",
+    "— Financial Profile —",
+    `Employment: ${form.employment}`,
+    `Monthly salary: RM${form.salary}`,
+    ...(form.commitments
+      ? [`Monthly commitments: RM${form.commitments}`]
+      : []),
+    `Location: ${form.location}`,
+    `Existing credit issues: ${form.creditIssues}`,
+    "",
+    "— Personal Details —",
+    `Name: ${form.fullName}`,
+    `Age: ${form.age}`,
+    `NRIC: ${form.nric}`,
+    `Email: ${form.email}`,
+    `Phone: ${form.phone}`,
+    `Preferred contact: ${form.preferredComm}`,
+  ];
+  const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    waLines.join("\n")
+  )}`;
 
   const handleSubmit = async () => {
     if (!allValid || submitting) return;
