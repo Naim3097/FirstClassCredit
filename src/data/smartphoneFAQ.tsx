@@ -59,8 +59,7 @@ export const smartphoneHomeFAQ: FAQItem[] = [
       "A fixed flat rate of 10% per annum (≈ 0.833% per month), locked in for the full tenure.",
   },
   {
-    question:
-      "Can you provide a representative example of a smartphone hire purchase loan with First Class Credit?",
+    question: "Can you provide a representative example?",
     answer: smartphoneRepExample,
   },
   {
@@ -178,12 +177,18 @@ export const smartphoneFAQ: FAQItem[] = [
   },
 ];
 
-// ── Resources page — full FAQ (16) ──────────────────────────────────
+// ── Resources page — full FAQ ───────────────────────────────────────
 export const smartphoneResourcesFAQ: FAQItem[] = [
   {
     question: "How does the Smartphone Hire Purchase program work?",
     answer:
       "This program lets you buy a smartphone through fixed monthly payments. The phone belongs to the Institution until you make your final payment, after which ownership transfers to you.",
+  },
+  {
+    question:
+      "Is First Class Credit Smartphone HP Financing governed under the Hire Purchase Act 1967?",
+    answer:
+      "Yes. All our smartphone financing is governed by the Hire Purchase Act 1967, which protects you as the Hirer.",
   },
   {
     question: "What are the basic eligibility requirements to apply?",
@@ -202,11 +207,11 @@ export const smartphoneResourcesFAQ: FAQItem[] = [
           <li>Employed for at least 6 months at your current workplace.</li>
           <li>Minimum gross monthly salary of RM1,300.</li>
           <li>Provide two (2) contactable referees.</li>
+          <li>
+            Note: Express Financing is available even if you are blacklisted on
+            CCRIS or CTOS.
+          </li>
         </ul>
-        <p className="mt-1.5 italic">
-          Note: Express Financing is available even if you are blacklisted on
-          CCRIS or CTOS.
-        </p>
         <p className="font-semibold text-[#272A33] mt-3">
           For Self-Employed Individuals:
         </p>
@@ -214,11 +219,11 @@ export const smartphoneResourcesFAQ: FAQItem[] = [
           <li>Your business must have been established for more than 1 year.</li>
           <li>Minimum gross monthly income of RM1,300.</li>
           <li>Provide two (2) contactable referees.</li>
+          <li>
+            Note: Express Financing is available even if you are blacklisted on
+            CCRIS or CTOS.
+          </li>
         </ul>
-        <p className="mt-1.5 italic">
-          Note: Express Financing is available even if you are blacklisted on
-          CCRIS or CTOS.
-        </p>
       </>
     ),
   },
@@ -254,16 +259,26 @@ export const smartphoneResourcesFAQ: FAQItem[] = [
   },
   {
     question: "How much downpayment is required?",
-    answer:
-      "You are required to pay an upfront downpayment of 10% of the device price.",
+    answer: "An upfront downpayment of 10% of the device price is required.",
   },
   {
-    question: "What is the interest rate?",
-    answer: "The financing comes with a flat interest rate of 10% per annum.",
+    question: "What is the profit rate offered?",
+    answer:
+      "A fixed flat rate of 10.00% per annum (≈ 0.833% per month). The rate is locked in for the full tenure.",
   },
   {
     question: "Can you provide a representative example?",
     answer: smartphoneRepExample,
+  },
+  {
+    question: "What is the minimum & maximum loan tenure?",
+    answer:
+      "Minimum loan tenure 1 year (12 months) & maximum loan tenure 3 years (36 months).",
+  },
+  {
+    question: "How long does the approval process take?",
+    answer:
+      "Once we receive your complete documentation (NRIC, latest 3 months’ payslip or latest EPF statement, latest 3 months’ salary crediting bank statements and bank proof), pre-approval typically takes 24 to 48 hours.",
   },
   {
     question: "Are there any setup fees or extra charges?",
@@ -278,7 +293,7 @@ export const smartphoneResourcesFAQ: FAQItem[] = [
   {
     question: "How are advance payments treated?",
     answer:
-      "Any payment exceeding your monthly instalment will automatically be treated as an advance payment. This amount will be applied to your next due installment or any outstanding fees.",
+      "Any payment exceeding your monthly instalment will automatically be treated as an advance payment. This amount will be applied to your next due instalment or any outstanding fees.",
   },
   {
     question:
@@ -287,9 +302,10 @@ export const smartphoneResourcesFAQ: FAQItem[] = [
       "Yes, you must notify the Institution of any change to your mobile number, email, or mailing address within 7 calendar days to ensure you receive critical system alerts and statutory notices.",
   },
   {
-    question: "What if I or my guarantor do not receive the agreement documents?",
+    question:
+      "What if I or my guarantor did not receive the agreement documents?",
     answer:
-      "If you or your guarantor do not receive a copy of the final Hire Purchase Agreement or Guarantee Form upon registration, contact us immediately.",
+      "If you or your guarantor did not receive a copy of the final Hire Purchase Agreement or Guarantee Form upon registration, contact us immediately.",
   },
   {
     question: "Am I required to buy insurance for the smartphone?",
@@ -307,17 +323,17 @@ export const smartphoneResourcesFAQ: FAQItem[] = [
       "You cannot sell, trade, or pawn the phone while your contract is active without written consent from the Institution. You can gift the phone to someone else, but you are still legally responsible for making all monthly payments.",
   },
   {
-    question: "What happens if I miss my monthly installments?",
+    question: "What happens if I miss my monthly instalments?",
     answer: (
       <>
         <p>
-          Failing to pay your monthly installments will result in several
+          Failing to pay your monthly instalments will result in several
           enforcement and penalty actions.
         </p>
         <ul className="list-disc pl-5 space-y-1.5 mt-2">
           <li>
             An extra 8% per annum interest rate will be calculated and charged
-            daily on any overdue installment amounts until paid.
+            daily on any overdue instalment amounts until paid.
           </li>
           <li>
             First Class Credit has the right to remotely lock your smartphone via
@@ -338,9 +354,9 @@ export const smartphoneResourcesFAQ: FAQItem[] = [
             prosecution.
           </li>
           <li>
-            First Class Credit will report your default history to credit
-            bureaus like CTOS, making your future loan and credit card approvals
-            much more difficult or expensive.
+            We will report your default history to credit bureaus like CTOS,
+            making your future loan and credit card approvals much more difficult
+            or expensive.
           </li>
         </ul>
       </>
@@ -358,25 +374,22 @@ export const smartphoneResourcesFAQ: FAQItem[] = [
         <p className="font-semibold text-[#272A33] my-2">
           Rebate = [Total Interest × RP × (RP + 1)] / [OP × (OP + 1)]
         </p>
-        <p>
-          RP represents the remaining period (number of months), from the point
-          of early settlement until the original full settlement date.
-        </p>
-        <p className="mt-1.5">
-          OP represents the original period (number of months) set out in the
-          Hire Purchase Agreement.
-        </p>
+        <ul className="list-disc pl-5 space-y-1.5">
+          <li>
+            RP represents the remaining period (number of months), from the point
+            of early settlement until the original full settlement date.
+          </li>
+          <li>
+            OP represents the original period (number of months) set out in the
+            Hire Purchase Agreement.
+          </li>
+        </ul>
       </>
     ),
   },
   {
     question: "What is the policy if the hirer passes away?",
     answer:
-      "If the hirer passes away, the estate or next-of-kin must notify us immediately. Enforcement actions, including remote locking, will only be deferred to four (4) consecutive monthly defaults once formal notification of death is received by the Institution.",
-  },
-  {
-    question: "How long does the approval process take?",
-    answer:
-      "Once we receive your complete documentation (NRIC, latest 3 months’ payslip or latest EPF statement, latest 3 months’ salary crediting bank statements and bank proof), pre-approval typically takes 24 to 48 hours.",
+      "If the hirer passes away, the estate or next-of-kin must notify us immediately. Enforcement actions, including remote locking, will only be deferred to four (4) consecutive monthly defaults once formal notification of death is received by First Class Credit.",
   },
 ];
