@@ -15,7 +15,7 @@ const heroSlides = [
     eyebrowColor: "text-[#47A7DD]",
     title: (
       <>
-        Tunggangan seterusnya anda,
+        Tunggangan baharu anda,
         <br />
         dibiayai dengan cara yang mudah
       </>
@@ -33,7 +33,7 @@ const heroSlides = [
       <>
         Pembiayaan bijak untuk
         <br />
-        telefon pintar seterusnya anda
+        telefon pintar baharu anda
       </>
     ),
     body: "Biayai naik taraf teknologi anda dengan mudah. First Class Credit membawakan pembiayaan telefon pintar yang mudah diakses dan tanpa kerumitan, dengan terma fleksibel untuk Kuching dan sekitarnya.",
@@ -497,7 +497,7 @@ export default function HomeMs() {
               <div className="relative flex flex-col md:flex-row md:items-center gap-8 md:gap-10">
                 <div className="flex-1">
                   <h2 className="text-[26px] md:text-[34px] lg:text-[38px] font-semibold text-white leading-[1.15] tracking-[-0.01em]">
-                    Bersedia membiayai pencapaian seterusnya anda?
+                    Bersedia untuk membiayai pencapaian anda yang seterusnya?
                   </h2>
                   <p className="text-[14px] md:text-[15px] text-white/70 mt-3 max-w-md">
                     Mulakan permohonan anda dalam masa 5 minit sahaja.
