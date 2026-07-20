@@ -167,18 +167,18 @@ export default function Footer() {
               <br />
               8:30 AM &ndash; 5:30 PM
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-x-4 gap-y-1.5">
               <Link
                 href="/terms"
                 className="text-[13px] hover:text-white transition-colors"
               >
-                Terms
+                Terms of Service
               </Link>
               <Link
                 href="/privacy"
                 className="text-[13px] hover:text-white transition-colors"
               >
-                Privacy
+                Privacy Notice
               </Link>
             </div>
           </div>
