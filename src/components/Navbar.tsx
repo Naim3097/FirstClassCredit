@@ -4,25 +4,54 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { getLocale, localizeHref, toggleLocalePath } from "@/lib/locale";
 
-const services = [
-  { href: "/financing-hp", label: "First Class Motorcycle HP Financing" },
-  { href: "/objective-financing", label: "First Class Smartphone HP Financing" },
-];
-
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
-  { href: "/resources", label: "Resources" },
-  { href: "/contact", label: "Contact" },
-];
+const NAV = {
+  en: {
+    home: "Home",
+    services: "Services",
+    apply: "Apply Now",
+    links: [
+      { href: "/about", label: "About Us" },
+      { href: "/resources", label: "Resources" },
+      { href: "/contact", label: "Contact" },
+    ],
+    svc: [
+      { href: "/financing-hp", label: "First Class Motorcycle HP Financing" },
+      { href: "/objective-financing", label: "First Class Smartphone HP Financing" },
+    ],
+  },
+  ms: {
+    home: "Utama",
+    services: "Perkhidmatan",
+    apply: "Mohon Sekarang",
+    links: [
+      { href: "/about", label: "Tentang Kami" },
+      { href: "/resources", label: "Sumber" },
+      { href: "/contact", label: "Hubungi Kami" },
+    ],
+    svc: [
+      { href: "/financing-hp", label: "Pembiayaan Sewa Beli Motosikal First Class" },
+      { href: "/objective-financing", label: "Pembiayaan Sewa Beli Telefon Pintar First Class" },
+    ],
+  },
+} as const;
 
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const servicesActive = services.some((s) => s.href === pathname);
+
+  const locale = getLocale(pathname);
+  const t = NAV[locale];
+  const homeHref = localizeHref("/", locale);
+  const applyHref = localizeHref("/apply", locale);
+  const otherHref = toggleLocalePath(pathname);
+  const otherLabel = locale === "ms" ? "EN" : "BM";
+  const servicesActive = t.svc.some(
+    (s) => pathname === localizeHref(s.href, locale)
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -50,7 +79,7 @@ export default function Navbar() {
     >
       <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 h-[72px] flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href={homeHref} className="flex items-center">
           <Image
             src="/logo.png"
             alt="First Class Credit"
@@ -67,9 +96,9 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-7">
           {/* Home */}
           <Link
-            href="/"
+            href={homeHref}
             className={`text-[14px] font-medium transition-colors duration-300 ${
-              pathname === "/"
+              pathname === homeHref
                 ? scrolled
                   ? "text-[#2C76BB]"
                   : "text-white"
@@ -78,7 +107,7 @@ export default function Navbar() {
                 : "text-white/70 hover:text-white"
             }`}
           >
-            Home
+            {t.home}
           </Link>
 
           {/* Services dropdown */}
@@ -96,7 +125,7 @@ export default function Navbar() {
               }`}
               aria-haspopup="true"
             >
-              Services
+              {t.services}
               <svg
                 width="11"
                 height="11"
@@ -114,32 +143,35 @@ export default function Navbar() {
             {/* Hover bridge + panel */}
             <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-[300px] opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
               <div className="bg-white rounded-xl shadow-[0_16px_48px_-12px_rgba(13,36,97,0.28)] border border-[#eef0f5] p-2">
-                {services.map((s) => (
-                  <Link
-                    key={s.href}
-                    href={s.href}
-                    className={`block px-4 py-3 rounded-lg text-[13.5px] font-medium leading-snug transition-colors ${
-                      pathname === s.href
-                        ? "bg-[#E8F1FB] text-[#2C76BB]"
-                        : "text-[#272A33]/80 hover:bg-[#f4f6fb] hover:text-[#2C76BB]"
-                    }`}
-                  >
-                    {s.label}
-                  </Link>
-                ))}
+                {t.svc.map((s) => {
+                  const href = localizeHref(s.href, locale);
+                  return (
+                    <Link
+                      key={s.href}
+                      href={href}
+                      className={`block px-4 py-3 rounded-lg text-[13.5px] font-medium leading-snug transition-colors ${
+                        pathname === href
+                          ? "bg-[#E8F1FB] text-[#2C76BB]"
+                          : "text-[#272A33]/80 hover:bg-[#f4f6fb] hover:text-[#2C76BB]"
+                      }`}
+                    >
+                      {s.label}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>
 
           {/* Remaining links */}
-          {links
-            .filter((link) => link.href !== "/")
-            .map((link) => (
+          {t.links.map((link) => {
+            const href = localizeHref(link.href, locale);
+            return (
               <Link
                 key={link.href}
-                href={link.href}
+                href={href}
                 className={`text-[14px] font-medium transition-colors duration-300 ${
-                  pathname === link.href
+                  pathname === href
                     ? scrolled
                       ? "text-[#2C76BB]"
                       : "text-white"
@@ -150,14 +182,29 @@ export default function Navbar() {
               >
                 {link.label}
               </Link>
-            ))}
+            );
+          })}
+
+          {/* Language toggle */}
+          <Link
+            href={otherHref}
+            aria-label={`Switch to ${otherLabel === "BM" ? "Bahasa Malaysia" : "English"}`}
+            className={`text-[13px] font-semibold rounded-full border px-3 py-1 transition-colors duration-300 ${
+              scrolled
+                ? "border-[#272A33]/25 text-[#272A33]/70 hover:text-[#2C76BB] hover:border-[#2C76BB]/50"
+                : "border-white/40 text-white/80 hover:text-white hover:border-white"
+            }`}
+          >
+            {otherLabel}
+          </Link>
+
           <a
-            href="/apply"
+            href={applyHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-3 inline-flex items-center justify-center px-5 py-2 bg-[#EE4720] text-white text-[14px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
+            className="inline-flex items-center justify-center px-5 py-2 bg-[#EE4720] text-white text-[14px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
           >
-            Apply Now
+            {t.apply}
           </a>
         </div>
 
@@ -200,10 +247,10 @@ export default function Navbar() {
         <div className="flex flex-col px-8 pt-12 pb-16 gap-1">
           {/* Home */}
           <Link
-            href="/"
+            href={homeHref}
             onClick={() => setOpen(false)}
             className={`py-3 text-[28px] font-extralight tracking-tight transition-all duration-300 ${
-              pathname === "/" ? "text-[#2C76BB]" : "text-[#272A33]"
+              pathname === homeHref ? "text-[#2C76BB]" : "text-[#272A33]"
             }`}
             style={{
               transitionDelay: open ? "0ms" : "0ms",
@@ -211,7 +258,7 @@ export default function Navbar() {
               opacity: open ? 1 : 0,
             }}
           >
-            Home
+            {t.home}
           </Link>
 
           {/* Services (expandable) */}
@@ -230,7 +277,7 @@ export default function Navbar() {
                 servicesActive ? "text-[#2C76BB]" : "text-[#272A33]"
               }`}
             >
-              Services
+              {t.services}
               <svg
                 width="22"
                 height="22"
@@ -251,32 +298,35 @@ export default function Navbar() {
               }`}
             >
               <div className="flex flex-col gap-1 pl-4 border-l-2 border-[#E8F1FB] py-1">
-                {services.map((s) => (
-                  <Link
-                    key={s.href}
-                    href={s.href}
-                    onClick={() => setOpen(false)}
-                    className={`py-2.5 text-[16px] font-medium leading-snug transition-colors ${
-                      pathname === s.href ? "text-[#2C76BB]" : "text-[#272A33]/75"
-                    }`}
-                  >
-                    {s.label}
-                  </Link>
-                ))}
+                {t.svc.map((s) => {
+                  const href = localizeHref(s.href, locale);
+                  return (
+                    <Link
+                      key={s.href}
+                      href={href}
+                      onClick={() => setOpen(false)}
+                      className={`py-2.5 text-[16px] font-medium leading-snug transition-colors ${
+                        pathname === href ? "text-[#2C76BB]" : "text-[#272A33]/75"
+                      }`}
+                    >
+                      {s.label}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>
 
           {/* Remaining links */}
-          {links
-            .filter((link) => link.href !== "/")
-            .map((link, i) => (
+          {t.links.map((link, i) => {
+            const href = localizeHref(link.href, locale);
+            return (
               <Link
                 key={link.href}
-                href={link.href}
+                href={href}
                 onClick={() => setOpen(false)}
                 className={`py-3 text-[28px] font-extralight tracking-tight transition-all duration-300 ${
-                  pathname === link.href ? "text-[#2C76BB]" : "text-[#272A33]"
+                  pathname === href ? "text-[#2C76BB]" : "text-[#272A33]"
                 }`}
                 style={{
                   transitionDelay: open ? `${(i + 2) * 60}ms` : "0ms",
@@ -286,20 +336,38 @@ export default function Navbar() {
               >
                 {link.label}
               </Link>
-            ))}
+            );
+          })}
+
           <a
-            href="/apply"
+            href={applyHref}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}
             className="mt-8 inline-flex items-center justify-center px-8 py-3.5 bg-[#EE4720] text-white font-semibold rounded-lg w-fit"
             style={{
-              transitionDelay: open ? `${(links.length + 2) * 60}ms` : "0ms",
+              transitionDelay: open ? `${(t.links.length + 2) * 60}ms` : "0ms",
               opacity: open ? 1 : 0,
             }}
           >
-            Apply Now
+            {t.apply}
           </a>
+
+          {/* Language toggle */}
+          <Link
+            href={otherHref}
+            onClick={() => setOpen(false)}
+            className="mt-5 inline-flex items-center gap-2 text-[15px] font-semibold text-[#272A33]/70 hover:text-[#2C76BB] w-fit"
+            style={{
+              transitionDelay: open ? `${(t.links.length + 3) * 60}ms` : "0ms",
+              opacity: open ? 1 : 0,
+            }}
+          >
+            <span className="inline-flex items-center justify-center rounded-full border border-[#272A33]/25 px-2.5 py-0.5 text-[13px]">
+              {otherLabel}
+            </span>
+            {locale === "ms" ? "English" : "Bahasa Malaysia"}
+          </Link>
         </div>
       </div>
     </>

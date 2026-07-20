@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { localizeHref, type Locale } from "@/lib/locale";
 
 const socials = [
   {
@@ -33,7 +34,44 @@ const socials = [
   },
 ];
 
-export default function Footer() {
+const FOOTER = {
+  en: {
+    tagline1: "Your Financing, Our Priority.",
+    tagline2: "Your trusted partner in hire purchase financing in Malaysia.",
+    navigate: "Navigate",
+    home: "Home",
+    moto: "First Class Motorcycle HP Financing",
+    phone: "First Class Smartphone HP Financing",
+    about: "About Us",
+    resources: "Resources",
+    contact: "Contact",
+    hoursHeading: "Hours",
+    days: "Mon – Fri",
+    rights: "All rights reserved.",
+    apply: "Apply Now",
+  },
+  ms: {
+    tagline1: "Pembiayaan Anda, Keutamaan Kami.",
+    tagline2:
+      "Rakan pembiayaan sewa beli yang anda boleh percaya di Malaysia.",
+    navigate: "Navigasi",
+    home: "Utama",
+    moto: "Pembiayaan Sewa Beli Motosikal First Class",
+    phone: "Pembiayaan Sewa Beli Telefon Pintar First Class",
+    about: "Tentang Kami",
+    resources: "Sumber",
+    contact: "Hubungi Kami",
+    hoursHeading: "Waktu Operasi",
+    days: "Isnin – Jumaat",
+    rights: "Hak cipta terpelihara.",
+    apply: "Mohon Sekarang",
+  },
+} as const;
+
+export default function Footer({ locale = "en" }: { locale?: Locale }) {
+  const t = FOOTER[locale];
+  const lh = (p: string) => localizeHref(p, locale);
+
   return (
     <footer className="bg-[#272A33] text-white/60 pt-32 md:pt-40 pb-8">
       <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
@@ -49,11 +87,9 @@ export default function Footer() {
             />
             <p className="text-[13px] leading-relaxed mt-4 max-w-[240px]">
               <span className="block text-white font-semibold">
-                Your Financing, Our Priority.
+                {t.tagline1}
               </span>
-              <span className="block mt-2">
-                Your trusted partner in hire purchase financing in Malaysia.
-              </span>
+              <span className="block mt-2">{t.tagline2}</span>
             </p>
 
             {/* Social icons */}
@@ -76,26 +112,26 @@ export default function Footer() {
           {/* Navigation */}
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[1.5px] text-white mb-5">
-              Navigate
+              {t.navigate}
             </p>
             <nav className="flex flex-col gap-2.5">
-              <Link href="/" className="text-[14px] hover:text-white transition-colors">
-                Home
+              <Link href={lh("/")} className="text-[14px] hover:text-white transition-colors">
+                {t.home}
               </Link>
-              <Link href="/financing-hp" className="text-[14px] hover:text-white transition-colors">
-                First Class Motorcycle HP Financing
+              <Link href={lh("/financing-hp")} className="text-[14px] hover:text-white transition-colors">
+                {t.moto}
               </Link>
-              <Link href="/objective-financing" className="text-[14px] hover:text-white transition-colors">
-                First Class Smartphone HP Financing
+              <Link href={lh("/objective-financing")} className="text-[14px] hover:text-white transition-colors">
+                {t.phone}
               </Link>
-              <Link href="/about" className="text-[14px] hover:text-white transition-colors">
-                About Us
+              <Link href={lh("/about")} className="text-[14px] hover:text-white transition-colors">
+                {t.about}
               </Link>
-              <Link href="/resources" className="text-[14px] hover:text-white transition-colors">
-                Resources
+              <Link href={lh("/resources")} className="text-[14px] hover:text-white transition-colors">
+                {t.resources}
               </Link>
-              <Link href="/contact" className="text-[14px] hover:text-white transition-colors">
-                Contact
+              <Link href={lh("/contact")} className="text-[14px] hover:text-white transition-colors">
+                {t.contact}
               </Link>
             </nav>
           </div>
@@ -103,7 +139,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[1.5px] text-white mb-5">
-              Contact
+              {t.contact}
             </p>
             <div className="space-y-3 text-[14px]">
               <p className="leading-relaxed">
@@ -160,10 +196,10 @@ export default function Footer() {
           {/* Hours + Legal */}
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[1.5px] text-white mb-5">
-              Hours
+              {t.hoursHeading}
             </p>
             <p className="text-[14px] mb-6">
-              Mon &ndash; Fri
+              {t.days}
               <br />
               8:30 AM &ndash; 5:30 PM
             </p>
@@ -187,15 +223,15 @@ export default function Footer() {
         <div className="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-3 text-[12px]">
           <span className="text-white/75 leading-relaxed">
             &copy; Copyright {new Date().getFullYear()}, First Class Credit Sdn. Bhd.
-            [Registration No. 201801009791 (1271805-K)]. All rights reserved.
+            [Registration No. 201801009791 (1271805-K)]. {t.rights}
           </span>
           <a
-            href="/apply"
+            href={lh("/apply")}
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#EE4720] font-semibold hover:text-[#F18F33] transition-colors whitespace-nowrap"
           >
-            Apply Now
+            {t.apply}
           </a>
         </div>
       </div>

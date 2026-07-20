@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "./ScrollAnimations";
+import { localizeHref, type Locale } from "@/lib/locale";
 
 type Variant = "navy" | "light";
 
@@ -60,46 +61,93 @@ const appleIcon = (
   </svg>
 );
 
-const services: Service[] = [
-  {
-    key: "motorcycle",
-    tab: "Motorcycle HP Financing",
-    heading: "The Numbers That Matter",
-    body: "We keep it simple. Competitive rates, fast approvals, and high financing margins so you can focus on what matters — getting on the road.",
-    button: { text: "About Motorcycle Financing", href: "/financing-hp" },
-    plate: {
-      image: "/moped.png",
-      alt: "Happy customer with new motorcycle",
-      eyebrow: "On the road",
-      text: "Driving Malaysians forward with simple, transparent motorcycle HP financing.",
+const EYEBROW: Record<Locale, string> = {
+  en: "Our Impact",
+  ms: "Impak Kami",
+};
+
+const SERVICES: Record<Locale, Service[]> = {
+  en: [
+    {
+      key: "motorcycle",
+      tab: "Motorcycle HP Financing",
+      heading: "The Numbers That Matter",
+      body: "We keep it simple. Competitive rates, fast approvals, and high financing margins so you can focus on what matters — getting on the road.",
+      button: { text: "About Motorcycle Financing", href: "/financing-hp" },
+      plate: {
+        image: "/moped.png",
+        alt: "Happy customer with new motorcycle",
+        eyebrow: "On the road",
+        text: "Driving Malaysians forward with simple, transparent motorcycle HP financing.",
+      },
+      stats: [
+        { value: "90%", label: "Maximum financing margin", variant: "navy", icon: clockIcon },
+        { value: "60", label: "Months maximum tenure", variant: "light", icon: calendarIcon },
+        { value: "24–48h", label: "Pre-approval turnaround", variant: "light", icon: boltIcon },
+        { value: "10%", label: "Fixed interest per annum", variant: "light", icon: percentIcon },
+      ],
     },
-    stats: [
-      { value: "90%", label: "Maximum financing margin", variant: "navy", icon: clockIcon },
-      { value: "60", label: "Months maximum tenure", variant: "light", icon: calendarIcon },
-      { value: "24–48h", label: "Pre-approval turnaround", variant: "light", icon: boltIcon },
-      { value: "10%", label: "Fixed interest per annum", variant: "light", icon: percentIcon },
-    ],
-  },
-  {
-    key: "smartphone",
-    tab: "Smartphone HP Financing",
-    heading: "Built to Keep You Connected",
-    body: "A simpler way to own your next device. Transparent terms, fast pre-approvals, and a fixed monthly rate you can plan around.",
-    button: { text: "About Smartphone Financing", href: "/objective-financing" },
-    plate: {
-      image: "/iphone-horizontal-3.jpg",
-      alt: "Person using a new smartphone",
-      eyebrow: "Stay connected",
-      text: "Own the latest device today and spread the cost with confidence.",
+    {
+      key: "smartphone",
+      tab: "Smartphone HP Financing",
+      heading: "Built to Keep You Connected",
+      body: "A simpler way to own your next device. Transparent terms, fast pre-approvals, and a fixed monthly rate you can plan around.",
+      button: { text: "About Smartphone Financing", href: "/objective-financing" },
+      plate: {
+        image: "/iphone-horizontal-3.jpg",
+        alt: "Person using a new smartphone",
+        eyebrow: "Stay connected",
+        text: "Own the latest device today and spread the cost with confidence.",
+      },
+      stats: [
+        { value: "36", label: "Months maximum tenure", variant: "light", icon: calendarIcon },
+        { value: "24–48h", label: "Pre-approval turnaround", variant: "light", icon: boltIcon },
+        { value: "10%", label: "Per annum effective interest rate", variant: "navy", icon: percentIcon },
+        { value: "", label: "iPhone 17 Full Lineup Now Available", variant: "navy", icon: appleIcon },
+      ],
     },
-    stats: [
-      { value: "36", label: "Months maximum tenure", variant: "light", icon: calendarIcon },
-      { value: "24–48h", label: "Pre-approval turnaround", variant: "light", icon: boltIcon },
-      { value: "10%", label: "Per annum effective interest rate", variant: "navy", icon: percentIcon },
-      { value: "", label: "iPhone 17 Full Lineup Now Available", variant: "navy", icon: appleIcon },
-    ],
-  },
-];
+  ],
+  ms: [
+    {
+      key: "motorcycle",
+      tab: "Pembiayaan Sewa Beli Motosikal",
+      heading: "Angka Yang Penting",
+      body: "Kami permudahkan semuanya. Kadar yang kompetitif, kelulusan pantas, dan margin pembiayaan yang tinggi supaya anda boleh fokus pada apa yang penting — meneruskan perjalanan anda.",
+      button: { text: "Tentang Pembiayaan Motosikal", href: "/financing-hp" },
+      plate: {
+        image: "/moped.png",
+        alt: "Pelanggan gembira dengan motosikal baharu",
+        eyebrow: "Di atas jalan",
+        text: "Membawa rakyat Malaysia ke hadapan dengan pembiayaan sewa beli motosikal yang mudah dan telus.",
+      },
+      stats: [
+        { value: "90%", label: "Margin pembiayaan maksimum", variant: "navy", icon: clockIcon },
+        { value: "60", label: "Bulan tempoh maksimum", variant: "light", icon: calendarIcon },
+        { value: "24–48j", label: "Tempoh pra-kelulusan", variant: "light", icon: boltIcon },
+        { value: "10%", label: "Faedah tetap setahun", variant: "light", icon: percentIcon },
+      ],
+    },
+    {
+      key: "smartphone",
+      tab: "Pembiayaan Sewa Beli Telefon Pintar",
+      heading: "Direka Untuk Anda Sentiasa Terhubung",
+      body: "Cara yang lebih mudah untuk memiliki peranti baharu anda. Terma yang telus, pra-kelulusan pantas, dan kadar bulanan tetap yang mudah dirancang.",
+      button: { text: "Tentang Pembiayaan Telefon Pintar", href: "/objective-financing" },
+      plate: {
+        image: "/iphone-horizontal-3.jpg",
+        alt: "Individu menggunakan telefon pintar baharu",
+        eyebrow: "Kekal terhubung",
+        text: "Miliki peranti terkini hari ini dan bayar secara ansuran dengan penuh yakin.",
+      },
+      stats: [
+        { value: "36", label: "Bulan tempoh maksimum", variant: "light", icon: calendarIcon },
+        { value: "24–48j", label: "Tempoh pra-kelulusan", variant: "light", icon: boltIcon },
+        { value: "10%", label: "Kadar faedah efektif setahun", variant: "navy", icon: percentIcon },
+        { value: "", label: "iPhone 17 Full Lineup Kini Tersedia", variant: "navy", icon: appleIcon },
+      ],
+    },
+  ],
+};
 
 function StatCard({ stat }: { stat: Stat }) {
   const navy = stat.variant === "navy";
@@ -148,8 +196,9 @@ function StatCard({ stat }: { stat: Stat }) {
   );
 }
 
-export default function ImpactShowcase() {
+export default function ImpactShowcase({ locale = "en" }: { locale?: Locale }) {
   const [active, setActive] = useState<Service["key"]>("motorcycle");
+  const services = SERVICES[locale];
   const service = services.find((s) => s.key === active)!;
 
   return (
@@ -158,7 +207,7 @@ export default function ImpactShowcase() {
         {/* Header */}
         <Reveal className="mb-9 md:mb-12 max-w-2xl">
           <p className="text-[11px] font-semibold uppercase tracking-[2.5px] text-[#2C76BB] mb-5">
-            Our Impact
+            {EYEBROW[locale]}
           </p>
 
           {/* Segmented service toggle */}
@@ -193,7 +242,7 @@ export default function ImpactShowcase() {
             </p>
             <div className="mt-7">
               <Link
-                href={service.button.href}
+                href={localizeHref(service.button.href, locale)}
                 className="inline-flex items-center px-5 py-2.5 bg-[#0d2461] text-white text-[13.5px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#253A7D]"
               >
                 {service.button.text}

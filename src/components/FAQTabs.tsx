@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import FAQAccordion, { type FAQItem } from "./FAQAccordion";
+import type { Locale } from "@/lib/locale";
 
 interface FAQTabsProps {
   motorcycleItems: FAQItem[];
@@ -9,22 +10,37 @@ interface FAQTabsProps {
   smartphoneMessage?: string;
   /** Classes applied to the panel that wraps the accordion. */
   panelClassName?: string;
+  locale?: Locale;
 }
 
-const tabs = [
-  { key: "motorcycle", label: "Motorcycle HP Financing" },
-  { key: "smartphone", label: "Smartphone HP Financing" },
-] as const;
+const TAB_LABELS = {
+  en: {
+    motorcycle: "Motorcycle HP Financing",
+    smartphone: "Smartphone HP Financing",
+    comingSoon: "Coming Soon",
+  },
+  ms: {
+    motorcycle: "Pembiayaan Sewa Beli Motosikal",
+    smartphone: "Pembiayaan Sewa Beli Telefon Pintar",
+    comingSoon: "Akan Datang",
+  },
+} as const;
 
-type TabKey = (typeof tabs)[number]["key"];
+type TabKey = "motorcycle" | "smartphone";
 
 export default function FAQTabs({
   motorcycleItems,
   smartphoneItems,
   smartphoneMessage,
   panelClassName = "",
+  locale = "en",
 }: FAQTabsProps) {
   const [tab, setTab] = useState<TabKey>("motorcycle");
+  const L = TAB_LABELS[locale];
+  const tabs: { key: TabKey; label: string }[] = [
+    { key: "motorcycle", label: L.motorcycle },
+    { key: "smartphone", label: L.smartphone },
+  ];
 
   const items = tab === "motorcycle" ? motorcycleItems : smartphoneItems;
 
@@ -66,7 +82,7 @@ export default function FAQTabs({
           </div>
           <div>
             <h3 className="text-[16px] md:text-[17px] font-semibold text-[#272A33] mb-2">
-              Coming Soon
+              {L.comingSoon}
             </h3>
             <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed max-w-[560px]">
               {smartphoneMessage}

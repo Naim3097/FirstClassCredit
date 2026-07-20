@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { Locale } from "@/lib/locale";
 
 interface LoanCalculatorProps {
   minAmount?: number;
@@ -10,7 +11,45 @@ interface LoanCalculatorProps {
   tenures?: number[];
   defaultTenure?: number;
   pdsHref?: string;
+  locale?: Locale;
 }
+
+const LABELS = {
+  en: {
+    amount: "Amount Financed (RM)",
+    tenure: "Loan Tenure",
+    months: "months",
+    year: "year",
+    years: "years",
+    fixedRate: "Fixed rate:",
+    ratePhrase: "10.00% per annum (flat)",
+    totalTermCharges: "Total Term Charges",
+    totalPayable: "Total Payable",
+    noInstalments: "No. of Instalments",
+    finalInstalment: "Final Instalment",
+    monthlyInstalment: "Monthly Instalment",
+    disclaimerPre:
+      "Indicative only — actual instalment, margin, and rate will be confirmed in your signed Hire Purchase Agreement and",
+    pdsLabel: "Product Disclosure Sheet",
+  },
+  ms: {
+    amount: "Jumlah Dibiayai (RM)",
+    tenure: "Tempoh Pinjaman",
+    months: "bulan",
+    year: "tahun",
+    years: "tahun",
+    fixedRate: "Kadar tetap:",
+    ratePhrase: "10.00% setahun (rata)",
+    totalTermCharges: "Jumlah Caj Tempoh",
+    totalPayable: "Jumlah Perlu Dibayar",
+    noInstalments: "Bilangan Ansuran",
+    finalInstalment: "Ansuran Akhir",
+    monthlyInstalment: "Ansuran Bulanan",
+    disclaimerPre:
+      "Anggaran sahaja — ansuran, margin dan kadar sebenar akan disahkan dalam Perjanjian Hire Purchase anda yang ditandatangani dan",
+    pdsLabel: "Product Disclosure Sheet",
+  },
+} as const;
 
 export default function LoanCalculator({
   minAmount = 3000,
@@ -20,7 +59,9 @@ export default function LoanCalculator({
   tenures = [12, 24, 36, 48, 60],
   defaultTenure = 48,
   pdsHref = "/motorcycle-hp-pds.pdf",
+  locale = "en",
 }: LoanCalculatorProps = {}) {
+  const t9n = LABELS[locale];
   const [amount, setAmount] = useState(defaultAmount);
   const [tenure, setTenure] = useState(defaultTenure);
   const rate = 0.1; // 10% per annum, flat (per PDS)
@@ -40,7 +81,7 @@ export default function LoanCalculator({
       {/* Amount Financed */}
       <div className="mb-8">
         <label className="block text-xs font-semibold uppercase tracking-[1.5px] text-blue mb-3">
-          Amount Financed (RM)
+          {t9n.amount}
         </label>
         <input
           type="range"
@@ -59,7 +100,7 @@ export default function LoanCalculator({
       {/* Tenure */}
       <div className="mb-6">
         <label className="block text-xs font-semibold uppercase tracking-[1.5px] text-blue mb-3">
-          Loan Tenure
+          {t9n.tenure}
         </label>
         <select
           value={tenure}
@@ -68,39 +109,39 @@ export default function LoanCalculator({
         >
           {tenures.map((t) => (
             <option key={t} value={t}>
-              {t} months ({t / 12} {t / 12 === 1 ? "year" : "years"})
+              {t} {t9n.months} ({t / 12} {t / 12 === 1 ? t9n.year : t9n.years})
             </option>
           ))}
         </select>
       </div>
 
       <p className="text-sm text-[var(--text-secondary)] mb-6">
-        Fixed rate: <strong>10.00% per annum (flat)</strong>
+        {t9n.fixedRate} <strong>{t9n.ratePhrase}</strong>
       </p>
 
       {/* Summary breakdown — PDS format */}
       <div className="grid grid-cols-2 gap-x-6 gap-y-5 pt-6 border-t border-[var(--border-color)]">
         <div>
           <p className="text-[var(--text-muted)] uppercase text-[10px] font-semibold tracking-[1.5px] mb-1">
-            Total Term Charges
+            {t9n.totalTermCharges}
           </p>
           <p className="text-base font-semibold text-dark-blue">RM {fmt(totalTermCharges)}</p>
         </div>
         <div>
           <p className="text-[var(--text-muted)] uppercase text-[10px] font-semibold tracking-[1.5px] mb-1">
-            Total Payable
+            {t9n.totalPayable}
           </p>
           <p className="text-base font-semibold text-dark-blue">RM {fmt(totalPayable)}</p>
         </div>
         <div>
           <p className="text-[var(--text-muted)] uppercase text-[10px] font-semibold tracking-[1.5px] mb-1">
-            No. of Instalments
+            {t9n.noInstalments}
           </p>
           <p className="text-base font-semibold text-dark-blue">{tenure}</p>
         </div>
         <div>
           <p className="text-[var(--text-muted)] uppercase text-[10px] font-semibold tracking-[1.5px] mb-1">
-            Final Instalment
+            {t9n.finalInstalment}
           </p>
           <p className="text-base font-semibold text-dark-blue">RM {final.toLocaleString()}</p>
         </div>
@@ -109,21 +150,20 @@ export default function LoanCalculator({
       {/* Headline monthly */}
       <div className="text-center pt-8 mt-6 border-t border-[var(--border-color)]">
         <p className="text-xs font-semibold uppercase tracking-[1.5px] text-[var(--text-secondary)] mb-2">
-          Monthly Instalment
+          {t9n.monthlyInstalment}
         </p>
         <p className="text-4xl md:text-5xl font-semibold text-dark-blue">
           RM {monthly.toLocaleString()}
         </p>
         <p className="text-[11px] text-[var(--text-muted)] mt-3 leading-relaxed">
-          Indicative only — actual instalment, margin, and rate will be confirmed in your
-          signed Hire Purchase Agreement and{" "}
+          {t9n.disclaimerPre}{" "}
           <a
             href={pdsHref}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue font-semibold underline underline-offset-2 hover:text-dark-blue"
           >
-            Product Disclosure Sheet
+            {t9n.pdsLabel}
           </a>
           .
         </p>
