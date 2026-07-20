@@ -15,7 +15,7 @@ const heroSlides = [
     eyebrowColor: "text-[#47A7DD]",
     title: (
       <>
-        Tunggangan baharu anda,
+        Motosikal baharu anda,
         <br />
         dibiayai dengan cara yang mudah
       </>
