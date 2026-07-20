@@ -122,7 +122,7 @@ export default function FinancingHPMs() {
               Pembiayaan Sewa Beli Motosikal First Class
             </p>
             <h1 className="text-[34px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.05] text-white tracking-[-0.02em] mb-5 md:mb-6">
-              Membiayai motosikal<br className="hidden sm:block" /> baharu anda, dipermudah
+              Membiayai motosikal<br className="hidden sm:block" /> baharu anda, dipermudahkan
             </h1>
             <p className="text-[14px] md:text-[16px] text-white/70 max-w-[440px] mb-8 md:mb-10 leading-[1.65]">
               Pembiayaan Hire Purchase yang pantas, fleksibel dan telus untuk
