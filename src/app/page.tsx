@@ -86,7 +86,7 @@ const homeFAQ = [
           rel="noopener noreferrer"
           className="text-[#2C76BB] font-semibold underline underline-offset-2 hover:text-[#253A7D]"
         >
-          PDS
+          Product Disclosure Sheet (PDS)
         </a>
         : Stamp Duty RM20 (without guarantor) or RM60 (with guarantor),
         e-Hakmilik Charges RM3, and Postage RM10. All fees are disclosed up

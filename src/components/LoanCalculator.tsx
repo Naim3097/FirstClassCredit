@@ -46,7 +46,7 @@ const LABELS = {
     finalInstalment: "Ansuran Akhir",
     monthlyInstalment: "Ansuran Bulanan",
     disclaimerPre:
-      "Anggaran sahaja — ansuran, margin dan kadar sebenar akan disahkan dalam Perjanjian Hire Purchase anda yang ditandatangani dan",
+      "Anggaran sahaja — ansuran, margin dan kadar sebenar akan disahkan dalam Perjanjian Sewa Beli anda yang ditandatangani dan",
     pdsLabel: "Product Disclosure Sheet",
   },
 } as const;

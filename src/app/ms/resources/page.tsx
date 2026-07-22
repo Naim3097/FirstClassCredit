@@ -3,17 +3,17 @@ import Link from "next/link";
 import FAQTabs from "@/components/FAQTabs";
 import RepresentativeExample from "@/components/RepresentativeExample";
 import { smartphoneResourcesFAQms } from "@/data/smartphoneFAQ.bm";
-import { blogPosts } from "@/app/resources/blog/posts";
+import { blogPostsMs } from "@/app/resources/blog/posts.bm";
 
 const vehicleFAQ = [
   {
-    question: "Apakah itu perjanjian Hire Purchase (HP)?",
+    question: "Apakah itu perjanjian Sewa Beli (HP)?",
     answer:
       "Ia merupakan kontrak di mana anda 'menyewa' motosikal daripada Pemilik (First Class Credit Sdn. Bhd.) dan hak milik berpindah kepada anda setelah pembiayaan diselesaikan sepenuhnya. Anda hanya menjadi pemilik sah selepas ansuran terakhir dijelaskan.",
   },
   {
     question:
-      "Adakah pembiayaan Hire Purchase First Class Credit tertakluk di bawah Akta Sewa Beli 1967?",
+      "Adakah Pembiayaan Sewa Beli First Class tertakluk di bawah Akta Sewa Beli 1967?",
     answer:
       "Ya. Semua pembiayaan motosikal kami tertakluk di bawah Akta Sewa Beli 1967, yang melindungi anda sebagai Penyewa.",
   },
@@ -158,7 +158,7 @@ export default function ResourcesMs() {
               Belajar &amp; Terokai
             </h1>
             <p className="text-[14px] md:text-[16px] text-white/70 max-w-[440px] mb-8 md:mb-10 leading-[1.65]">
-              Panduan lengkap anda untuk memahami pembiayaan Hire Purchase,
+              Panduan lengkap anda untuk memahami pembiayaan Sewa Beli,
               meningkatkan profil kredit anda, dan membuat keputusan bijak untuk
               naik taraf motosikal atau telefon pintar anda.
             </p>
@@ -193,10 +193,10 @@ export default function ResourcesMs() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {blogPosts.map((post) => (
+            {blogPostsMs.map((post) => (
               <Link
                 key={post.slug}
-                href={`/resources/blog/${post.slug}`}
+                href={`/ms/resources/blog/${post.slug}`}
                 className="block bg-white border border-[var(--border-color)] rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_8px_32px_rgba(39,42,51,0.08)] hover:-translate-y-0.5 group"
               >
                 <div className="relative aspect-[16/9] bg-[var(--bg-primary)]">

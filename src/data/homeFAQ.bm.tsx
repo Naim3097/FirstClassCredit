@@ -58,7 +58,7 @@ export const motorcycleHomeFAQms: FAQItem[] = [
           rel="noopener noreferrer"
           className={pdsLinkClass}
         >
-          PDS
+          Product Disclosure Sheet (PDS)
         </a>
         : Duti Setem RM20 (tanpa penjamin) atau RM60 (dengan penjamin), Caj
         e-Hakmilik RM3, dan Pos RM10. Semua yuran didedahkan dengan jelas di

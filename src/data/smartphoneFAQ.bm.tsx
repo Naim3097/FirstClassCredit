@@ -44,7 +44,7 @@ const pdsHiddenFeesAnswer = (
 // ── Halaman Perkhidmatan Telefon Pintar — FAQ penuh (12) ────────────
 export const smartphoneFAQms: FAQItem[] = [
   {
-    question: "Bagaimanakah program Hire Purchase telefon pintar berfungsi?",
+    question: "Bagaimanakah program Sewa Beli telefon pintar berfungsi?",
     answer:
       "Program ini membolehkan anda membeli telefon pintar melalui bayaran bulanan tetap. Sila ambil perhatian bahawa telefon pintar tersebut secara sah dimiliki oleh First Class Credit sehingga anda menjelaskan ansuran terakhir, dan selepas itu hak milik akan berpindah kepada anda.",
   },
@@ -118,7 +118,7 @@ export const smartphoneFAQms: FAQItem[] = [
     ),
   },
   {
-    question: "Bolehkah saya menyelesaikan baki Hire Purchase lebih awal?",
+    question: "Bolehkah saya menyelesaikan baki Sewa Beli lebih awal?",
     answer: (
       <>
         <p>
@@ -136,7 +136,7 @@ export const smartphoneFAQms: FAQItem[] = [
         </p>
         <p className="mt-1.5">
           OP mewakili tempoh asal (bilangan bulan) seperti yang dinyatakan dalam
-          Perjanjian Hire Purchase anda.
+          Perjanjian Sewa Beli anda.
         </p>
       </>
     ),
@@ -155,7 +155,7 @@ export const smartphoneFAQms: FAQItem[] = [
 // ── Halaman Sumber — FAQ penuh ──────────────────────────────────────
 export const smartphoneResourcesFAQms: FAQItem[] = [
   {
-    question: "Bagaimanakah program Hire Purchase telefon pintar berfungsi?",
+    question: "Bagaimanakah program Sewa Beli telefon pintar berfungsi?",
     answer:
       "Program ini membolehkan anda membeli telefon pintar melalui bayaran bulanan tetap. Telefon tersebut dimiliki oleh pihak Institusi sehingga anda membuat bayaran terakhir, dan selepas itu hak milik berpindah kepada anda.",
   },
@@ -281,7 +281,7 @@ export const smartphoneResourcesFAQms: FAQItem[] = [
     question:
       "Bagaimana jika saya atau penjamin saya tidak menerima dokumen perjanjian?",
     answer:
-      "Jika anda atau penjamin anda tidak menerima salinan Perjanjian Hire Purchase atau Borang Jaminan yang muktamad semasa pendaftaran, hubungi kami dengan segera.",
+      "Jika anda atau penjamin anda tidak menerima salinan Perjanjian Sewa Beli atau Borang Jaminan yang muktamad semasa pendaftaran, hubungi kami dengan segera.",
   },
   {
     question: "Adakah saya diwajibkan membeli insurance untuk telefon pintar?",
@@ -292,7 +292,7 @@ export const smartphoneResourcesFAQms: FAQItem[] = [
     question:
       "Bolehkah saya membatalkan pelan perlindungan peranti pilihan saya dan mendapat bayaran balik?",
     answer:
-      "Jika anda membatalkan polisi pilihan yang dibiayai, sebarang bayaran balik premium secara pro-rata akan dikreditkan terus ke dalam akaun Hire Purchase anda sebagai bayaran pendahuluan.",
+      "Jika anda membatalkan polisi pilihan yang dibiayai, sebarang bayaran balik premium secara pro-rata akan dikreditkan terus ke dalam akaun Sewa Beli anda sebagai bayaran pendahuluan.",
   },
   {
     question: "Bolehkah saya menjual, menukar, atau memberikan telefon kepada orang lain?",
@@ -342,7 +342,7 @@ export const smartphoneResourcesFAQms: FAQItem[] = [
     ),
   },
   {
-    question: "Bolehkah saya menyelesaikan baki Hire Purchase lebih awal?",
+    question: "Bolehkah saya menyelesaikan baki Sewa Beli lebih awal?",
     answer: (
       <>
         <p>
@@ -360,7 +360,7 @@ export const smartphoneResourcesFAQms: FAQItem[] = [
           </li>
           <li>
             OP mewakili tempoh asal (bilangan bulan) seperti yang dinyatakan
-            dalam Perjanjian Hire Purchase.
+            dalam Perjanjian Sewa Beli.
           </li>
         </ul>
       </>

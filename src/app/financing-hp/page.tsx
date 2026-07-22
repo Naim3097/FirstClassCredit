@@ -14,7 +14,7 @@ const hpFAQ = [
       "It is a contract where you \u201chire\u201d the motorcycle from the Owner (First Class Credit Sdn. Bhd.) and ownership transfers to you upon full settlement. You become the legal owner only after the final instalment is paid.",
   },
   {
-    question: "Is First Class Credit Motorcycle HP financing governed under the Hire Purchase Act 1967?",
+    question: "Is First Class Motorcycle HP Financing governed under the Hire Purchase Act 1967?",
     answer:
       "Yes. All our motorcycle financing is governed by the Hire Purchase Act 1967, which protects you as the Hirer.",
   },
@@ -282,7 +282,7 @@ export default function FinancingHP() {
                   },
                   {
                     label: "Age",
-                    value: "18 to 70 years old (at end of financing tenure)",
+                    value: "18 to 65 years old (at end of financing tenure)",
                     icon: (
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d2461" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3.5" y="5" width="17" height="15" rx="2" />

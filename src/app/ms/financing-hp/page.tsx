@@ -9,13 +9,13 @@ import { HeroReveal, Reveal, StaggerChildren } from "@/components/ScrollAnimatio
 
 const hpFAQ = [
   {
-    question: "Apakah itu perjanjian Hire Purchase (HP)?",
+    question: "Apakah itu perjanjian Sewa Beli (HP)?",
     answer:
       "Ia merupakan kontrak di mana anda “menyewa” motosikal daripada Pemilik (First Class Credit Sdn. Bhd.) dan hak milik berpindah kepada anda setelah pembiayaan diselesaikan sepenuhnya. Anda hanya menjadi pemilik sah selepas ansuran terakhir dijelaskan.",
   },
   {
     question:
-      "Adakah pembiayaan Hire Purchase motosikal First Class Credit tertakluk di bawah Akta Sewa Beli 1967?",
+      "Adakah Pembiayaan Sewa Beli Motosikal First Class tertakluk di bawah Akta Sewa Beli 1967?",
     answer:
       "Ya. Semua pembiayaan motosikal kami tertakluk di bawah Akta Sewa Beli 1967, yang melindungi anda sebagai Penyewa.",
   },
@@ -122,10 +122,10 @@ export default function FinancingHPMs() {
               Pembiayaan Sewa Beli Motosikal First Class
             </p>
             <h1 className="text-[34px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.05] text-white tracking-[-0.02em] mb-5 md:mb-6">
-              Membiayai motosikal<br className="hidden sm:block" /> baharu anda, dipermudahkan
+              Membiayai Motosikal<br className="hidden sm:block" /> Baharu Anda, Dipermudahkan
             </h1>
             <p className="text-[14px] md:text-[16px] text-white/70 max-w-[440px] mb-8 md:mb-10 leading-[1.65]">
-              Pembiayaan Hire Purchase yang pantas, fleksibel dan telus untuk
+              Pembiayaan Sewa Beli yang pantas, fleksibel dan telus untuk
               motosikal baharu dan terpakai — margin sehingga 90% dan tempoh
               sehingga 5 tahun, tertakluk sepenuhnya di bawah Akta Sewa Beli 1967.
             </p>
@@ -295,7 +295,7 @@ export default function FinancingHPMs() {
                   },
                   {
                     label: "Umur",
-                    value: "18 hingga 70 tahun (pada akhir tempoh pembiayaan)",
+                    value: "18 hingga 65 tahun (pada akhir tempoh pembiayaan)",
                     icon: (
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d2461" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3.5" y="5" width="17" height="15" rx="2" />
@@ -367,7 +367,7 @@ export default function FinancingHPMs() {
                 Rancang bajet anda
               </p>
               <h2 className="text-[26px] md:text-[32px] lg:text-[34px] font-bold text-white leading-[1.15] tracking-tight mb-4 md:mb-5">
-                Lihat Bagaimana Ia<br /> Sesuai Dengan Anda
+                Lihat Bagaimana Ia<br /> Sesuai dengan Anda
               </h2>
               <p className="text-[14px] md:text-[15px] text-white/65 leading-relaxed max-w-md mb-5 md:mb-6">
                 Gunakan kalkulator kami untuk menganggarkan ansuran bulanan
@@ -393,7 +393,7 @@ export default function FinancingHPMs() {
               Cara memohon
             </p>
             <h2 className="text-[26px] md:text-[32px] lg:text-[36px] font-bold text-[#272A33] leading-[1.15] tracking-tight max-w-[640px] mx-auto">
-              Langkah mudah untuk anda mula menunggang
+              Langkah Mudah untuk Anda Mula Menunggang
             </h2>
           </Reveal>
 
@@ -424,7 +424,7 @@ export default function FinancingHPMs() {
               },
               {
                 n: 2,
-                title: "Permohonan Dalam Talian Pantas",
+                title: "Permohonan dalam Talian Pantas",
                 desc: "Isi borang permohonan 5 minit kami dengan butiran motosikal dan peribadi anda.",
                 icon: (
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -449,7 +449,7 @@ export default function FinancingHPMs() {
               {
                 n: 4,
                 title: "Tandatangan & Tunggang",
-                desc: "Tandatangani Perjanjian Hire Purchase anda, jelaskan downpayment, dan ambil motosikal anda.",
+                desc: "Tandatangani Perjanjian Sewa Beli anda, jelaskan downpayment, dan ambil motosikal anda.",
                 icon: (
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="8" cy="15" r="4" />
@@ -537,7 +537,7 @@ export default function FinancingHPMs() {
                 </div>
                 <div>
                   <h2 className="text-[20px] md:text-[24px] lg:text-[26px] font-semibold text-white leading-snug tracking-tight">
-                    Berminat Untuk Memohon?
+                    Berminat untuk Memohon?
                   </h2>
                   <p className="text-[13px] md:text-[14px] text-white/65 mt-1">
                     Mulakan permohonan anda dalam masa 5 minit sahaja.

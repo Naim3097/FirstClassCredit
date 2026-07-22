@@ -111,7 +111,7 @@ const SERVICES: Record<Locale, Service[]> = {
     {
       key: "motorcycle",
       tab: "Pembiayaan Sewa Beli Motosikal",
-      heading: "Angka Yang Penting",
+      heading: "Angka yang Penting",
       body: "Kami permudahkan semuanya. Kadar yang kompetitif, kelulusan pantas, dan margin pembiayaan yang tinggi supaya anda boleh fokus pada apa yang penting — meneruskan perjalanan anda.",
       button: { text: "Tentang Pembiayaan Motosikal", href: "/financing-hp" },
       plate: {
@@ -130,7 +130,7 @@ const SERVICES: Record<Locale, Service[]> = {
     {
       key: "smartphone",
       tab: "Pembiayaan Sewa Beli Telefon Pintar",
-      heading: "Direka Untuk Anda Sentiasa Terhubung",
+      heading: "Direka untuk Anda Sentiasa Terhubung",
       body: "Cara yang lebih mudah untuk memiliki peranti baharu anda. Terma yang telus, pra-kelulusan pantas, dan kadar bulanan tetap yang mudah dirancang.",
       button: { text: "Tentang Pembiayaan Telefon Pintar", href: "/objective-financing" },
       plate: {

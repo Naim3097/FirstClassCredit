@@ -69,7 +69,7 @@ export default function ContactMs() {
                 href="#contact-form"
                 className="inline-flex items-center justify-center px-6 md:px-7 py-3 md:py-3.5 bg-[#EE4720] text-white text-[14px] md:text-[15px] font-semibold rounded-lg transition-all duration-300 hover:bg-[#F18F33]"
               >
-                Hantar mesej
+                Hantar Mesej
               </Link>
               <a
                 href="https://wa.me/60169328901"
@@ -77,7 +77,7 @@ export default function ContactMs() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-white text-[13px] md:text-[14px] font-semibold hover:text-[#47A7DD] transition-colors"
               >
-                WhatsApp kami
+                WhatsApp Kami
               </a>
             </div>
           </HeroReveal>
@@ -93,7 +93,7 @@ export default function ContactMs() {
             <div className="lg:col-span-7">
               <Reveal>
                 <h2 className="text-[38px] md:text-[52px] font-bold text-[#272A33] leading-[1.1] tracking-[-0.02em] mb-4">
-                  Hubungi kami
+                  Hubungi Kami
                 </h2>
                 <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed mb-10">
                   Beritahu kami bagaimana kami boleh bantu, dan kami akan sahkan pertanyaan anda dalam masa 1 hari bekerja.
@@ -334,7 +334,7 @@ export default function ContactMs() {
           <Reveal delay={0.14}>
             <div className="mt-10 bg-white rounded-xl p-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
               <p className="text-[14px] text-[#272A33]">
-                Sedia untuk memohon pembiayaan Hire Purchase?
+                Sedia untuk Memohon Pembiayaan Hire Purchase?
               </p>
               <a
                 href="/ms/apply"

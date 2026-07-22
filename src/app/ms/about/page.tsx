@@ -17,10 +17,10 @@ export default function AboutMs() {
                 Tentang kami
               </p>
               <h1 className="text-[34px] sm:text-[44px] md:text-[52px] font-bold leading-[1.08] text-white tracking-[-0.02em] mb-6">
-                Rakan yang anda percayai<br className="hidden sm:block" /> dalam perkhidmatan pembiayaan
+                Rakan yang Anda Percayai<br className="hidden sm:block" /> dalam Perkhidmatan Pembiayaan
               </h1>
               <p className="text-[15px] md:text-[16px] text-white/70 max-w-[420px] mb-10 leading-[1.65]">
-                Sama ada anda ingin menaik taraf motosikal atau smartphone, kami bantu rakyat Malaysia mencapai impian mereka dengan pembiayaan Hire Purchase yang fleksibel, telus dan boleh dipercayai.
+                Sama ada anda ingin menaik taraf motosikal atau smartphone, kami bantu rakyat Malaysia mencapai impian mereka dengan pembiayaan Sewa Beli yang fleksibel, telus dan boleh dipercayai.
               </p>
               {/* Trust badges */}
               <div className="flex flex-col sm:flex-row gap-5 sm:gap-8">
@@ -78,7 +78,7 @@ export default function AboutMs() {
                 Di First Class Credit, kami percaya mencapai impian anda sepatutnya menjadi detik yang membanggakan, bukannya beban kewangan.
               </p>
               <p className="text-[14px] md:text-[15px] text-[#555] leading-[1.8] mb-3">
-                Beroperasi dari Kuching, Sarawak, First Class Credit Sdn. Bhd. (201801009791 / 1271805-K) merupakan penyedia kredit berlesen yang menawarkan penyelesaian Hire Purchase mudah dicapai untuk individu. Sebagai institusi dipercayai yang tertakluk di bawah Akta Sewa Beli 1967, kami menyediakan sokongan kewangan yang anda perlukan untuk melangkah ke hadapan. Sama ada anda ingin turun ke jalan raya dengan Pembiayaan Sewa Beli Motosikal kami atau kekal berhubung menerusi Pembiayaan Sewa Beli Telefon Pintar kami, kami merapatkan jurang antara impian dan realiti anda.
+                Beroperasi dari Kuching, Sarawak, First Class Credit Sdn. Bhd. (201801009791 / 1271805-K) merupakan penyedia kredit berlesen yang menawarkan penyelesaian Sewa Beli mudah dicapai untuk individu. Sebagai institusi dipercayai yang tertakluk di bawah Akta Sewa Beli 1967, kami menyediakan sokongan kewangan yang anda perlukan untuk melangkah ke hadapan. Sama ada anda ingin turun ke jalan raya dengan Pembiayaan Sewa Beli Motosikal kami atau kekal berhubung menerusi Pembiayaan Sewa Beli Telefon Pintar kami, kami merapatkan jurang antara impian dan realiti anda.
               </p>
               <Link
                 href="/ms/contact"
@@ -184,7 +184,7 @@ export default function AboutMs() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 ),
-                title: "Perkhidmatan peribadi",
+                title: "Perkhidmatan Peribadi",
                 desc: "Pasukan pakar kami membimbing anda menerusi setiap dokumen, permohonan dan tandatangan. Anda bukan sekadar nombor bagi kami.",
               },
             ].map((item, i) => (
@@ -244,7 +244,7 @@ export default function AboutMs() {
               Nilai kami
             </p>
             <h2 className="text-[30px] md:text-[40px] lg:text-[48px] font-bold text-[#0d2461] leading-[1.1] tracking-tight max-w-[540px]">
-              Nilai yang mendorong<br />setiap langkah kami
+              Nilai yang Mendorong<br />Setiap Langkah Kami
             </h2>
           </Reveal>
 
@@ -351,7 +351,7 @@ export default function AboutMs() {
                 </p>
                 <p className="text-[14px] md:text-[15px] text-[#555] leading-[1.8] mb-8">
                   Sebagai rakan vendor rasmi kami, JomKaki Motor menjadi
-                  destinasi utama anda untuk mengakses pembiayaan Hire Purchase
+                  destinasi utama anda untuk mengakses pembiayaan Sewa Beli
                   (HP) kami. Sama ada anda ingin turun ke jalan raya dengan
                   motosikal baharu atau menaik taraf peranti dengan smartphone
                   terkini, anda boleh memohon dan menggunakan pelan pembiayaan
@@ -406,7 +406,7 @@ export default function AboutMs() {
               </div>
               <div>
                 <h2 className="text-[20px] md:text-[24px] font-bold text-white mb-2">
-                  Bersedia untuk bermula?
+                  Bersedia untuk Bermula?
                 </h2>
                 <p className="text-[13px] md:text-[14px] text-white/55 max-w-[400px] leading-relaxed">
                   Sertai ribuan rakyat Malaysia yang telah mempercayai First Class Credit untuk menguasai perjalanan kewangan mereka.
@@ -426,7 +426,7 @@ export default function AboutMs() {
                 href="/ms/contact"
                 className="text-white/55 text-[13px] md:text-[14px] font-medium hover:text-white transition-colors duration-300 flex items-center gap-1"
               >
-                Hubungi pasukan kami
+                Hubungi Pasukan Kami
               </Link>
             </div>
           </div>

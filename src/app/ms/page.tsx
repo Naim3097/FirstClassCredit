@@ -15,9 +15,9 @@ const heroSlides = [
     eyebrowColor: "text-[#47A7DD]",
     title: (
       <>
-        Motosikal baharu anda,
+        Motosikal Baharu Anda,
         <br />
-        dibiayai dengan cara yang mudah
+        Dibiayai dengan Cara yang Mudah
       </>
     ),
     body: "Pembiayaan Hire Purchase motosikal berlesen di Kuching. Margin sehingga 90%, tempoh sehingga 60 bulan, kadar tetap tanpa kejutan.",
@@ -31,9 +31,9 @@ const heroSlides = [
     eyebrowColor: "text-[#FCDB81]",
     title: (
       <>
-        Pembiayaan bijak untuk
+        Pembiayaan Bijak untuk
         <br />
-        telefon pintar baharu anda
+        Telefon Pintar Baharu Anda
       </>
     ),
     body: "Biayai naik taraf teknologi anda dengan mudah. First Class Credit membawakan pembiayaan telefon pintar yang mudah diakses dan tanpa kerumitan, dengan terma fleksibel untuk Kuching dan sekitarnya.",
@@ -219,7 +219,7 @@ export default function HomeMs() {
                 Penyelesaian Pembiayaan
               </p>
               <h2 className="text-[28px] md:text-[34px] lg:text-[38px] font-semibold leading-[1.15] text-white tracking-[-0.01em]">
-                Menyokong perjalanan anda, kini dan seterusnya
+                Menyokong Perjalanan Anda, Kini dan Seterusnya
               </h2>
               <p className="text-[14px] text-white/55 leading-relaxed mt-5 max-w-xs">
                 Penyelesaian yang seiring dengan kehidupan anda. Mudah, fleksibel dan direka mengikut keperluan anda.
@@ -250,7 +250,7 @@ export default function HomeMs() {
                   </svg>
                 </div>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-white leading-snug mb-3">
-                  Teruskan perjalanan dengan motosikal baharu anda
+                  Teruskan Perjalanan dengan Motosikal Baharu Anda
                 </h3>
                 <p className="text-[14px] text-white/70 leading-relaxed">
                   Berhenti menunggu, mula menunggang. Dapatkan motosikal baharu atau terpakai anda dengan pembiayaan HP tanpa kerumitan dan pelan bayaran balik fleksibel sehingga 60 bulan.
@@ -284,7 +284,7 @@ export default function HomeMs() {
                   </svg>
                 </div>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-white leading-snug mb-3">
-                  Naik taraf telefon pintar anda
+                  Naik Taraf Telefon Pintar Anda
                 </h3>
                 <p className="text-[14px] text-white/65 leading-relaxed">
                   Dapatkan peranti terkini tanpa kos pendahuluan yang tinggi. Nikmati pelan pembiayaan yang fleksibel dan telus, direka untuk memastikan anda sentiasa terhubung.
@@ -326,7 +326,7 @@ export default function HomeMs() {
                   Kadar Kompetitif
                 </p>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  Kadar rata tetap, dikunci sepanjang tempoh
+                  Kadar Rata Tetap, Dikunci Sepanjang Tempoh
                 </h3>
                 <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
                   Nikmati kadar kompetitif dengan ketelusan sepenuhnya dari awal — tiada caj tersembunyi, tiada kejutan.
@@ -347,7 +347,7 @@ export default function HomeMs() {
                   Pembiayaan Margin Tinggi
                 </p>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  Dapatkan pembiayaan maksimum untuk pembelian anda
+                  Dapatkan Pembiayaan Maksimum untuk Pembelian Anda
                 </h3>
                 <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
                   Dapatkan sokongan maksimum yang anda perlukan dengan pilihan tempoh fleksibel yang disesuaikan dengan bajet dan gaya hidup anda.
@@ -366,7 +366,7 @@ export default function HomeMs() {
                   Kelulusan Pantas
                 </p>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  Pra-kelulusan dalam masa 24 hingga 48 jam
+                  Pra-kelulusan dalam Masa 24 hingga 48 Jam
                 </h3>
                 <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
                   Hantar dokumen anda dan bergerak lebih pantas. Pasukan kami menyemak setiap permohonan dengan segera supaya anda tidak menunggu lama.
@@ -385,7 +385,7 @@ export default function HomeMs() {
                   Fleksibel &amp; Telus
                 </p>
                 <h3 className="text-[19px] md:text-[20px] font-semibold text-[#272A33] leading-snug mb-3">
-                  Kami menilai lebih daripada skor kredit anda
+                  Kami Menilai Lebih daripada Skor Kredit Anda
                 </h3>
                 <p className="text-[14px] text-[var(--text-secondary)] leading-relaxed">
                   Kami menilai potensi semasa dan kestabilan kewangan anda. Pendekatan yang jujur &amp; telus dalam mencari penyelesaian.
@@ -452,7 +452,7 @@ export default function HomeMs() {
                 Soalan Lazim
               </p>
               <h2 className="text-[28px] md:text-[34px] lg:text-[38px] font-semibold text-[#272A33] leading-[1.15] tracking-[-0.01em]">
-                Soalan lazim, <br />jawapan jelas
+                Soalan Lazim, <br />Jawapan Jelas
               </h2>
             </Reveal>
             <div className="lg:col-span-8">
@@ -497,7 +497,7 @@ export default function HomeMs() {
               <div className="relative flex flex-col md:flex-row md:items-center gap-8 md:gap-10">
                 <div className="flex-1">
                   <h2 className="text-[26px] md:text-[34px] lg:text-[38px] font-semibold text-white leading-[1.15] tracking-[-0.01em]">
-                    Bersedia untuk membiayai pencapaian anda yang seterusnya?
+                    Bersedia untuk Membiayai Pencapaian Anda yang Seterusnya?
                   </h2>
                   <p className="text-[14px] md:text-[15px] text-white/70 mt-3 max-w-md">
                     Mulakan permohonan anda dalam masa 5 minit sahaja.

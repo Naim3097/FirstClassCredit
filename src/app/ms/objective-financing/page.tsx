@@ -68,7 +68,7 @@ export default function SmartphoneFinancingMs() {
               Pembiayaan Sewa Beli Telefon Pintar First Class
             </p>
             <h1 className="text-[32px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.05] text-white tracking-[-0.02em] mb-5 md:mb-6">
-              Cara bijak untuk<br className="hidden sm:block" /> naik taraf telefon anda
+              Cara Bijak untuk<br className="hidden sm:block" /> Menaik Taraf Telefon Anda
             </h1>
             <p className="text-[14px] md:text-[16px] text-white/70 max-w-[460px] mb-8 md:mb-10 leading-[1.65]">
               Pembiayaan yang pantas dan telus untuk peranti flagship terkini.
@@ -170,7 +170,7 @@ export default function SmartphoneFinancingMs() {
               Barisan Produk
             </p>
             <h2 className="text-[26px] md:text-[34px] lg:text-[40px] font-bold text-white leading-[1.1] tracking-tight mb-4">
-              iPhone 17 Full Lineup, sedia untuk anda
+              iPhone 17 Full Lineup, Sedia untuk Anda
             </h2>
             <p className="text-[14px] md:text-[15px] text-white/65 leading-relaxed">
               Pilih model yang sesuai untuk anda. Mohon hari ini dan naik taraf
@@ -349,7 +349,7 @@ export default function SmartphoneFinancingMs() {
                 Rancang bajet anda
               </p>
               <h2 className="text-[26px] md:text-[32px] lg:text-[34px] font-bold text-white leading-[1.15] tracking-tight mb-4 md:mb-5">
-                Lihat Bagaimana Ia<br /> Sesuai Dengan Anda
+                Lihat Bagaimana Ia<br /> Sesuai dengan Anda
               </h2>
               <p className="text-[14px] md:text-[15px] text-white/65 leading-relaxed max-w-md mb-5 md:mb-6">
                 Gunakan kalkulator kami untuk menganggarkan ansuran bulanan
@@ -384,7 +384,7 @@ export default function SmartphoneFinancingMs() {
               Cara memohon
             </p>
             <h2 className="text-[26px] md:text-[32px] lg:text-[36px] font-bold text-[#272A33] leading-[1.15] tracking-tight max-w-[640px] mx-auto">
-              Langkah mudah ke arah naik taraf anda
+              Langkah Mudah ke Arah Naik Taraf Anda
             </h2>
           </Reveal>
 
@@ -408,7 +408,7 @@ export default function SmartphoneFinancingMs() {
               },
               {
                 n: 2,
-                title: "Permohonan Dalam Talian Pantas",
+                title: "Permohonan dalam Talian Pantas",
                 desc: "Isi borang permohonan 5 minit kami dengan butiran peribadi dan pekerjaan anda.",
                 icon: (
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -513,7 +513,7 @@ export default function SmartphoneFinancingMs() {
                 </div>
                 <div>
                   <h2 className="text-[20px] md:text-[24px] lg:text-[26px] font-semibold text-white leading-snug tracking-tight">
-                    Bersedia untuk naik taraf telefon anda?
+                    Bersedia untuk Menaik Taraf Telefon Anda?
                   </h2>
                   <p className="text-[13px] md:text-[14px] text-white/65 mt-1">
                     Mulakan permohonan anda dalam masa 5 minit sahaja.
