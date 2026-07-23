@@ -29,7 +29,7 @@ export const blogPosts: BlogPost[] = [
     body: [
       {
         type: "p",
-        text: "A Hire Purchase (HP) agreement is one of the biggest financial commitments most Malaysians will make outside of a home loan. Whether it is your first commuter bike or an upgrade to a bigger motorcycle, signing the dotted line locks you in for years. Before you do, run through this five-point checklist to protect your wallet and your peace of mind.",
+        text: "A Hire Purchase (HP) agreement is one of the biggest financial commitments most Malaysians will make outside of a home loan. Whether it is your first commuter bike or an upgrade to a bigger motorcycle, signing on the dotted line locks you in for years. Before you do, run through this five-point checklist to protect your wallet and your peace of mind.",
       },
       {
         type: "h2",
@@ -37,7 +37,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "The “Amount Financed” is the figure the financier (the Owner) actually lends you — not the motorcycle's sticker price. The “Margin of Financing” is the percentage of the motorcycle price being financed (the rest is your downpayment). Under the Hire Purchase Act 1967 this can go up to 90%. Make sure these two numbers match what you discussed with the dealer.",
+        text: "The “Amount Financed” is the figure the financier (the Owner) actually lends you — not the motorcycle's sticker price. The “Margin of Financing” is the percentage of the motorcycle price being financed (the rest is your downpayment). Under the Hire Purchase Act 1967, this can go up to 90%. Make sure these two numbers match what you discussed with the dealer.",
       },
       {
         type: "h2",
@@ -82,7 +82,7 @@ export const blogPosts: BlogPost[] = [
         type: "ul",
         items: [
           "Late payment: A penalty of 8% per annum on the arrears, calculated daily, is standard.",
-          "Repossession: By law, the Owner can only repossess after you have defaulted on two successive instalments and served you a Fourth Schedule notice (21 days).",
+          "Repossession: By law, the Owner can only repossess after you have defaulted on two successive instalments and the Owner has served you a Fourth Schedule notice (21 days).",
           "Early settlement: You are entitled to a statutory rebate. The formula is Rebate = [RP × (RP+1)] / [OP × (OP+1)] × Total Term Charges, where RP is remaining months and OP is the original tenure.",
         ],
       },
@@ -144,7 +144,7 @@ export const blogPosts: BlogPost[] = [
           "Pull your own report. Get a free CCRIS report from Bank Negara's eCCRIS portal and check your CTOS score — fix any errors.",
           "Settle small overdue balances. Even RM50 in arrears on a credit card hurts your record disproportionately.",
           "Don't apply everywhere at once. Multiple loan inquiries in a short window are a red flag.",
-          "Save for a bigger downpayment. Going from 10% to 19% (a 81.30% margin instead of 90%) noticeably improves your odds.",
+          "Save for a bigger downpayment. Going from 10% to 19% (an 81.30% margin instead of 90%) noticeably improves your odds.",
           "Have your documents ready. NRIC, latest 3 months' payslips, EPF/bank statements — a complete file gets reviewed faster.",
         ],
       },

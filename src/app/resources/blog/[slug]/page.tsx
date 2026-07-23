@@ -180,7 +180,7 @@ export default async function BlogPostPage({
               Keep Reading
             </p>
             <h2 className="text-[24px] md:text-[30px] font-bold text-[#0d2461] mb-8">
-              More from the blog
+              More from the Blog
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {others.map((p) => (

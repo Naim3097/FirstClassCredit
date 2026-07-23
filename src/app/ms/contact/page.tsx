@@ -59,7 +59,7 @@ export default function ContactMs() {
               Hubungi
             </p>
             <h1 className="text-[34px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.05] text-white tracking-[-0.02em] mb-5 md:mb-6">
-              Jom hubungi<br className="hidden sm:block" /> kami
+              Jom Hubungi<br className="hidden sm:block" /> Kami
             </h1>
             <p className="text-[14px] md:text-[16px] text-white/70 max-w-[440px] mb-8 md:mb-10 leading-[1.65]">
               Sama ada anda ingin tahu lebih lanjut tentang pilihan pembiayaan kami atau perlukan bantuan dengan permohonan anda, kami sentiasa bersedia membantu. Hubungi kami hari ini!

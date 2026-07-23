@@ -38,7 +38,7 @@ export const blogPostsMs: BlogPost[] = [
       },
       {
         type: "h2",
-        text: "4. Kira Semua Fi, Duti Setem dan Insurance",
+        text: "4. Kira Semua Fi, Duti Setem dan Insurans",
       },
       { type: "p", text: "Selain jumlah pokok dan faedah, jangkakan:" },
       {
@@ -47,7 +47,7 @@ export const blogPostsMs: BlogPost[] = [
           "Duti Setem: RM20 (tanpa penjamin) atau RM60 (dengan penjamin)",
           "Caj e-Hakmilik: RM3",
           "Pos: RM10",
-          "Insurance/Takaful Komprehensif (diwajibkan di bawah Akta Sewa Beli 1967, sehingga penyelesaian penuh)",
+          "Insurans/Takaful Komprehensif (diwajibkan di bawah Akta Sewa Beli 1967, sehingga penyelesaian penuh)",
         ],
       },
       {
@@ -107,7 +107,7 @@ export const blogPostsMs: BlogPost[] = [
       },
       {
         type: "h2",
-        text: "Persoalan Besarnya: Bolehkah Anda Masih Mendapat Pinjaman Motosikal?",
+        text: "Persoalan Utama: Bolehkah Anda Masih Mendapat Pinjaman Motosikal?",
       },
       {
         type: "p",
@@ -133,7 +133,7 @@ export const blogPostsMs: BlogPost[] = [
           "Sediakan dokumen anda awal-awal. NRIC, slip gaji 3 bulan terkini, penyata KWSP/bank — fail yang lengkap disemak dengan lebih pantas.",
         ],
       },
-      { type: "h2", text: "Di Mana First Class Credit Membantu" },
+      { type: "h2", text: "Bagaimana First Class Credit Membantu" },
       {
         type: "p",
         text: "Kami pakar dalam membantu rakyat Malaysia yang kisah kredit mereka lebih rumit daripada sekadar satu angka. Proses kami pantas (pra-kelulusan dalam 24–48 jam), kadar kami tetap dan didedahkan secara bertulis melalui PDS, dan hak anda sebagai pengguna dilindungi oleh Akta Sewa Beli 1967 sejak hari pertama.",

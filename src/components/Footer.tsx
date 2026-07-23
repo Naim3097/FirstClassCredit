@@ -53,7 +53,7 @@ const FOOTER = {
   ms: {
     tagline1: "Pembiayaan Anda, Keutamaan Kami.",
     tagline2:
-      "Rakan pembiayaan sewa beli yang anda boleh percaya di Malaysia.",
+      "Rakan pembiayaan sewa beli yang anda boleh percayai di Malaysia.",
     navigate: "Navigasi",
     home: "Utama",
     moto: "Pembiayaan Sewa Beli Motosikal First Class",
