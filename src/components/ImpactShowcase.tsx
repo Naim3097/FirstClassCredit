@@ -4,18 +4,20 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "./ScrollAnimations";
+import { Icon } from "./icons";
 import { localizeHref, type Locale } from "@/lib/locale";
+import type { IconKey } from "@/fields/iconOptions";
 
 type Variant = "navy" | "light";
 
-interface Stat {
+export interface ImpactStat {
   value: string;
   label: string;
   variant: Variant;
-  icon: React.ReactNode;
+  icon: IconKey | string;
 }
 
-interface Service {
+export interface ImpactService {
   key: "motorcycle" | "smartphone";
   tab: string;
   heading: string;
@@ -28,45 +30,21 @@ interface Service {
     eyebrow: string;
     text: string;
   };
-  stats: Stat[];
+  stats: ImpactStat[];
 }
 
-const calendarIcon = (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3.5" y="5" width="17" height="15" rx="2" />
-    <path d="M3.5 9.5h17M8 3v4M16 3v4" />
-  </svg>
-);
-const boltIcon = (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />
-  </svg>
-);
-const percentIcon = (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="6" y1="18" x2="18" y2="6" />
-    <circle cx="7.5" cy="7.5" r="2" />
-    <circle cx="16.5" cy="16.5" r="2" />
-  </svg>
-);
-const clockIcon = (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="9" />
-    <path d="M12 7v5l3 2" />
-  </svg>
-);
-const appleIcon = (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.46z" />
-  </svg>
-);
+export interface ImpactData {
+  eyebrow: string;
+  services: ImpactService[];
+}
 
 const EYEBROW: Record<Locale, string> = {
   en: "Our Impact",
   ms: "Impak Kami",
 };
 
-const SERVICES: Record<Locale, Service[]> = {
+// Built-in fallback content — used until the "Our Impact" global is populated.
+const SERVICES: Record<Locale, ImpactService[]> = {
   en: [
     {
       key: "motorcycle",
@@ -81,10 +59,10 @@ const SERVICES: Record<Locale, Service[]> = {
         text: "Driving Malaysians forward with simple, transparent motorcycle HP financing.",
       },
       stats: [
-        { value: "90%", label: "Maximum financing margin", variant: "navy", icon: clockIcon },
-        { value: "60", label: "Months maximum tenure", variant: "light", icon: calendarIcon },
-        { value: "24–48h", label: "Pre-approval turnaround", variant: "light", icon: boltIcon },
-        { value: "10%", label: "Fixed interest per annum", variant: "light", icon: percentIcon },
+        { value: "90%", label: "Maximum financing margin", variant: "navy", icon: "clock" },
+        { value: "60", label: "Months maximum tenure", variant: "light", icon: "calendar" },
+        { value: "24–48h", label: "Pre-approval turnaround", variant: "light", icon: "bolt" },
+        { value: "10%", label: "Fixed interest per annum", variant: "light", icon: "percent" },
       ],
     },
     {
@@ -100,10 +78,10 @@ const SERVICES: Record<Locale, Service[]> = {
         text: "Own the latest device today and spread the cost with confidence.",
       },
       stats: [
-        { value: "36", label: "Months maximum tenure", variant: "light", icon: calendarIcon },
-        { value: "24–48h", label: "Pre-approval turnaround", variant: "light", icon: boltIcon },
-        { value: "10%", label: "Per annum effective interest rate", variant: "navy", icon: percentIcon },
-        { value: "", label: "iPhone 17 Full Lineup Now Available", variant: "navy", icon: appleIcon },
+        { value: "36", label: "Months maximum tenure", variant: "light", icon: "calendar" },
+        { value: "24–48h", label: "Pre-approval turnaround", variant: "light", icon: "bolt" },
+        { value: "10%", label: "Per annum effective interest rate", variant: "navy", icon: "percent" },
+        { value: "", label: "iPhone 17 Full Lineup Now Available", variant: "navy", icon: "apple" },
       ],
     },
   ],
@@ -121,10 +99,10 @@ const SERVICES: Record<Locale, Service[]> = {
         text: "Membawa rakyat Malaysia ke hadapan dengan pembiayaan sewa beli motosikal yang mudah dan telus.",
       },
       stats: [
-        { value: "90%", label: "Margin pembiayaan maksimum", variant: "navy", icon: clockIcon },
-        { value: "60", label: "Bulan tempoh maksimum", variant: "light", icon: calendarIcon },
-        { value: "24–48j", label: "Tempoh pra-kelulusan", variant: "light", icon: boltIcon },
-        { value: "10%", label: "Faedah tetap setahun", variant: "light", icon: percentIcon },
+        { value: "90%", label: "Margin pembiayaan maksimum", variant: "navy", icon: "clock" },
+        { value: "60", label: "Bulan tempoh maksimum", variant: "light", icon: "calendar" },
+        { value: "24–48j", label: "Tempoh pra-kelulusan", variant: "light", icon: "bolt" },
+        { value: "10%", label: "Faedah tetap setahun", variant: "light", icon: "percent" },
       ],
     },
     {
@@ -140,16 +118,16 @@ const SERVICES: Record<Locale, Service[]> = {
         text: "Miliki peranti terkini hari ini dan bayar secara ansuran dengan penuh yakin.",
       },
       stats: [
-        { value: "36", label: "Bulan tempoh maksimum", variant: "light", icon: calendarIcon },
-        { value: "24–48j", label: "Tempoh pra-kelulusan", variant: "light", icon: boltIcon },
-        { value: "10%", label: "Kadar faedah efektif setahun", variant: "navy", icon: percentIcon },
-        { value: "", label: "iPhone 17 Full Lineup Kini Tersedia", variant: "navy", icon: appleIcon },
+        { value: "36", label: "Bulan tempoh maksimum", variant: "light", icon: "calendar" },
+        { value: "24–48j", label: "Tempoh pra-kelulusan", variant: "light", icon: "bolt" },
+        { value: "10%", label: "Kadar faedah efektif setahun", variant: "navy", icon: "percent" },
+        { value: "", label: "iPhone 17 Full Lineup Kini Tersedia", variant: "navy", icon: "apple" },
       ],
     },
   ],
 };
 
-function StatCard({ stat }: { stat: Stat }) {
+function StatCard({ stat }: { stat: ImpactStat }) {
   const navy = stat.variant === "navy";
   return (
     <div
@@ -162,7 +140,7 @@ function StatCard({ stat }: { stat: Stat }) {
           navy ? "bg-white/10 text-[#FCDB81]" : "bg-white text-[#253A7D]"
         }`}
       >
-        {stat.icon}
+        <Icon name={stat.icon} size={18} />
       </div>
       {stat.value ? (
         <div className="min-w-0 flex-1 lg:flex lg:items-center lg:gap-3">
@@ -196,10 +174,19 @@ function StatCard({ stat }: { stat: Stat }) {
   );
 }
 
-export default function ImpactShowcase({ locale = "en" }: { locale?: Locale }) {
-  const [active, setActive] = useState<Service["key"]>("motorcycle");
-  const services = SERVICES[locale];
-  const service = services.find((s) => s.key === active)!;
+export default function ImpactShowcase({
+  locale = "en",
+  impact,
+}: {
+  locale?: Locale;
+  impact?: ImpactData | null;
+}) {
+  const services =
+    impact && impact.services.length > 0 ? impact.services : SERVICES[locale];
+  const eyebrow = impact?.eyebrow || EYEBROW[locale];
+
+  const [active, setActive] = useState<ImpactService["key"]>("motorcycle");
+  const service = services.find((s) => s.key === active) ?? services[0];
 
   return (
     <section className="py-20 md:py-28 bg-white">
@@ -207,7 +194,7 @@ export default function ImpactShowcase({ locale = "en" }: { locale?: Locale }) {
         {/* Header */}
         <Reveal className="mb-9 md:mb-12 max-w-2xl">
           <p className="text-[11px] font-semibold uppercase tracking-[2.5px] text-[#2C76BB] mb-5">
-            {EYEBROW[locale]}
+            {eyebrow}
           </p>
 
           {/* Segmented service toggle */}
@@ -256,12 +243,14 @@ export default function ImpactShowcase({ locale = "en" }: { locale?: Locale }) {
           <div key={`bento-${active}`} className="impact-swap grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6">
             {/* Wide image plate */}
             <div className="lg:col-span-8 relative rounded-2xl overflow-hidden h-[260px] md:h-[340px] lg:h-auto lg:min-h-[420px] shadow-[0_20px_60px_-30px_rgba(13,36,97,0.35)]">
-              <Image
-                src={service.plate.image}
-                alt={service.plate.alt}
-                fill
-                className="object-cover object-center"
-              />
+              {service.plate.image && (
+                <Image
+                  src={service.plate.image}
+                  alt={service.plate.alt}
+                  fill
+                  className="object-cover object-center"
+                />
+              )}
               <div
                 className="absolute inset-0"
                 style={{
@@ -288,8 +277,8 @@ export default function ImpactShowcase({ locale = "en" }: { locale?: Locale }) {
 
             {/* Right: stat cards (mobile 2-col, desktop 1-col) */}
             <div className="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-3">
-              {service.stats.map((stat) => (
-                <StatCard key={stat.label} stat={stat} />
+              {service.stats.map((stat, i) => (
+                <StatCard key={`${stat.label}-${i}`} stat={stat} />
               ))}
             </div>
           </div>

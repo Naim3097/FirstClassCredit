@@ -4,7 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getLocale, localizeHref, toggleLocalePath } from "@/lib/locale";
+import { getLocale, localizeHref, toggleLocalePath, type Locale } from "@/lib/locale";
+
+type SvcItem = { name: string; href: string };
+export type NavServices = Record<Locale, SvcItem[]>;
 
 const NAV = {
   en: {
@@ -37,7 +40,7 @@ const NAV = {
   },
 } as const;
 
-export default function Navbar() {
+export default function Navbar({ services }: { services?: NavServices }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -45,11 +48,16 @@ export default function Navbar() {
 
   const locale = getLocale(pathname);
   const t = NAV[locale];
+  // Prefer CMS-managed services; fall back to the built-in list when empty.
+  const svc: SvcItem[] =
+    services?.[locale] && services[locale].length > 0
+      ? services[locale]
+      : (t.svc as unknown as SvcItem[]);
   const homeHref = localizeHref("/", locale);
   const applyHref = localizeHref("/apply", locale);
   const otherHref = toggleLocalePath(pathname);
   const otherLabel = locale === "ms" ? "EN" : "BM";
-  const servicesActive = t.svc.some(
+  const servicesActive = svc.some(
     (s) => pathname === localizeHref(s.href, locale)
   );
 
@@ -143,7 +151,7 @@ export default function Navbar() {
             {/* Hover bridge + panel */}
             <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-[300px] opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
               <div className="bg-white rounded-xl shadow-[0_16px_48px_-12px_rgba(13,36,97,0.28)] border border-[#eef0f5] p-2">
-                {t.svc.map((s) => {
+                {svc.map((s) => {
                   const href = localizeHref(s.href, locale);
                   return (
                     <Link
@@ -155,7 +163,7 @@ export default function Navbar() {
                           : "text-[#272A33]/80 hover:bg-[#f4f6fb] hover:text-[#2C76BB]"
                       }`}
                     >
-                      {s.label}
+                      {s.name}
                     </Link>
                   );
                 })}
@@ -298,7 +306,7 @@ export default function Navbar() {
               }`}
             >
               <div className="flex flex-col gap-1 pl-4 border-l-2 border-[#E8F1FB] py-1">
-                {t.svc.map((s) => {
+                {svc.map((s) => {
                   const href = localizeHref(s.href, locale);
                   return (
                     <Link
@@ -309,7 +317,7 @@ export default function Navbar() {
                         pathname === href ? "text-[#2C76BB]" : "text-[#272A33]/75"
                       }`}
                     >
-                      {s.label}
+                      {s.name}
                     </Link>
                   );
                 })}

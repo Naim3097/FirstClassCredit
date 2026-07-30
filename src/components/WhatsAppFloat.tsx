@@ -1,7 +1,11 @@
-export default function WhatsAppFloat() {
+export default function WhatsAppFloat({
+  number = "60169328901",
+}: {
+  number?: string;
+}) {
   return (
     <a
-      href="https://wa.me/60169328901"
+      href={`https://wa.me/${number}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
