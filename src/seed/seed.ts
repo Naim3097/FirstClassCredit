@@ -842,6 +842,175 @@ async function seed() {
   }
 
   // ─────────────────────────────────────────────────────────────────────
+  // COLLECTION: Financing Pages — a duplicatable product-page template
+  // ─────────────────────────────────────────────────────────────────────
+  if (await isEmpty("financing-pages")) {
+    const faqEn = smartphoneFAQ.slice(0, 5);
+    const faqMs = smartphoneFAQms.slice(0, 5);
+
+    const created = await payload.create({
+      collection: "financing-pages",
+      locale: "en",
+      data: {
+        title: "Smartphone HP Financing",
+        slug: "smartphone-hp",
+        enabled: true,
+        hero: {
+          eyebrow: "First Class Smartphone HP Financing",
+          accent: "gold",
+          title: "The Smart Way to\nUpgrade Your Phone",
+          body: "Fast, transparent financing for the latest flagship devices. Enjoy flexible monthly payments for up to 36 months.",
+          backgroundImageUrl: "/iphone-background-2.png",
+          applyHref: "/apply?type=smartphone",
+          applyLabel: "Apply Now",
+        },
+        whyUs: {
+          heading: "Why Choose\nFirst Class Credit?",
+          cards: [
+            { icon: "chart", title: "Competitive Fixed Rate", desc: "A locked-in fixed flat rate so you can plan your monthly cash flow without any surprise fluctuations." },
+            { icon: "income", title: "Low Upfront Cost", desc: "Get your hands on premium smartphones without draining your savings." },
+            { icon: "bolt", title: "Quick Turnaround", desc: "Pre-approval status within 24–48 hours of document submission." },
+            { icon: "shield", title: "100% Genuine Devices", desc: "All smartphones are guaranteed authentic, brand new, and come with standard manufacturer warranties." },
+          ],
+        },
+        lineup: {
+          enabled: true,
+          eyebrow: "The Lineup",
+          heading: "The Complete iPhone 17 Lineup, Ready for You",
+          body: "Choose your perfect model. Apply today and upgrade to Apple's most advanced iPhones yet.",
+          products: [
+            { imageUrl: "/iphone-17e.jpg", name: "iPhone 17e", desc: "Sleek, ultra-slim, and packed with essential next-gen features.", applyHref: "/apply?type=smartphone" },
+            { imageUrl: "/iphone-17.jpg", name: "iPhone 17", desc: "The perfect balance of power and everyday design.", applyHref: "/apply?type=smartphone" },
+            { imageUrl: "/iphone-17-pro.jpg", name: "iPhone 17 Pro", desc: "Pro-level cameras and ultimate performance in a premium titanium finish.", applyHref: "/apply?type=smartphone" },
+            { imageUrl: "/iphone-17-pro-max.jpg", name: "iPhone 17 Pro Max", desc: "The ultimate iPhone experience with the largest display and maximum power.", applyHref: "/apply?type=smartphone" },
+          ],
+        },
+        eligibility: {
+          eyebrow: "Before You Apply",
+          heading: "Eligibility &\nDocuments",
+          intro: "Make sure you meet the requirements below before you start your application.",
+          checkLabel: "Check If You Qualify",
+          checkHref: "/apply?type=smartphone",
+          pdsLabel: "View the Product Disclosure Sheet (PDS)",
+          pdsUrl: "/smartphone-hp-pds.pdf",
+          rows: [
+            { icon: "person", label: "Nationality", value: "Malaysian Citizen" },
+            { icon: "calendar", label: "Age", value: "18 to 65 years old" },
+            { icon: "income", label: "Minimum Income", value: "RM1,300 basic monthly salary" },
+            { icon: "document", label: "Documents", value: "Copy of NRIC, latest 3 months’ payslips or latest EPF statement, latest 3 months’ salary crediting bank statements and bank proof" },
+          ],
+        },
+        calculator: {
+          enabled: true,
+          eyebrow: "Plan your budget",
+          heading: "See How It Fits\nYour Plan",
+          body: "Use our calculator to estimate your monthly instalments. Adjust the amount financed and tenure to find a repayment plan that suits you.",
+          minAmount: 3000,
+          maxAmount: 10000,
+          step: 500,
+          defaultAmount: 4000,
+          defaultTenure: 24,
+          tenures: "12,24,36",
+          pdsUrl: "/smartphone-hp-pds.pdf",
+        },
+        faq: faqEn.map((f) => ({
+          question: f.question,
+          answer: answerToRichText(f.answer),
+        })),
+        cta: {
+          heading: "Ready to Upgrade Your Phone?",
+          body: "Apply in minutes and get pre-approval within 24–48 hours.",
+          buttonLabel: "Apply Now",
+          buttonHref: "/apply?type=smartphone",
+        },
+      },
+    });
+
+    // MS locale — reuse the EN array row ids so localized values line up.
+    const saved = await payload.findByID({
+      collection: "financing-pages",
+      id: created.id,
+      locale: "en",
+      depth: 0,
+    });
+    await payload.update({
+      collection: "financing-pages",
+      id: created.id,
+      locale: "ms",
+      data: {
+        hero: {
+          eyebrow: "Pembiayaan Sewa Beli Telefon Pintar First Class",
+          title: "Cara Bijak untuk\nMenaik Taraf Telefon Anda",
+          body: "Pembiayaan yang pantas dan telus untuk peranti flagship terkini. Nikmati bayaran bulanan yang fleksibel sehingga 36 bulan.",
+          applyLabel: "Mohon Sekarang",
+        },
+        whyUs: {
+          heading: "Mengapa Pilih\nFirst Class Credit?",
+          cards: attachIds(
+            [
+              { title: "Kadar Tetap Kompetitif", desc: "Kadar rata tetap yang dikunci supaya anda boleh merancang aliran tunai bulanan tanpa sebarang turun naik yang mengejutkan." },
+              { title: "Kos Pendahuluan Rendah", desc: "Miliki telefon pintar premium tanpa menghabiskan simpanan anda." },
+              { title: "Kelulusan Pantas", desc: "Status pra-kelulusan dalam masa 24–48 jam selepas dokumen dihantar." },
+              { title: "100% Peranti Tulen", desc: "Semua telefon pintar dijamin tulen, baharu, dan disertakan waranti pengeluar standard." },
+            ],
+            saved.whyUs?.cards,
+          ),
+        },
+        lineup: {
+          eyebrow: "Barisan Produk",
+          heading: "Barisan Lengkap iPhone 17, Sedia untuk Anda",
+          body: "Pilih model yang sempurna untuk anda. Mohon hari ini dan naik taraf ke iPhone Apple paling canggih.",
+          products: attachIds(
+            [
+              { name: "iPhone 17e", desc: "Kemas, sangat nipis, dan sarat dengan ciri generasi baharu yang penting." },
+              { name: "iPhone 17", desc: "Keseimbangan sempurna antara kuasa dan reka bentuk harian." },
+              { name: "iPhone 17 Pro", desc: "Kamera bertaraf pro dan prestasi terunggul dalam kemasan titanium premium." },
+              { name: "iPhone 17 Pro Max", desc: "Pengalaman iPhone terunggul dengan paparan terbesar dan kuasa maksimum." },
+            ],
+            saved.lineup?.products,
+          ),
+        },
+        eligibility: {
+          eyebrow: "Sebelum Anda Memohon",
+          heading: "Kelayakan &\nDokumen",
+          intro: "Pastikan anda memenuhi syarat di bawah sebelum memulakan permohonan anda.",
+          checkLabel: "Semak Kelayakan Anda",
+          pdsLabel: "Lihat Product Disclosure Sheet (PDS)",
+          rows: attachIds(
+            [
+              { label: "Warganegara", value: "Warganegara Malaysia" },
+              { label: "Umur", value: "18 hingga 65 tahun" },
+              { label: "Pendapatan Minimum", value: "Gaji bulanan asas RM1,300" },
+              { label: "Dokumen", value: "Salinan NRIC, slip gaji 3 bulan terkini atau penyata KWSP terkini, penyata bank pengkreditan gaji 3 bulan terkini dan bukti bank." },
+            ],
+            saved.eligibility?.rows,
+          ),
+        },
+        calculator: {
+          eyebrow: "Rancang bajet anda",
+          heading: "Lihat Bagaimana Ia Sesuai\nDengan Rancangan Anda",
+          body: "Gunakan kalkulator kami untuk menganggarkan ansuran bulanan anda. Laraskan jumlah pembiayaan dan tempoh untuk mencari pelan bayaran balik yang sesuai.",
+        },
+        faq: attachIds(
+          faqMs.map((f) => ({
+            question: f.question,
+            answer: answerToRichText(f.answer),
+          })),
+          saved.faq,
+        ),
+        cta: {
+          heading: "Sedia untuk Menaik Taraf Telefon Anda?",
+          body: "Mohon dalam beberapa minit dan dapatkan pra-kelulusan dalam masa 24–48 jam.",
+          buttonLabel: "Mohon Sekarang",
+        },
+      },
+    });
+    console.log("✓ Financing Pages (template: smartphone-hp)");
+  } else {
+    console.log("• Financing Pages already present — skipped");
+  }
+
+  // ─────────────────────────────────────────────────────────────────────
   // GLOBALS: Terms of Service + Privacy Notice (from the existing pages)
   // ─────────────────────────────────────────────────────────────────────
   await payload.updateGlobal({

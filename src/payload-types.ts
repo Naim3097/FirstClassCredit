@@ -75,6 +75,7 @@ export interface Config {
     testimonials: Testimonial;
     'smartphone-products': SmartphoneProduct;
     'blog-posts': BlogPost;
+    'financing-pages': FinancingPage;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,6 +91,7 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'smartphone-products': SmartphoneProductsSelect<false> | SmartphoneProductsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
+    'financing-pages': FinancingPagesSelect<false> | FinancingPagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -406,6 +408,161 @@ export interface BlogPost {
   createdAt: string;
 }
 /**
+ * Product financing pages. Duplicate one to add a new product page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "financing-pages".
+ */
+export interface FinancingPage {
+  id: number;
+  /**
+   * Admin title, e.g. "Smartphone HP Financing".
+   */
+  title: string;
+  /**
+   * URL segment — the page lives at /financing/<slug>. Lowercase, dashes, e.g. "laptop-hp".
+   */
+  slug: string;
+  enabled?: boolean | null;
+  hero?: {
+    eyebrow?: string | null;
+    /**
+     * Colour of the eyebrow label.
+     */
+    accent?: ('gold' | 'sky') | null;
+    /**
+     * Use a line break for a two-line title.
+     */
+    title?: string | null;
+    body?: string | null;
+    backgroundImage?: (number | null) | Media;
+    /**
+     * Optional: external image URL, used if no upload is set.
+     */
+    backgroundImageUrl?: string | null;
+    applyHref?: string | null;
+    applyLabel?: string | null;
+  };
+  whyUs?: {
+    heading?: string | null;
+    cards?:
+      | {
+          icon?:
+            | (
+                | 'calendar'
+                | 'bolt'
+                | 'percent'
+                | 'clock'
+                | 'apple'
+                | 'person'
+                | 'document'
+                | 'income'
+                | 'shield'
+                | 'chart'
+              )
+            | null;
+          title?: string | null;
+          desc?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  lineup?: {
+    enabled?: boolean | null;
+    eyebrow?: string | null;
+    heading?: string | null;
+    body?: string | null;
+    products?:
+      | {
+          image?: (number | null) | Media;
+          /**
+           * Used if no upload is set.
+           */
+          imageUrl?: string | null;
+          name?: string | null;
+          desc?: string | null;
+          applyHref?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  eligibility?: {
+    eyebrow?: string | null;
+    heading?: string | null;
+    intro?: string | null;
+    checkLabel?: string | null;
+    checkHref?: string | null;
+    pdsLabel?: string | null;
+    pdsUrl?: string | null;
+    rows?:
+      | {
+          icon?:
+            | (
+                | 'calendar'
+                | 'bolt'
+                | 'percent'
+                | 'clock'
+                | 'apple'
+                | 'person'
+                | 'document'
+                | 'income'
+                | 'shield'
+                | 'chart'
+              )
+            | null;
+          label?: string | null;
+          value?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  calculator?: {
+    enabled?: boolean | null;
+    eyebrow?: string | null;
+    heading?: string | null;
+    body?: string | null;
+    minAmount?: number | null;
+    maxAmount?: number | null;
+    step?: number | null;
+    defaultAmount?: number | null;
+    defaultTenure?: number | null;
+    /**
+     * Comma-separated month options, e.g. 12,24,36.
+     */
+    tenures?: string | null;
+    pdsUrl?: string | null;
+  };
+  faq?:
+    | {
+        question: string;
+        answer?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  cta?: {
+    heading?: string | null;
+    body?: string | null;
+    buttonLabel?: string | null;
+    buttonHref?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -460,6 +617,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'blog-posts';
         value: number | BlogPost;
+      } | null)
+    | ({
+        relationTo: 'financing-pages';
+        value: number | FinancingPage;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -629,6 +790,109 @@ export interface BlogPostsSelect<T extends boolean = true> {
   imageUrl?: T;
   body?: T;
   callout?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "financing-pages_select".
+ */
+export interface FinancingPagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  enabled?: T;
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        accent?: T;
+        title?: T;
+        body?: T;
+        backgroundImage?: T;
+        backgroundImageUrl?: T;
+        applyHref?: T;
+        applyLabel?: T;
+      };
+  whyUs?:
+    | T
+    | {
+        heading?: T;
+        cards?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              desc?: T;
+              id?: T;
+            };
+      };
+  lineup?:
+    | T
+    | {
+        enabled?: T;
+        eyebrow?: T;
+        heading?: T;
+        body?: T;
+        products?:
+          | T
+          | {
+              image?: T;
+              imageUrl?: T;
+              name?: T;
+              desc?: T;
+              applyHref?: T;
+              id?: T;
+            };
+      };
+  eligibility?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        intro?: T;
+        checkLabel?: T;
+        checkHref?: T;
+        pdsLabel?: T;
+        pdsUrl?: T;
+        rows?:
+          | T
+          | {
+              icon?: T;
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+      };
+  calculator?:
+    | T
+    | {
+        enabled?: T;
+        eyebrow?: T;
+        heading?: T;
+        body?: T;
+        minAmount?: T;
+        maxAmount?: T;
+        step?: T;
+        defaultAmount?: T;
+        defaultTenure?: T;
+        tenures?: T;
+        pdsUrl?: T;
+      };
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        heading?: T;
+        body?: T;
+        buttonLabel?: T;
+        buttonHref?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

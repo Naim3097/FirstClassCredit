@@ -16,6 +16,7 @@ import type {
   Term,
   Privacy,
   ApplySetting,
+  FinancingPage,
 } from "@/payload-types";
 
 /**
@@ -212,6 +213,47 @@ export async function getBlogPosts(locale: Locale): Promise<BlogPost[]> {
   } catch (err) {
     warn("blog-posts", err);
     return [];
+  }
+}
+
+export async function getFinancingPages(
+  locale: Locale = "en",
+): Promise<FinancingPage[]> {
+  if (!dbConfigured()) return [];
+  try {
+    const payload = await client();
+    const res = await payload.find({
+      collection: "financing-pages",
+      where: { enabled: { equals: true } },
+      locale,
+      depth: 1,
+      limit: 100,
+    });
+    return res.docs;
+  } catch (err) {
+    warn("financing-pages", err);
+    return [];
+  }
+}
+
+export async function getFinancingPageBySlug(
+  slug: string,
+  locale: Locale = "en",
+): Promise<FinancingPage | null> {
+  if (!dbConfigured()) return null;
+  try {
+    const payload = await client();
+    const res = await payload.find({
+      collection: "financing-pages",
+      where: { slug: { equals: slug }, enabled: { equals: true } },
+      locale,
+      depth: 1,
+      limit: 1,
+    });
+    return res.docs[0] ?? null;
+  } catch (err) {
+    warn(`financing-page:${slug}`, err);
+    return null;
   }
 }
 

@@ -13,6 +13,7 @@ import { FAQs } from "./collections/FAQs";
 import { Services } from "./collections/Services";
 import { Testimonials } from "./collections/Testimonials";
 import { SmartphoneProducts } from "./collections/SmartphoneProducts";
+import { FinancingPages } from "./collections/FinancingPages";
 import { BlogPosts } from "./collections/BlogPosts";
 import { SiteSettings } from "./globals/SiteSettings";
 import { HomeImpact } from "./globals/HomeImpact";
@@ -50,6 +51,7 @@ export default buildConfig({
     Testimonials,
     SmartphoneProducts,
     BlogPosts,
+    FinancingPages,
   ],
   globals: [
     SiteSettings,

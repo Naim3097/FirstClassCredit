@@ -148,6 +148,21 @@ Everything the site shows is editable in `/admin`, in English and Bahasa Malaysi
 Every section falls back to sensible built‑in defaults, so the site never breaks
 if a field is left empty.
 
+### Adding a new product financing page (no developer needed)
+
+New financing products can get their own full page without any code changes:
+
+1. In `/admin`, open **Financing Pages** and click into the existing
+   **Smartphone HP Financing** entry.
+2. Click the **⋯ → Duplicate** button (top right).
+3. On the copy, change the **slug** (e.g. `laptop-hp`) and edit the hero, cards,
+   product lineup, eligibility table, calculator, FAQ, and CTA.
+4. Toggle **Published** on and save.
+
+The new page is immediately live at `/financing/<slug>` (and `/ms/financing/<slug>`
+for Bahasa Malaysia). Fill in both languages using the language switch in the
+admin top bar. Link to it from the navigation or homepage as needed.
+
 ---
 
 ## Notes & troubleshooting
