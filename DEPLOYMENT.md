@@ -143,10 +143,25 @@ Everything the site shows is editable in `/admin`, in English and Bahasa Malaysi
 - **Contact** – address, phone, WhatsApp, hours, map
 - **Resources** – blog articles and FAQs
 - **Legal** – Terms of Service, Privacy Notice
-- **Apply Forms** – enable/disable each financing form and edit its label
+- **Apply Forms** – enable/disable each financing form, edit its label, and
+  choose which questions it asks
 
 Every section falls back to sensible built‑in defaults, so the site never breaks
 if a field is left empty.
+
+### Removing a question from an application form
+
+**Apply Forms** has a tab per product — **Motorcycle Questions** and
+**Smartphone Questions**. Unticking a question hides it from `/apply` and
+`/ms/apply`, stops it being required, and leaves it out of the submitted lead
+and the WhatsApp summary. The two products are independent, so you can drop
+NRIC from the Smartphone application and keep it on Motorcycle.
+
+Untick every question under *Step 2 — Financial Profile* and that step is
+skipped entirely; the progress bar renumbers to two steps.
+
+Full Name, Phone Number and the PDPA consent have no toggle — they are the
+minimum needed to follow up on a lead lawfully.
 
 ### Adding a new product financing page (no developer needed)
 

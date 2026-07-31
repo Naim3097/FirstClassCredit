@@ -1276,7 +1276,7 @@ export interface Privacy {
   createdAt?: string | null;
 }
 /**
- * Enable/disable each financing application form and edit its label.
+ * Enable/disable each financing application form, edit its label, and choose which questions it asks.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "apply-settings".
@@ -1287,6 +1287,62 @@ export interface ApplySetting {
   motorcycleLabel?: string | null;
   smartphoneEnabled?: boolean | null;
   smartphoneLabel?: string | null;
+  motorcycleFields?: {
+    financingDetails?: {
+      condition?: boolean | null;
+      brand?: boolean | null;
+      year?: boolean | null;
+      tenure?: boolean | null;
+      price?: boolean | null;
+      downpayment?: boolean | null;
+    };
+    /**
+     * Turn every question in this step off and the step is skipped entirely.
+     */
+    financialProfile?: {
+      employment?: boolean | null;
+      salary?: boolean | null;
+      commitments?: boolean | null;
+      location?: boolean | null;
+      creditIssues?: boolean | null;
+    };
+    /**
+     * Full Name, Phone Number and the PDPA consent are always asked — they are the minimum needed to follow up on a lead lawfully.
+     */
+    personalDetails?: {
+      age?: boolean | null;
+      nric?: boolean | null;
+      email?: boolean | null;
+      preferredComm?: boolean | null;
+      payslip?: boolean | null;
+    };
+  };
+  smartphoneFields?: {
+    financingDetails?: {
+      deviceModel?: boolean | null;
+      smartphoneTenure?: boolean | null;
+    };
+    /**
+     * Turn every question in this step off and the step is skipped entirely.
+     */
+    financialProfile?: {
+      employment?: boolean | null;
+      salary?: boolean | null;
+      commitments?: boolean | null;
+      location?: boolean | null;
+      creditIssues?: boolean | null;
+    };
+    /**
+     * Full Name, Phone Number and the PDPA consent are always asked — they are the minimum needed to follow up on a lead lawfully.
+     */
+    personalDetails?: {
+      age?: boolean | null;
+      nric?: boolean | null;
+      email?: boolean | null;
+      preferredComm?: boolean | null;
+      payslip?: boolean | null;
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1470,6 +1526,66 @@ export interface ApplySettingsSelect<T extends boolean = true> {
   motorcycleLabel?: T;
   smartphoneEnabled?: T;
   smartphoneLabel?: T;
+  motorcycleFields?:
+    | T
+    | {
+        financingDetails?:
+          | T
+          | {
+              condition?: T;
+              brand?: T;
+              year?: T;
+              tenure?: T;
+              price?: T;
+              downpayment?: T;
+            };
+        financialProfile?:
+          | T
+          | {
+              employment?: T;
+              salary?: T;
+              commitments?: T;
+              location?: T;
+              creditIssues?: T;
+            };
+        personalDetails?:
+          | T
+          | {
+              age?: T;
+              nric?: T;
+              email?: T;
+              preferredComm?: T;
+              payslip?: T;
+            };
+      };
+  smartphoneFields?:
+    | T
+    | {
+        financingDetails?:
+          | T
+          | {
+              deviceModel?: T;
+              smartphoneTenure?: T;
+            };
+        financialProfile?:
+          | T
+          | {
+              employment?: T;
+              salary?: T;
+              commitments?: T;
+              location?: T;
+              creditIssues?: T;
+            };
+        personalDetails?:
+          | T
+          | {
+              age?: T;
+              nric?: T;
+              email?: T;
+              preferredComm?: T;
+              payslip?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

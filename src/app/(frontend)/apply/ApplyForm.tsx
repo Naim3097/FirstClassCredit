@@ -3,6 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import type { ApplyConfig } from "@/lib/applyConfig";
+
+export type { ApplyConfig };
 
 const malaysianStates = [
   "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan",
@@ -66,13 +69,6 @@ const initialForm = {
   pdpa: false,
 };
 
-export type ApplyConfig = {
-  motorcycleEnabled: boolean;
-  smartphoneEnabled: boolean;
-  motorcycleLabel: string;
-  smartphoneLabel: string;
-};
-
 export default function ApplyForm({ config }: { config: ApplyConfig }) {
   // Financing types the CMS has enabled, in display order.
   const financingOptions = [
@@ -92,7 +88,33 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const set = <K extends keyof typeof initialForm>(key: K, value: (typeof initialForm)[K]) =>
-    setForm((f) => ({ ...f, [key]: value }));
+    setForm((prev) => ({ ...prev, [key]: value }));
+
+  // Which questions this product asks — switched on/off in the CMS.
+  const fields =
+    financingType === "motorcycle"
+      ? config.motorcycleFields
+      : config.smartphoneFields;
+
+  // Step 2 disappears entirely when every question in it is switched off.
+  const hasStep2 =
+    fields.employment ||
+    fields.salary ||
+    fields.commitments ||
+    fields.location ||
+    fields.creditIssues;
+  const stepDefs = [
+    { num: 1, label: "Financing Details" },
+    ...(hasStep2 ? [{ num: 2, label: "Financial Profile" }] : []),
+    { num: 3, label: "Personal Details" },
+  ];
+  const stepAt = (offset: number) => {
+    const i = stepDefs.findIndex((s) => s.num === step);
+    const next = Math.min(Math.max(i + offset, 0), stepDefs.length - 1);
+    return stepDefs[next].num;
+  };
+  const goNext = () => setStep(stepAt(1));
+  const goBack = () => setStep(stepAt(-1));
 
   // Preselect the financing type from the URL (?type=smartphone) — e.g. when
   // a customer arrives from a Smartphone HP Financing CTA.
@@ -107,28 +129,31 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
   }, [config.smartphoneEnabled]);
 
   // ── Validation ──────────────────────────────────────────────────
+  // A hidden question is never required.
+  const need = (shown: boolean, filled: boolean) => !shown || filled;
   const step1Valid =
     financingType === "motorcycle"
-      ? !!form.condition &&
-        form.brand.trim().length > 0 &&
-        !!form.year &&
-        form.price.length > 0 &&
-        form.downpayment.length > 0 &&
-        !!form.tenure
-      : !!form.deviceModel && !!form.smartphoneTenure;
+      ? need(fields.condition, !!form.condition) &&
+        need(fields.brand, form.brand.trim().length > 0) &&
+        need(fields.year, !!form.year) &&
+        need(fields.price, form.price.length > 0) &&
+        need(fields.downpayment, form.downpayment.length > 0) &&
+        need(fields.tenure, !!form.tenure)
+      : need(fields.deviceModel, !!form.deviceModel) &&
+        need(fields.smartphoneTenure, !!form.smartphoneTenure);
   const step2Valid =
-    !!form.employment &&
-    form.salary.length > 0 &&
-    !!form.location &&
-    !!form.creditIssues;
+    need(fields.employment, !!form.employment) &&
+    need(fields.salary, form.salary.length > 0) &&
+    need(fields.location, !!form.location) &&
+    need(fields.creditIssues, !!form.creditIssues);
   const step3Valid =
     form.fullName.trim().length > 0 &&
-    form.age.length > 0 &&
-    form.nric.length === 12 &&
-    emailValid(form.email) &&
+    need(fields.age, form.age.length > 0) &&
+    need(fields.nric, form.nric.length === 12) &&
+    need(fields.email, emailValid(form.email)) &&
     form.phone.length >= 10 &&
     form.phone.length <= 12 &&
-    !!form.preferredComm &&
+    need(fields.preferredComm, !!form.preferredComm) &&
     form.pdpa;
   const allValid = step1Valid && step2Valid && step3Valid;
 
@@ -155,26 +180,54 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
       : "Smartphone HP Financing";
   const product =
     financingType === "motorcycle"
-      ? [form.brand, form.condition && `(${form.condition})`, form.year]
+      ? [
+          fields.brand && form.brand,
+          fields.condition && form.condition && `(${form.condition})`,
+          fields.year && form.year,
+        ]
           .filter(Boolean)
           .join(" ")
-      : form.deviceModel;
+      : fields.deviceModel
+        ? form.deviceModel
+        : "";
   const tenure =
-    financingType === "motorcycle" ? form.tenure : form.smartphoneTenure;
+    financingType === "motorcycle"
+      ? fields.tenure
+        ? form.tenure
+        : ""
+      : fields.smartphoneTenure
+        ? form.smartphoneTenure
+        : "";
 
   // Prefilled WhatsApp message (shown on the success screen) — carries all
   // the relevant form details so the team gets everything (no payslips).
+  // Questions switched off in the CMS are left out entirely.
+  const line = (shown: boolean, text: string) => (shown ? [text] : []);
   const financingLines =
     financingType === "motorcycle"
       ? [
-          `Condition: ${form.condition}`,
-          `Motorcycle: ${form.brand}`,
-          `Year: ${form.year}`,
-          `Price: RM${form.price}`,
-          `Downpayment: RM${form.downpayment}`,
-          `Tenure: ${form.tenure}`,
+          ...line(fields.condition, `Condition: ${form.condition}`),
+          ...line(fields.brand, `Motorcycle: ${form.brand}`),
+          ...line(fields.year, `Year: ${form.year}`),
+          ...line(fields.price, `Price: RM${form.price}`),
+          ...line(fields.downpayment, `Downpayment: RM${form.downpayment}`),
+          ...line(fields.tenure, `Tenure: ${form.tenure}`),
         ]
-      : [`Device: ${form.deviceModel}`, `Tenure: ${form.smartphoneTenure}`];
+      : [
+          ...line(fields.deviceModel, `Device: ${form.deviceModel}`),
+          ...line(fields.smartphoneTenure, `Tenure: ${form.smartphoneTenure}`),
+        ];
+
+  const profileLines = [
+    ...line(fields.employment, `Employment: ${form.employment}`),
+    ...line(fields.salary, `Monthly salary: RM${form.salary}`),
+    ...line(
+      fields.commitments && !!form.commitments,
+      `Monthly commitments: RM${form.commitments}`,
+    ),
+    ...line(fields.location, `Location: ${form.location}`),
+    ...line(fields.creditIssues, `Existing credit issues: ${form.creditIssues}`),
+  ];
 
   const waLines: string[] = [
     "Hi First Class Credit, I've just submitted my application.",
@@ -182,23 +235,15 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
     "— Financing —",
     `Type: ${financingLabel}`,
     ...financingLines,
-    "",
-    "— Financial Profile —",
-    `Employment: ${form.employment}`,
-    `Monthly salary: RM${form.salary}`,
-    ...(form.commitments
-      ? [`Monthly commitments: RM${form.commitments}`]
-      : []),
-    `Location: ${form.location}`,
-    `Existing credit issues: ${form.creditIssues}`,
+    ...(profileLines.length ? ["", "— Financial Profile —", ...profileLines] : []),
     "",
     "— Personal Details —",
     `Name: ${form.fullName}`,
-    `Age: ${form.age}`,
-    `NRIC: ${form.nric}`,
-    `Email: ${form.email}`,
+    ...line(fields.age, `Age: ${form.age}`),
+    ...line(fields.nric, `NRIC: ${form.nric}`),
+    ...line(fields.email, `Email: ${form.email}`),
     `Phone: ${form.phone}`,
-    `Preferred contact: ${form.preferredComm}`,
+    ...line(fields.preferredComm, `Preferred contact: ${form.preferredComm}`),
   ];
   const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     waLines.join("\n")
@@ -235,16 +280,18 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
         product,
         tenure,
         fullName: form.fullName,
-        age: form.age,
-        nric: form.nric,
-        email: form.email,
+        // Questions switched off in the CMS are submitted blank so the
+        // spreadsheet columns stay aligned.
+        age: fields.age ? form.age : "",
+        nric: fields.nric ? form.nric : "",
+        email: fields.email ? form.email : "",
         phone: form.phone,
-        salary: form.salary,
-        employment: form.employment,
-        commitments: form.commitments,
-        location: form.location,
-        creditIssues: form.creditIssues,
-        preferredComm: form.preferredComm,
+        salary: fields.salary ? form.salary : "",
+        employment: fields.employment ? form.employment : "",
+        commitments: fields.commitments ? form.commitments : "",
+        location: fields.location ? form.location : "",
+        creditIssues: fields.creditIssues ? form.creditIssues : "",
+        preferredComm: fields.preferredComm ? form.preferredComm : "",
         files: encodedFiles,
       };
       // text/plain avoids a CORS preflight that Apps Script can't answer;
@@ -331,11 +378,7 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
       {/* Stepper */}
       <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 py-8">
         <div className="flex items-center justify-center">
-          {[
-            { num: 1, label: "Financing Details" },
-            { num: 2, label: "Financial Profile" },
-            { num: 3, label: "Personal Details" },
-          ].map((s, i) => (
+          {stepDefs.map((s, i) => (
             <div key={s.num} className="flex items-center">
               <div className="flex items-center gap-2.5">
                 <div
@@ -350,14 +393,14 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
                   ) : (
-                    s.num
+                    i + 1
                   )}
                 </div>
                 <span className="hidden md:inline text-sm font-semibold text-[#272A33]">
                   {s.label}
                 </span>
               </div>
-              {i < 2 && (
+              {i < stepDefs.length - 1 && (
                 <div className="w-12 md:w-16 h-[2px] bg-[#e8e8e0] mx-3 md:mx-4" />
               )}
             </div>
@@ -425,111 +468,129 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
 
             {financingType === "motorcycle" ? (
               <>
-                <div>
-                  <label className={labelClass}>Motorcycle Condition {req}</label>
-                  <select
-                    value={form.condition}
-                    onChange={(e) => set("condition", e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="" disabled>Select condition…</option>
-                    <option>New</option>
-                    <option>Used</option>
-                  </select>
-                </div>
-                <div>
-                  <label className={labelClass}>
-                    Motorcycle Brand &amp; Model {req}
-                  </label>
-                  <input
-                    type="text"
-                    value={form.brand}
-                    onChange={(e) => set("brand", e.target.value)}
-                    placeholder="e.g., Yamaha Y16ZR"
-                    className={inputClass}
-                  />
-                </div>
-                <div>
-                  <label className={labelClass}>Year of Manufacture {req}</label>
-                  <select
-                    value={form.year}
-                    onChange={(e) => set("year", e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="" disabled>Select year…</option>
-                    {[2026, 2025, 2024, 2023, 2022, 2021, 2020].map((y) => (
-                      <option key={y}>{y}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {fields.condition && (
                   <div>
-                    <label className={labelClass}>Motorcycle Price (RM) {req}</label>
+                    <label className={labelClass}>Motorcycle Condition {req}</label>
+                    <select
+                      value={form.condition}
+                      onChange={(e) => set("condition", e.target.value)}
+                      className={selectClass}
+                    >
+                      <option value="" disabled>Select condition…</option>
+                      <option>New</option>
+                      <option>Used</option>
+                    </select>
+                  </div>
+                )}
+                {fields.brand && (
+                  <div>
+                    <label className={labelClass}>
+                      Motorcycle Brand &amp; Model {req}
+                    </label>
                     <input
                       type="text"
-                      inputMode="numeric"
-                      value={form.price}
-                      onChange={(e) => set("price", digitsOnly(e.target.value))}
-                      placeholder="e.g., 12000"
+                      value={form.brand}
+                      onChange={(e) => set("brand", e.target.value)}
+                      placeholder="e.g., Yamaha Y16ZR"
                       className={inputClass}
                     />
                   </div>
+                )}
+                {fields.year && (
                   <div>
-                    <label className={labelClass}>Downpayment (RM) {req}</label>
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      value={form.downpayment}
-                      onChange={(e) => set("downpayment", digitsOnly(e.target.value))}
-                      placeholder="e.g., 1200"
-                      className={inputClass}
-                    />
+                    <label className={labelClass}>Year of Manufacture {req}</label>
+                    <select
+                      value={form.year}
+                      onChange={(e) => set("year", e.target.value)}
+                      className={selectClass}
+                    >
+                      <option value="" disabled>Select year…</option>
+                      {[2026, 2025, 2024, 2023, 2022, 2021, 2020].map((y) => (
+                        <option key={y}>{y}</option>
+                      ))}
+                    </select>
                   </div>
-                </div>
-                <div>
-                  <label className={labelClass}>Loan Tenure {req}</label>
-                  <select
-                    value={form.tenure}
-                    onChange={(e) => set("tenure", e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="" disabled>Select tenure…</option>
-                    <option>1 year</option>
-                    <option>2 years</option>
-                    <option>3 years</option>
-                    <option>4 years</option>
-                    <option>5 years</option>
-                  </select>
-                </div>
+                )}
+                {(fields.price || fields.downpayment) && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {fields.price && (
+                      <div>
+                        <label className={labelClass}>Motorcycle Price (RM) {req}</label>
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          value={form.price}
+                          onChange={(e) => set("price", digitsOnly(e.target.value))}
+                          placeholder="e.g., 12000"
+                          className={inputClass}
+                        />
+                      </div>
+                    )}
+                    {fields.downpayment && (
+                      <div>
+                        <label className={labelClass}>Downpayment (RM) {req}</label>
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          value={form.downpayment}
+                          onChange={(e) => set("downpayment", digitsOnly(e.target.value))}
+                          placeholder="e.g., 1200"
+                          className={inputClass}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
+                {fields.tenure && (
+                  <div>
+                    <label className={labelClass}>Loan Tenure {req}</label>
+                    <select
+                      value={form.tenure}
+                      onChange={(e) => set("tenure", e.target.value)}
+                      className={selectClass}
+                    >
+                      <option value="" disabled>Select tenure…</option>
+                      <option>1 year</option>
+                      <option>2 years</option>
+                      <option>3 years</option>
+                      <option>4 years</option>
+                      <option>5 years</option>
+                    </select>
+                  </div>
+                )}
               </>
             ) : (
               <>
-                <div>
-                  <label className={labelClass}>Device Model {req}</label>
-                  <select
-                    value={form.deviceModel}
-                    onChange={(e) => set("deviceModel", e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="" disabled>Select device model…</option>
-                    {deviceModels.map((m) => (
-                      <option key={m}>{m}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className={labelClass}>Preferred Financing Tenure {req}</label>
-                  <select
-                    value={form.smartphoneTenure}
-                    onChange={(e) => set("smartphoneTenure", e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="" disabled>Select tenure…</option>
-                    <option>12 Months</option>
-                    <option>24 Months</option>
-                    <option>36 Months</option>
-                  </select>
-                </div>
+                {fields.deviceModel && (
+                  <div>
+                    <label className={labelClass}>Device Model {req}</label>
+                    <select
+                      value={form.deviceModel}
+                      onChange={(e) => set("deviceModel", e.target.value)}
+                      className={selectClass}
+                    >
+                      <option value="" disabled>Select device model…</option>
+                      {deviceModels.map((m) => (
+                        <option key={m}>{m}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+                {fields.smartphoneTenure && (
+                  <div>
+                    <label className={labelClass}>Preferred Financing Tenure {req}</label>
+                    <select
+                      value={form.smartphoneTenure}
+                      onChange={(e) => set("smartphoneTenure", e.target.value)}
+                      className={selectClass}
+                    >
+                      <option value="" disabled>Select tenure…</option>
+                      <option>12 Months</option>
+                      <option>24 Months</option>
+                      <option>36 Months</option>
+                    </select>
+                  </div>
+                )}
               </>
             )}
 
@@ -537,7 +598,7 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
               <button
                 type="button"
                 disabled={!step1Valid}
-                onClick={() => setStep(2)}
+                onClick={goNext}
                 className={nextBtn}
               >
                 Next
@@ -549,84 +610,94 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
         {/* Step 2: Financial Profile */}
         {step === 2 && (
           <div className="space-y-7">
-            <div>
-              <label className={labelClass}>Employment Type {req}</label>
-              <select
-                value={form.employment}
-                onChange={(e) => set("employment", e.target.value)}
-                className={selectClass}
-              >
-                <option value="" disabled>Select employment type…</option>
-                <option>Private</option>
-                <option>Government</option>
-                <option>GLC</option>
-                <option>Self-Employed / Business</option>
-                <option>Part-Timer</option>
-              </select>
-            </div>
-            <div>
-              <label className={labelClass}>Monthly Basic Salary (RM) {req}</label>
-              <input
-                type="text"
-                inputMode="numeric"
-                value={form.salary}
-                onChange={(e) => set("salary", digitsOnly(e.target.value))}
-                placeholder="e.g., 2500"
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>
-                Total Monthly Commitments (RM){" "}
-                <span className="normal-case tracking-normal font-normal text-[#888]">
-                  — Optional
-                </span>
-              </label>
-              <input
-                type="text"
-                inputMode="numeric"
-                value={form.commitments}
-                onChange={(e) => set("commitments", digitsOnly(e.target.value))}
-                placeholder="e.g., 800"
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>Current Location {req}</label>
-              <select
-                value={form.location}
-                onChange={(e) => set("location", e.target.value)}
-                className={selectClass}
-              >
-                <option value="" disabled>Select state…</option>
-                {malaysianStates.map((state) => (
-                  <option key={state}>{state}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className={labelClass}>Existing Credit Issues? {req}</label>
-              <div className="flex gap-6 pt-2">
-                {["Yes", "No"].map((opt) => (
-                  <label key={opt} className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="creditIssues"
-                      value={opt}
-                      checked={form.creditIssues === opt}
-                      onChange={(e) => set("creditIssues", e.target.value)}
-                      className="w-4 h-4 accent-[#2C76BB]"
-                    />
-                    <span>{opt}</span>
-                  </label>
-                ))}
+            {fields.employment && (
+              <div>
+                <label className={labelClass}>Employment Type {req}</label>
+                <select
+                  value={form.employment}
+                  onChange={(e) => set("employment", e.target.value)}
+                  className={selectClass}
+                >
+                  <option value="" disabled>Select employment type…</option>
+                  <option>Private</option>
+                  <option>Government</option>
+                  <option>GLC</option>
+                  <option>Self-Employed / Business</option>
+                  <option>Part-Timer</option>
+                </select>
               </div>
-            </div>
+            )}
+            {fields.salary && (
+              <div>
+                <label className={labelClass}>Monthly Basic Salary (RM) {req}</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  value={form.salary}
+                  onChange={(e) => set("salary", digitsOnly(e.target.value))}
+                  placeholder="e.g., 2500"
+                  className={inputClass}
+                />
+              </div>
+            )}
+            {fields.commitments && (
+              <div>
+                <label className={labelClass}>
+                  Total Monthly Commitments (RM){" "}
+                  <span className="normal-case tracking-normal font-normal text-[#888]">
+                    — Optional
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  value={form.commitments}
+                  onChange={(e) => set("commitments", digitsOnly(e.target.value))}
+                  placeholder="e.g., 800"
+                  className={inputClass}
+                />
+              </div>
+            )}
+            {fields.location && (
+              <div>
+                <label className={labelClass}>Current Location {req}</label>
+                <select
+                  value={form.location}
+                  onChange={(e) => set("location", e.target.value)}
+                  className={selectClass}
+                >
+                  <option value="" disabled>Select state…</option>
+                  {malaysianStates.map((state) => (
+                    <option key={state}>{state}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+            {fields.creditIssues && (
+              <div>
+                <label className={labelClass}>Existing Credit Issues? {req}</label>
+                <div className="flex gap-6 pt-2">
+                  {["Yes", "No"].map((opt) => (
+                    <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="creditIssues"
+                        value={opt}
+                        checked={form.creditIssues === opt}
+                        onChange={(e) => set("creditIssues", e.target.value)}
+                        className="w-4 h-4 accent-[#2C76BB]"
+                      />
+                      <span>{opt}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="flex justify-between pt-4">
               <button
                 type="button"
-                onClick={() => setStep(1)}
+                onClick={goBack}
                 className="text-[rgb(85,85,81)] font-semibold hover:text-[#2C76BB] transition-colors"
               >
                 Back
@@ -634,7 +705,7 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
               <button
                 type="button"
                 disabled={!step2Valid}
-                onClick={() => setStep(3)}
+                onClick={goNext}
                 className={nextBtn}
               >
                 Next
@@ -656,46 +727,52 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
                 className={inputClass}
               />
             </div>
-            <div>
-              <label className={labelClass}>Age {req}</label>
-              <input
-                type="text"
-                inputMode="numeric"
-                maxLength={2}
-                value={form.age}
-                onChange={(e) => set("age", digitsOnly(e.target.value))}
-                placeholder="e.g., 28"
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>NRIC Number {req}</label>
-              <input
-                type="text"
-                inputMode="numeric"
-                maxLength={12}
-                value={form.nric}
-                onChange={(e) => set("nric", digitsOnly(e.target.value))}
-                placeholder="e.g., 900101131234"
-                className={inputClass}
-              />
-              {form.nric.length > 0 && form.nric.length < 12 && (
-                <p className={errorClass}>NRIC must be exactly 12 digits.</p>
-              )}
-            </div>
-            <div>
-              <label className={labelClass}>Email Address {req}</label>
-              <input
-                type="email"
-                value={form.email}
-                onChange={(e) => set("email", e.target.value)}
-                placeholder="your@email.com"
-                className={inputClass}
-              />
-              {form.email.length > 0 && !emailValid(form.email) && (
-                <p className={errorClass}>Please enter a valid email address.</p>
-              )}
-            </div>
+            {fields.age && (
+              <div>
+                <label className={labelClass}>Age {req}</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={2}
+                  value={form.age}
+                  onChange={(e) => set("age", digitsOnly(e.target.value))}
+                  placeholder="e.g., 28"
+                  className={inputClass}
+                />
+              </div>
+            )}
+            {fields.nric && (
+              <div>
+                <label className={labelClass}>NRIC Number {req}</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={12}
+                  value={form.nric}
+                  onChange={(e) => set("nric", digitsOnly(e.target.value))}
+                  placeholder="e.g., 900101131234"
+                  className={inputClass}
+                />
+                {form.nric.length > 0 && form.nric.length < 12 && (
+                  <p className={errorClass}>NRIC must be exactly 12 digits.</p>
+                )}
+              </div>
+            )}
+            {fields.email && (
+              <div>
+                <label className={labelClass}>Email Address {req}</label>
+                <input
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => set("email", e.target.value)}
+                  placeholder="your@email.com"
+                  className={inputClass}
+                />
+                {form.email.length > 0 && !emailValid(form.email) && (
+                  <p className={errorClass}>Please enter a valid email address.</p>
+                )}
+              </div>
+            )}
             <div>
               <label className={labelClass}>Phone Number {req}</label>
               <input
@@ -711,24 +788,27 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
                 <p className={errorClass}>Phone number must be 10–12 digits.</p>
               )}
             </div>
-            <div>
-              <label className={labelClass}>Preferred Communication {req}</label>
-              <div className="flex flex-wrap gap-6 pt-2">
-                {["WhatsApp", "Phone Call", "Email"].map((opt) => (
-                  <label key={opt} className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="preferredComm"
-                      value={opt}
-                      checked={form.preferredComm === opt}
-                      onChange={(e) => set("preferredComm", e.target.value)}
-                      className="w-4 h-4 accent-[#2C76BB]"
-                    />
-                    <span>{opt}</span>
-                  </label>
-                ))}
+            {fields.preferredComm && (
+              <div>
+                <label className={labelClass}>Preferred Communication {req}</label>
+                <div className="flex flex-wrap gap-6 pt-2">
+                  {["WhatsApp", "Phone Call", "Email"].map((opt) => (
+                    <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="preferredComm"
+                        value={opt}
+                        checked={form.preferredComm === opt}
+                        onChange={(e) => set("preferredComm", e.target.value)}
+                        className="w-4 h-4 accent-[#2C76BB]"
+                      />
+                      <span>{opt}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
+            {fields.payslip && (
             <div>
               <label className={labelClass}>
                 Payslip Upload{" "}
@@ -775,6 +855,7 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
                 </ul>
               )}
             </div>
+            )}
             <div className="flex items-start gap-3 pt-2">
               <input
                 type="checkbox"
@@ -821,7 +902,7 @@ export default function ApplyForm({ config }: { config: ApplyConfig }) {
             <div className="flex justify-start">
               <button
                 type="button"
-                onClick={() => setStep(2)}
+                onClick={goBack}
                 className="text-[rgb(85,85,81)] font-semibold hover:text-[#2C76BB] transition-colors"
               >
                 Back

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import type { ApplyConfig } from "@/app/(frontend)/apply/ApplyForm";
+import type { ApplyConfig } from "@/lib/applyConfig";
 
 const malaysianStates = [
   "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan",
@@ -85,7 +85,33 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const set = <K extends keyof typeof initialForm>(key: K, value: (typeof initialForm)[K]) =>
-    setForm((f) => ({ ...f, [key]: value }));
+    setForm((prev) => ({ ...prev, [key]: value }));
+
+  // Which questions this product asks — switched on/off in the CMS.
+  const fields =
+    financingType === "motorcycle"
+      ? config.motorcycleFields
+      : config.smartphoneFields;
+
+  // Step 2 disappears entirely when every question in it is switched off.
+  const hasStep2 =
+    fields.employment ||
+    fields.salary ||
+    fields.commitments ||
+    fields.location ||
+    fields.creditIssues;
+  const stepDefs = [
+    { num: 1, label: "Butiran Pembiayaan" },
+    ...(hasStep2 ? [{ num: 2, label: "Profil Kewangan" }] : []),
+    { num: 3, label: "Butiran Peribadi" },
+  ];
+  const stepAt = (offset: number) => {
+    const i = stepDefs.findIndex((s) => s.num === step);
+    const next = Math.min(Math.max(i + offset, 0), stepDefs.length - 1);
+    return stepDefs[next].num;
+  };
+  const goNext = () => setStep(stepAt(1));
+  const goBack = () => setStep(stepAt(-1));
 
   // Preselect the financing type from the URL (?type=smartphone) — e.g. when
   // a customer arrives from a Smartphone HP Financing CTA.
@@ -100,28 +126,31 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
   }, [config.smartphoneEnabled]);
 
   // ── Validation ──────────────────────────────────────────────────
+  // A hidden question is never required.
+  const need = (shown: boolean, filled: boolean) => !shown || filled;
   const step1Valid =
     financingType === "motorcycle"
-      ? !!form.condition &&
-        form.brand.trim().length > 0 &&
-        !!form.year &&
-        form.price.length > 0 &&
-        form.downpayment.length > 0 &&
-        !!form.tenure
-      : !!form.deviceModel && !!form.smartphoneTenure;
+      ? need(fields.condition, !!form.condition) &&
+        need(fields.brand, form.brand.trim().length > 0) &&
+        need(fields.year, !!form.year) &&
+        need(fields.price, form.price.length > 0) &&
+        need(fields.downpayment, form.downpayment.length > 0) &&
+        need(fields.tenure, !!form.tenure)
+      : need(fields.deviceModel, !!form.deviceModel) &&
+        need(fields.smartphoneTenure, !!form.smartphoneTenure);
   const step2Valid =
-    !!form.employment &&
-    form.salary.length > 0 &&
-    !!form.location &&
-    !!form.creditIssues;
+    need(fields.employment, !!form.employment) &&
+    need(fields.salary, form.salary.length > 0) &&
+    need(fields.location, !!form.location) &&
+    need(fields.creditIssues, !!form.creditIssues);
   const step3Valid =
     form.fullName.trim().length > 0 &&
-    form.age.length > 0 &&
-    form.nric.length === 12 &&
-    emailValid(form.email) &&
+    need(fields.age, form.age.length > 0) &&
+    need(fields.nric, form.nric.length === 12) &&
+    need(fields.email, emailValid(form.email)) &&
     form.phone.length >= 10 &&
     form.phone.length <= 12 &&
-    !!form.preferredComm &&
+    need(fields.preferredComm, !!form.preferredComm) &&
     form.pdpa;
   const allValid = step1Valid && step2Valid && step3Valid;
 
@@ -148,26 +177,57 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
       : "Smartphone HP Financing";
   const product =
     financingType === "motorcycle"
-      ? [form.brand, form.condition && `(${form.condition})`, form.year]
+      ? [
+          fields.brand && form.brand,
+          fields.condition && form.condition && `(${form.condition})`,
+          fields.year && form.year,
+        ]
           .filter(Boolean)
           .join(" ")
-      : form.deviceModel;
+      : fields.deviceModel
+        ? form.deviceModel
+        : "";
   const tenure =
-    financingType === "motorcycle" ? form.tenure : form.smartphoneTenure;
+    financingType === "motorcycle"
+      ? fields.tenure
+        ? form.tenure
+        : ""
+      : fields.smartphoneTenure
+        ? form.smartphoneTenure
+        : "";
 
   // Prefilled WhatsApp message (shown on the success screen) — carries all
   // the relevant form details so the team gets everything (no payslips).
+  // Questions switched off in the CMS are left out entirely.
+  const line = (shown: boolean, text: string) => (shown ? [text] : []);
   const financingLines =
     financingType === "motorcycle"
       ? [
-          `Keadaan: ${form.condition}`,
-          `Motosikal: ${form.brand}`,
-          `Tahun: ${form.year}`,
-          `Harga: RM${form.price}`,
-          `Downpayment: RM${form.downpayment}`,
-          `Tempoh: ${form.tenure}`,
+          ...line(fields.condition, `Keadaan: ${form.condition}`),
+          ...line(fields.brand, `Motosikal: ${form.brand}`),
+          ...line(fields.year, `Tahun: ${form.year}`),
+          ...line(fields.price, `Harga: RM${form.price}`),
+          ...line(fields.downpayment, `Downpayment: RM${form.downpayment}`),
+          ...line(fields.tenure, `Tempoh: ${form.tenure}`),
         ]
-      : [`Peranti: ${form.deviceModel}`, `Tempoh: ${form.smartphoneTenure}`];
+      : [
+          ...line(fields.deviceModel, `Peranti: ${form.deviceModel}`),
+          ...line(fields.smartphoneTenure, `Tempoh: ${form.smartphoneTenure}`),
+        ];
+
+  const profileLines = [
+    ...line(fields.employment, `Pekerjaan: ${form.employment}`),
+    ...line(fields.salary, `Gaji bulanan: RM${form.salary}`),
+    ...line(
+      fields.commitments && !!form.commitments,
+      `Komitmen bulanan: RM${form.commitments}`,
+    ),
+    ...line(fields.location, `Lokasi: ${form.location}`),
+    ...line(
+      fields.creditIssues,
+      `Masalah kredit sedia ada: ${form.creditIssues}`,
+    ),
+  ];
 
   const waLines: string[] = [
     "Hai First Class Credit, saya baru sahaja menghantar permohonan saya.",
@@ -175,23 +235,15 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
     "— Pembiayaan —",
     `Jenis: ${financingLabel}`,
     ...financingLines,
-    "",
-    "— Profil Kewangan —",
-    `Pekerjaan: ${form.employment}`,
-    `Gaji bulanan: RM${form.salary}`,
-    ...(form.commitments
-      ? [`Komitmen bulanan: RM${form.commitments}`]
-      : []),
-    `Lokasi: ${form.location}`,
-    `Masalah kredit sedia ada: ${form.creditIssues}`,
+    ...(profileLines.length ? ["", "— Profil Kewangan —", ...profileLines] : []),
     "",
     "— Butiran Peribadi —",
     `Nama: ${form.fullName}`,
-    `Umur: ${form.age}`,
-    `NRIC: ${form.nric}`,
-    `E-mel: ${form.email}`,
+    ...line(fields.age, `Umur: ${form.age}`),
+    ...line(fields.nric, `NRIC: ${form.nric}`),
+    ...line(fields.email, `E-mel: ${form.email}`),
     `Telefon: ${form.phone}`,
-    `Cara hubungan pilihan: ${form.preferredComm}`,
+    ...line(fields.preferredComm, `Cara hubungan pilihan: ${form.preferredComm}`),
   ];
   const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     waLines.join("\n")
@@ -228,16 +280,18 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
         product,
         tenure,
         fullName: form.fullName,
-        age: form.age,
-        nric: form.nric,
-        email: form.email,
+        // Questions switched off in the CMS are submitted blank so the
+        // spreadsheet columns stay aligned.
+        age: fields.age ? form.age : "",
+        nric: fields.nric ? form.nric : "",
+        email: fields.email ? form.email : "",
         phone: form.phone,
-        salary: form.salary,
-        employment: form.employment,
-        commitments: form.commitments,
-        location: form.location,
-        creditIssues: form.creditIssues,
-        preferredComm: form.preferredComm,
+        salary: fields.salary ? form.salary : "",
+        employment: fields.employment ? form.employment : "",
+        commitments: fields.commitments ? form.commitments : "",
+        location: fields.location ? form.location : "",
+        creditIssues: fields.creditIssues ? form.creditIssues : "",
+        preferredComm: fields.preferredComm ? form.preferredComm : "",
         files: encodedFiles,
       };
       // text/plain avoids a CORS preflight that Apps Script can't answer;
@@ -324,11 +378,7 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
       {/* Stepper */}
       <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16 py-8">
         <div className="flex items-center justify-center">
-          {[
-            { num: 1, label: "Butiran Pembiayaan" },
-            { num: 2, label: "Profil Kewangan" },
-            { num: 3, label: "Butiran Peribadi" },
-          ].map((s, i) => (
+          {stepDefs.map((s, i) => (
             <div key={s.num} className="flex items-center">
               <div className="flex items-center gap-2.5">
                 <div
@@ -343,14 +393,14 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
                   ) : (
-                    s.num
+                    i + 1
                   )}
                 </div>
                 <span className="hidden md:inline text-sm font-semibold text-[#272A33]">
                   {s.label}
                 </span>
               </div>
-              {i < 2 && (
+              {i < stepDefs.length - 1 && (
                 <div className="w-12 md:w-16 h-[2px] bg-[#e8e8e0] mx-3 md:mx-4" />
               )}
             </div>
@@ -418,111 +468,129 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
 
             {financingType === "motorcycle" ? (
               <>
-                <div>
-                  <label className={labelClass}>Keadaan Motosikal {req}</label>
-                  <select
-                    value={form.condition}
-                    onChange={(e) => set("condition", e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="" disabled>Pilih keadaan…</option>
-                    <option value="New">Baharu</option>
-                    <option value="Used">Terpakai</option>
-                  </select>
-                </div>
-                <div>
-                  <label className={labelClass}>
-                    Jenama &amp; Model Motosikal {req}
-                  </label>
-                  <input
-                    type="text"
-                    value={form.brand}
-                    onChange={(e) => set("brand", e.target.value)}
-                    placeholder="cth., Yamaha Y16ZR"
-                    className={inputClass}
-                  />
-                </div>
-                <div>
-                  <label className={labelClass}>Tahun Pembuatan {req}</label>
-                  <select
-                    value={form.year}
-                    onChange={(e) => set("year", e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="" disabled>Pilih tahun…</option>
-                    {[2026, 2025, 2024, 2023, 2022, 2021, 2020].map((y) => (
-                      <option key={y}>{y}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {fields.condition && (
                   <div>
-                    <label className={labelClass}>Harga Motosikal (RM) {req}</label>
+                    <label className={labelClass}>Keadaan Motosikal {req}</label>
+                    <select
+                      value={form.condition}
+                      onChange={(e) => set("condition", e.target.value)}
+                      className={selectClass}
+                    >
+                      <option value="" disabled>Pilih keadaan…</option>
+                      <option value="New">Baharu</option>
+                      <option value="Used">Terpakai</option>
+                    </select>
+                  </div>
+                )}
+                {fields.brand && (
+                  <div>
+                    <label className={labelClass}>
+                      Jenama &amp; Model Motosikal {req}
+                    </label>
                     <input
                       type="text"
-                      inputMode="numeric"
-                      value={form.price}
-                      onChange={(e) => set("price", digitsOnly(e.target.value))}
-                      placeholder="cth., 12000"
+                      value={form.brand}
+                      onChange={(e) => set("brand", e.target.value)}
+                      placeholder="cth., Yamaha Y16ZR"
                       className={inputClass}
                     />
                   </div>
+                )}
+                {fields.year && (
                   <div>
-                    <label className={labelClass}>Downpayment (RM) {req}</label>
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      value={form.downpayment}
-                      onChange={(e) => set("downpayment", digitsOnly(e.target.value))}
-                      placeholder="cth., 1200"
-                      className={inputClass}
-                    />
+                    <label className={labelClass}>Tahun Pembuatan {req}</label>
+                    <select
+                      value={form.year}
+                      onChange={(e) => set("year", e.target.value)}
+                      className={selectClass}
+                    >
+                      <option value="" disabled>Pilih tahun…</option>
+                      {[2026, 2025, 2024, 2023, 2022, 2021, 2020].map((y) => (
+                        <option key={y}>{y}</option>
+                      ))}
+                    </select>
                   </div>
-                </div>
-                <div>
-                  <label className={labelClass}>Tempoh Pinjaman {req}</label>
-                  <select
-                    value={form.tenure}
-                    onChange={(e) => set("tenure", e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="" disabled>Pilih tempoh…</option>
-                    <option value="1 year">1 tahun</option>
-                    <option value="2 years">2 tahun</option>
-                    <option value="3 years">3 tahun</option>
-                    <option value="4 years">4 tahun</option>
-                    <option value="5 years">5 tahun</option>
-                  </select>
-                </div>
+                )}
+                {(fields.price || fields.downpayment) && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {fields.price && (
+                      <div>
+                        <label className={labelClass}>Harga Motosikal (RM) {req}</label>
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          value={form.price}
+                          onChange={(e) => set("price", digitsOnly(e.target.value))}
+                          placeholder="cth., 12000"
+                          className={inputClass}
+                        />
+                      </div>
+                    )}
+                    {fields.downpayment && (
+                      <div>
+                        <label className={labelClass}>Downpayment (RM) {req}</label>
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          value={form.downpayment}
+                          onChange={(e) => set("downpayment", digitsOnly(e.target.value))}
+                          placeholder="cth., 1200"
+                          className={inputClass}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
+                {fields.tenure && (
+                  <div>
+                    <label className={labelClass}>Tempoh Pinjaman {req}</label>
+                    <select
+                      value={form.tenure}
+                      onChange={(e) => set("tenure", e.target.value)}
+                      className={selectClass}
+                    >
+                      <option value="" disabled>Pilih tempoh…</option>
+                      <option value="1 year">1 tahun</option>
+                      <option value="2 years">2 tahun</option>
+                      <option value="3 years">3 tahun</option>
+                      <option value="4 years">4 tahun</option>
+                      <option value="5 years">5 tahun</option>
+                    </select>
+                  </div>
+                )}
               </>
             ) : (
               <>
-                <div>
-                  <label className={labelClass}>Model Peranti {req}</label>
-                  <select
-                    value={form.deviceModel}
-                    onChange={(e) => set("deviceModel", e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="" disabled>Pilih model peranti…</option>
-                    {deviceModels.map((m) => (
-                      <option key={m}>{m}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className={labelClass}>Tempoh Pembiayaan Pilihan {req}</label>
-                  <select
-                    value={form.smartphoneTenure}
-                    onChange={(e) => set("smartphoneTenure", e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="" disabled>Pilih tempoh…</option>
-                    <option value="12 Months">12 Bulan</option>
-                    <option value="24 Months">24 Bulan</option>
-                    <option value="36 Months">36 Bulan</option>
-                  </select>
-                </div>
+                {fields.deviceModel && (
+                  <div>
+                    <label className={labelClass}>Model Peranti {req}</label>
+                    <select
+                      value={form.deviceModel}
+                      onChange={(e) => set("deviceModel", e.target.value)}
+                      className={selectClass}
+                    >
+                      <option value="" disabled>Pilih model peranti…</option>
+                      {deviceModels.map((m) => (
+                        <option key={m}>{m}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+                {fields.smartphoneTenure && (
+                  <div>
+                    <label className={labelClass}>Tempoh Pembiayaan Pilihan {req}</label>
+                    <select
+                      value={form.smartphoneTenure}
+                      onChange={(e) => set("smartphoneTenure", e.target.value)}
+                      className={selectClass}
+                    >
+                      <option value="" disabled>Pilih tempoh…</option>
+                      <option value="12 Months">12 Bulan</option>
+                      <option value="24 Months">24 Bulan</option>
+                      <option value="36 Months">36 Bulan</option>
+                    </select>
+                  </div>
+                )}
               </>
             )}
 
@@ -530,7 +598,7 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
               <button
                 type="button"
                 disabled={!step1Valid}
-                onClick={() => setStep(2)}
+                onClick={goNext}
                 className={nextBtn}
               >
                 Seterusnya
@@ -542,84 +610,94 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
         {/* Step 2: Financial Profile */}
         {step === 2 && (
           <div className="space-y-7">
-            <div>
-              <label className={labelClass}>Jenis Pekerjaan {req}</label>
-              <select
-                value={form.employment}
-                onChange={(e) => set("employment", e.target.value)}
-                className={selectClass}
-              >
-                <option value="" disabled>Pilih jenis pekerjaan…</option>
-                <option value="Private">Swasta</option>
-                <option value="Government">Kerajaan</option>
-                <option value="GLC">GLC</option>
-                <option value="Self-Employed / Business">Bekerja Sendiri / Perniagaan</option>
-                <option value="Part-Timer">Separuh Masa</option>
-              </select>
-            </div>
-            <div>
-              <label className={labelClass}>Gaji Pokok Bulanan (RM) {req}</label>
-              <input
-                type="text"
-                inputMode="numeric"
-                value={form.salary}
-                onChange={(e) => set("salary", digitsOnly(e.target.value))}
-                placeholder="cth., 2500"
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>
-                Jumlah Komitmen Bulanan (RM){" "}
-                <span className="normal-case tracking-normal font-normal text-[#888]">
-                  — Pilihan
-                </span>
-              </label>
-              <input
-                type="text"
-                inputMode="numeric"
-                value={form.commitments}
-                onChange={(e) => set("commitments", digitsOnly(e.target.value))}
-                placeholder="cth., 800"
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>Lokasi Semasa {req}</label>
-              <select
-                value={form.location}
-                onChange={(e) => set("location", e.target.value)}
-                className={selectClass}
-              >
-                <option value="" disabled>Pilih negeri…</option>
-                {malaysianStates.map((state) => (
-                  <option key={state}>{state}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className={labelClass}>Ada Masalah Kredit Sedia Ada? {req}</label>
-              <div className="flex gap-6 pt-2">
-                {["Yes", "No"].map((opt) => (
-                  <label key={opt} className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="creditIssues"
-                      value={opt}
-                      checked={form.creditIssues === opt}
-                      onChange={(e) => set("creditIssues", e.target.value)}
-                      className="w-4 h-4 accent-[#2C76BB]"
-                    />
-                    <span>{opt === "Yes" ? "Ya" : "Tidak"}</span>
-                  </label>
-                ))}
+            {fields.employment && (
+              <div>
+                <label className={labelClass}>Jenis Pekerjaan {req}</label>
+                <select
+                  value={form.employment}
+                  onChange={(e) => set("employment", e.target.value)}
+                  className={selectClass}
+                >
+                  <option value="" disabled>Pilih jenis pekerjaan…</option>
+                  <option value="Private">Swasta</option>
+                  <option value="Government">Kerajaan</option>
+                  <option value="GLC">GLC</option>
+                  <option value="Self-Employed / Business">Bekerja Sendiri / Perniagaan</option>
+                  <option value="Part-Timer">Separuh Masa</option>
+                </select>
               </div>
-            </div>
+            )}
+            {fields.salary && (
+              <div>
+                <label className={labelClass}>Gaji Pokok Bulanan (RM) {req}</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  value={form.salary}
+                  onChange={(e) => set("salary", digitsOnly(e.target.value))}
+                  placeholder="cth., 2500"
+                  className={inputClass}
+                />
+              </div>
+            )}
+            {fields.commitments && (
+              <div>
+                <label className={labelClass}>
+                  Jumlah Komitmen Bulanan (RM){" "}
+                  <span className="normal-case tracking-normal font-normal text-[#888]">
+                    — Pilihan
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  value={form.commitments}
+                  onChange={(e) => set("commitments", digitsOnly(e.target.value))}
+                  placeholder="cth., 800"
+                  className={inputClass}
+                />
+              </div>
+            )}
+            {fields.location && (
+              <div>
+                <label className={labelClass}>Lokasi Semasa {req}</label>
+                <select
+                  value={form.location}
+                  onChange={(e) => set("location", e.target.value)}
+                  className={selectClass}
+                >
+                  <option value="" disabled>Pilih negeri…</option>
+                  {malaysianStates.map((state) => (
+                    <option key={state}>{state}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+            {fields.creditIssues && (
+              <div>
+                <label className={labelClass}>Ada Masalah Kredit Sedia Ada? {req}</label>
+                <div className="flex gap-6 pt-2">
+                  {["Yes", "No"].map((opt) => (
+                    <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="creditIssues"
+                        value={opt}
+                        checked={form.creditIssues === opt}
+                        onChange={(e) => set("creditIssues", e.target.value)}
+                        className="w-4 h-4 accent-[#2C76BB]"
+                      />
+                      <span>{opt === "Yes" ? "Ya" : "Tidak"}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="flex justify-between pt-4">
               <button
                 type="button"
-                onClick={() => setStep(1)}
+                onClick={goBack}
                 className="text-[rgb(85,85,81)] font-semibold hover:text-[#2C76BB] transition-colors"
               >
                 Kembali
@@ -627,7 +705,7 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
               <button
                 type="button"
                 disabled={!step2Valid}
-                onClick={() => setStep(3)}
+                onClick={goNext}
                 className={nextBtn}
               >
                 Seterusnya
@@ -649,46 +727,52 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
                 className={inputClass}
               />
             </div>
-            <div>
-              <label className={labelClass}>Umur {req}</label>
-              <input
-                type="text"
-                inputMode="numeric"
-                maxLength={2}
-                value={form.age}
-                onChange={(e) => set("age", digitsOnly(e.target.value))}
-                placeholder="cth., 28"
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>Nombor NRIC {req}</label>
-              <input
-                type="text"
-                inputMode="numeric"
-                maxLength={12}
-                value={form.nric}
-                onChange={(e) => set("nric", digitsOnly(e.target.value))}
-                placeholder="cth., 900101131234"
-                className={inputClass}
-              />
-              {form.nric.length > 0 && form.nric.length < 12 && (
-                <p className={errorClass}>NRIC mesti tepat 12 digit.</p>
-              )}
-            </div>
-            <div>
-              <label className={labelClass}>Alamat E-mel {req}</label>
-              <input
-                type="email"
-                value={form.email}
-                onChange={(e) => set("email", e.target.value)}
-                placeholder="anda@email.com"
-                className={inputClass}
-              />
-              {form.email.length > 0 && !emailValid(form.email) && (
-                <p className={errorClass}>Sila masukkan alamat e-mel yang sah.</p>
-              )}
-            </div>
+            {fields.age && (
+              <div>
+                <label className={labelClass}>Umur {req}</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={2}
+                  value={form.age}
+                  onChange={(e) => set("age", digitsOnly(e.target.value))}
+                  placeholder="cth., 28"
+                  className={inputClass}
+                />
+              </div>
+            )}
+            {fields.nric && (
+              <div>
+                <label className={labelClass}>Nombor NRIC {req}</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={12}
+                  value={form.nric}
+                  onChange={(e) => set("nric", digitsOnly(e.target.value))}
+                  placeholder="cth., 900101131234"
+                  className={inputClass}
+                />
+                {form.nric.length > 0 && form.nric.length < 12 && (
+                  <p className={errorClass}>NRIC mesti tepat 12 digit.</p>
+                )}
+              </div>
+            )}
+            {fields.email && (
+              <div>
+                <label className={labelClass}>Alamat E-mel {req}</label>
+                <input
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => set("email", e.target.value)}
+                  placeholder="anda@email.com"
+                  className={inputClass}
+                />
+                {form.email.length > 0 && !emailValid(form.email) && (
+                  <p className={errorClass}>Sila masukkan alamat e-mel yang sah.</p>
+                )}
+              </div>
+            )}
             <div>
               <label className={labelClass}>Nombor Telefon {req}</label>
               <input
@@ -704,24 +788,27 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
                 <p className={errorClass}>Nombor telefon mesti 10–12 digit.</p>
               )}
             </div>
-            <div>
-              <label className={labelClass}>Cara Hubungan Pilihan {req}</label>
-              <div className="flex flex-wrap gap-6 pt-2">
-                {["WhatsApp", "Phone Call", "Email"].map((opt) => (
-                  <label key={opt} className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="preferredComm"
-                      value={opt}
-                      checked={form.preferredComm === opt}
-                      onChange={(e) => set("preferredComm", e.target.value)}
-                      className="w-4 h-4 accent-[#2C76BB]"
-                    />
-                    <span>{opt === "Phone Call" ? "Panggilan Telefon" : opt === "Email" ? "E-mel" : opt}</span>
-                  </label>
-                ))}
+            {fields.preferredComm && (
+              <div>
+                <label className={labelClass}>Cara Hubungan Pilihan {req}</label>
+                <div className="flex flex-wrap gap-6 pt-2">
+                  {["WhatsApp", "Phone Call", "Email"].map((opt) => (
+                    <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="preferredComm"
+                        value={opt}
+                        checked={form.preferredComm === opt}
+                        onChange={(e) => set("preferredComm", e.target.value)}
+                        className="w-4 h-4 accent-[#2C76BB]"
+                      />
+                      <span>{opt === "Phone Call" ? "Panggilan Telefon" : opt === "Email" ? "E-mel" : opt}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
+            {fields.payslip && (
             <div>
               <label className={labelClass}>
                 Muat Naik Slip Gaji{" "}
@@ -768,6 +855,7 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
                 </ul>
               )}
             </div>
+            )}
             <div className="flex items-start gap-3 pt-2">
               <input
                 type="checkbox"
@@ -814,7 +902,7 @@ export default function ApplyFormMs({ config }: { config: ApplyConfig }) {
             <div className="flex justify-start">
               <button
                 type="button"
-                onClick={() => setStep(2)}
+                onClick={goBack}
                 className="text-[rgb(85,85,81)] font-semibold hover:text-[#2C76BB] transition-colors"
               >
                 Kembali
